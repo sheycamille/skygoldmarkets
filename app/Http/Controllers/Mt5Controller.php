@@ -69,6 +69,8 @@ class Mt5Controller extends Controller
             'type' => ['required', 'string',],
         ])->validate();
 
+        return ["message" => "TBI"];
+
         // get logged in user
         // some info will come from their registration
         $oUser = auth()->user();
@@ -79,7 +81,7 @@ class Mt5Controller extends Controller
         $this->setServerConfig('demo');
         $amt = 100000;
         $type = 'demo';
-        $server = 'AxesPrimeLtd-Demo';
+        $server = 'MobiusTrader';
         $user->setGroup(env('MT5_SERVER_GROUP', 'demo\axes'));
 
         if ($request->type !== 'demo') {
@@ -87,7 +89,7 @@ class Mt5Controller extends Controller
             $type = 'live';
             $amt = 0;
             $user->setGroup(env('MT5_LIVE_SERVER_GROUP', 'real\axes\1'));
-            $server = 'AxesPrimeLtd-Live';
+            $server = 'MobiusTrader';
         }
 
         $password = $this->randomPassword();
@@ -107,7 +109,7 @@ class Mt5Controller extends Controller
         $user->setInvestorPassword($investor_password);
         $user->setPhonePassword($phone_password);
 
-        // mt5 account creation
+        // Trader7 account creation
         $api = new LaravelMt5();
         try {
             $result = $api->createUser($user);
@@ -116,7 +118,7 @@ class Mt5Controller extends Controller
             return ["message" => $e->getMessage()];
         }
 
-        // save the detials in the mt5 detials table
+        // save the detials in the Trader7 detials table
         $mt5Acc = new Mt5Details();
         $mt5Acc->client_id = $oUser->id;
         $mt5Acc->login = $result->getLogin() . '';
@@ -140,8 +142,8 @@ class Mt5Controller extends Controller
         // send the user an email with the details of the new account
         $this->notifyuser($mt5Acc);
 
-        $request->session()->flash("message", "Your new mt5 account has been created successfully. Check your email for the full account details. We are always at your service!");
-        return ["message" => "Your new mt5 account has been created successfully. Check your email for the full account details. We are always at your service!"];
+        $request->session()->flash("message", "Your new Trader7 account has been created successfully. Check your email for the full account details. We are always at your service!");
+        return ["message" => "Your new Trader7 account has been created successfully. Check your email for the full account details. We are always at your service!"];
     }
 
     public function resetmt5password()
@@ -151,19 +153,19 @@ class Mt5Controller extends Controller
 
     public function demotopup(Request $request, $id)
     {
-        $mt5Acc = Mt5Details::where('id', $id)->first();
+        // $mt5Acc = Mt5Details::where('id', $id)->first();
 
-        $this->setServerConfig('demo');
+        // $this->setServerConfig('demo');
 
-        // update the mt5 demo server
-        $this->dodeposit($mt5Acc->login, 100000);
+        // // update the Trader7 demo server
+        // $this->dodeposit($mt5Acc->login, 100000);
 
-        // update the local record
-        $mt5Acc->balance = (((int)$mt5Acc->balance) + 100000);
-        $mt5Acc->save();
+        // // update the local record
+        // $mt5Acc->balance = (((int)$mt5Acc->balance) + 100000);
+        // $mt5Acc->save();
 
         return redirect()->back()
-            ->with('message', 'Your MT5 Demo Account has been successfully topped up with another $100k!');
+            ->with('message', 'Your Trader7 Demo Account has been successfully topped up with another $100k!');
     }
 
 
@@ -190,13 +192,13 @@ class Mt5Controller extends Controller
         $site_name = Setting::getValue('site_name');
         $objDemo = new \stdClass();
         $objDemo->message = "\r Hello $user->name, \r \n " .
-            " \r This is to inform you that a new MT5 Account with details below have successfully registered on $site_name. \r \n " .
+            " \r This is to inform you that a new Trader7 Account with details below have successfully registered on $site_name. \r \n " .
             "   \r  Login: $mt5Acc->login \r \n " .
             " \r Password: $mt5Acc->password \r \n " .
             "  \r  Server: $mt5Acc->server \r \n ";
         $objDemo->sender = "$site_name";
         $objDemo->date = Carbon::Now();
-        $objDemo->subject = "Your new MT5 Account with Sky Gold Markets!";
+        $objDemo->subject = "Your new Trader7 Account with Sky Gold Markets!";
 
         Mail::mailer('smtp')->bcc($user->email)->send(new NewNotification($objDemo));
     }

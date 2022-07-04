@@ -302,13 +302,13 @@
 <!-- /Delete user Modal -->
 
 
-<!-- Live MT5 Account Mg't  Modal -->
+<!-- Live Trader7 Account Mg't  Modal -->
 <div id="liveaccounts{{ $user->id }}" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">MT5 Accounts</strong></h4>
+                <h4 class="modal-title">Trader7 Accounts</strong></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -341,4 +341,4 @@
         margin-right: 2%;
     }
 </style>
-<!-- /Live MT5 Account Mg't  Modal -->
+<!-- /Live Trader7 Account Mg't  Modal -->

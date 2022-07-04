@@ -1,43 +1,57 @@
 @extends('layouts.front')
 
-@section('title', 'Our Products')
+@section('title', 'Our Account types')
 
 @section('accounts-types-menu-item', 'uk-active')
 
 @section('content')
+
+    <!-- breadcrumb content begin -->
+    <div class="uk-section uk-padding-remove-vertical">
+        <div class="uk-container">
+            <div class="uk-grid">
+                <div class="uk-width-1-1 in-breadcrumb">
+                    <ul class="uk-breadcrumb uk-float-right">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="#">Company</a></li>
+                        <li><span>Account Types</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb content end -->
+
     <main id="main" class="about-us-page">
 
         <!--========================== Heading Section ============================-->
-        <section id="about" class="section-bg wow fadeInUp">
-            <div class="container">
+        <div id="about" class="uk-section in-liquid-6 in-offset-top-10">
+            <div class="uk-container">
                 <div class="section-header">
                     <h1 class="text-center">Trading Accounts</h1>
                 </div>
             </div>
-        </section>
+        </div>
 
 
         <!--========================== Account types Section ============================-->
-        <section id="pricing" class="wow fadeInUp section-bg">
+        <div id="pricing" class="uk-section in-liquid-6 in-offset-top-10">
 
-            <div class="container special-cont">
+            <div class="uk-container special-cont">
 
                 <header class="section-header">
                     <h3>Our Account Types</h3>
                     <p>Trade like a pro with any account type</p>
                 </header>
 
-                <div class="row flex-items-xs-middle flex-items-xs-center">
-
+                <div class="flex-items-xs-middle flex-items-xs-center" style="margin-top:40px;">
                     <!-- List Account Types  -->
                     @foreach ($account_types as $accType)
-                        <div class="col-lg-3 col-md-6">
+                        <div class="col-lg-3 col-md-6 card" style="margin-top:40px;">
                             <div class="pricing-box">
                                 <h3>{{ $accType->name }}</h3>
                                 <div class="cur">
-                                    <span>$</span>
-                                    <h2>{{ $accType->cost }}</h2>
-                                    <h6>USD</h6>
+                                    <h4>${{ $accType->cost }} USD</h4>
                                 </div>
                                 <div class="price-list">
                                     <ul class="list-unstyled">
@@ -61,7 +75,11 @@
                                             {{ $accType->max_trade_size }} lots</li>
                                         <li class="list-item"><i class="bx bx-check"></i>Typical Spread:
                                             {{ $accType->typical_spread }}</li>
-                                        <li class="list-item"><i class="bx bx-check"></i>Swaps: @if ($accType->swaps) Yes @else No @endif
+                                        <li class="list-item"><i class="bx bx-check"></i>Swaps: @if ($accType->swaps)
+                                                Yes
+                                            @else
+                                                No
+                                            @endif
                                         </li>
                                         <li class="list-item"><i class="bx bx-check"></i>Requotes:
                                             {{ $accType->requotes }}</li>
@@ -76,7 +94,7 @@
                                     </ul>
                                 </div>
                                 <div class="pricing-button">
-                                    <a href="/register?account_type={{ $accType->id }}" class="btn btn-primary">Get
+                                    <a href="/register?account_type={{ $accType->id }}" class="uk-button uk-button-default uk-border-rounded uk-margin-small-left uk-visible@m">Get
                                         Started</a>
                                 </div>
                             </div>
@@ -86,7 +104,7 @@
                 </div>
             </div>
 
-        </section>
+        </div>
 
     </main>
 @endsection

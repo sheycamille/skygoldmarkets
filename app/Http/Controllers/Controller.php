@@ -160,13 +160,13 @@ class Controller extends BaseController
 
     protected function updateaccounts($user)
     {
-        // initialize the mt5 api
+        // initialize the Trader7 api
         $api = new LaravelMt5();
 
         // check and update live account balances
         $this->setServerConfig('live');
 
-        // Get user mt5 accounts
+        // Get user Trader7 accounts
         $liveLogins = $user->accounts();
         // $demoLogins = $user->demoaccounts();
 

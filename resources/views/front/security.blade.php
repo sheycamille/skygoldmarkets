@@ -5,7 +5,24 @@
 @section('credit-score-menu-item', 'uk-active')
 
 @section('content')
-<main id="main" class="security-page">
+
+    <!-- breadcrumb content begin -->
+    <div class="uk-section uk-padding-remove-vertical">
+        <div class="uk-container">
+            <div class="uk-grid">
+                <div class="uk-width-1-1 in-breadcrumb">
+                    <ul class="uk-breadcrumb uk-float-right">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="#">Company</a></li>
+                        <li><span>Security</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb content end -->
+
+    <main id="main" class="security-page">
 
         <div class="uk-section in-liquid-6 in-offset-top-10">
             <div class="uk-container">
@@ -27,7 +44,7 @@
                                 </div>
                                 <div class="uk-box-shadow-small uk-width-expand">
                                     <div class="uk-card uk-card-default uk-card-body uk-card-small uk-border-rounded">
-                                    <h4>@lang('message.your_data')</h4>
+                                        <h4>@lang('message.your_data')</h4>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +68,7 @@
                                 </div>
                                 <div class="uk-box-shadow-small uk-width-expand">
                                     <div class="uk-card uk-card-default uk-card-body uk-card-small uk-border-rounded">
-                                       <h4>@lang('message.suspicious')</h4>
+                                        <h4>@lang('message.suspicious')</h4>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +97,8 @@
                     <div class="uk-width-1-1 uk-flex uk-flex-center">
                         <div class="uk-width-3-4@m uk-margin-medium-bottom">
                             <h3 class="uk-margin-small-bottom" style="text-align: center;">@lang('message.your_data')</h3>
-                            <p class="uk-text-lead uk-text-muted uk-margin-remove" style="text-align: center; font-size: 1rem;">@lang('message.security.safety').</p>
+                            <p class="uk-text-lead uk-text-muted uk-margin-remove"
+                                style="text-align: center; font-size: 1rem;">@lang('message.security.safety').</p>
 
                         </div>
                     </div>
@@ -134,13 +152,15 @@
                     <div class="uk-width-1-1 uk-flex uk-flex-center">
                         <div class="uk-width-3-4@m uk-margin-medium-bottom">
                             <h3 class="uk-margin-small-bottom" style="text-align: center;">@lang('message.precautions')</h3>
-                            <p class="uk-text-lead uk-text-muted uk-margin-remove" style="text-align: center; font-size: 1rem;">@lang('message.security.online_banking').</p>
+                            <p class="uk-text-lead uk-text-muted uk-margin-remove"
+                                style="text-align: center; font-size: 1rem;">@lang('message.security.online_banking').</p>
 
                         </div>
                     </div>
                     <div class="uk-width-1-1 in-content-10">
 
-                        <div class="uk-grid-divider uk-child-width-1-2@m uk-child-width-1-2@s uk-margin-medium-top uk-grid" data-uk-grid="">
+                        <div class="uk-grid-divider uk-child-width-1-2@m uk-child-width-1-2@s uk-margin-medium-top uk-grid"
+                            data-uk-grid="">
                             <div class="uk-first-column">
                                 <h4 class="uk-heading-bullet">@lang('message.security.phishing')</h4>
                                 <div class="uk-grid uk-grid-small" data-uk-grid="">
@@ -198,7 +218,8 @@
                     <div class="uk-width-1-1 uk-flex uk-flex-center">
                         <div class="uk-width-3-4@m uk-margin-medium-bottom">
                             <h3 class="uk-margin-small-bottom" style="text-align: center;">@lang('message.suspicious')s</h3>
-                            <p class="uk-text-lead uk-text-muted uk-margin-remove" style="text-align: center; font-size: 1rem;">@lang('message.security.for_clarity'):</p>
+                            <p class="uk-text-lead uk-text-muted uk-margin-remove"
+                                style="text-align: center; font-size: 1rem;">@lang('message.security.for_clarity'):</p>
 
                         </div>
                     </div>
@@ -207,7 +228,7 @@
 
                             <div class="uk-card-body" style="padding: 15px 40px;">
 
-                                    <p>@lang('message.security.clarity_pt1').</p>
+                                <p>@lang('message.security.clarity_pt1').</p>
 
                             </div>
 
@@ -218,7 +239,7 @@
 
                             <div class="uk-card-body" style="padding: 15px 40px;">
 
-                                    <p>@lang('message.security.clarity_pt2').</p>
+                                <p>@lang('message.security.clarity_pt2').</p>
 
                             </div>
 
@@ -229,7 +250,7 @@
 
                             <div class="uk-card-body" style="padding: 15px 40px;">
 
-                                    <p>@lang('message.security.clarity_pt3') </p>
+                                <p>@lang('message.security.clarity_pt3') </p>
 
                             </div>
 
@@ -240,7 +261,7 @@
 
                             <div class="uk-card-body" style="padding: 15px 40px;">
 
-                                    <p>@lang('message.security.clarity_pt4').</p>
+                                <p>@lang('message.security.clarity_pt4').</p>
 
                             </div>
 
@@ -251,7 +272,7 @@
 
                             <div class="uk-card-body" style="padding: 15px 40px;">
 
-                                    <p>@lang('message.security.clarity_pt5').</p>
+                                <p>@lang('message.security.clarity_pt5').</p>
 
                             </div>
 
@@ -266,9 +287,10 @@
             <div class="uk-container">
                 <div class="uk-grid">
                     <div class="uk-width-1-1">
-                        <div class="uk-card uk-card-default uk-border-rounded uk-background-center uk-background-contain uk-background-image@m">
+                        <div
+                            class="uk-card uk-card-default uk-border-rounded uk-background-center uk-background-contain uk-background-image@m">
                             <div class="uk-card-body" style="padding: 70px 150px;">
-                                <div class="uk-grid uk-flex uk-flex-center" style="padding: 2rem;" >
+                                <div class="uk-grid uk-flex uk-flex-center" style="padding: 2rem;">
                                     <div class="uk-width-3-4@m uk-text-center">
                                         <h3>@lang('message.fraud')</h3>
                                         <p>@lang('message.security.fraud_pt1').</p>
@@ -312,7 +334,9 @@
                     </div>
                     <div class="uk-width-1-1 in-content-10">
 
-                        <div class="uk-grid-divider uk-child-width-1-2@m uk-child-width-1-2@s uk-margin-medium-top uk-grid" data-uk-grid="">
+                        <div class="uk-grid-divider uk-child-width-1-2@m uk-child-width-1-2@s
+uk-margin-medium-top uk-grid"
+                            data-uk-grid="">
                             <div class="uk-first-column">
 
                                 <div class="uk-grid uk-grid-small uk-grid-stack" data-uk-grid="">
@@ -323,35 +347,10 @@
                                 </div>
                             </div>
                             <div class="uk-visible@m">
-
                                 <div class="uk-grid uk-grid-small uk-grid-stack" data-uk-grid="">
                                     <div class="uk-width-expand@m uk-first-column">
                                         <p>@lang('message.security.we_remind_you_pt3').</p>
                                     </div>
-
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="uk-section">
-            <div class="uk-container">
-                <div class="uk-grid">
-                    <div class="uk-width-1-1 in-card-16">
-                        <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
-                            <div class="uk-grid uk-flex-middle" data-uk-grid="">
-                                <div class="uk-width-1-1 uk-width-expand@m uk-first-column">
-                                    <h3>@lang('message.trade_like_a_pro')!</h3>
-                                    <p>@lang('message.trade_cdfs').</p>
-                                </div>
-                                <div class="uk-width-auto">
-                                    <a class="uk-button uk-button-primary uk-border-rounded" href="{{ route('register') }}">@lang('message.open_acount')t</a>
                                 </div>
                             </div>
                         </div>
@@ -359,6 +358,5 @@
                 </div>
             </div>
         </div>
-
-</main>
+    </main>
 @endsection

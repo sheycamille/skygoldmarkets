@@ -41,7 +41,7 @@ class UpdateAccounts
         // check and update live account balances
         $this->setServerConfig('live');
 
-        // Get user mt5 accounts
+        // Get user Trader7 accounts
         $liveLogins = $user->accounts();
         $demoLogins = $user->demoaccounts();
 
@@ -49,7 +49,7 @@ class UpdateAccounts
         // echo ('<br><br>');
         foreach ($liveLogins as $acc) {
             try {
-                // initialize the mt5 api
+                // initialize the Trader7 api
                 $api = new LaravelMt5();
 
                 // var_dump($acc->login);
@@ -77,7 +77,7 @@ class UpdateAccounts
         // foreach ($demoLogins as $acc) {
         //     try {
 
-        //         // initialize the mt5 api
+        //         // initialize the Trader7 api
         //         $api = new LaravelMt5();
 
         //         var_dump($acc->login);

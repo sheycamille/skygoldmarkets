@@ -51,7 +51,7 @@
     </div>
     <!-- preloader end -->
 
-    <main>
+    <main class="container">
         @yield('content')
     </main>
 

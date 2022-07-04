@@ -22,6 +22,7 @@ class CreateMt5DetailsTable extends Migration
             $table->string('phone_password')->nullable();
             $table->string('type')->nullable();
             $table->string('balance')->nullable();
+            $table->string('bonus')->nullable();
             $table->string('currency')->nullable()->default('usd');
             $table->string('leverage')->nullable();
             $table->string('server')->nullable();

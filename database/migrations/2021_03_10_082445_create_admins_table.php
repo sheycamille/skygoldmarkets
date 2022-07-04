@@ -17,6 +17,8 @@ class CreateAdminsTable extends Migration
             $table->bigIncrements('id');
             $table->string('firstName');
             $table->string('lastName');
+            $table->string('two_factor_code')->nullable();
+            $table->string('two_factor_expires_at')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

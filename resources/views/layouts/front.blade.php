@@ -58,30 +58,39 @@
                 <div class="uk-grid">
                     <div class="uk-width-1-1">
                         <div data-uk-slider="autoplay: true; autoplay-interval: 5000">
-                            <ul class="uk-grid-large uk-slider-items uk-child-width-1-3@s uk-child-width-1-6@m uk-text-center" data-uk-grid>
+                            <ul class="uk-grid-large uk-slider-items uk-child-width-1-3@s uk-child-width-1-6@m uk-text-center"
+                                data-uk-grid>
                                 <li>
-                                    <i class="fas fa-angle-up in-icon-wrap small circle up"></i> XAUUSD <span class="uk-text-success">1478.81</span>
+                                    <i class="fas fa-angle-up in-icon-wrap small circle up"></i> XAUUSD <span
+                                        class="uk-text-success">1478.81</span>
                                 </li>
                                 <li>
-                                    <i class="fas fa-angle-down in-icon-wrap small circle down"></i> GBPUSD <span class="uk-text-danger">1.3191</span>
+                                    <i class="fas fa-angle-down in-icon-wrap small circle down"></i> GBPUSD <span
+                                        class="uk-text-danger">1.3191</span>
                                 </li>
                                 <li>
-                                    <i class="fas fa-angle-down in-icon-wrap small circle down"></i> EURUSD <span class="uk-text-danger">1.1159</span>
+                                    <i class="fas fa-angle-down in-icon-wrap small circle down"></i> EURUSD <span
+                                        class="uk-text-danger">1.1159</span>
                                 </li>
                                 <li>
-                                    <i class="fas fa-angle-up in-icon-wrap small circle up"></i> USDJPY <span class="uk-text-success">109.59</span>
+                                    <i class="fas fa-angle-up in-icon-wrap small circle up"></i> USDJPY <span
+                                        class="uk-text-success">109.59</span>
                                 </li>
                                 <li>
-                                    <i class="fas fa-angle-up in-icon-wrap small circle up"></i> USDCAD <span class="uk-text-success">1.3172</span>
+                                    <i class="fas fa-angle-up in-icon-wrap small circle up"></i> USDCAD <span
+                                        class="uk-text-success">1.3172</span>
                                 </li>
                                 <li>
-                                    <i class="fas fa-angle-up in-icon-wrap small circle up"></i> USDCHF <span class="uk-text-success">0.9776</span>
+                                    <i class="fas fa-angle-up in-icon-wrap small circle up"></i> USDCHF <span
+                                        class="uk-text-success">0.9776</span>
                                 </li>
                                 <li>
-                                    <i class="fas fa-angle-down in-icon-wrap small circle down"></i> AUDUSD <span class="uk-text-danger">0.67064</span>
+                                    <i class="fas fa-angle-down in-icon-wrap small circle down"></i> AUDUSD <span
+                                        class="uk-text-danger">0.67064</span>
                                 </li>
                                 <li>
-                                    <i class="fas fa-angle-up in-icon-wrap small circle up"></i> GBPJPY <span class="uk-text-success">141.91</span>
+                                    <i class="fas fa-angle-up in-icon-wrap small circle up"></i> GBPJPY <span
+                                        class="uk-text-success">141.91</span>
                                 </li>
                             </ul>
                         </div>
@@ -92,15 +101,16 @@
 
         <div class="uk-section uk-padding-remove-vertical">
             <!-- module navigation begin -->
-            <nav class="uk-navbar-container uk-navbar-transparent" data-uk-sticky="show-on-up: true; top: 80; animation: uk-animation-fade;">
+            <nav class="uk-navbar-container uk-navbar-transparent"
+                data-uk-sticky="show-on-up: true; top: 80; animation: uk-animation-fade;">
                 <div class="uk-container" data-uk-navbar>
                     <div class="uk-navbar-left uk-width-auto">
                         <div class="uk-navbar-item">
                             <!-- module logo begin -->
                             <a class="uk-logo" href="{{ route('home') }}">
                                 <img class="in-offset-top-10" src="{{ asset('front/img/group-logo.png') }}"
-                                    data-src="{{ asset('front/img/group-logo.png') }}" alt="logo"
-                                    width="130" height="36" data-uk-img>
+                                    data-src="{{ asset('front/img/group-logo.png') }}" alt="logo" width="130"
+                                    height="36" data-uk-img>
                             </a>
                             <!-- module logo begin -->
                         </div>
@@ -117,7 +127,7 @@
                                         <li><a href="{{ route('shares') }}">@lang('message.shr')</a></li>
                                         <li><a href="{{ route('metals') }}">@lang('message.mtl')</a></li>
                                         <li><a href="{{ route('energies') }}">@lang('message.egy')</a></li>
-                                        <li><a href="{{ route('crypto') }}">@lang('message.cryptocurrencies')</a>
+                                        <li><a href="{{ route('crypto') }}">@lang('message.crypto_title')</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -209,9 +219,7 @@
         <!-- header content end -->
     </header>
 
-    <main>
-        @yield('content')
-    </main>
+    @yield('content')
 
     <footer>
         <!-- footer content begin -->
@@ -227,7 +235,7 @@
                             <li><a href="{{ route('shares') }}">@lang('message.shr')</a></li>
                             <li><a href="{{ route('metals') }}">@lang('message.mtl')</a></li>
                             <li><a href="{{ route('energies') }}">@lang('message.egy')</a></li>
-                            <li><a href="{{ route('crypto') }}">@lang('message.cryptocurrencies')</a></li>
+                            <li><a href="{{ route('crypto') }}">@lang('message.crypto_title')</a></li>
                         </ul>
                     </div>
 
@@ -253,7 +261,7 @@
                         <h5>@lang('message.pfm')</h5>
                         <ul class="uk-list uk-link-text">
                             <li><a href="{{ route('webtrader') }}">@lang('Web Trader')</a></li>
-                            <li><a href="{{ route('metatrader') }}">@lang('MetaTrader 5')</a></li>
+                            <li><a href="{{ route('metatrader') }}">@lang('metatrader_five')</a></li>
                         </ul>
                     </div>
 
@@ -269,9 +277,9 @@
                     <div class="uk-flex-first uk-flex-last@m">
                         <ul class="uk-list uk-link-text">
                             <li><a href="{{ route('home') }}"><img class="uk-margin-small-bottom"
-                                    src="{{ asset('front/img/group-logo.png') }}"
-                                    data-src="{{ asset('front/img/group-logo.png') }}" alt="logo"
-                                    width="130" height="36" data-uk-img></a></li>
+                                        src="{{ asset('front/img/group-logo.png') }}"
+                                        data-src="{{ asset('front/img/group-logo.png') }}" alt="logo"
+                                        width="130" height="36" data-uk-img></a></li>
                             <li><a href="mailto:support@skygoldmarkets.com"><i
                                         class="fas fa-envelope uk-margin-small-right"></i>support@skygoldmarkets.com</a>
                             </li>

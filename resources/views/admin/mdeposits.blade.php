@@ -55,7 +55,7 @@
                                             <th>ID</th>
                                             <th>Client name</th>
                                             <th>Client email</th>
-                                            <th>MT5 Account</th>
+                                            <th>Trader7 Account</th>
                                             <th>Amount</th>
                                             <th>Payment mode</th>
                                             <th>Status</th>
@@ -207,7 +207,7 @@
                                                             <input type="hidden" name="user_id"
                                                                 value="{{ $deposit->duser->id }}">
                                                             <textarea class="form-control" name="message" row="3"
-                                                                required>This is to inform you that your deposit of {{ \App\Models\Setting::getValue('currency') }}{{ $deposit->amount }} has been received and processed. You can now check your MT5 account.</textarea>
+                                                                required>This is to inform you that your deposit of {{ \App\Models\Setting::getValue('currency') }}{{ $deposit->amount }} has been received and processed. You can now check your Trader7 account.</textarea>
                                                             <br />
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}">

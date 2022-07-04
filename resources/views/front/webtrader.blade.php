@@ -5,7 +5,24 @@
 @section('webtrader-menu-item', 'uk-active')
 
 @section('content')
-<main id="main" class="webtrader-page">
+
+    <!-- breadcrumb content begin -->
+    <div class="uk-section uk-padding-remove-vertical">
+        <div class="uk-container">
+            <div class="uk-grid">
+                <div class="uk-width-1-1 in-breadcrumb">
+                    <ul class="uk-breadcrumb uk-float-right">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><span>WebTrader</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb content end -->
+
+    <main id="main" class="webtrader-page">
 
         <div class="uk-section in-liquid-6 in-offset-top-10">
             <div class="uk-container">
@@ -14,7 +31,7 @@
                         <div class="uk-text-center">
                             <h1 style="text-align: center;">@lang('message.webtrader.webtrader_title1')<br>@lang('message.webtrader.webtrader_title2')</h1>
                             <p class="uk-text-lead uk-visible@m" style="font-size: 17px; text-align: center;">
-                            @lang('message.webtrader.webtrader_platform')
+                                @lang('message.webtrader.webtrader_platform')
                             </p>
                         </div>
                     </div>
@@ -93,7 +110,8 @@
                 <div class="uk-grid uk-flex uk-flex-center">
                     <div class="uk-width-3-4@m">
                         <div class="uk-grid uk-flex uk-flex-center" data-uk-grid="">
-                            <a href="#" class="uk-button uk-text-center uk-button-primary uk-border-rounded"
+                            <a href="https://web.mobius-trader.com"
+                                class="uk-button uk-text-center uk-button-primary uk-border-rounded"
                                 style="padding: 15px 60px;">@lang('message.webtrader.btn_2')<i
                                     class="fas fa-angle-right uk-margin-small-left"></i></a>
                         </div>
@@ -122,7 +140,7 @@
                                     <div class="uk-card uk-card-default uk-card-body uk-card-small uk-border-rounded">
                                         <h3>@lang('message.seamless')</h3>
                                         <p>@lang('message.int_awards')</p>
-                                        <p>  @lang('message.our_work').</p>
+                                        <p> @lang('message.our_work').</p>
                                     </div>
                                 </div>
                             </div>
@@ -157,25 +175,26 @@
                         <h2>@lang('message.trade_with') <span class="in-highlight">@lang('message.world_leading')</span> @lang('message.broker').</h2>
                     </div>
                 </div>
-                <div class="uk-grid uk-child-width-1-2@s uk-child-width-1-3@m uk-text-center" data-uk-grid="">
+                <div class="uk-grid uk-child-width-1-2@s
+uk-child-width-1-3@m uk-text-center"
+                    data-uk-grid="">
                     <div class="uk-first-column">
                         <div class="in-liquid-16-counter">
-                            <img class="uk-margin-remove"
-                                src="{{ asset('front/img/in-liquid-icon-22.svg') }}"
-                                data-src="{{ asset('front/img/in-liquid-icon-22.svg') }}" alt="sample-icon" width="92" height="92"
-                              >
+                            <img class="uk-margin-remove" src="{{ asset('front/img/in-liquid-icon-22.svg') }}"
+                                data-src="{{ asset('front/img/in-liquid-icon-22.svg') }}" alt="sample-icon" width="92"
+                                height="92">
                             <h1 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                                <span class="count" data-counter-end="20" data-counter-append=" years">@lang('message.six_years')</span>
+                                <span class="count" data-counter-end="20"
+                                    data-counter-append=" years">@lang('message.six_years')</span>
                             </h1>
                             <p class="uk-margin-small-top">Experience</p>
                         </div>
                     </div>
                     <div>
                         <div class="in-liquid-16-counter">
-                            <img class="uk-margin-remove"
-                                src="{{ asset('front/img/in-liquid-icon-23.svg') }}"
-                                data-src="{{ asset('front/img/in-liquid-icon-23.svg') }}" alt="sample-icon" width="92" height="92"
-                              >
+                            <img class="uk-margin-remove" src="{{ asset('front/img/in-liquid-icon-23.svg') }}"
+                                data-src="{{ asset('front/img/in-liquid-icon-23.svg') }}" alt="sample-icon" width="92"
+                                height="92">
                             <h1 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
                                 <span class="count" data-counter-end="15" data-counter-append=" years">15 years</span>
                             </h1>
@@ -185,10 +204,9 @@
 
                     <div>
                         <div class="in-liquid-16-counter">
-                            <img class="uk-margin-remove"
-                                src="{{ asset('front/img/in-liquid-icon-25.svg') }}"
-                                data-src="{{ asset('front/img/in-liquid-icon-25.svg') }}" alt="sample-icon" width="92" height="92"
-                              >
+                            <img class="uk-margin-remove" src="{{ asset('front/img/in-liquid-icon-25.svg') }}"
+                                data-src="{{ asset('front/img/in-liquid-icon-25.svg') }}" alt="sample-icon"
+                                width="92" height="92">
                             <h1 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
                                 <span class="count" data-counter-end="24" data-counter-append="/5">24/5</span>
                             </h1>
@@ -199,26 +217,5 @@
 
             </div>
         </div>
-
-        <div class="uk-section">
-            <div class="uk-container">
-                <div class="uk-grid">
-                    <div class="uk-width-1-1 in-card-16">
-                        <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
-                            <div class="uk-grid uk-flex-middle" data-uk-grid="">
-                                <div class="uk-width-1-1 uk-width-expand@m uk-first-column">
-                                    <h3>@lang('message.trade_like_a_pro')</h3>
-                                    <p>@lang('message.trade_cdfs').</p>
-                                </div>
-                                <div class="uk-width-auto">
-                                    <a class="uk-button uk-button-primary uk-border-rounded" href="{{ route('register') }}">@lang('message.open_acount')</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-</main>
+    </main>
 @endsection

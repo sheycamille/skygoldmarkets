@@ -3,234 +3,233 @@
 @section('title', 'Register')
 
 @section('content')
-<main id="main" class="crypto-page">
-    <div class="uk-section in-liquid-6 in-offset-top-10">
-        <div class="uk-container">
 
-            <div class="uk-grid uk-flex uk-flex-center">
-                <div class="uk-width-5-1@m uk-background-contain uk-background-center-center">
-                    <div class="uk-text-center">
-                        <div class="mb-4 text-center">
-                            <a href="{{url('/')}}">
-                                <img src="{{ asset('front/img/group-logo.png') }}"
-                                    alt="{{\App\Models\Setting::getValue('site_name')}}" title=""
-                                    class="img-fluid auth__logo" style="width: 15%;" />
-                            </a>
+    <!-- section content begin -->
+    <div class="uk-section uk-padding-remove-vertical">
+        <div class="uk-container uk-container-expand">
+            <div class="uk-grid" data-uk-height-viewport="expand: true">
+                <div class="uk-width-3-5@m uk-background-cover uk-background-center-right uk-visible@m uk-box-shadow-xlarge"
+                    style="background-image: url({{ asset('front/img/in-signin-image.jpeg') }});">
+                </div>
+                <div class="uk-width-expand@m uk-flex uk-flex-middle">
+                    <div class="uk-grid uk-flex-center">
+                        <div class="uk-width-3-5@m">
+                            <div class="in-padding-horizontal@s">
+                                <!-- module logo begin -->
+                                <a class="uk-logo" href="{{ route('home') }}">
+                                    <img class="in-offset-top-10" src="{{ asset('front/img/group-logo.png') }}"
+                                        data-src="{{ asset('front/img/group-logo.png') }}" alt="logo" width="130"
+                                        height="36" data-uk-img>
+                                </a>
+                                <!-- module logo begin -->
+                                <p class="uk-text-lead uk-margin-top uk-margin-remove-bottom">@lang('message.register.crt')</p>
+                                <p class="uk-text-small uk-margin-remove-top uk-margin-medium-bottom">@lang('message.register.already')
+                                    <a href="{{ route('login') }}">Login here</a>
+                                </p>
+
+                                <div class="mb-4 text-center">
+                                    @if (Session::has('status'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                            style="margin: auto;">
+                                            {{ session('status') }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <button type="button" class="text-white close" data-dismiss="alert"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+
+                                    </div>
+                                @endif
+
+                                <!-- login form begin -->
+                                <form class="uk-grid uk-form" action="{{ route('register') }}" method="post">
+                                    @csrf
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('first_name'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('first_name') }}</strong>
+                                            </span>
+                                        @endif
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"
+                                            for="first_name"></span>
+                                        <input type="text" class="uk-input uk-border-rounded" name="first_name"
+                                            value="{{ old('first_name') }}" id="first_name"
+                                            placeholder="@lang('message.first_name')">
+                                    </div>
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('last_name'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('last_name') }}</strong>
+                                            </span>
+                                        @endif
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"
+                                            for="last_name"></span>
+                                        <input type="text" class="uk-input uk-border-rounded" name="last_name"
+                                            value="{{ old('last_name') }}" id="last_name"
+                                            placeholder="@lang('message.last_name')">
+                                    </div>
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('email'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                        @endif
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-envelope fa-sm"
+                                            for="email"></span>
+                                        <input type="email" class="uk-input uk-border-rounded" name="email"
+                                            value="{{ old('email') }}" id="email" placeholder="@lang('message.register.example')">
+                                    </div>
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('phone'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('phone') }}</strong>
+                                            </span>
+                                        @endif
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-phone fa-sm"
+                                            for="phone"></span>
+                                        <input type="mumber" class="uk-input uk-border-rounded" name="phone"
+                                            value="{{ old('phone') }}" id="phone" placeholder="@lang('message.register.enter_num')">
+                                    </div>
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('account_type'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('account_type') }}</strong>
+                                            </span>
+                                        @endif
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-cog fa-sm"
+                                            for="account_type"></span>
+                                        <select class="uk-input uk-border-rounded" name="account_type" id="account_type"
+                                            required>
+                                            <option>Choose Account Type</option>
+                                            @foreach ($account_types as $accType)
+                                                <option @if ($accType->id == request()->get('account_type')) selected @endif
+                                                    value="{{ $accType->id }}">
+                                                    {{ $accType->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('address'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('address') }}</strong>
+                                            </span>
+                                        @endif
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-address-card fa-sm"
+                                            for="address"></span>
+                                        <input type="text" class="uk-input uk-border-rounded" name="address"
+                                            value="{{ old('address') }}" id="address" placeholder="@lang('message.register.addrs')">
+                                    </div>
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('country'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('country') }}</strong>
+                                            </span>
+                                        @endif
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-flag fa-sm" for="country"
+                                            name="country"></span>
+                                        <select name="country" id="country" class="uk-input uk-border-rounded"
+                                            required>
+                                            <option>@lang('message.register.chs')</option>
+                                            @foreach ($countries as $country)
+                                                <option @if ($country->id == old('country')) selected @endif
+                                                    value="{{ $country->id }}">
+                                                    {{ ucfirst($country->name) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('state'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('state') }}</strong>
+                                            </span>
+                                        @endif
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-file fa-sm"
+                                            for="state"></span>
+                                        <input type="text" class="uk-input uk-border-rounded" name="state"
+                                            value="{{ old('state') }}" id="state" placeholder="@lang('message.register.enter_stt')">
+                                    </div>
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('town'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('town') }}</strong>
+                                            </span>
+                                        @endif
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-city fa-sm"
+                                            for="town"></span>
+                                        <input type="text" class="uk-input uk-border-rounded" name="town"
+                                            value="{{ old('town') }}" id="town" placeholder="@lang('message.register.town')">
+                                    </div>
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('zip_code'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('zip_code') }}</strong>
+                                            </span>
+                                        @endif
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-map-marker fa-sm"
+                                            for="zip_code"></span>
+                                        <input type="text" class="uk-input uk-border-rounded" name="zip_code"
+                                            value="{{ old('zip_code') }}" id="zip_code"
+                                            placeholder="@lang('message.register.enter_zip')">
+                                    </div>
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                        <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                            <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"
+                                                for="password"></span>
+                                            <input type="password" class="uk-input uk-border-rounded" name="password"
+                                                id="password" placeholder="@lang('message.register.enter_pass')">
+                                        </div>
+                                        <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                            <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"
+                                                for="confirm-password"></span>
+                                            <input type="password" class="uk-input uk-border-rounded"
+                                                name="password_confirmation" value="{{ old('password_confirmation') }}"
+                                                id="confirm-password" placeholder="@lang('message.register.confirm')">
+                                        </div>
+                                    </div>
+
+                                    <div class="uk-margin-small uk-width-1-1">
+                                        <button
+                                            class="uk-button uk-width-1-1 uk-button-primary uk-border-rounded uk-float-left"
+                                            type="submit" name="submit">@lang('message.register.reg')</button>
+                                    </div>
+                                </form>
+                                <!-- login form end -->
+                            </div>
                         </div>
-
-                        <div class="mb-4 text-center">
-                            @if(Session::has('status'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                                style="margin: auto;">
-                                {{ session('status') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h1 class="mt-3 uk-text-center" style="font-size: 32px; margin-top: 10px;">
-                            @lang('message.register.crt')
-                        </h1>
-
-                        @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <button type="button" class="text-white close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-
-                        </div>
-                        @endif
-                        <br>
-
-                        <form method="POST" action="{{ route('register') }}" class="mt-5 card__form">
-                            @csrf
-
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    @if ($errors->has('first_name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
-                                    @endif
-                                    <label for="first_name">@lang('message.first_name'):</label>
-                                    <input type="text" class="mr-2 form-control" name="first_name" value="{{ old('first_name') }}"
-                                        id="first_name" placeholder="@lang('message.first_name')">
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    @if ($errors->has('last_name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
-                                    </span>
-                                    @endif
-                                    <label for="last_name">@lang('message.last_name'):</label>
-                                    <input type="text" class="mr-2 form-control" name="last_name" value="{{ old('last_name') }}"
-                                        id="last_name" placeholder="@lang('message.last_name')">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                                @endif
-                                <label for="email">@lang('message.register.email'):</label>
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}"
-                                    id="email" placeholder="@lang('message.register.example')">
-                            </div>
-
-                            <div class="d-flex">
-                                <div class="form-group">
-                                    @if ($errors->has('phone'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                    @endif
-                                    <label for="phone">@lang('message.register.num'):</label>
-                                    <input type="mumber" class="form-control" name="phone" value="{{ old('phone') }}"
-                                        id="phone" placeholder="@lang('message.register.enter_num')">
-                                </div>
-
-                                <div class="form-group">
-                                    @if ($errors->has('account_type'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('account_type') }}</strong>
-                                    </span>
-                                    @endif
-                                    <label for="account_type">@lang('message.register.type'):</label>
-                                    <select class="form_control" name="account_type" id="account_type" required>
-                                        <option disabled>Choose Account Type</option>
-                                        @foreach ($account_types as $accType)
-                                        <option @if ($accType->id == request()->get('account_type')) selected @endif
-                                            value="{{ $accType->id }}">
-                                            {{ $accType->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                @if ($errors->has('address'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('address') }}</strong>
-                                </span>
-                                @endif
-                                <label for="address">@lang('message.register.addrs'):</label>
-                                <input type="text" class="form-control" name="address" value="{{ old('address') }}"
-                                    id="address" placeholder="@lang('message.register.addrs')">
-                            </div>
-
-                            <div class="form-group">
-                                @if ($errors->has('country'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('country') }}</strong>
-                                </span>
-                                @endif
-                                <label for="country" name="country">@lang('message.register.country'):</label>
-                                <select name="country" id="country" class="form-control" style="max-width: 150px"
-                                    required>
-                                    <option>@lang('message.register.chs')</option>
-                                    @foreach ($countries as $country)
-                                    <option @if ($country->id == old('country')) selected @endif value="{{ $country->id
-                                        }}">
-                                        {{ ucfirst($country->name) }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                @if ($errors->has('state'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('state') }}</strong>
-                                </span>
-                                @endif
-                                <label for="state">@lang('message.register.state'):</label>
-                                <input type="text" class="form-control" name="state" value="{{ old('state') }}"
-                                    id="state" placeholder="@lang('message.register.enter_stt')">
-                            </div>
-
-                            <div class="form-group">
-                                @if ($errors->has('town'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('town') }}</strong>
-                                </span>
-                                @endif
-                                <label for="town">@lang('message.register.town'):</label>
-                                <input type="text" class="form-control" name="town" value="{{ old('town') }}"
-                                    id="town" placeholder="@lang('message.register.town')">
-                            </div>
-
-                            <div class="form-group">
-                                @if ($errors->has('zip_code'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('zip_code') }}</strong>
-                                </span>
-                                @endif
-                                <label for="zip_code">@lang('message.register.zip'):</label>
-                                <input type="text" class="form-control" name="zip_code" value="{{ old('zip_code') }}"
-                                    id="zip_code" placeholder="@lang('message.register.enter_zip')">
-                            </div>
-
-                            <div class="form-row">
-                                @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                                @endif
-                                <div class="form-group">
-                                    <label for="password">@lang('message.register.pass'):</label>
-                                    <input type="password" class="form-control" name="password" id="password"
-                                        placeholder="@lang('message.register.enter_pass')">
-                                </div>
-                                <div class="form-group">
-                                    <label for="confirm-password">@lang('message.register.confrm'):</label>
-                                    <input type="password" class="form-control" name="password_confirmation"
-                                        value="{{ old('password_confirmation') }}" id="confirm-password"
-                                        placeholder="@lang('message.register.confirm')">
-                                </div>
-                            </div>
-
-                            {{-- <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Captcha:</label>
-                                <div class="col-md-6">
-                                    {!! NoCaptcha::display() !!}
-                                    @if ($errors->has('g-recaptcha-response'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div> --}}
-                            <br>
-
-                            <div class="form-group" style="justify-content:center">
-                                <button class="mt-4 btn btn-primary uk-button uk-button-primary uk-border-rounded"
-                                    type="submit">@lang('message.register.reg')</button>
-                            </div>
-                            <br>
-
-                            <div class="mb-3 text-center">
-                                <small class="mb-2 text-center ">@lang('message.register.already') <a
-                                        href="{{ route('login') }}">@lang('message.register.log').</a> </small>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
+    <!-- section content end -->
+
 @endsection

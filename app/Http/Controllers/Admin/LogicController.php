@@ -142,13 +142,13 @@ class LogicController extends Controller
         $deposit = Deposit::where('id', $id)->first();
         $user = User::where('id', $deposit->user)->first();
 
-        // switch the mt5 api to use live server
+        // switch the Trader7 api to use live server
         $this->setServerConfig('live');
 
-        // get mt5 account in question
+        // get Trader7 account in question
         $mt5 = Mt5Details::find($deposit->account_id);
 
-        // do the deposit on the mt5 account
+        // do the deposit on the Trader7 account
         $data = $this->performTransaction($mt5->login, $deposit->amount, Trade::DEAL_BALANCE);
 
         if ($data['status'] == false)
@@ -157,7 +157,7 @@ class LogicController extends Controller
         $deposit->status = 'Processed';
         $deposit->save();
 
-        // update the local mt5 account
+        // update the local Trader7 account
         $mt5->balance += $deposit->amount;
         $mt5->save();
 
@@ -171,7 +171,7 @@ class LogicController extends Controller
         // send email notification
         $objDemo = new \stdClass();
         $objDemo->message = "\r Hello $user->name, \r \n
-        This is to inform you that your deposit of $currency$deposit->amount has been received and processed. You can now check your MT5 account. \r\r";
+        This is to inform you that your deposit of $currency$deposit->amount has been received and processed. You can now check your Trader7 account. \r\r";
         $objDemo->sender = "$site_name";
         $objDemo->date = Carbon::Now();
         $objDemo->subject = "Deposit processed successfully!";
@@ -189,10 +189,10 @@ class LogicController extends Controller
         $withdrawal = Withdrawal::where('id', $id)->first();
         $user = User::where('id', $withdrawal->user)->first();
 
-        // switch the mt5 api to use live server
+        // switch the Trader7 api to use live server
         $this->setServerConfig('live');
 
-        // do the withdrawal from on the mt5 account
+        // do the withdrawal from on the Trader7 account
         $mt5 = Mt5Details::find($withdrawal->account_id);
         $data = $this->performTransaction($mt5->login, -round($withdrawal->amount), Trade::DEAL_BALANCE);
 
@@ -203,7 +203,7 @@ class LogicController extends Controller
         $withdrawal->status = 'Processed';
         $withdrawal->save();
 
-        // update the local mt5 account
+        // update the local Trader7 account
         $mt5->balance -= round($withdrawal->amount);
         $mt5->save();
 

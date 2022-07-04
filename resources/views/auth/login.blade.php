@@ -18,8 +18,8 @@
                                 <!-- module logo begin -->
                                 <a class="uk-logo" href="{{ route('home') }}">
                                     <img class="in-offset-top-10" src="{{ asset('front/img/group-logo.png') }}"
-                                        data-src="{{ asset('front/img/group-logo.png') }}" alt="logo"
-                                        width="130" height="36" data-uk-img>
+                                        data-src="{{ asset('front/img/group-logo.png') }}" alt="logo" width="130"
+                                        height="36" data-uk-img>
                                 </a>
                                 <!-- module logo begin -->
                                 <p class="uk-text-lead uk-margin-top uk-margin-remove-bottom">Log into your account</p>
@@ -27,17 +27,17 @@
                                     <a href="{{ route('register') }}">Register here</a>
                                 </p>
                                 <!-- login form begin -->
-                                <form class="uk-grid uk-form" action="{{ route('login') }}">
+                                <form class="uk-grid uk-form" action="{{ route('login') }}" method="post">
                                     @csrf
                                     <div class="uk-margin-small uk-width-1-1 uk-inline">
                                         <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
-                                        <input class="uk-input uk-border-rounded" id="username" value=""
-                                            type="text" placeholder="Username">
+                                        <input name="email" class="uk-input uk-border-rounded" id="email"
+                                            value="" type="text" placeholder="Username">
                                     </div>
                                     <div class="uk-margin-small uk-width-1-1 uk-inline">
                                         <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
-                                        <input class="uk-input uk-border-rounded" id="password" value=""
-                                            type="password" placeholder="Password">
+                                        <input name="password" class="uk-input uk-border-rounded" id="password"
+                                            value="" type="password" placeholder="Password">
                                     </div>
                                     <div class="uk-margin-small uk-width-auto uk-text-small">
                                         <label><input class="uk-checkbox uk-border-rounded" type="checkbox"> Remember

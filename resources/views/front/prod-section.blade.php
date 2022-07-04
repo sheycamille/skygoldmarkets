@@ -78,7 +78,7 @@
                     <img class="uk-margin-small-bottom" src="{{ asset('front/img/in-liquid-icon-17.svg') }}"
                         data-src="{{ asset('front/img/in-liquid-icon-17.svg') }}" alt="wave-award" width="72"
                         height="72" data-uk-img="">
-                    <h3 class="uk-margin-top">Sky Gold Markets MeTaTrader5</h3>
+                    <h3 class="uk-margin-top">Sky Gold Markets Trader 7</h3>
 
                 </div>
             </div>
@@ -146,27 +146,6 @@
                         <span class="count" data-counter-end="4"
                             data-counter-append=" industry regulations">@lang('message.industry_regulations')<span>
                     </h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="uk-section">
-    <div class="uk-container">
-        <div class="uk-grid">
-            <div class="uk-width-1-1 in-card-16">
-                <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
-                    <div class="uk-grid uk-flex-middle" data-uk-grid="">
-                        <div class="uk-width-1-1 uk-width-expand@m uk-first-column">
-                            <h3>@lang('message.trade_like_a_pro')</h3>
-                            <p>@lang('message.trade_cdfs').</p>
-                        </div>
-                        <div class="uk-width-auto">
-                            <a class="uk-button uk-button-primary uk-border-rounded"
-                                href="{{ route('register') }}">@lang('message.open_acount')</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

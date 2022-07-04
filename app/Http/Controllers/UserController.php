@@ -78,7 +78,7 @@ class UserController extends Controller
         $user = User::where('id', $user->id)->first();
         $total_bonus = $user->totalBonus() + $user->signup_bonus + $user->ref_bonus;
 
-        // Get the total balance the user has in each mt5 live account
+        // Get the total balance the user has in each Trader7 live account
         $total_balance = $user->totalBalance();
 
         //log user out if not approved

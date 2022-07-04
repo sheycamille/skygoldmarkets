@@ -132,7 +132,7 @@ class UsersController extends Controller
             return $fdata;
     }
 
-    
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -237,10 +237,10 @@ class UsersController extends Controller
         // check and update live account balances
         $this->setServerConfig('live');
 
-        // initialize the mt5 api
+        // initialize the Trader7 api
         $api = new LaravelMt5();
 
-        // delete the mt5 account
+        // delete the Trader7 account
         try {
             $data = $api->deleteUser($mt5->login);
         } catch (Exception $e) {
@@ -396,7 +396,7 @@ class UsersController extends Controller
     // top up route
     public function topup(Request $request)
     {
-        // switch the mt5 api to use live server
+        // switch the Trader7 api to use live server
         $this->setServerConfig('live');
 
         $msg = 'Action Successful';
@@ -404,10 +404,10 @@ class UsersController extends Controller
 
         if ($request->t_type == "Credit") {
             $data = ['status' => false];
-            // get mt5 account in question
+            // get Trader7 account in question
             $mt5 = Mt5Details::find($request->account_id);
             if (!$mt5)
-                return redirect()->back()->with('message', 'MT5 account not found');
+                return redirect()->back()->with('message', 'Trader7 account not found');
 
             if ($request->type == "Bonus") {
                 $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_CREDIT);
@@ -432,10 +432,10 @@ class UsersController extends Controller
             }
         } elseif ($request->t_type == "Debit") {
             $data = ['status' => false];
-            // get mt5 account in question
+            // get Trader7 account in question
             $mt5 = Mt5Details::find($request->account_id);
             if (!$mt5)
-                return redirect()->back()->with('message', 'MT5 account not found');
+                return redirect()->back()->with('message', 'Trader7 account not found');
 
             if ($request->type == "Bonus") {
                 $data = $this->performTransaction($mt5->login, -$amt, Trade::DEAL_CREDIT);

@@ -20,7 +20,7 @@ class CreateAccountTypeTable extends Migration
             $table->boolean('active')->default(true);
             $table->string('cost')->nullable();
             $table->string('trading_model')->nullable()->default('STP');
-            $table->string('trading_platforms')->nullable()->default('MT5, iOs, Andriod');
+            $table->string('trading_platforms')->nullable()->default('Trader7, iOs, Andriod');
             $table->boolean('account_manager')->nullable()->default(true);
             $table->double('min_trade_size')->nullable();
             $table->string('max_trade_size')->nullable();

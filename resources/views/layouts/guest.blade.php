@@ -78,7 +78,7 @@
                                             <li><a href="{{ route('shares') }}">Shares</a></li>
                                             <li><a href="{{ route('metals') }}">Metals</a></li>
                                             <li><a href="{{ route('energies') }}">Energies</a></li>
-                                            <li><a href="{{ route('crypto') }}">Cryptocurrencies</a></li>
+                                            <li><a href="{{ route('crypto') }}">@lang('message.crypto_title')</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -91,7 +91,7 @@
                                                         <h3>Platforms</h3>
                                                     </li>
                                                     <li><a href="{{ route('webtrader') }}">Web Trader</a></li>
-                                                    <li><a href="{{ route('metatrader') }}">MetaTrader 5</a></li>
+                                                    <li><a href="{{ route('metatrader') }}">@lang('metatrader_five')</a></li>
                                                 </ul>
                                             </div>
                                             <div>
@@ -211,14 +211,14 @@
                             <li><a href="{{ route('shares') }}">Shares</a></li>
                             <li><a href="{{ route('metals') }}">Metals</a></li>
                             <li><a href="{{ route('energies') }}">Energies</a></li>
-                            <li><a href="{{ route('crypto') }}">Cryptocurrencies</a></li>
+                            <li><a href="{{ route('crypto') }}">@lang('message.crypto_title')</a></li>
                         </ul>
                     </div>
                     <div>
                         <h5>Trading Platforms</h5>
                         <ul class="uk-list uk-link-text">
                             <li><a href="{{ route('webtrader') }}">Web Trader</a></li>
-                            <li><a href="{{ route('metatrader') }}">MetaTrader 5</a></li>
+                            <li><a href="{{ route('metatrader') }}">@lang('metatrader_five')</a></li>
                         </ul>
                     </div>
                     <div>

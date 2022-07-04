@@ -46,9 +46,9 @@ Route::get('terms-of-serv', 'FrontController@terms')->name('terms-of-serv');
 Route::get('order-execution', 'FrontController@Execution')->name('order-execution');
 Route::get('risk-disclosure', 'FrontController@disclosure')->name('risk-disclosure');
 // Route::get('products', 'FrontController@products')->name('products');
-// Route::get('account-types', 'FrontController@accountTypes')->name('account-types');
+Route::get('account-types', 'FrontController@accountTypes')->name('account-types');
 // Route::get('trading-platforms', 'FrontController@tradingPlatforms')->name('trading-platforms');
-// Route::post('/send-contact-message', 'FrontController@sendContact')->name('sendcontactmessage');
+Route::post('/send-contact-message', 'FrontController@sendContact')->name('sendcontactmessage');
 // Route::get('private/ftds', 'FrontController@ftds')->name('ftds');
 
 Route::get('dependent-dropdown', 'FrontController@fetchDependent');
@@ -248,7 +248,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/delmarket/{id}', 'UserController@delmarket');
     Route::get('dashboard/delassets/{id}', 'UserController@delassets');
 
-    // mt5 account mg't
+    // Trader7 account mg't
     Route::get('/dashboard/demo-accounts', 'Mt5Controller@demoaccounts')->name('account.demoaccounts');
     Route::get('/dashboard/live-accounts', 'Mt5Controller@liveaccounts')->name('account.liveaccounts');
     Route::post('/dashboard/add-account', 'Mt5Controller@addmt5account')->name('account.addmt5account'); //->middleware(['throttle:1,30']);

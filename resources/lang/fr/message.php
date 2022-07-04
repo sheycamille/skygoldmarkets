@@ -83,7 +83,7 @@ return [
         FOREX, MÉTAUX, INDICES ET ÉNERGIES - SPREADS RÉDUITS ET COMMISSIONS COMPÉTITIVES - MARCHÉ
         EXECUTION',
         'webtrader_sub' => 'WebTrader',
-        'mt5_account' => 'Accédez à votre compte MT5
+        'mt5_account' => 'Accédez à votre compte Trader7
         directement depuis votre navigateur sans avoir à installer de logiciel',
         'indicators' => "30 indicateurs techniques et 24 outils d'analyse",
         'chart_type' => '3 types de graphiques avec 9 cadres temporels',
@@ -95,12 +95,12 @@ return [
     ],
     'metatrader' => [
         'metatrader_title1' => 'Plate-forme de négociation',
-        'metatrader_title2' => 'MetaTrader 5',
-        'fx_mt5' => "Fidèle à l'impressionnante réputation de son prédécesseur, la plateforme de négociation MT5 de FxPro vous offre tout ce dont vous avez besoin pour négocier sur les marchés financiers. MT5 est facile à utiliser et entièrement personnalisable pour s'adapter à votre style de trading, avec un environnement avancé pour le développement d'EA et des fonctionnalités supplémentaires.",
+        'metatrader_title2' => 'Tradere 7',
+        'fx_mt5' => "Fidèle à l'impressionnante réputation de son prédécesseur, la plateforme de négociation Tradre7 vous offre tout ce dont vous avez besoin pour négocier sur les marchés financiers. Trader7 est facile à utiliser et entièrement personnalisable pour s'adapter à votre style de trading, avec un environnement avancé pour le développement d'EA et des fonctionnalités supplémentaires.",
         'btn_3' => 'Commencez à négocier dès maintenant',
-        'metatrader_five' => 'Metatrader 5',
+        'metatrader_five' => 'Tradere 7',
         'desktop_platform' => 'Plateforme de bureau',
-        'ea_trading' => "La MT5 est en train de devenir l'une des plates-formes les plus utilisées dans le secteur. Elle intègre toutes les fonctions clés qui ont été défendues pendant des années avec la MT4, mais avec quelques fonctions supplémentaires et un environnement optimisé pour le trading EA.",
+        'ea_trading' => "La Trader7 est en train de devenir l'une des plates-formes les plus utilisées dans le secteur. Elle intègre toutes les fonctions clés qui ont été défendues pendant des années avec la MT4, mais avec quelques fonctions supplémentaires et un environnement optimisé pour le trading EA.",
         'tech_indicators' => '38+ indicateurs techniques préinstallés',
         'charting_tools' => '44 outils de graphiques analytiques',
         'frames' => '3 types de graphiques et 21 cadres temporels',
@@ -115,15 +115,15 @@ return [
         'intergrated_calender' => 'Calendrier économique intégré',
         'dom' => 'DOM(Profondeur du marché)',
         'win_mac' => 'Disponible pour Windows ou Mac',
-        'download' => "Téléchargez-le gratuitement pour profiter de tous les avantages qu'il a à offrir en conjonction avec le compte de trading Sky Gold Markets MT5",
-        'for_win' => 'Télécharger MT5 pour Windows',
-        'for_mac' => 'Télécharger MT5 pour Mac',
+        'download' => "Téléchargez-le gratuitement pour profiter de tous les avantages qu'il a à offrir en conjonction avec le compte de trading Sky Gold Markets Tradre 7",
+        'for_win' => 'Télécharger Tradre 7 pour Windows',
+        'for_mac' => 'Télécharger Tradre 7 pour Mac',
         'system_req' => 'Configuration requise',
         'compatible' => "Compatible avec les systèmes d'exploitation Microsoft Windows 2008/7/8/10. Vitesse Internet de 56 kbps ou plus",
-        'netting' => "Le compte MT5 de FxPro est réglé par défaut sur 'Netting', ce qui signifie que les transactions sont agrégées et que la couverture n'est pas possible.",
+        'netting' => "Le compte Tradre7 est réglé par défaut sur 'Netting', ce qui signifie que les transactions sont agrégées et que la couverture n'est pas possible.",
         'hedging' => 'mais nous pouvons fournir une version "hedging" de la plate-forme sur demande.',
-        'meta_for_mobile' => 'MetaTrader 5 pour mobiles et tablettes',
-        'with_fxpro' => 'Avec FxPro MT5 Mobile, vous pouvez profiter de la plateforme de trading la plus populaire sur votre téléphone portable, partout et à tout moment. Disponible pour iOS et Android',
+        'meta_for_mobile' => 'Tradre 7  pour mobiles et tablettes',
+        'with_fxpro' => 'Avec Tradre 7 Mobile, vous pouvez profiter de la plateforme de trading la plus populaire sur votre téléphone portable, partout et à tout moment. Disponible pour iOS et Android',
 
     ],
     'economic_calender' => [
@@ -254,10 +254,10 @@ return [
     'trading_platforms' => [
         'o_t_p' => 'Nos plateformes de négociation',
         'advanced_platform' => 'La plateforme la plus avancée au monde',
-        'more_features' => "Profitez de plus de fonctionnalités avec la plateforme de trading MT5 d'AXESPRIME. AXESPRIME MT5 est la plateforme MetaTrader la plus récente et la plus avancée. Elle offre toutes les fonctions pionnières de MT4, avec en plus des outils de trading et des indicateurs plus avancés qui permettent aux traders de mieux contrôler leurs transactions et de prendre des décisions plus éclairées en utilisant des analyses de pointe.",
+        'more_features' => "Profitez de plus de fonctionnalités avec la plateforme de trading Trader7 d'Sky Gold Markets. Sky Gold Markets Trader7 est la plateforme Tradre 7 la plus récente et la plus avancée. Elle offre toutes les fonctions pionnières de MT4, avec en plus des outils de trading et des indicateurs plus avancés qui permettent aux traders de mieux contrôler leurs transactions et de prendre des décisions plus éclairées en utilisant des analyses de pointe.",
         'benefits' => 'Avantages et bénéfices',
-        'lates_platform' => "La dernière plateforme MetaTrader offre un certain nombre d'outils analytiques et de fonctions supplémentaires conçus pour vous offrir un arsenal de négociation plus complet et une expérience améliorée, ce qui en fait l'une des meilleures plateformes disponibles sur le marché.",
-        'mobile_apps' => 'Applications mobiles AXESPRIME',
+        'lates_platform' => "La dernière plateforme Tradre 7 offre un certain nombre d'outils analytiques et de fonctions supplémentaires conçus pour vous offrir un arsenal de négociation plus complet et une expérience améliorée, ce qui en fait l'une des meilleures plateformes disponibles sur le marché.",
+        'mobile_apps' => 'Applications mobiles Sky Gold Markets',
         'freedom' => 'La liberté de commercer partout et à tout moment',
         'multi_awarded' => "Notre application mobile, plusieurs fois récompensée, est dotée d'une interface de trading conviviale qui vous permet de placer et de gérer vos transactions en déplacement, tout en utilisant les mêmes outils et fonctionnalités que ceux disponibles sur notre plateforme de bureau..",
         'get_started' => 'Comment commencer',
@@ -429,8 +429,8 @@ return [
         'b13' => "Dans le cas où le Client reçoit une directive précise de la part d'Sky Gold Markets concernant l'exécution de la commande et que la société a décidé de cette directive, l'exécution de la commande ne sera pas possible.
         l'exécution de l'ordre et que la société a décidé de cette directive, par conséquent, une exécution de l'ordre sera exécutée selon l'instruction spécifique donnée.
         l'ordre sera exécuté avec l'instruction spécifique donnée.",
-        'b14' => "Néanmoins, si le client souhaite exécuter un ordre et donne une certaine instruction, alors en exécutant cet ordre, Sky Gold Markets s'acquittera de la responsabilité d'Axes Prime de fournir la meilleure exécution.
-        l'ordre, Sky Gold Markets s'acquittera de la responsabilité d'Axes Prime de fournir la meilleure exécution au client.
+        'b14' => "Néanmoins, si le client souhaite exécuter un ordre et donne une certaine instruction, alors en exécutant cet ordre, Sky Gold Markets s'acquittera de la responsabilité d'Sky Gold Markets de fournir la meilleure exécution.
+        l'ordre, Sky Gold Markets s'acquittera de la responsabilité d'Sky Gold Markets de fournir la meilleure exécution au client.
         pour le client. Cela peut avoir pour conséquence de ne pas être qualifié pour se conformer à la politique d'exécution des ordres d'Sky Gold Markets pour cet ordre.
         d'exécution des ordres d'Sky Gold Markets pour cet ordre précis.
         ",
@@ -438,8 +438,8 @@ return [
         'b15' => "Les entités chargées de l'exécution sont principalement le cadre dans lequel les ordres sont placés ou exécutés.
         ou exécutés. Les Entités d'Exécution pour le compte des Clients seront donc accréditées par des sociétés d'investissement.
         par des sociétés d'investissement. ",
-        'b16' => "En général, les fonds placés sur les comptes des clients auprès d'Axes Prime, en comptant les ordres qui sont positionnés vers une plateforme de trading, sont sécurisés par Sky Gold Markets.
-        positionnés vers une plateforme de trading sont sécurisés par Axes Prime qui est le seul responsable des
+        'b16' => "En général, les fonds placés sur les comptes des clients auprès d'Sky Gold Markets, en comptant les ordres qui sont positionnés vers une plateforme de trading, sont sécurisés par Sky Gold Markets.
+        positionnés vers une plateforme de trading sont sécurisés par Sky Gold Markets qui est le seul responsable des
         de ces capitaux. ",
         'review' => 'Examen et surveillance',
         'b21' => "La politique mise en œuvre par Sky Gold Markets sera certainement surveillée, y compris les dispositions substantielles relatives à l'exécution des ordres.
@@ -687,7 +687,7 @@ return [
     'communication' => [
         'head' => 'COMMUNICATION',
         'b1' => "You acknowledge that all communication from the Company shall be in electronic form
-                through AxesPro's website and other Company means of communication to
+                through Sky Gold Markets's website and other Company means of communication to
                 clients.",
 
     ],
@@ -1034,8 +1034,7 @@ return [
         'pay_method' => 'Mode de paiement',
         'my_with' => 'Mes retraits',
         'new_with' => 'Nouveau retrait',
-        'metatrader5' => 'Télécharger MetaTradre 5 pour PC, smartphones et tablettes',
-        'metatrader4' => 'Télécharger MetaTradre 4 pour PC, smartphones et tablettes',
+        'metatrader5' => 'Télécharger Tradre 7 pour PC, smartphones et tablettes',
         'windows' => 'Téléchargement pour
         Windows',
         'android' => 'Téléchargement Andriod',
@@ -1172,7 +1171,7 @@ return [
         'sub' => 'Soumettre',
         'demo' => 'Créer un compte de démonstration',
         'lev' => 'Effet de levier',
-        'pass' => 'Mot de passe MT5',
+        'pass' => 'Mot de passe Trader7',
         'inv' => "Mot de passe de l'investisseur",
         'cur' => 'Monnaie',
         'int' => 'Solde initial',
@@ -1189,7 +1188,7 @@ return [
     'trade_major_and_minor' => 'Négociez des CFDs Spot et Futures sur les indices majeurs et mineurs du monde entier',
     'Shres' => 'Actions',
     'hundreds_of_companies' => "Des centaines d'entreprises publiques des États-Unis, du Royaume-Uni, de France et d'Allemagne sont disponibles pour la négociation",
-    'Cryptocurrencies' => 'Crypto-monnaies',
+    'crypto_title' => 'Crypto-monnaies',
     'trde_bitcn' => "Négociez des CFD de bitcoin, d'éther, de doge et d'autres crypto et altcoins",
     'discover_opportunities' => 'Découvrez les opportunités sur le pétrole brut britannique et américain, ainsi que les CFDs sur le gaz naturel au comptant et à terme',
     'read_more' => 'Lire la suite',
@@ -1235,7 +1234,7 @@ return [
     'creat_account' => 'Créer un compte',
     'discover' => 'Découvrez la plate-forme',
     'choose_platform' => 'Choisissez votre plateforme',
-    'platforms' => 'Nous mettons à la disposition de nos clients un large éventail de plateformes de trading de bureau, web et mobiles, notamment la plateforme Sky Gold Markets, MetaTrader 5 et cTrader.',
+    'platforms' => 'Nous mettons à la disposition de nos clients un large éventail de plateformes de trading de bureau, web et mobiles, notamment la plateforme Sky Gold Markets, Tradre 7 et WebTrader.',
     'skygoldmarkets_platform' => 'Plateforme Sky Gold Markets',
     'start_trading' => 'Commencer à négocier',
     'six_years' => '6 ans',
@@ -1252,7 +1251,7 @@ return [
     'transparency' => 'La transparence avant tout',
     'trusted' => 'Confiance et réglementation complète',
     'commitment' => 'Nous maintenons un engagement inébranlable en faveur de pratiques commerciales équitables et éthiques.',
-    'best_in_class' => 'Le meilleur courtier MetaTrader de sa catégorie',
+    'best_in_class' => 'Le meilleur courtier Tradre 7 de sa catégorie',
     'precautions' => 'Précautions à prendre',
     'your_data' => 'Comment Sky Gold Markets protège vos données',
     'suspicious' => 'Signaler les messages suspects dans la boîte de réception',
@@ -1265,11 +1264,10 @@ return [
     'shr' => 'Actions',
     'mtl' => 'Métaux',
     'egy' => 'Energies',
-    'cryptocurrencies' => 'Crypto-monnaies',
     'tools' => 'Outils',
     'pfm' => 'Plateformes',
     'wtd' => 'Web Trader',
-    'mtd' => 'MetaTrader 5',
+    'mtd' => 'Trader 7',
     'trading_tools' => 'Outils de négociation',
     'ecn_cal' => 'Calendrier économique',
     'calc' => 'Calculatrice',

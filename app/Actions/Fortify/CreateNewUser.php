@@ -78,7 +78,7 @@ class CreateNewUser implements CreatesNewUsers
             'hash' => $hash,
         ]);
         $objDemo->message = "\r Hi $user->name, \r\n
-        \r\n This is to inform you that you have successfully registered on our $site_name \r\n "; //. ".<br> Please click on the button below to verify your email. <br><br> <a class='button button-primary' href='" . $link . "' style='margin:20px 0; text-align:center; margin:auto; display:block; width:30%;'>Verify Account</a>";
+        \r\n This is to inform you that you have successfully registered on $site_name. \r\n "; //. ".<br> Please click on the button below to verify your email. <br><br> <a class='button button-primary' href='" . $link . "' style='margin:20px 0; text-align:center; margin:auto; display:block; width:30%;'>Verify Account</a>";
         $objDemo->sender = "$site_name";
         // $objDemo->link = $link;
         $objDemo->date = Carbon::Now();

@@ -17,6 +17,7 @@ class CreateWithdrawalsTable extends Migration
             $table->bigIncrements('id');
             $table->string('txn_id')->nullable();
             $table->integer('user')->nullable();
+            $table->string('account_id')->nullable();
             $table->string('uname')->nullable();
             $table->string('amount')->nullable();
             $table->string('to_deduct')->nullable();

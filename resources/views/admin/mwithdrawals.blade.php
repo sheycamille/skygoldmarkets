@@ -58,7 +58,7 @@
                                                 <th>Client name</th>
                                                 <th>Amount requested</th>
                                                 <th>Amount + charges</th>
-                                                <th>MT5 Account</th>
+                                                <th>Trader7 Account</th>
                                                 <th>Payment mode</th>
                                                 <th>Receiver's email</th>
                                                 <th>Status</th>

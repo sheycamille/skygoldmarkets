@@ -2,10 +2,8 @@
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
         <div class="c-sidebar-brand">
             <a href="/">
-                <img class="c-sidebar-brand-full" src="{{ asset('front/img/group-logo.png') }}" width="100"
-                    height="46" alt="Sky Gold Markets Logo">
-                <img class="c-sidebar-brand-minimized" src="{{ asset('front/favicon.png') }}" width="40" height="46"
-                    alt="Sky Gold Markets Logo">
+                <img class="c-sidebar-brand-full" src="{{ asset('front/img/group-logo.png') }}" width="200" alt="Sky Gold Markets Logo">
+                <img class="c-sidebar-brand-minimized" src="{{ asset('front/favicon.png') }}" width="100" alt="Sky Gold Markets Logo">
             </a>
         </div>
         <ul class="c-sidebar-nav">
@@ -67,7 +65,7 @@
             <li class="c-sidebar-nav-dropdown @yield('maccounts')">
                 <a class="c-sidebar-nav-dropdown-toggle" data-toggle="collapse" href="#macc">
                     <i class="cil-monitor c-sidebar-nav-icon"></i>
-                    MT5 Accounts
+                    Trader7 Accounts
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
                     @if (auth('admin')->user()->hasPermissionTo('mftd-list', 'admin'))

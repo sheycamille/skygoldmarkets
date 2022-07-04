@@ -15,14 +15,21 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->text('first_name');
+            $table->text('last_name');
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone')->nullable();
             $table->string('password');
+            $table->string('account_type')->nullable();
             $table->date('dob')->nullable();
+
             $table->text('address')->nullable();
             $table->string('country_id')->nullable();
-            $table->string('phone')->nullable();
+            $table->text('town')->nullable();
+            $table->text('state')->nullable();
+            $table->text('zip_code')->nullable();
+
             $table->string('dashboard_style')->default('dark');
             $table->string('bank_name')->nullable();
             $table->string('bank_address')->nullable();
@@ -37,6 +44,9 @@ class CreateUsersTable extends Migration
             $table->string('bnb_address')->nullable();
             $table->string('usdt_address')->nullable();
             $table->string('xrp_address')->nullable();
+            $table->string('interac')->nullable();
+            $table->string('paypal_email')->nullable();
+
             $table->integer('account_bal')->default('0');
             $table->integer('bonus')->default('0');
             $table->integer('ref_bonus')->default('0');
@@ -46,8 +56,13 @@ class CreateUsersTable extends Migration
             $table->string('ref_by')->nullable();
             $table->string('ref_link')->nullable();
 
+
             $table->string('id_card')->nullable();
+            $table->string('id_card_back')->nullable();
+            $table->text('address_document')->nullable();
             $table->string('passport')->nullable();
+            $table->date('docs_uploaded_date')->nullable();
+            $table->date('docs_verified_date')->nullable();
             $table->string('account_verify')->nullable();
 
             $table->datetime('entered_at')->nullable();
@@ -57,9 +72,16 @@ class CreateUsersTable extends Migration
             $table->string('trade_mode')->nullable();
             $table->string('act_session')->nullable();
 
+            $table->text('two_factor_secret')->nullable();
+            $table->text('two_factor_recovery_codes')->nullable();
+            $table->text('token_2fa')->nullable();
+            $table->text('token_2fa_expiry')->nullable();
+
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
+
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
     }

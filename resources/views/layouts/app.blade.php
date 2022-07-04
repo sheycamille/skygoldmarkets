@@ -10,7 +10,7 @@
     <title>@yield('title') | {{ \App\Models\Setting::getValue('site_name') }}</title>
 
     <meta name="description"
-        content="{{ \App\Models\Setting::getValue('site_description') }} Sky Gold Markets offers CFDs on currency pairs and five other asset classes. Start trading forex online with the world’s best forex broker.">
+        content="{{ \App\Models\Setting::getValue('site_description') }} Sky Gold Markets offers CFDs on currency pairs and five other asset classes. Start trading forex online with the world's best forex broker.">
     <meta name="keywords"
         content="forex, exchange, broker, crypto, trading, indices, shares, stocks, bonds, cryptocurrencies, futures, energies">
     <meta name="author" content="skygoldmarkets">
@@ -38,7 +38,7 @@
 
         @yield('topbar')
 
-        <div class="c-body">
+        <div class="c-body container">
 
             <main class="c-main">
 

@@ -5,7 +5,24 @@
 @section('calender-menu-item', 'uk-active')
 
 @section('content')
-<main id="main" class="about-us-page">
+
+    <!-- breadcrumb content begin -->
+    <div class="uk-section uk-padding-remove-vertical">
+        <div class="uk-container">
+            <div class="uk-grid">
+                <div class="uk-width-1-1 in-breadcrumb">
+                    <ul class="uk-breadcrumb uk-float-right">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><span>Economic Calender</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb content end -->
+
+    <main id="main" class="about-us-page">
 
         <div class="uk-section in-liquid-6 in-offset-top-10">
             <div class="uk-container">
@@ -29,7 +46,7 @@
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container" style="width: 100%; height: 1000px;">
                         <iframe scrolling="no" allowtransparency="true" frameborder="0"
-                            src="https://www.tradingview-widget.com/embed-widget/events/?locale=en#%7B%22width%22%3A%22100%25%22%2C%22height%22%3A%221000%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Afalse%2C%22importanceFilter%22%3A%22-1%2C0%2C1%22%2C%22utm_source%22%3A%skygoldmarkets.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22events%22%7D"
+                            src="https://www.tradingview-widget.com/embed-widget/events/?locale=en#%7B%22width%22%3A%22100%25%22%2C%22height%22%3A%221000%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Afalse%2C%22importanceFilter%22%3A%22-1%2C0%2C1%22%2C%22utm_source%22%3A%25skygoldmarkets.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22events%22%7D"
                             style="box-sizing: border-box; height: 1000px; width: 100%;"></iframe>
                         <style>
                             .tradingview-widget-copyright {
@@ -98,28 +115,32 @@
                         <div class="uk-grid-medium uk-child-width-1-3@s uk-child-width-1-3@m uk-text-center uk-margin-top uk-grid"
                             data-uk-grid="">
                             <div class="uk-first-column">
-                                <img src="{{ asset('front/img/in-liquid-award.svg') }}" data-src="{{ asset('front/img//in-liquid-award.svg') }}" alt="wave-award"
+                                <img src="{{ asset('front/img/in-liquid-award.svg') }}"
+                                    data-src="{{ asset('front/img//in-liquid-award.svg') }}" alt="wave-award"
                                     width="71" height="58" data-uk-img="">
                                 <h6 class="uk-margin-small-top uk-margin-remove-bottom">@lang('message.best_cdf')</h6>
                                 <p class="uk-text-small uk-margin-remove-top">@lang('message.summit')</p>
                             </div>
                             <div>
-                                <img src="{{ asset('front/img/in-liquid-award.svg') }}" data-src="{{ asset('front/img//in-liquid-award.svg') }}" alt="wave-award"
+                                <img src="{{ asset('front/img/in-liquid-award.svg') }}"
+                                    data-src="{{ asset('front/img//in-liquid-award.svg') }}" alt="wave-award"
                                     width="71" height="58" data-uk-img="">
                                 <h6 class="uk-margin-small-top uk-margin-remove-bottom">@lang('message.execution')</h6>
                                 <p class="uk-text-small uk-margin-remove-top">@lang('message.expo')</p>
                             </div>
                             <div>
-                                <img src="{{ asset('front/img/in-liquid-award.svg') }}" data-src="{{ asset('front/img//in-liquid-award.svg') }}" alt="wave-award"
+                                <img src="{{ asset('front/img/in-liquid-award.svg') }}"
+                                    data-src="{{ asset('front/img//in-liquid-award.svg') }}" alt="wave-award"
                                     width="71" height="58" data-uk-img="">
                                 <h6 class="uk-margin-small-top uk-margin-remove-bottom">@lang('message.best_platform')</h6>
                                 <p class="uk-text-small uk-margin-remove-top">@lang('message.london_summit')</p>
                             </div>
                         </div>
                         <img class="uk-align-center" src="{{ asset('front/img//in-liquid-7-mockup.png') }}"
-                            data-src="{{ asset('front/img//in-liquid-7-mockup.png') }}" alt="sample-images" width="691" height="420"
-                          >
-                        <div class="uk-grid-divider uk-child-width-1-2@s uk-child-width-1-4@m uk-text-center in-offset-top-10 uk-grid"
+                            data-src="{{ asset('front/img//in-liquid-7-mockup.png') }}" alt="sample-images" width="691"
+                            height="420">
+                        <div class="uk-grid-divider uk-child-width-1-2@s
+uk-child-width-1-4@m uk-text-center in-offset-top-10 uk-grid"
                             data-uk-grid="">
                             <div class="uk-first-column">
                                 <h2 class="uk-margin-small-bottom">~30ms</h2>
@@ -149,25 +170,5 @@
             </div>
         </div>
 
-        <div class="uk-section">
-            <div class="uk-container">
-                <div class="uk-grid">
-                    <div class="uk-width-1-1 in-card-16">
-                        <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
-                            <div class="uk-grid uk-flex-middle" data-uk-grid="">
-                                <div class="uk-width-1-1 uk-width-expand@m uk-first-column">
-                                    <h3>@lang('message.trade_like_a_pro')</h3>
-                                    <p>@lang('message.trade_cdfs').</p>
-                                </div>
-                                <div class="uk-width-auto">
-                                    <a class="uk-button uk-button-primary uk-border-rounded" href="{{ route('register') }}">@lang('message.open_acount')</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-</main>
+    </main>
 @endsection

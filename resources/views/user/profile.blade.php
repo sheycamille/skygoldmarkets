@@ -9,8 +9,6 @@
 
     @include('user.topmenu')
 
-    @include('user.sidebar')
-
     <div class="container-fluid">
         <div class="fade-in">
             <div class="row">
@@ -70,16 +68,14 @@
                                                             <div class="form-group col-sm-6">
                                                                 <label for="first_name">@lang('message.first_name')</label>
                                                                 <input class="form-control" id="first_name" type="text"
-                                                                    name="first_name"
-                                                                    placeholder="@lang('message.first_name')"
+                                                                    name="first_name" placeholder="@lang('message.first_name')"
                                                                     value="{{ Auth::user()->first_name }}">
                                                             </div>
 
                                                             <div class="form-group col-sm-6">
                                                                 <label for="last_name">@lang('message.last_name')</label>
                                                                 <input class="form-control" id="last_name" type="text"
-                                                                    name="last_name"
-                                                                    placeholder="@lang('message.last_name')"
+                                                                    name="last_name" placeholder="@lang('message.last_name')"
                                                                     value="{{ Auth::user()->last_name }}">
                                                             </div>
                                                         </div>
@@ -88,16 +84,14 @@
                                                             <div class="form-group col-sm-6">
                                                                 <label for="email">@lang('message.body.email') </label>
                                                                 <input class="form-control" id="email" type="text"
-                                                                    name="email"
-                                                                    placeholder="@lang('message.body.enter_email')"
+                                                                    name="email" placeholder="@lang('message.body.enter_email')"
                                                                     value="{{ Auth::user()->email }}">
                                                             </div>
 
                                                             <div class="form-group col-sm-6">
                                                                 <label for="dob">@lang('message.dob')</label>
                                                                 <input class="form-control" id="dob" type="date"
-                                                                    name="dob"
-                                                                    placeholder="@lang('message.dob')"
+                                                                    name="dob" placeholder="@lang('message.dob')"
                                                                     value="{{ Auth::user()->dob }}">
                                                             </div>
                                                         </div>
@@ -106,8 +100,7 @@
                                                             <div class="form-group col-sm-6">
                                                                 <label for="phone">@lang('message.body.phone')</label>
                                                                 <input class="form-control" id="phone" type="text"
-                                                                    name="phone"
-                                                                    placeholder="@lang('message.body.enter_phone')"
+                                                                    name="phone" placeholder="@lang('message.body.enter_phone')"
                                                                     value="{{ Auth::user()->phone }}">
                                                             </div>
 
@@ -122,8 +115,7 @@
 
                                                         <div class="row">
                                                             <div class="form-group col-sm-6">
-                                                                <label
-                                                                    for="country">@lang('message.register.country')</label>
+                                                                <label for="country">@lang('message.register.country')</label>
                                                                 <select class="form-control" name="country" id="country"
                                                                     required>
                                                                     <option selected disabled>

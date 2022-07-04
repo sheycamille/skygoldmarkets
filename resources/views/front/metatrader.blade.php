@@ -1,11 +1,28 @@
 @extends('layouts.front')
 
-@section('title', 'MetaTrader 5')
+@section('title', 'Trader 7')
 
 @section('metatrader-menu-item', 'uk-active')
 
 @section('content')
-<main id="main" class="metatrader-page">
+
+    <!-- breadcrumb content begin -->
+    <div class="uk-section uk-padding-remove-vertical">
+        <div class="uk-container">
+            <div class="uk-grid">
+                <div class="uk-width-1-1 in-breadcrumb">
+                    <ul class="uk-breadcrumb uk-float-right">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><span>Trader 7</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb content end -->
+
+    <main id="main" class="trader-page">
         <div class="uk-section in-liquid-6 in-offset-top-10">
             <div class="uk-container">
                 <div class="uk-grid uk-flex uk-flex-center">
@@ -13,12 +30,13 @@
                         <div class="uk-text-center">
                             <h1 class="uk-margin-remove">@lang('message.metatrader.metatrader_title1') <br> @lang('message.metatrader.metatrader_title2')</h1>
                             <p class="uk-text-lead uk-text-muted uk-margin-small-top">
-                            @lang('message.metatrader.fx_mt5')
+                                @lang('message.metatrader.fx_mt5')
                             </p>
                             <img src="{{ asset('front/img/mt5.jpg') }}" />
                             <br><br>
                             <div class="uk-width-auto">
-                                <a class="uk-button uk-button-primary uk-border-rounded" href="{{ route('register') }}">@lang('message.metatrader.btn_3')</a>
+                                <a class="uk-button uk-button-primary uk-border-rounded"
+                                    href="{{ route('register') }}">@lang('message.metatrader.btn_3')</a>
                             </div>
                         </div>
                     </div>
@@ -33,7 +51,8 @@
                         <div class="uk-width-3-4@m uk-margin-medium-bottom">
                             <h2 class="uk-margin-small-bottom uk-text-center">@lang('message.metatrader.metatrader_five')</h2>
                             <h4 class="uk-text-center uk-margin-small-top uk-text-muted">@lang('message.metatrader.desktop_platform')</h4>
-                            <p class="uk-text-center uk-text-muted uk-margin-remove" style="text-align: center; font-size: 1rem;">@lang('message.metatrader.ea_trading').</p>
+                            <p class="uk-text-center uk-text-muted uk-margin-remove"
+                                style="text-align: center; font-size: 1rem;">@lang('message.metatrader.ea_trading').</p>
                         </div>
                     </div>
                     <div class="uk-width-1-1 in-timeline-1">
@@ -86,7 +105,7 @@
                     <div>
                         <div class="uk-card uk-card-default uk-border-rounded uk-box-shadow-medium">
                             <div class="uk-card-body">
-                               <img src="{{ asset('front/img/mt5_tab.jpeg') }}" alt="mt5 trader">
+                                <img src="{{ asset('front/img/mt5_tab.jpeg') }}" alt="mt5 trader">
                             </div>
                         </div>
                     </div>
@@ -94,11 +113,11 @@
                         <h4 class="uk-margin-remove">@lang('message.metatrader.download').</h4>
                         <br>
                         <div class="uk-width-auto">
-                            <a class="uk-button uk-button-primary uk-border-rounded" href="#">@lang('message.metatrader.for_win')</a>
+                            <a class="uk-button uk-button-primary uk-border-rounded" href="https://mobius-trader.s3.eu-north-1.amazonaws.com/MobiusTrader/MobiusTrader-Mobius.win.exe">@lang('message.metatrader.for_win')</a>
                         </div>
                         <br>
                         <div class="uk-width-auto">
-                            <a class="uk-button uk-button-primary uk-border-rounded" href="#">@lang('message.metatrader.for_mac')</a>
+                            <a class="uk-button uk-button-primary uk-border-rounded" href="https://mobius-trader.s3.eu-north-1.amazonaws.com/MobiusTrader/MobiusTrader-Mobius.mac.dmg">@lang('message.metatrader.for_mac')</a>
                         </div>
                         <div class="uk-subnav uk-subnav-divider uk-margin-medium-top uk-text-small" data-uk-margin="">
                             <div class="uk-first-column uk-text-muted">@lang('message.metatrader.system_req'):</div>
@@ -121,92 +140,34 @@
                             <p class="uk-text-lead uk-text-muted uk-margin-small-top">@lang('message.metatrader.with_fxpro').</p>
                             <br>
                         </div>
-                        <div class="uk-grid-medium uk-child-width-1-3@s uk-child-width-1-3@m uk-text-center uk-margin-top uk-grid" data-uk-grid="">
+                        <div class="uk-grid-medium uk-child-width-1-3@s uk-child-width-1-3@m uk-text-center uk-margin-top uk-grid"
+                            data-uk-grid="">
                             <div class="uk-first-column">
-                                <img src="{{ asset('front/img/play-market-icon.svg') }}" data-src="{{ asset('front/img/play-market-icon.svg') }}" alt="wave-award" style="margin-top: 45%;">
+                                <img src="{{ asset('front/img/play-market-icon.svg') }}"
+                                    data-src="{{ asset('front/img/play-market-icon.svg') }}" alt="wave-award"
+                                    style="margin-top: 45%;">
                             </div>
                             <div>
-                                <img src="{{ asset('front/img/mt5_mobile.jpeg') }}" data-src="{{ asset('front/img/mt5_mobile.jpeg') }}" alt="wave-award" width="500">
+                                <img src="{{ asset('front/img/mt5_mobile.jpeg') }}"
+                                    data-src="{{ asset('front/img/mt5_mobile.jpeg') }}" alt="wave-award" width="500">
                             </div>
-                            <div>
-                                <img src="{{ asset('front/img/ios-store-icon.svg') }}" data-src="{{ asset('front/img/ios-store-icon.svg') }}" alt="wave-award" style="margin-top: 45%;">
-                            </div>
+                            {{-- <div>
+                                <img src="{{ asset('front/img/ios-store-icon.svg') }}"
+                                    data-src="{{ asset('front/img/ios-store-icon.svg') }}" alt="wave-award"
+                                    style="margin-top: 45%;">
+                            </div> --}}
                         </div>
                         <br>
 
                         <div class="uk-text-center uk-margin-medium-top">
-                            <a class="uk-button uk-button-primary uk-border-rounded uk-margin-small-right" href="#">@lang('message.creat_account')<i class="fas fa-angle-right uk-margin-small-left"></i></a>
-                            <a class="uk-button uk-button-secondary uk-border-rounded" href="#">@lang('message.discover')<i class="fas fa-angle-right uk-margin-small-left"></i></a>
+                            <a class="uk-button uk-button-primary uk-border-rounded uk-margin-small-right"
+                                href="{{ route('register') }}">@lang('message.creat_account')<i class="fas fa-angle-right uk-margin-small-left"></i></a>
+                            <a class="uk-button uk-button-secondary uk-border-rounded" href="{{ route('about') }}">@lang('message.discover')<i class="fas fa-angle-right uk-margin-small-left"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- section stats begin -->
-        <div class="uk-section in-liquid-16">
-            <div class="uk-container">
-                <div class="uk-grid uk-flex uk-flex-center">
-                    <div class="uk-width-1-2@m uk-text-center">
-                        <h2>@lang('message.trade_with') <span class="in-highlight">@lang('message.world_leading')</span> @lang('message.broker').</h2>
-                    </div>
-                </div>
-                <div class="uk-grid uk-child-width-1-2@s uk-child-width-1-4@m uk-text-center" data-uk-grid>
-                    <div>
-                        <div class="in-liquid-16-counter">
-                            <img class="uk-margin-remove" src="{{ asset('front/img/in-lazy.gif') }}" data-src="{{ asset('front/img/in-liquid-icon-22.svg') }}" alt="sample-icon" width="92" height="92" data-uk-img>
-                            <h3 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                                <span class="count" data-counter-end="1000" data-counter-append=" clients">1k+ clients</span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="in-liquid-16-counter">
-                            <img class="uk-margin-remove" src="{{ asset('front/img/in-lazy.gif') }}" data-src="{{ asset('front/img/in-liquid-icon-24.svg') }}" alt="sample-icon" width="92" height="92" data-uk-img>
-                            <h3 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                                <span class="count" data-counter-end="90" data-counter-append=" awards">@lang('message.awards')</span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="in-liquid-16-counter">
-                            <img class="uk-margin-remove" src="{{ asset('front/img/in-lazy.gif') }}" data-src="{{ asset('front/img/in-liquid-icon-25.svg') }}" alt="sample-icon" width="92" height="92" data-uk-img>
-                            <h3 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                                <span class="count" data-counter-end="5" data-counter-append=" customer service">@lang('message.five_star')</span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="in-liquid-16-counter">
-                            <img class="uk-margin-remove" src="{{ asset('front/img/in-lazy.gif') }}" data-src="{{ asset('front/img/in-liquid-icon-23.svg') }}" alt="sample-icon" width="92" height="92" data-uk-img>
-                            <h3 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                                <span class="count" data-counter-end="4" data-counter-append=" industry regulations">@lang('message.industry_regulations')<span>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="uk-section">
-            <div class="uk-container">
-                <div class="uk-grid">
-                    <div class="uk-width-1-1 in-card-16">
-                        <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
-                            <div class="uk-grid uk-flex-middle" data-uk-grid="">
-                                <div class="uk-width-1-1 uk-width-expand@m uk-first-column">
-                                    <h3>@lang('message.trade_like_a_pro')</h3>
-                                    <p>@lang('message.trade_cdfs').</p>
-                                </div>
-                                <div class="uk-width-auto">
-                                    <a class="uk-button uk-button-primary uk-border-rounded" href="{{ route('register') }}">@lang('message.open_acount')</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-</main>
+    </main>
 @endsection
