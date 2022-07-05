@@ -2,6 +2,31 @@
 
 @section('title', 'Register')
 
+@section('stylesheets')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+    <style>
+        span.select2.select2-container.select2-container--default {
+            max-width: 100%;
+            width: 100%;
+            border: 0 none;
+            border-radius: 5px;
+            padding: 7px 0;
+            background: #f7f6fc;
+            color: #666;
+            font-size: .941rem;
+            border: 1px solid #d0d0d0;
+            transition: .2s ease-in-out;
+            transition-property: color, background-color, border;
+        }
+
+        .select2-selection {
+            border: 0 none !important;
+            border-radius: none !important;
+            background-color: #f7f6fc !important;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     <!-- section content begin -->
@@ -32,29 +57,21 @@
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert"
                                             style="margin: auto;">
                                             {{ session('status') }}
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
                                         </div>
                                     @endif
                                 </div>
 
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
-                                        <button type="button" class="text-white close" data-dismiss="alert"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
                                         <ul>
                                             @foreach ($errors->all() as $error)
                                                 <li>{{ $error }}</li>
                                             @endforeach
                                         </ul>
-
                                     </div>
                                 @endif
 
-                                <!-- login form begin -->
+                                <!-- form begin -->
                                 <form class="uk-grid uk-form" action="{{ route('register') }}" method="post">
                                     @csrf
 
@@ -92,7 +109,9 @@
                                         <span class="uk-form-icon uk-form-icon-flip fas fa-envelope fa-sm"
                                             for="email"></span>
                                         <input type="email" class="uk-input uk-border-rounded" name="email"
-                                            value="{{ old('email') }}" id="email" placeholder="@lang('message.register.example')">
+                                            value="{{ old('email', request()->email) }}" id="email"
+                                            placeholder="@lang('message.register.example')">
+
                                     </div>
 
                                     <div class="uk-margin-small uk-width-1-1 uk-inline">
@@ -104,7 +123,8 @@
                                         <span class="uk-form-icon uk-form-icon-flip fas fa-phone fa-sm"
                                             for="phone"></span>
                                         <input type="mumber" class="uk-input uk-border-rounded" name="phone"
-                                            value="{{ old('phone') }}" id="phone" placeholder="@lang('message.register.enter_num')">
+                                            value="{{ old('phone', request()->phone) }}" id="phone"
+                                            placeholder="@lang('message.register.enter_num')">
                                     </div>
 
                                     <div class="uk-margin-small uk-width-1-1 uk-inline">
@@ -147,8 +167,8 @@
                                         @endif
                                         <span class="uk-form-icon uk-form-icon-flip fas fa-flag fa-sm" for="country"
                                             name="country"></span>
-                                        <select name="country" id="country" class="uk-input uk-border-rounded"
-                                            required>
+                                        <select name="country" id="country"
+                                            class="uk-input uk-border-rounded country-select" required>
                                             <option>@lang('message.register.chs')</option>
                                             @foreach ($countries as $country)
                                                 <option @if ($country->id == old('country')) selected @endif
@@ -222,7 +242,7 @@
                                             type="submit" name="submit">@lang('message.register.reg')</button>
                                     </div>
                                 </form>
-                                <!-- login form end -->
+                                <!-- form end -->
                             </div>
                         </div>
                     </div>
@@ -232,4 +252,18 @@
     </div>
     <!-- section content end -->
 
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer>
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $('.country-select').select2({
+                placeholder: 'Select a country',
+                allowClear: true
+            })
+        })
+    </script>
 @endsection

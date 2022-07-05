@@ -123,7 +123,7 @@
                                                                     </option>
                                                                     @foreach ($countries as $country)
                                                                         <option
-                                                                            @if (Auth::user()->country_id == $country->id || Auth::user()->country_id == $name) selected @endif
+                                                                            @if (Auth::user()->country_id == $country->id || Auth::user()->country_id == $country->name) selected @endif
                                                                             value="{{ $country->id }}">
                                                                             {{ ucfirst($country->name) }}
                                                                         </option>

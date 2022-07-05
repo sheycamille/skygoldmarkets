@@ -8,6 +8,6 @@
     @endcomponent
 
     @php echo("\r \n Kind regards") @endphp,
-    {{ "\r \n " . config('app.name') }}, @php echo("your reputable financial broker.\r\n") @endphp.
+    {{ "\r \n " . config('app.name') }} @php echo("your reputable financial broker.\r\n") @endphp
 
 @endcomponent

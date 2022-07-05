@@ -10,6 +10,6 @@
     @php echo("\r Thanks! \r\n") @endphp
 
     @php echo("\r Kind regards \r \n") @endphp,
-    {{ "\r " . $demo->sender }}, @php echo("your reputable financial broker. \r\n") @endphp.
+    {{ "\r " . $demo->sender }} @php echo("your reputable financial broker. \r\n") @endphp
 
 @endcomponent

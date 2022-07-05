@@ -3,73 +3,74 @@
 @section('title', 'Admin Login')
 
 @section('content')
-    <main id="main" class="adminlogin-page">
-        <div class="uk-section in-liquid-6 in-offset-top-10">
-            <div class="uk-container">
-                <div class="uk-grid uk-flex uk-flex-center">
-                    <div class="uk-width-5-1@m uk-background-contain uk-background-center-center">
-                        <div class="uk-text-center">
-                            <div class="uk-grid uk-flex">
-                                <a href="{{ url('/') }}" style="margin: auto;">
-                                    <img src="{{ asset('front/img/group-logo.png') }}"
-                                        alt="{{ \App\Models\Setting::getValue('site_name') }}" title=""
-                                        class="img-fluid auth__logo" />
+
+    <!-- section content begin -->
+    <div class="uk-section uk-padding-remove-vertical">
+        <div class="uk-container uk-container-expand">
+            <div class="uk-grid" data-uk-height-viewport="expand: true">
+                <div class="uk-width-3-5@m uk-background-cover uk-background-center-right uk-visible@m uk-box-shadow-xlarge"
+                    style="background-image: url({{ asset('front/img/in-signin-image.jpeg') }});">
+                </div>
+                <div class="uk-width-expand@m uk-flex uk-flex-middle">
+                    <div class="uk-grid uk-flex-center">
+                        <div class="uk-width-3-5@m">
+                            <div class="in-padding-horizontal@s">
+                                <!-- module logo begin -->
+                                <a class="uk-logo" href="{{ route('home') }}">
+                                    <img class="in-offset-top-10" src="{{ asset('front/img/group-logo.png') }}"
+                                        data-src="{{ asset('front/img/group-logo.png') }}" alt="logo" width="130"
+                                        height="36" data-uk-img>
                                 </a>
-                            </div>
+                                <!-- module logo begin -->
 
-                            <div class="uk-grid uk-flex">
-                                @if (Session::has('message'))
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                                        style="margin: auto;">
-                                        <p class="alert-message">{!! Session::get('message') !!}</p>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endif
-                            </div>
+                                <div class="uk-grid uk-flex">
+                                    @if (Session::has('message'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                            style="margin: auto;">
+                                            <p class="alert-message">{!! Session::get('message') !!}</p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    @endif
+                                </div>
 
-                            <div class="text-left card">
-                                <h1 class="mt-3 text-center"> Admin Login</h1>
+                                <!-- form begin -->
                                 <form method="POST" action="{{ route('adminlogin') }}" class="mt-5 card__form">
                                     {{ csrf_field() }}
+
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('email') }}</strong>
                                         </span>
                                     @endif
                                     <br>
-                                    <div class="form-group">
-                                        <label for="email">Email address</label>
-                                        <input type="email" class="form-control" name="email"
+
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
+                                        <input name="email" class="uk-input uk-border-rounded"
                                             value="{{ old('email') }}" id="email" placeholder="name@example.com"
                                             required>
                                     </div>
-
-
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                    <br>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="Enter Password" required>
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+                                        <input name="password" class="uk-input uk-border-rounded" id="password"
+                                            value="" type="password" placeholder="Password">
                                     </div>
-                                    <br>
-
-                                    <div class="form-group" style="justify-content:center">
-                                        <button class="uk-button uk-button-primary uk-border-rounded"
-                                            type="submit">Login</button>
+                                    <div class="uk-margin-small uk-width-1-1">
+                                        <button
+                                            class="uk-button uk-width-1-1 uk-button-primary uk-border-rounded uk-float-left"
+                                            type="submit" name="submit">Sign in</button>
                                     </div>
                                 </form>
+                                <!-- form end -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+    <!-- section content end -->
+
 @endsection

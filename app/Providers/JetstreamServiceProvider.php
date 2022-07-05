@@ -59,7 +59,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
 
         Fortify::registerView(function () {
-            $countries = Country::whereStatus('active')->get();
+            $countries = Country::whereStatus('active')->orderBy('name', 'asc')->get();
             $account_types = AccountType::where('active', 1)->get();
 
             return view('auth.register', [

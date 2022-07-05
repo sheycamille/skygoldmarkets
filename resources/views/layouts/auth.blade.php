@@ -40,6 +40,8 @@
     <link href="{{ asset('front/css/vendors/uikit.min.css') }}" rel="stylesheet">
     <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
 
+    @yield('stylesheets')
+
 </head>
 
 <body>
@@ -56,8 +58,9 @@
     </main>
 
     <!-- Javascript -->
-    <script src="{{ asset('front/js/vendors/uikit.min.js') }}" defer></script>
-    <script src="{{ asset('front/js/vendors/indonez.min.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('front/js/vendors/uikit.min.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('front/js/vendors/indonez.min.js') }}" defer></script>
+    @yield('scripts')
 </body>
 
 </html>

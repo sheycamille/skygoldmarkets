@@ -22,17 +22,38 @@
                                         height="36" data-uk-img>
                                 </a>
                                 <!-- module logo begin -->
+
                                 <p class="uk-text-lead uk-margin-top uk-margin-remove-bottom">Log into your account</p>
                                 <p class="uk-text-small uk-margin-remove-top uk-margin-medium-bottom">Don't have an account?
                                     <a href="{{ route('register') }}">Register here</a>
                                 </p>
-                                <!-- login form begin -->
+
+                                <div class="mb-4 text-center">
+                                    @if (Session::has('status'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                            style="margin: auto;">
+                                            {{ session('status') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                <!-- form begin -->
                                 <form class="uk-grid uk-form" action="{{ route('login') }}" method="post">
                                     @csrf
                                     <div class="uk-margin-small uk-width-1-1 uk-inline">
                                         <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
                                         <input name="email" class="uk-input uk-border-rounded" id="email"
-                                            value="" type="text" placeholder="Username">
+                                            value="" type="text" placeholder="email@gmail.com">
                                     </div>
                                     <div class="uk-margin-small uk-width-1-1 uk-inline">
                                         <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
@@ -53,7 +74,7 @@
                                             type="submit" name="submit">Sign in</button>
                                     </div>
                                 </form>
-                                <!-- login form end -->
+                                <!-- form end -->
                             </div>
                         </div>
                     </div>

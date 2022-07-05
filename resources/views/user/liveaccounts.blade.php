@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="row mb-5">
-                                <div class="col text-center card p-4 bg-{{ $bg }}">
+                                <div class="col text-center card p-4">
                                     <div class="bs-example widget-shadow table-responsive"
                                         data-example-id="hoverable-table">
                                         <table class="table table-bordered table-striped table-responsive-sm">

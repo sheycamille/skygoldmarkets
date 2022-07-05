@@ -3,88 +3,106 @@
 @section('title', 'Reset Password')
 
 @section('content')
-    <main id="main" class="crypto-page">
-        <div class="uk-section in-liquid-6 in-offset-top-10">
-            <div class="uk-container">
-                <div class="uk-grid uk-flex uk-flex-center">
-                    <div class="uk-width-5-1@m uk-background-contain uk-background-center-center">
-                        <div class="uk-text-center">
-                            <div class="text-center">
-                                @if (Session::has('message'))
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <p class="alert-message">{!! Session::get('message') !!}</p>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+
+    <!-- section content begin -->
+    <div class="uk-section uk-padding-remove-vertical">
+        <div class="uk-container uk-container-expand">
+            <div class="uk-grid" data-uk-height-viewport="expand: true">
+                <div class="uk-width-3-5@m uk-background-cover uk-background-center-right uk-visible@m uk-box-shadow-xlarge"
+                    style="background-image: url({{ asset('front/img/in-signin-image.jpeg') }});">
+                </div>
+                <div class="uk-width-expand@m uk-flex uk-flex-middle">
+                    <div class="uk-grid uk-flex-center">
+                        <div class="uk-width-3-5@m">
+                            <div class="in-padding-horizontal@s">
+                                <!-- module logo begin -->
+                                <a class="uk-logo" href="{{ route('home') }}">
+                                    <img class="in-offset-top-10" src="{{ asset('front/img/group-logo.png') }}"
+                                        data-src="{{ asset('front/img/group-logo.png') }}" alt="logo" width="130"
+                                        height="36" data-uk-img>
+                                </a>
+                                <!-- module logo begin -->
+
+                                <p class="uk-text-lead uk-margin-top uk-margin-remove-bottom">Create new password</p>
+
+                                <div class="mb-4 text-center">
+                                    @if (Session::has('status'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                            style="margin: auto;">
+                                            {{ session('status') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+
                                     </div>
                                 @endif
 
-                                @if (session('status'))
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        {{ session('status') }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endif
-                            </div>
+                                <!-- form begin -->
+                                <form class="uk-grid uk-form" action="{{ route('password.update') }}" method="post">
+                                    @csrf
 
-                            <div class="card ">
-                                <h1 class="mt-3 text-center">Create new password</h1>
-                                <form method="POST" action="{{ route('password.update') }}" class="mt-5 card__form">
-                                    {{ csrf_field() }}
                                     <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-                                    <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }} ">
-                                        @if ($errors->has('email'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('email') }}</strong>
-                                            </span>
-                                        @endif
-                                        <br>
-                                        <label for="email">Email address</label>
-
-                                        <input type="email"
-                                            class="form-control {{ $errors->has('email') ? ' has-error' : '' }}"
-                                            name="email" value="{{ $email or old('email') }}" id="email"
-                                            placeholder="name@example.com" required>
-                                    </div>
-                                    <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-                                        @if ($errors->has('password'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
-                                        @endif
-                                        <br>
-                                        <label for="password">Password</label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="Enter Password" required>
-                                    </div>
-
-                                    <div
-                                        class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                        @if ($errors->has('password_confirmation'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                            </span>
-                                        @endif
-                                        <br>
-                                        <label for="password-confirm">Password Confirmation</label>
-                                        <input type="password" class="form-control" name="password_confirmation"
-                                            id="password-confirm" placeholder="Enter Password" required>
-                                    </div>
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
                                     <br>
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
+                                        <input name="email" class="uk-input uk-border-rounded" id="email"
+                                            value="{{ $email or old('email') }}" type="text"
+                                            placeholder="email@gmail.com" required>
+                                    </div>
 
-                                    <div class="form-group" style="justify-content:center">
-                                        <button class="uk-button uk-button-primary uk-border-rounded" type="submit">Reset
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                    <br>
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+                                        <input name="password" class="uk-input uk-border-rounded" id="password"
+                                            value="" type="password" placeholder="Password" required>
+                                    </div>
+
+                                    @if ($errors->has('password_confirmation'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                        </span>
+                                    @endif
+                                    <br>
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+                                        <input name="password_confirmation" class="uk-input uk-border-rounded"
+                                            id="password_confirmation" value="" type="password" placeholder="Password"
+                                            required>
+                                    </div>
+
+                                    <div class="uk-margin-small uk-width-1-1">
+                                        <button
+                                            class="uk-button uk-width-1-1 uk-button-primary uk-border-rounded uk-float-left"
+                                            type="submit" name="submit">Reset
                                             Password</button>
                                     </div>
                                 </form>
+                                <!-- form end -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+    <!-- section content end -->
+
 @endsection

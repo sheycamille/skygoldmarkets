@@ -78,19 +78,12 @@ class CreateNewUser implements CreatesNewUsers
             'hash' => $hash,
         ]);
         $objDemo->message = "\r Hi $user->name, \r\n
-        \r\n This is to inform you that you have successfully registered on $site_name. \r\n "; //. ".<br> Please click on the button below to verify your email. <br><br> <a class='button button-primary' href='" . $link . "' style='margin:20px 0; text-align:center; margin:auto; display:block; width:30%;'>Verify Account</a>";
+        \r\n This is to inform you that you have successfully registered on $site_name. \r\n ";
         $objDemo->sender = "$site_name";
-        // $objDemo->link = $link;
         $objDemo->date = Carbon::Now();
         $objDemo->subject = "Welcome To Sky Gold Markets, Get more freedom in the markets.";
-
-
         $mail = new NewNotification($objDemo);
         $mail->subject = "Welcome To Sky Gold Markets, Get more freedom in the markets.";
         Mail::mailer('smtp')->bcc($user->email)->send($mail);
-
-        // show message so client can go get verified
-        // $message = "Thanks for registering your account, please check your email(including the spam folder) to verify your profile. You won't be able to request for withdrawals, if you can't find the email, visit the <form style='display: inline-block;' method='post' action='" . route('verification.send') . "'><input type='hidden' name='_token' value='" . csrf_token() . "'><input class='btn btn-sm btn-primary inline-block' value='email verification page' type='submit'> </form> <p class='alert-message'>to request a new verification email and complete the process.</p>";
-        // session()->put('message', $message);
     }
 }

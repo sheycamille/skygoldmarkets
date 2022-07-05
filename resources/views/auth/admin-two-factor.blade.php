@@ -4,71 +4,75 @@
 
 @section('content')
 
-    <main id="main" class="adminlogin-page">
-        <div class="uk-section in-liquid-6 in-offset-top-10">
-            <div class="uk-container">
-                <div class="uk-grid uk-flex uk-flex-center">
-                    <div class="uk-width-5-1@m uk-background-contain uk-background-center-center">
-                        <div class="uk-text-center">
-
-                            <div class="uk-grid uk-flex">
-                                <a href="{{ url('/') }}" style="margin: auto;">
-                                    <img src="{{ asset('front/img/group-logo.png') }}"
-                                        alt="{{ \App\Models\Setting::getValue('site_name') }}" title=""
-                                        class="img-fluid auth__logo" />
+    <!-- section content begin -->
+    <div class="uk-section uk-padding-remove-vertical">
+        <div class="uk-container uk-container-expand">
+            <div class="uk-grid" data-uk-height-viewport="expand: true">
+                <div class="uk-width-3-5@m uk-background-cover uk-background-center-right uk-visible@m uk-box-shadow-xlarge"
+                    style="background-image: url({{ asset('front/img/in-signin-image.jpeg') }});">
+                </div>
+                <div class="uk-width-expand@m uk-flex uk-flex-middle">
+                    <div class="uk-grid uk-flex-center">
+                        <div class="uk-width-3-5@m">
+                            <div class="in-padding-horizontal@s">
+                                <!-- module logo begin -->
+                                <a class="uk-logo" href="{{ route('home') }}">
+                                    <img class="in-offset-top-10" src="{{ asset('front/img/group-logo.png') }}"
+                                        data-src="{{ asset('front/img/group-logo.png') }}" alt="logo" width="130"
+                                        height="36" data-uk-img>
                                 </a>
-                            </div>
+                                <!-- module logo begin -->
 
-                            <div class="uk-grid uk-flex">
-                                @if (Session::has('message'))
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                                        style="margin: auto;">
-                                        <p class="alert-message">{!! Session::get('message') !!}</p>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endif
-                            </div>
+                                <div class="uk-grid uk-flex">
+                                    @if (Session::has('message'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                            style="margin: auto;">
+                                            <p class="alert-message">{!! Session::get('message') !!}</p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    @endif
+                                </div>
 
-                            <form method="POST" action="{{ route('verify.store') }}">
-                                {{ csrf_field() }}
-                                <h1>Two Factor Verification</h1>
-                                <p class="text-muted">
-                                    You have received an email which contains two factor login code.
-                                    If you haven't received it, press <a
-                                        href="{{ route('admin.verify.resend') }}">here</a>.
-                                </p>
+                                <!-- form begin -->
+                                <form method="POST" action="{{ route('verify.store') }}" class="mt-5 card__form">
+                                    {{ csrf_field() }}
+                                    <h1>Two Factor Verification</h1>
+                                    <p class="text-muted">
+                                        You have received an email which contains two factor login code.
+                                        If you haven't received it, press <a
+                                            href="{{ route('admin.verify.resend') }}">here</a>.
+                                    </p>
 
-
-                                @if ($errors->has('two_factor_code'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('two_factor_code') }}</strong>
-                                    </span>
-                                @endif
-                                <br>
-                                <div class="form-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            Two Factor Code<i class="fa fa-lock"></i>
+                                    @if ($errors->has('two_factor_code'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('two_factor_code') }}</strong>
                                         </span>
-                                    </div>
-                                    <input name="two_factor_code" type="text"
-                                        class="form-control{{ $errors->has('two_factor_code') ? ' is-invalid' : '' }}"
-                                        required autofocus placeholder="Two Factor Code" required>
-                                </div>
-                                <br>
+                                    @endif
+                                    <br>
 
-                                <div class="form-group" style="justify-content:center">
-                                    <button class="uk-button uk-button-primary uk-border-rounded"
-                                        type="submit">Verify</button>
-                                </div>
-                            </form>
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+                                        <input name="two_factor_code"
+                                            class="uk-input uk-border-rounded {{ $errors->has('two_factor_code') ? ' is-invalid' : '' }}"
+                                            required autofocus placeholder="Two Factor Code" required
+                                            value="{{ old('two_factor_code') }}" id="two_factor_code">
+                                    </div>
+                                    <div class="uk-margin-small uk-width-1-1">
+                                        <button
+                                            class="uk-button uk-width-1-1 uk-button-primary uk-border-rounded uk-float-left"
+                                            type="submit" name="submit">Verify</button>
+                                    </div>
+                                </form>
+                                <!-- form end -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-    </main>
+    </div>
+    <!-- section content end -->
+
 @endsection

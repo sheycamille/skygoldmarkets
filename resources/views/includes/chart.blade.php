@@ -10,7 +10,7 @@
             , "symbol": "COINBASE:BTCUSD"
             , "interval": "1"
             , "timezone": "Etc/UTC"
-            , "theme": '<?php echo $style ?>'
+            , "theme": ''
             , "style": "9"
             , "locale": "en"
             , "toolbar_bg": "#f1f3f6"
@@ -51,7 +51,7 @@
                 , "CNY"
             ]
             , "isTransparent": false
-            , "colorTheme": "<?php echo $style ?>"
+            , "colorTheme": ""
             , "width": "100%"
             , "height": "100%"
             , "locale": "en"

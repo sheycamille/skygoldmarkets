@@ -106,33 +106,33 @@
                                                         <div class="modal-dialog">
                                                             <!-- Modal content -->
                                                             <div class="modal-content">
-                                                                <div class="modal-header bg-{{ $bg }}">
+                                                                <div class="modal-header">
                                                                     <h4 class="modal-title text-left text-white">Trader7 Reset
                                                                         Password</h4>
                                                                     <button type="button"
                                                                         class="close text-left text-white"
                                                                         data-dismiss="modal">&times;</button>
                                                                 </div>
-                                                                <div class="modal-body bg-{{ $bg }}">
+                                                                <div class="modal-body">
                                                                     <form role="form" method="post"
                                                                         action="{{ route('account.resetmt5password', $account->id) }}">
                                                                         @csrf
                                                                         <h5 class="text-left text-white ">Trader7 Password*:
                                                                         </h5>
                                                                         <input style="padding:5px;"
-                                                                            class="form-control bg-{{ $bg }} text-left text-white"
+                                                                            class="form-control text-left text-white"
                                                                             type="text" name="password" required><br />
                                                                         <h5 class="text-left text-white ">Confirm Password*:
                                                                         </h5>
                                                                         <input style="padding:5px;"
-                                                                            class="form-control bg-{{ $bg }} text-left text-white"
+                                                                            class="form-control text-left text-white"
                                                                             type="text" name="confirm_password"
                                                                             required><br />
 
                                                                         <div
                                                                             class="d-flex justify-content-start align-content-start input-wrapper">
                                                                             <input
-                                                                                class="form-control bg-{{ $bg }} text-left checkbox"
+                                                                                class="form-control text-left checkbox"
                                                                                 type="checkbox" name="master_password">
                                                                             <label>Reset Investor Password</label>
                                                                         </div>
