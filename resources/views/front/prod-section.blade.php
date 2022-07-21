@@ -1,69 +1,3 @@
-<div class="uk-section in-liquid-7 in-offset-top-10">
-    <div class="uk-container">
-        <div class="uk-grid uk-flex uk-flex-center">
-            <div class="uk-width-5-6@m uk-background-contain uk-background-center-center"
-                style="background-image: url({{ asset('front/img/in-liquid-7-bg.png') }});" data-uk-img="">
-                <div class="uk-text-center">
-                    <h2 class="uk-margin-remove">@lang('message.why_trade')</h2>
-                    <p class="uk-text-lead uk-text-muted uk-margin-small-top">@lang('message.improve_result')</p>
-                </div>
-                <div class="uk-grid-medium uk-child-width-1-3@s uk-child-width-1-3@m uk-text-center uk-margin-top uk-grid"
-                    data-uk-grid="">
-                    <div class="uk-first-column">
-                        <img src="{{ asset('front/img/in-liquid-award.svg') }}"
-                            data-src="{{ asset('front/img/in-liquid-award.svg') }}" alt="wave-award" width="71"
-                            height="58" data-uk-img="">
-                        <h6 class="uk-margin-small-top uk-margin-remove-bottom">@lang('message.best_cdf')</h6>
-                        <p class="uk-text-small uk-margin-remove-top">@lang('message.summit')</p>
-                    </div>
-                    <div>
-                        <img src="{{ asset('front/img/in-liquid-award.svg') }}"
-                            data-src="{{ asset('front/img/in-liquid-award.svg') }}" alt="wave-award" width="71"
-                            height="58" data-uk-img="">
-                        <h6 class="uk-margin-small-top uk-margin-remove-bottom">@lang('message.execution')</h6>
-                        <p class="uk-text-small uk-margin-remove-top">@lang('message.expo')</p>
-                    </div>
-                    <div>
-                        <img src="{{ asset('front/img/in-liquid-award.svg') }}"
-                            data-src="{{ asset('front/img/in-liquid-award.svg') }}" alt="wave-award" width="71"
-                            height="58" data-uk-img="">
-                        <h6 class="uk-margin-small-top uk-margin-remove-bottom">@lang('message.best_platform')</h6>
-                        <p class="uk-text-small uk-margin-remove-top">@lang('message.london_summit')</p>
-                    </div>
-                </div>
-                <img class="uk-align-center" src="{{ asset('front/img//in-liquid-7-mockup.png') }}"
-                    data-src="{{ asset('front/img//in-liquid-7-mockup.png') }}" alt="sample-images" width="691"
-                    height="420" data-uk-img="">
-                <div class="uk-grid-divider uk-child-width-1-2@s uk-child-width-1-4@m uk-text-center in-offset-top-10 uk-grid"
-                    data-uk-grid="">
-                    <div class="uk-first-column">
-                        <h2 class="uk-margin-small-bottom">~30ms</h2>
-                        <p class="uk-text-small uk-text-uppercase uk-margin-remove-top">@lang('message.speed')*</p>
-                    </div>
-                    <div>
-                        <h2 class="uk-margin-small-bottom">24/5</h2>
-                        <p class="uk-text-small uk-text-uppercase uk-margin-remove-top">@lang('message.support')</p>
-                    </div>
-                    <div>
-                        <h2 class="uk-margin-small-bottom">0.0</h2>
-                        <p class="uk-text-small uk-text-uppercase uk-margin-remove-top">@lang('message.spread')</p>
-                    </div>
-                    <div>
-                        <h2 class="uk-margin-small-bottom">150+</h2>
-                        <p class="uk-text-small uk-text-uppercase uk-margin-remove-top">@lang('message.instruments')</p>
-                    </div>
-                </div>
-                <div class="uk-text-center uk-margin-medium-top">
-                    <a class="uk-button uk-button-primary uk-border-rounded uk-margin-small-right"
-                        href="#">@lang('message.creat_account')<i class="fas fa-angle-right uk-margin-small-left"></i></a>
-                    <a class="uk-button uk-button-secondary uk-border-rounded" href="#">@lang('message.discover')<i
-                            class="fas fa-angle-right uk-margin-small-left"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="uk-section uk-section-secondary in-liquid-10">
     <div class="uk-container uk-light">
         <div class="uk-grid-medium uk-child-width-1-3@m uk-flex uk-flex-middle uk-grid" data-uk-grid="">
@@ -78,7 +12,7 @@
                     <img class="uk-margin-small-bottom" src="{{ asset('front/img/in-liquid-icon-17.svg') }}"
                         data-src="{{ asset('front/img/in-liquid-icon-17.svg') }}" alt="wave-award" width="72"
                         height="72" data-uk-img="">
-                    <h3 class="uk-margin-top">Sky Gold Markets Trader 7</h3>
+                    <h3 class="uk-margin-top">SGM @lang('message.mtd')</h3>
 
                 </div>
             </div>
@@ -87,7 +21,7 @@
                     <img class="uk-margin-small-bottom" src="{{ asset('front/img/in-liquid-icon-18.svg') }}"
                         data-src="{{ asset('front/img/in-liquid-icon-18.svg') }}" alt="wave-award" width="72"
                         height="72" data-uk-img="">
-                    <h3 class="uk-margin-top">Sky Gold Markets Platform</h3>
+                    <h3 class="uk-margin-top">@lang('message.trading_platforms.mobile_apps')</h3>
 
                 </div>
             </div>
@@ -95,57 +29,106 @@
     </div>
 </div>
 
-<!-- section stats begin -->
-<div class="uk-section in-liquid-16">
-    <div class="uk-container">
-        <div class="uk-grid uk-flex uk-flex-center">
-            <div class="uk-width-1-2@m uk-text-center">
-                <h2>@lang('message.trade_with') <span class="in-highlight">@lang('message.world_leading')</span> @lang('message.broker').</h2>
-            </div>
-        </div>
-        <div class="uk-grid uk-child-width-1-2@s uk-child-width-1-4@m uk-text-center" data-uk-grid>
-            <div>
-                <div class="in-liquid-16-counter">
-                    <img class="uk-margin-remove" src="{{ asset('front/img/in-lazy.gif') }}"
-                        data-src="{{ asset('front/img/in-liquid-icon-22.svg') }}" alt="sample-icon" width="92"
-                        height="92" data-uk-img>
-                    <h3 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                        <span class="count" data-counter-end="1000" data-counter-append=" clients">1k+
-                            clients</span>
-                    </h3>
+<!-- section content begin -->
+<div class="uk-section uk-padding-large in-padding-large-vertical@s in-profit-4">
+    <div class="uk-container uk-margin-small-top uk-margin-medium-bottom">
+        <div class="uk-grid uk-flex uk-flex-center " data-uk-grid>
+            <div class="uk-width-5-6@m">
+                <div class="uk-grid uk-flex-middle" data-uk-grid>
+                    <div class="uk-width-expand@m">
+                        <h2></h2>
+                    </div>
+                    <div class="uk-width-3-5@m">
+                        <p class="uk-text-lead">@lang('message.home.access_more')</p>
+                    </div>
                 </div>
             </div>
-            <div>
-                <div class="in-liquid-16-counter">
-                    <img class="uk-margin-remove" src="{{ asset('front/img/in-lazy.gif') }}"
-                        data-src="{{ asset('front/img/in-liquid-icon-24.svg') }}" alt="sample-icon" width="92"
-                        height="92" data-uk-img>
-                    <h3 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                        <span class="count" data-counter-end="90" data-counter-append=" awards">90+
-                            @lang('message.awards')</span>
-                    </h3>
+            <div class="uk-width-1-1">
+                <div class="uk-child-width-1-2@s uk-child-width-1-5@m in-profit-stockprice" data-uk-grid>
+                    <div>
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-pill">
+                            <span class="uk-float-left">
+                                <img src="{{ asset('front/img/in-lazy.svg') }}"
+                                    data-src="{{ asset('front/img/in-profit-ticker-1.svg') }}" alt="profit-ticker"
+                                    width="77" height="20" data-uk-img>
+                            </span>
+                            <span class="uk-float-right down">
+                                <i class="fas fa-arrow-down"></i>1,526.05
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-pill">
+                            <span class="uk-float-left">
+                                <img src="{{ asset('front/img/in-lazy.svg') }}"
+                                    data-src="{{ asset('front/img/in-profit-ticker-2.svg') }}" alt="profit-ticker"
+                                    width="77" height="20" data-uk-img>
+                            </span>
+                            <span class="uk-float-right down">
+                                <i class="fas fa-arrow-down"></i>205.37
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-pill">
+                            <span class="uk-float-left">
+                                <img src="{{ asset('front/img/in-lazy.svg') }}"
+                                    data-src="{{ asset('front/img/in-profit-ticker-3.svg') }}" alt="profit-ticker"
+                                    width="77" height="20" data-uk-img>
+                            </span>
+                            <span class="uk-float-right down">
+                                <i class="fas fa-arrow-down"></i>267.97
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-pill">
+                            <span class="uk-float-left">
+                                <img src="{{ asset('front/img/in-lazy.svg') }}"
+                                    data-src="{{ asset('front/img/in-profit-ticker-4.svg') }}" alt="profit-ticker"
+                                    width="77" height="20" data-uk-img>
+                            </span>
+                            <span class="uk-float-right up">
+                                <i class="fas fa-arrow-up"></i>59,230
+                            </span>
+                        </div>
+                    </div>
+                    <div class="uk-visible@m">
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-pill">
+                            <span class="uk-float-left">
+                                <img src="{{ asset('front/img/in-lazy.svg') }}"
+                                    data-src="{{ asset('front/img/in-profit-ticker-5.svg') }}" alt="profit-ticker"
+                                    width="77" height="20" data-uk-img>
+                            </span>
+                            <span class="uk-float-right up">
+                                <i class="fas fa-arrow-up"></i>78.98
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div>
-                <div class="in-liquid-16-counter">
-                    <img class="uk-margin-remove" src="{{ asset('front/img/in-lazy.gif') }}"
-                        data-src="{{ asset('front/img/in-liquid-icon-25.svg') }}" alt="sample-icon" width="92"
-                        height="92" data-uk-img>
-                    <h3 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                        <span class="count" data-counter-end="5"
-                            data-counter-append=" customer service">@lang('message.five_star')</span>
-                    </h3>
-                </div>
-            </div>
-            <div>
-                <div class="in-liquid-16-counter">
-                    <img class="uk-margin-remove" src="{{ asset('front/img/in-lazy.gif') }}"
-                        data-src="{{ asset('front/img/in-liquid-icon-23.svg') }}" alt="sample-icon" width="92"
-                        height="92" data-uk-img>
-                    <h3 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                        <span class="count" data-counter-end="4"
-                            data-counter-append=" industry regulations">@lang('message.industry_regulations')<span>
-                    </h3>
+            <div class="uk-width-5-6@m">
+                <div class="uk-grid-large uk-flex-middle" data-uk-grid>
+                    <div class="uk-width-auto@m">
+                        <h4 class="uk-margin-remove-bottom uk-text-primary">@lang('message.home.ready_2trade')</h4>
+                        <p class="uk-margin-remove-top">@lang('message.home.get_stat')</p>
+                    </div>
+                    <div class="uk-width-expand@m">
+                        <form class="uk-grid-small" data-uk-grid action="{{ route('register') }}">
+                            <div class="uk-width-1-1 uk-width-expand@m">
+                                <input name="email" class="uk-input uk-border-rounded" type="text"
+                                    placeholder="@lang('message.register.email')">
+                            </div>
+                            <div class="uk-width-1-1 uk-width-expand@m">
+                                <input name="phone" class="uk-input uk-border-rounded" type="text"
+                                    placeholder="@lang('message.body.phone')">
+                            </div>
+                            <div class="uk-width-1-1 uk-width-auto@m">
+                                <button
+                                    class="uk-button uk-button-primary uk-border-rounded uk-width-expand">@lang('message.open_account')</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

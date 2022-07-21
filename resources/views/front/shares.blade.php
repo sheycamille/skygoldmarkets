@@ -1,7 +1,8 @@
 @extends('layouts.front')
 
-@section('title', 'Shares')
+@section('title', __('message.shares.shares_stocks'))
 
+@section('markets', 'uk-active')
 @section('shares-menu-item', 'uk-active')
 
 @section('content')
@@ -12,9 +13,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Markets</a></li>
-                        <li><span>Shares</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.markets')</a></li>
+                        <li><span>@lang('message.shares.shares_stocks')</span></li>
                     </ul>
                 </div>
             </div>

@@ -1,7 +1,8 @@
 @extends('layouts.front')
 
-@section('title', 'Webtrader')
+@section('title', __('message.wtd'))
 
+@section('tools', 'uk-active')
 @section('webtrader-menu-item', 'uk-active')
 
 @section('content')
@@ -12,9 +13,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><span>WebTrader</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.tools')</a></li>
+                        <li><span>@lang('message.wtd')</span></li>
                     </ul>
                 </div>
             </div>
@@ -39,28 +40,14 @@
             </div>
         </div>
 
-        <div class="uk-section">
-            <div class="uk-container">
-                <div class="uk-grid">
-                    <div class="uk-width-1-1 uk-flex uk-flex-center">
-                        <div class="uk-width-3-3@m uk-margin-medium-bottom"
-                            style="border-bottom: 1px solid #a79582; padding-top: 60px;">
-                            <h5 class="uk-margin-small-bottom" style="text-align: center; color: #a79582;"></h5>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="uk-section">
+        <div class="uk-section in-offset-top-10">
             <div class="uk-container">
                 <div class="uk-grid">
                     <div class="uk-width-1-1 uk-flex uk-flex-center">
                         <div class="uk-width-3-4@m uk-margin-medium-bottom">
-                            <h2 class="uk-margin-small-bottom" style="text-align: center;">@lang('message.webtrader.webtrader_sub') </h2>
+                            <h2 class="uk-margin-small-bottom" style="text-align: center;">@lang('message.webtrader.webtrader_sub')</h2>
                             <p class="uk-text-lead uk-text-muted uk-margin-remove"
-                                style="text-align: center; font-size: 24px; color: #636e72;">@lang('message.webtrader.mt5_account')</p>
+                                style="text-align: center; font-size: 24px; color: #636e72;">@lang('message.webtrader.t7_account')</p>
                         </div>
                     </div>
                     <div class="uk-width-1-1 in-timeline-1">
@@ -85,7 +72,6 @@
                             <div>
                                 <div class="in-timeline-branch">
                                     <div class="uk-flex">
-
                                     </div>
                                 </div>
                                 <div class="uk-box-shadow-small uk-width-expand">
@@ -168,54 +154,8 @@
             </div>
         </div>
 
-        <div class="uk-section in-liquid-16">
-            <div class="uk-container">
-                <div class="uk-grid uk-flex uk-flex-center">
-                    <div class="uk-width-1-2@m uk-text-center">
-                        <h2>@lang('message.trade_with') <span class="in-highlight">@lang('message.world_leading')</span> @lang('message.broker').</h2>
-                    </div>
-                </div>
-                <div class="uk-grid uk-child-width-1-2@s
-uk-child-width-1-3@m uk-text-center"
-                    data-uk-grid="">
-                    <div class="uk-first-column">
-                        <div class="in-liquid-16-counter">
-                            <img class="uk-margin-remove" src="{{ asset('front/img/in-liquid-icon-22.svg') }}"
-                                data-src="{{ asset('front/img/in-liquid-icon-22.svg') }}" alt="sample-icon" width="92"
-                                height="92">
-                            <h1 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                                <span class="count" data-counter-end="20"
-                                    data-counter-append=" years">@lang('message.six_years')</span>
-                            </h1>
-                            <p class="uk-margin-small-top">Experience</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="in-liquid-16-counter">
-                            <img class="uk-margin-remove" src="{{ asset('front/img/in-liquid-icon-23.svg') }}"
-                                data-src="{{ asset('front/img/in-liquid-icon-23.svg') }}" alt="sample-icon" width="92"
-                                height="92">
-                            <h1 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                                <span class="count" data-counter-end="15" data-counter-append=" years">15 years</span>
-                            </h1>
-                            <p class="uk-margin-small-top">@lang('message.regulated')</p>
-                        </div>
-                    </div>
+        @include('front.prod-section')
 
-                    <div>
-                        <div class="in-liquid-16-counter">
-                            <img class="uk-margin-remove" src="{{ asset('front/img/in-liquid-icon-25.svg') }}"
-                                data-src="{{ asset('front/img/in-liquid-icon-25.svg') }}" alt="sample-icon"
-                                width="92" height="92">
-                            <h1 class="uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                                <span class="count" data-counter-end="24" data-counter-append="/5">24/5</span>
-                            </h1>
-                            <p class="uk-margin-small-top">@lang('message.cus_support')</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
     </main>
+
 @endsection

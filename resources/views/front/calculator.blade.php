@@ -1,7 +1,8 @@
 @extends('layouts.front')
 
-@section('title', 'Trading Calculator')
+@section('title', __('message.fx_calc'))
 
+@section('tools', 'uk-active')
 @section('calculator-menu-item', 'uk-active')
 
 @section('content')
@@ -12,9 +13,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><span>Calculator</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.tools')</a></li>
+                        <li><span>@lang('message.fx_calc')</span></li>
                     </ul>
                 </div>
             </div>
@@ -40,6 +41,8 @@
             <iframe width="100%" frameborder="0" scrolling="no" height="400px"
                 src="https://widgets-m.techsubservices.com/en/calculators/all-in-one/9"></iframe>
         </div>
+
+        @include('front.prod-section')
 
     </main>
 @endsection

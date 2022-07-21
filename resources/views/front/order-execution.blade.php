@@ -1,8 +1,9 @@
 @extends('layouts.front')
 
-@section('title', 'Order Execution')
+@section('title', __('message.order_execution.order'))
 
-@section('order-execution-menu-item', 'active')
+@section('tools', 'uk-active')
+@section('order-execution-menu-item', 'uk-active')
 
 @section('content')
 
@@ -13,9 +14,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Policies</a></li>
-                        <li><span>Order Execution</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.tools')</a></li>
+                        <li><span>@lang('message.order_execution.order')</span></li>
                     </ul>
                 </div>
             </div>

@@ -14,8 +14,8 @@ class Deposit extends Model
         return $this->belongsTo('App\Models\User', 'user');
     }
 
-    public function mt5()
+    public function t7()
     {
-        return $this->belongsTo('App\Models\Mt5Details', 'account_id');
+        return $this->belongsTo('App\Models\Trader7', 'account_id');
     }
 }

@@ -1,7 +1,8 @@
 @extends('layouts.front')
 
-@section('title', 'Our Account types')
+@section('title', __('message.account_types'))
 
+@section('company', 'uk-active')
 @section('accounts-types-menu-item', 'uk-active')
 
 @section('content')
@@ -12,9 +13,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Company</a></li>
-                        <li><span>Account Types</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.company')</a></li>
+                        <li><span>@lang('message.account_types')</span></li>
                     </ul>
                 </div>
             </div>
@@ -28,7 +29,7 @@
         <div id="about" class="uk-section in-liquid-6 in-offset-top-10">
             <div class="uk-container">
                 <div class="section-header">
-                    <h1 class="text-center">Trading Accounts</h1>
+                    <h1 class="text-center">@lang('message.trading_accounts')</h1>
                 </div>
             </div>
         </div>
@@ -40,7 +41,7 @@
             <div class="uk-container special-cont">
 
                 <header class="section-header">
-                    <h3>Our Account Types</h3>
+                    <h3>@lang('message.account_types')</h3>
                     <p>Trade like a pro with any account type</p>
                 </header>
 
@@ -94,7 +95,8 @@
                                     </ul>
                                 </div>
                                 <div class="pricing-button">
-                                    <a href="/register?account_type={{ $accType->id }}" class="uk-button uk-button-default uk-border-rounded uk-margin-small-left uk-visible@m">Get
+                                    <a href="/register?account_type={{ $accType->id }}"
+                                        class="uk-button uk-button-default uk-border-rounded uk-margin-small-left uk-visible@m">Get
                                         Started</a>
                                 </div>
                             </div>

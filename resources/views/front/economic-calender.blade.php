@@ -1,7 +1,8 @@
 @extends('layouts.front')
 
-@section('title', 'Economic Calender')
+@section('title', __('message.economic_calender.calender'))
 
+@section('tools', 'uk-active')
 @section('calender-menu-item', 'uk-active')
 
 @section('content')
@@ -12,9 +13,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><span>Economic Calender</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.tools')</a></li>
+                        <li><span>@lang('message.economic_calender.calender')</span></li>
                     </ul>
                 </div>
             </div>
@@ -30,9 +31,7 @@
                     <div class="uk-width-5-6@m uk-background-contain uk-background-center-center" data-uk-img="">
                         <div class="uk-text-center">
                             <h1 class="uk-margin-remove">@lang('message.economic_calender.calender')</h1>
-                            <p class="uk-text-lead uk-text-muted uk-margin-small-top">@lang('message.economic_calender.become')
-
-                            </p>
+                            <p class="uk-text-lead uk-text-muted uk-margin-small-top">@lang('message.economic_calender.become')</p>
                         </div>
 
                     </div>
@@ -96,79 +95,12 @@
                         <h3 class="uk-margin-small-bottom">@lang('message.economic_calender.how_to_use_calender')</h3>
                         <p class="uk-text-lead uk-text-muted uk-margin-remove-top uk-margin-medium-bottom"
                             style="font-size: 1rem;">@lang('message.economic_calender.assist').</p>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="uk-section in-liquid-7 in-offset-top-10">
-            <div class="uk-container">
-                <div class="uk-grid uk-flex uk-flex-center">
-                    <div class="uk-width-5-6@m uk-background-contain uk-background-center-center"
-                        style="background-image: url({{ asset('front/img/in-liquid-7-bg.png') }});" data-uk-img="">
-                        <div class="uk-text-center">
-                            <h2 class="uk-margin-remove">@lang('message.why_trade')</h2>
-                            <p class="uk-text-lead uk-text-muted uk-margin-small-top">@lang('message.improve_result')</p>
-                        </div>
-                        <div class="uk-grid-medium uk-child-width-1-3@s uk-child-width-1-3@m uk-text-center uk-margin-top uk-grid"
-                            data-uk-grid="">
-                            <div class="uk-first-column">
-                                <img src="{{ asset('front/img/in-liquid-award.svg') }}"
-                                    data-src="{{ asset('front/img//in-liquid-award.svg') }}" alt="wave-award"
-                                    width="71" height="58" data-uk-img="">
-                                <h6 class="uk-margin-small-top uk-margin-remove-bottom">@lang('message.best_cdf')</h6>
-                                <p class="uk-text-small uk-margin-remove-top">@lang('message.summit')</p>
-                            </div>
-                            <div>
-                                <img src="{{ asset('front/img/in-liquid-award.svg') }}"
-                                    data-src="{{ asset('front/img//in-liquid-award.svg') }}" alt="wave-award"
-                                    width="71" height="58" data-uk-img="">
-                                <h6 class="uk-margin-small-top uk-margin-remove-bottom">@lang('message.execution')</h6>
-                                <p class="uk-text-small uk-margin-remove-top">@lang('message.expo')</p>
-                            </div>
-                            <div>
-                                <img src="{{ asset('front/img/in-liquid-award.svg') }}"
-                                    data-src="{{ asset('front/img//in-liquid-award.svg') }}" alt="wave-award"
-                                    width="71" height="58" data-uk-img="">
-                                <h6 class="uk-margin-small-top uk-margin-remove-bottom">@lang('message.best_platform')</h6>
-                                <p class="uk-text-small uk-margin-remove-top">@lang('message.london_summit')</p>
-                            </div>
-                        </div>
-                        <img class="uk-align-center" src="{{ asset('front/img//in-liquid-7-mockup.png') }}"
-                            data-src="{{ asset('front/img//in-liquid-7-mockup.png') }}" alt="sample-images" width="691"
-                            height="420">
-                        <div class="uk-grid-divider uk-child-width-1-2@s
-uk-child-width-1-4@m uk-text-center in-offset-top-10 uk-grid"
-                            data-uk-grid="">
-                            <div class="uk-first-column">
-                                <h2 class="uk-margin-small-bottom">~30ms</h2>
-                                <p class="uk-text-small uk-text-uppercase uk-margin-remove-top">@lang('message.speed')*</p>
-                            </div>
-                            <div>
-                                <h2 class="uk-margin-small-bottom">24/5</h2>
-                                <p class="uk-text-small uk-text-uppercase uk-margin-remove-top">@lang('message.support')</p>
-                            </div>
-                            <div>
-                                <h2 class="uk-margin-small-bottom">0.0</h2>
-                                <p class="uk-text-small uk-text-uppercase uk-margin-remove-top">@lang('message.spread')</p>
-                            </div>
-                            <div>
-                                <h2 class="uk-margin-small-bottom">150+</h2>
-                                <p class="uk-text-small uk-text-uppercase uk-margin-remove-top">@lang('message.instruments')</p>
-                            </div>
-                        </div>
-                        <div class="uk-text-center uk-margin-medium-top">
-                            <a class="uk-button uk-button-primary uk-border-rounded uk-margin-small-right"
-                                href="#">@lang('message.creat_account')<i class="fas fa-angle-right uk-margin-small-left"></i></a>
-                            <a class="uk-button uk-button-secondary uk-border-rounded" href="#">@lang('message.discover')<i
-                                    class="fas fa-angle-right uk-margin-small-left"></i></a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        @include('front.prod-section')
 
     </main>
 @endsection

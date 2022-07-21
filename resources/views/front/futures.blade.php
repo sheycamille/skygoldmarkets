@@ -1,7 +1,8 @@
 @extends('layouts.front')
 
-@section('title', 'Futures')
+@section('title', __('message.futures.futures_trading'))
 
+@section('markets', 'uk-active')
 @section('futures-menu-item', 'uk-active')
 
 @section('content')
@@ -12,9 +13,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Markets</a></li>
-                        <li><span>Futures</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.markets')</a></li>
+                        <li><span>@lang('message.futures.futures_trading')</span></li>
                     </ul>
                 </div>
             </div>
@@ -114,7 +115,6 @@
 
             </div>
         </div>
-
 
         @include('front.prod-section')
 

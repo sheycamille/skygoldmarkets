@@ -26,7 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'first_name', 'last_name', 'email', 'phone', 'country_id', 'password', 'address', 'town', 'state', 'dashboard_style', 'account_type', 'zip_code', 'status', 'token_2fa_expiry', 'bank_name', 'account_name', 'account_number', 'swift_code', 'bank_address', 'btc_address', 'eth_address', 'xrp_address', 'usdt_address', 'bch_address', 'bnb_address', 'interac', 'paypal_email'
+        'name', 'first_name', 'last_name', 'email', 'phone', 'country_id', 'password', 'phone_password', 'address', 'town', 'state', 'dashboard_style', 'account_type', 'zip_code', 'status', 'token_2fa_expiry', 'bank_name', 'account_name', 'account_number', 'swift_code', 'bank_address', 'btc_address', 'eth_address', 'xrp_address', 'usdt_address', 'bch_address', 'bnb_address', 'interac', 'paypal_email'
     ];
 
     /**
@@ -101,14 +101,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function accounts()
     {
-        $accounts = Mt5Details::where('client_id', $this->id)->where('type', 'live')->get();
+        $accounts = Trader7::where('client_id', $this->id)->where('type', 'live')->get();
         return $accounts;
     }
 
 
     public function demoaccounts()
     {
-        $accounts = Mt5Details::where('client_id', $this->id)->where('type', 'demo')->get();
+        $accounts = Trader7::where('client_id', $this->id)->where('type', 'demo')->get();
         return $accounts;
     }
 

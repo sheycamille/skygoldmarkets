@@ -12,7 +12,7 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
                         <li><a href="#">Tools</a></li>
                         <li><span>Trading Platforms</span></li>
                     </ul>
@@ -51,7 +51,8 @@
                                 href="https://mobius-trader.s3.eu-north-1.amazonaws.com/MobiusTrader/MobiusTrader-Mobius.win.exe">@lang('message.trading_platform.download_now')</a><br>
                         </div>
                     </div>
-                    <img class="col-md-6" src="{{ asset('front/img/about/MT5-10.jpg') }}" alt="Trader7" tilte="Trader7" />
+                    <img class="col-md-6" src="{{ asset('front/img/about/MT5-10.jpg') }}" alt="Trader7"
+                        tilte="Trader7" />
                 </div>
             </div>
         </section>

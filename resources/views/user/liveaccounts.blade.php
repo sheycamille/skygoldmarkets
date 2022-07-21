@@ -66,7 +66,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>@lang('message.body.server')</th>
+                                                    <th>@lang('message.account_name')</th>
                                                     <th>@lang('message.body.balnce')</th>
                                                     <th>@lang('message.body.bonus')</th>
                                                     <th>@lang('message.body.leverage') </th>
@@ -78,8 +78,8 @@
                                             <tbody>
                                                 @forelse ($accounts as $account)
                                                     <tr>
-                                                        <th scope="row">{{ $account->login }}</th>
-                                                        <th scope="row">{{ $account->server }}</th>
+                                                        <th scope="row">{{ $account->number }}</th>
+                                                        <th scope="row">{{ $account->name }}</th>
                                                         <td>{{ $account->balance }}{{ $account->currency }}</td>
                                                         <td>{{ $account->bonus }}{{ $account->currency }}</td>
                                                         <td>1:{{ $account->leverage }}</td>
@@ -150,7 +150,7 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <form role="form" method="post"
-                                                                        action="{{ route('account.resetmt5password', $account->id) }}">
+                                                                        action="{{ route('account.resett7password', $account->id) }}">
                                                                         @csrf
                                                                         <h5 class="text-left text-white ">Trader7 Password*:
                                                                         </h5>

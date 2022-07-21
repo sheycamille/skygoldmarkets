@@ -1,7 +1,8 @@
 @extends('layouts.front')
 
-@section('title', 'Trade CFDs on Energies')
+@section('title', __('message.energies.trade_cdf_on_energies'))
 
+@section('markets', 'uk-active')
 @section('energies-menu-item', 'uk-active')
 
 @section('content')
@@ -12,9 +13,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Markets</a></li>
-                        <li><span>Energies</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.markets')</a></li>
+                        <li><span>@lang('message.egy')</span></li>
                     </ul>
                 </div>
             </div>

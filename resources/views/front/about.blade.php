@@ -1,7 +1,8 @@
 @extends('layouts.front')
 
-@section('title', 'About Us')
+@section('title', __('message.abt'))
 
+@section('company', 'uk-active')
 @section('about-menu-item', 'uk-active')
 
 @section('content')
@@ -12,16 +13,15 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Company</a></li>
-                        <li><span>About</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.company')</a></li>
+                        <li><span>@lang('message.abt')</span></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
     <!-- breadcrumb content end -->
-
 
     <main>
         <!-- section content begin -->
@@ -30,8 +30,9 @@
                 <div class="uk-grid">
                     <div class="uk-width-1-1 uk-flex uk-flex-center">
                         <div class="uk-width-3-5@m uk-text-center">
-                            <h1 class="uk-margin-small-bottom">Putting our clients first<br /><span class="in-highlight">since 2016</span></h1>
-                            <p class="uk-text-lead uk-text-muted uk-margin-remove-top">For more than 6 years, we’ve been empowering clients by helping them take control of their financial lives.</p>
+                            <h1 class="uk-margin-small-bottom">@lang('message.about.putting_clients_first')<br /><span
+                                    class="in-highlight">@lang('message.about.since_2016')</span></h1>
+                            <p class="uk-text-lead uk-text-muted uk-margin-remove-top">@lang('message.about.subtitle')</p>
                         </div>
                     </div>
                     <div class="uk-grid uk-grid-large uk-child-width-1-3@m uk-margin-medium-top" data-uk-grid>
@@ -40,8 +41,8 @@
                                 <i class="fas fa-leaf fa-lg in-icon-wrap circle primary-color"></i>
                             </div>
                             <div>
-                                <h3>Philosophy</h3>
-                                <p>At vero eos etme accusamus iusto odio ent dignissimos deleniti atque corrupti quos ducimus moll quilla blanditiis expedita est distinctio.</p>
+                                <h3>@lang('message.about.philosophy')</h3>
+                                <p>@lang('message.about.phil_text')</p>
                             </div>
                         </div>
                         <div class="uk-flex uk-flex-left">
@@ -49,8 +50,8 @@
                                 <i class="fas fa-hourglass-end fa-lg in-icon-wrap circle primary-color"></i>
                             </div>
                             <div>
-                                <h3>History</h3>
-                                <p>At vero eos etme accusamus iusto odio ent dignissimos deleniti atque corrupti quos ducimus moll quilla blanditiis expedita est distinctio.</p>
+                                <h3>@lang('message.about.our_vision')</h3>
+                                <p>@lang('message.about.vision_text')</p>
                             </div>
                         </div>
                         <div class="uk-flex uk-flex-left">
@@ -58,8 +59,8 @@
                                 <i class="fas fa-flag fa-lg in-icon-wrap circle primary-color"></i>
                             </div>
                             <div>
-                                <h3>Culture</h3>
-                                <p>At vero eos etme accusamus iusto odio ent dignissimos deleniti atque corrupti quos ducimus moll quilla blanditiis expedita est distinctio.</p>
+                                <h3>@lang('message.about.culture')</h3>
+                                <p>@lang('message.about.culture_text')</p>
                             </div>
                         </div>
                     </div>
@@ -148,7 +149,8 @@
                             <h2 class="uk-margin-remove">@lang('message.worlds_num1')!</h2>
                             <p class="uk-text-lead uk-text-muted uk-margin-small-top">@lang('message.years_of_exl').</p>
                         </div>
-                        <div class="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m uk-margin-medium-top"
+                        <div class="uk-grid-small uk-child-width-1-2@s
+uk-child-width-1-3@m uk-margin-medium-top"
                             data-uk-grid>
                             <div>
                                 <div class="uk-card uk-card-secondary uk-card-body uk-border-rounded">
@@ -157,7 +159,7 @@
                                             <i class="in-icon-wrap circle small green">FX</i>
                                         </div>
                                         <div>
-                                            <h6 class="uk-margin-remove">Forex</h6>
+                                            <h6 class="uk-margin-remove">@lang('message.frex')</h6>
                                         </div>
                                     </div>
                                     <p>@lang('message.trade_70_major').</p>
@@ -173,7 +175,7 @@
                                             <i class="in-icon-wrap circle small red">MX</i>
                                         </div>
                                         <div>
-                                            <h6 class="uk-margin-remove">@lang('message.metals')</h6>
+                                            <h6 class="uk-margin-remove">@lang('message.metls')</h6>
                                         </div>
                                     </div>
                                     <p>@lang('message.trade_metal_comodities').</p>
@@ -189,7 +191,7 @@
                                             <i class="in-icon-wrap circle small blue">IX</i>
                                         </div>
                                         <div>
-                                            <h6 class="uk-margin-remove">Indices</h6>
+                                            <h6 class="uk-margin-remove">@lang('message.idc')</h6>
                                         </div>
                                     </div>
                                     <p>@lang('message.trade_major_and_minor').</p>
@@ -205,7 +207,7 @@
                                             <i class="in-icon-wrap circle small grey">SX</i>
                                         </div>
                                         <div>
-                                            <h6 class="uk-margin-remove">@lang('message.shares')</h6>
+                                            <h6 class="uk-margin-remove">@lang('message.shres')</h6>
                                         </div>
                                     </div>
                                     <p>@lang('message.hundreds_of_companies').</p>
@@ -237,7 +239,7 @@
                                             <i class="in-icon-wrap circle small grey">EX</i>
                                         </div>
                                         <div>
-                                            <h6 class="uk-margin-remove">Energies</h6>
+                                            <h6 class="uk-margin-remove">@lang('message.egy')</h6>
                                         </div>
                                     </div>
                                     <p>@lang('message.discover_opportunities').</p>
@@ -260,9 +262,12 @@
                     <div class="uk-width-3-4@m">
                         <div class="uk-grid uk-flex uk-flex-middle" data-uk-grid>
                             <div class="uk-width-1-2@m">
-                                <h4 class="uk-text-muted in-offset-bottom-10">Number speaks</h4>
-                                <h1 class="uk-margin-medium-bottom">We always ready<br>for a <span class="in-highlight">challenge.</span></h1>
-                                <a href="#" class="uk-button uk-button-primary uk-border-rounded">Learn more<i class="fas fa-chevron-circle-right fa-xs uk-margin-small-left"></i></a>
+                                <h4 class="uk-text-muted in-offset-bottom-10">@lang('message.about.num_speaks')</h4>
+                                <h1 class="uk-margin-medium-bottom">@lang('message.about.we_always') <br> @lang('message.about.for_a') <span
+                                        class="in-highlight">@lang('message.about.chall').</span></h1>
+                                <a href="#"
+                                    class="uk-button uk-button-primary uk-border-rounded">@lang('message.about.')<i
+                                        class="fas fa-chevron-circle-right fa-xs uk-margin-small-left"></i></a>
                             </div>
                             <div class="uk-width-1-2@m">
                                 <div class="uk-margin-large" data-uk-grid>
@@ -273,8 +278,8 @@
                                         <hr class="uk-divider-small uk-text-right@m">
                                     </div>
                                     <div class="uk-width-expand@m">
-                                        <h3>Trading instruments</h3>
-                                        <p>Reprehenderit qui in svoluptate velit esse quam molestiae vel illum qui dolorem eum fugiat quo.</p>
+                                        <h3>@lang('message.about.trading_instru')</h3>
+                                        <p>@lang('message.about.trading_instru_text')</p>
                                     </div>
                                 </div>
                                 <div class="uk-margin-large" data-uk-grid>
@@ -285,8 +290,8 @@
                                         <hr class="uk-divider-small uk-text-right@m">
                                     </div>
                                     <div class="uk-width-expand@m">
-                                        <h3>Countries covered</h3>
-                                        <p>At vero eos et accusamus iusto dignissimos ducimus qui blanditiis praesentium voluta deleniti.</p>
+                                        <h3>@lang('message.about.countries_cov')</h3>
+                                        <p>@lang('message.about.countries_cov_text')</p>
                                     </div>
                                 </div>
                             </div>

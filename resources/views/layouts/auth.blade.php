@@ -57,6 +57,11 @@
         @yield('content')
     </main>
 
+    <div class="uk-visible@m">
+        <a href="#" class="in-totop fas fa-chevron-up uk-animation-slide-top" data-uk-scroll=""
+            style="opacity: 1;"></a>
+    </div>
+
     <!-- Javascript -->
     <script type="text/javascript" src="{{ asset('front/js/vendors/uikit.min.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('front/js/vendors/indonez.min.js') }}" defer></script>

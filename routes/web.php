@@ -32,7 +32,7 @@ Route::get('market-news', 'FrontController@marketNews')->name('news');
 Route::get('economic-calender', 'FrontController@economicCalender')->name('calender');
 Route::get('calculator', 'FrontController@calculator')->name('calculator');
 Route::get('webtrader', 'FrontController@webtrader')->name('webtrader');
-Route::get('metatrader', 'FrontController@metatrader')->name('metatrader');
+Route::get('trader7', 'FrontController@trader7')->name('trader7');
 Route::get('contact-us', 'FrontController@contact')->name('contact');
 Route::get('forex', 'FrontController@forex')->name('forex');
 Route::get('futures', 'FrontController@futures')->name('futures');
@@ -136,7 +136,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['isadmin', 'twofactor']], f
     Route::post('deposits/rejectdeposit/{id}', 'Admin\LogicController@rejectdeposit')->name('rejectdeposit');
 
     // Settings Routes
-    Route::get('settings/siteinfo', 'Admin\SettingsController@settings')->name('settings');
+    Route::get('settings/siteinfo', 'Admin\SettingsController@index')->name('settings');
     Route::get('settings/preferences', 'Admin\SettingsController@prefsettings')->name('preferencesettings');
     Route::get('settings/payments', 'Admin\SettingsController@paysettings')->name('paymentsettings');
     Route::post('settings/updatesettings', 'Admin\SettingsController@updatesettings')->name('updatesettings');
@@ -249,11 +249,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/delassets/{id}', 'UserController@delassets');
 
     // Trader7 account mg't
-    Route::get('/dashboard/demo-accounts', 'Mt5Controller@demoaccounts')->name('account.demoaccounts');
-    Route::get('/dashboard/live-accounts', 'Mt5Controller@liveaccounts')->name('account.liveaccounts');
-    Route::post('/dashboard/add-account', 'Mt5Controller@addmt5account')->name('account.addmt5account'); //->middleware(['throttle:1,30']);
-    Route::get('/dashboard/mt5-demo-deposit/{id}', 'Mt5Controller@demotopup')->name('account.demotopup');
-    Route::post('/dashboard/reset-account-password/{id}', 'Mt5Controller@resetmt5password')->name('account.resetmt5password');
+    Route::get('/dashboard/demo-accounts', 'T7Controller@demoaccounts')->name('account.demoaccounts');
+    Route::get('/dashboard/live-accounts', 'T7Controller@liveaccounts')->name('account.liveaccounts');
+    Route::post('/dashboard/add-account', 'T7Controller@addt7account')->name('account.addt7account'); //->middleware(['throttle:1,30']);
+    Route::get('/dashboard/t7-demo-deposit/{id}', 'T7Controller@demotopup')->name('account.demotopup');
+    Route::post('/dashboard/reset-account-password/{id}', 'T7Controller@resett7password')->name('account.resett7password');
 
 
     // user deposit routes

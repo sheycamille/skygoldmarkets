@@ -180,7 +180,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-        Tarikhagustia\LaravelMt5\LaravelMt5Provider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 

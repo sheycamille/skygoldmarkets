@@ -73,7 +73,7 @@
                                                 <td>{{ $withdrawal->duser->name }}</td>
                                                 <td>{{ $withdrawal->amount }}</td>
                                                 <td>{{ $withdrawal->to_deduct }}</td>
-                                                <td>{{ $withdrawal->mt5->login }}</td>
+                                                <td>{{ $withdrawal->t7->number }}</td>
                                                 <td>{{ $withdrawal->payment_mode }}</td>
                                                 <td>{{ $withdrawal->duser->email }}</td>
                                                 <td>{{ $withdrawal->status }}</td>

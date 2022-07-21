@@ -10,7 +10,7 @@ use App\Models\Deposit;
 use App\Models\Setting;
 use App\Models\Testimony;
 use App\Models\Withdrawal;
-use App\Models\Mt5Details;
+use App\Models\Trader7;
 use App\Models\AccountType;
 use App\Mail\NewNotification;
 
@@ -142,24 +142,22 @@ class LogicController extends Controller
         $deposit = Deposit::where('id', $id)->first();
         $user = User::where('id', $deposit->user)->first();
 
-        // switch the Trader7 api to use live server
-        $this->setServerConfig('live');
-
         // get Trader7 account in question
-        $mt5 = Mt5Details::find($deposit->account_id);
+        $t7 = Trader7::find($deposit->account_id);
 
         // do the deposit on the Trader7 account
-        $data = $this->performTransaction($mt5->login, $deposit->amount, Trade::DEAL_BALANCE);
+        $respTrans = $this->performTransaction($t7->currency, $t7->number, $deposit->amount, 'SKG-Admin', 'SKY-Auto', 'deposit', 'balance');
 
-        if ($data['status'] == false)
-            return redirect()->back()->with('message', 'Sorry an error occurred, please contact admin and report this error: ' . $data['msg']);
+        if($respTrans['status'] || $respTrans['status'] == false) {
+            return redirect()->back()->with('message', 'Sorry an error occured, report this to admin!');
+        }
 
         $deposit->status = 'Processed';
         $deposit->save();
 
         // update the local Trader7 account
-        $mt5->balance += $deposit->amount;
-        $mt5->save();
+        $t7->balance += $deposit->amount;
+        $t7->save();
 
         // save transaction
         $this->saveTransaction($user->id, $deposit->amount, 'Processed Deposit', 'Credit');
@@ -189,23 +187,21 @@ class LogicController extends Controller
         $withdrawal = Withdrawal::where('id', $id)->first();
         $user = User::where('id', $withdrawal->user)->first();
 
-        // switch the Trader7 api to use live server
-        $this->setServerConfig('live');
-
         // do the withdrawal from on the Trader7 account
-        $mt5 = Mt5Details::find($withdrawal->account_id);
-        $data = $this->performTransaction($mt5->login, -round($withdrawal->amount), Trade::DEAL_BALANCE);
+        $t7 = Trader7::find($withdrawal->account_id);
+        $respTrans = $this->performTransaction($t7->currency, $t7->number, $withdrawal->amount, 'SKG-Admin', 'SKY-Auto', 'withdrawal');
 
-        if ($data['status'] == false)
-            return redirect()->back()->with('message', 'Sorry an error occurred, please contact admin and report this error: ' . $data['msg']);
+        if($respTrans['status'] || $respTrans['status'] == false) {
+            return redirect()->back()->with('message', 'Sorry an error occured, report this to admin!');
+        }
 
         // update withdrawal
         $withdrawal->status = 'Processed';
         $withdrawal->save();
 
         // update the local Trader7 account
-        $mt5->balance -= round($withdrawal->amount);
-        $mt5->save();
+        $t7->balance -= round($withdrawal->amount);
+        $t7->save();
 
         // save transaction
         $this->saveTransaction($user->id, round($withdrawal->amount), 'Processed Withdrawal', 'Debit');

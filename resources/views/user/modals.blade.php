@@ -17,9 +17,9 @@
                     <select required class="form-control" name="account_id" id="account_id" required>
                         <option value="" disabled selected>@lang('message.modal.chose')</option>
                         @foreach (Auth::user()->accounts() as $account)
-                        <option value="{{ $account->id }}">{{ $account->login }} | {{ $account->server }} |
-                            USD {{ $account->balance }}
-                        </option>
+                            <option value="{{ $account->id }}">{{ $account->login }} | {{ $account->server }} |
+                                USD {{ $account->balance }}
+                            </option>
                         @endforeach
                     </select> <br>
 
@@ -68,9 +68,11 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form role="form" method="post" action="{{ route('account.addmt5account') }}" id="demoAccForm">
+                <form role="form" method="post" action="{{ route('account.addt7account') }}" id="demoAccForm">
                     @csrf
                     <input class="form-control" value="demo" type="hidden" name="type">
+                    <h5 class="">@lang('message.account_name')*:</h5>
+                    <input class="form-control" value="" type="text" name="name">
 
                     <h5 class="">@lang('message.modal.lev')*:</h5>
                     <select class="form-control" name="leverage" class="leverage" required>
@@ -110,9 +112,12 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form role="form" method="post" action="{{ route('account.addmt5account') }}" id="liveAccform">
+                <form role="form" method="post" action="{{ route('account.addt7account') }}"
+                    id="liveAccform">
                     @csrf
                     <input class="form-control" value="live" type="hidden" name="type">
+                    <h5 class="">@lang('message.account_name')*:</h5>
+                    <input class="form-control" value="" type="text" name="name">
 
                     <h5 class="">@lang('message.modal.lev')*:</h5>
                     <select class="form-control" name="leverage" class="leverage" required>
@@ -131,8 +136,7 @@
                     {{-- <h5 class="">@lang('message.modal.cur')*:</h5>
                     <input class="form-control" Placeholder="E.g. usd" type="text" name="currency" required><br /> --}}
                     {{-- <h5 class="">@lang('message.modal.int') *:</h5>
-                    <input class="form-control" Placeholder="E.g. 10,0000" type="text" name="balance" required><br />
-                    --}}
+                    <input class="form-control" Placeholder="E.g. 10,0000" type="text" name="balance" required><br /> --}}
                     <input type="submit" class="btn btn-primary" value="@lang('message.modal.sub')">
                 </form>
             </div>

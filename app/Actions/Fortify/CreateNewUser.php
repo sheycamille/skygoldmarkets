@@ -3,12 +3,14 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Models\Country;
 use App\Models\Setting;
 use App\Mail\NewNotification;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -16,10 +18,12 @@ use stdClass;
 
 use Carbon\Carbon;
 
+use App\Libraries\MobiusTrader;
 
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
+
 
     /**
      * Validate and create a newly registered user.
@@ -46,8 +50,9 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
-        $user = User::create([
-            'name' => $input['first_name'] . ' ' . $input['last_name'],
+        $data = [
+            'name' => $input['first_name'],
+            'lastName' => $input['last_name'],
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
             'email' => $input['email'],
@@ -59,14 +64,26 @@ class CreateNewUser implements CreatesNewUsers
             'zip_code' => $input['zip_code'],
             'country_id' => $input['country'],
             'status' => 'active',
-            'password' => Hash::make($input['password']),
-        ]);
+            'password' => $input['password'],
+        ];
 
-        // send verification email
-        $this->notifyUser($user);
+        $mobiusResp = $this->createTrader($data);
 
-        return $user;
+        if($mobiusResp['status'] === MobiusTrader::STATUS_OK) {
+            // hash the password before creating the user
+            $data['password'] = Hash::make($data['password']);
+            $data['account_number'] = $mobiusResp['data']['Id'];
+            $user = User::create($data);
+
+            // send verification email
+            $this->notifyUser($user);
+
+            return $user;
+        } else{
+            throw ValidationException::withMessages([$mobiusResp['data']]);
+        }
     }
+
 
     protected function notifyUser($user)
     {
@@ -85,5 +102,43 @@ class CreateNewUser implements CreatesNewUsers
         $mail = new NewNotification($objDemo);
         $mail->subject = "Welcome To Sky Gold Markets, Get more freedom in the markets.";
         Mail::mailer('smtp')->bcc($user->email)->send($mail);
+    }
+
+
+    protected function createTrader($data)
+    {
+        $country = Country::find($data['country_id']);
+        $m7 = new MobiusTrader(config('mobius'));
+
+        // create the account
+        $resp = $m7->create_account(
+            $data['email'],
+            $data['name'],
+            null,
+            $country->name,
+            $data['town'],
+            $data['address'],
+            $data['phone'],
+            $data['zip_code'],
+            $data['state'],
+            'SKG-Creation'
+        );
+
+        // set password
+        if($resp['status'] == MobiusTrader::STATUS_OK) {
+            $account = $resp['data'];
+            $login = $account['Email'];
+            $account_id = $account['Id'];
+            $password = $data['password'];
+
+            // set the password
+            $respPassSet = $m7->password_set($account_id, $login, $password);
+            if($respPassSet['status'] == MobiusTrader::STATUS_OK)
+                return $resp;
+            else
+                return $respPassSet;
+        }
+
+        return $resp;
     }
 }

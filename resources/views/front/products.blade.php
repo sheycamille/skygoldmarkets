@@ -2,6 +2,7 @@
 
 @section('title', 'Our Products')
 
+@section('markets', 'uk-active')
 @section('products-menu-item', 'uk-active')
 
 @section('content')
@@ -12,8 +13,8 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Markets</a></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.markets')</a></li>
                         <li><span>Products</span></li>
                     </ul>
                 </div>
@@ -47,11 +48,13 @@
                             trading with CFDs, you’re effectively buying or selling one against another in an attempt to
                             benefit from long or short term price changes.
 
-                            Sky Gold Market offers you easy access to trade on the price direction of more than 50 major, minor
+                            Sky Gold Market offers you easy access to trade on the price direction of more than 50 major,
+                            minor
                             and exotic pairs from as low as 0.0 spreads.
 
                             Open an account to BUY or SELL forex CFDs such as the EUR/USD from 0.01 lots in less than 0.01s
-                            with Sky Gold Market's award-winning platforms. Take advantage of our flexible leverage*, leading
+                            with Sky Gold Market's award-winning platforms. Take advantage of our flexible leverage*,
+                            leading
                             research and advanced analysis tools.
                         </p>
                         <div class="text-left">
@@ -82,7 +85,8 @@
                             ETFs in the form of CFDs combine the benefits and convenience of investing in stocks and those
                             of investing in mutual funds, making them ideal for diversified portfolios.
 
-                            Sky Gold Markets offers over 80 ETFs CFDs from the world’s leading exchanges to trade with direct
+                            Sky Gold Markets offers over 80 ETFs CFDs from the world’s leading exchanges to trade with
+                            direct
                             market access exclusively on our InvestPLUS. All ETFs are set to BUY only and can be traded with
                             up to 1:5 leverage.
                         </p>
@@ -144,7 +148,8 @@
                             Trade long or short on both rising and falling prices with Sky Gold Markets’ flexible leverage*,
                             ultra-low commissions and exceptional execution speeds.
 
-                            Sky Gold Markets offers hundreds of leading shares CFDs, from the world’s biggest exchanges to trade
+                            Sky Gold Markets offers hundreds of leading shares CFDs, from the world’s biggest exchanges to
+                            trade
                             from 0.01 lots in a secure and multi-regulated environment.
 
                             While we offer over 140 most-traded share CFDs on all our online and Trader 7 platforms, you
@@ -208,7 +213,8 @@
                             Bitcoin, Litecoin, Ripple and Ethereum with CFDs. Trade long or short on both rising and falling
                             prices.
 
-                            Sky Gold Markets gives you easy access to crypto trading on award-winning mobile, web and desktop
+                            Sky Gold Markets gives you easy access to crypto trading on award-winning mobile, web and
+                            desktop
                             platforms, enabling you to benefit from flexible leverage*, ultra-low spreads and exceptional
                             execution speeds.
                         </p>

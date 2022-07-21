@@ -169,9 +169,9 @@ class FrontController extends Controller
     }
 
 
-    public function metatrader()
+    public function trader7()
     {
-        return view('front.metatrader');
+        return view('front.trader7');
     }
 
 

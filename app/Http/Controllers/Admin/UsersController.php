@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use App\Libraries\MobiusTrader;
 use App\Mail\NewNotification;
 
 use Illuminate\Http\Request;
@@ -20,15 +20,11 @@ use App\Models\Admin;
 use App\Models\Setting;
 use App\Models\Country;
 use App\Models\Deposit;
-use App\Models\Mt5Details;
+use App\Models\Trader7;
 use App\Models\Withdrawal;
 use App\Models\TpTransaction;
 
 use Carbon\Carbon;
-
-use Tarikhagustia\LaravelMt5\LaravelMt5;
-
-use Tarikh\PhpMeta\Entities\Trade;
 
 use DataTables;
 
@@ -227,31 +223,27 @@ class UsersController extends Controller
 
     public function dellaccounts(Request $request, $id)
     {
-        $mt5 = Mt5Details::find($id);
+        $t7 = Trader7::find($id);
 
-        if (!isset($mt5)) {
+        if (!isset($t7)) {
             return redirect()->back()
                 ->with('message', 'Account not found!');
         }
 
-        // check and update live account balances
-        $this->setServerConfig('live');
-
         // initialize the Trader7 api
-        $api = new LaravelMt5();
+        // $m7 = new MobiusTrader(config('mobius'));
 
-        // delete the Trader7 account
-        try {
-            $data = $api->deleteUser($mt5->login);
-        } catch (Exception $e) {
-            return redirect()->back()
-                ->with('message', 'Sorry an error occured, please contact admin with this error message: ' . $e->getMessage());
-        }
+        // // delete the Trader7 account
+        // $data = $m7->deleteUser($t7->account_number);
+        // if ($resp['status'] === MobiusTrader::STATUS_OK) {
+        //     return redirect()->back()
+        //         ->with('message', 'Sorry an error occured, please contact admin with this error message: ' . $e->getMessage());
+        // }
 
-        $mt5->delete();
+        $t7->delete();
 
-        return redirect()->back()
-            ->with('message', 'Account successfully deleted!');
+        return redirect()->back();
+            // ->with('message', 'Account successfully deleted!');
     }
 
 
@@ -286,8 +278,8 @@ class UsersController extends Controller
         //Byeppass 2FA
         $user->token_2fa_expiry = \Carbon\Carbon::now()->addMinutes(15)->toDateTimeString();
         $user->save();
-        Auth::guard('admin')->login($admin, true);
-        Auth::guard('web')->login($user, true);
+        Auth::guard('admin')->account_number($admin, true);
+        Auth::guard('web')->account_number($user, true);
         $request->session()->invalidate();
         $request->session()->regenerate();
 
@@ -396,28 +388,28 @@ class UsersController extends Controller
     // top up route
     public function topup(Request $request)
     {
-        // switch the Trader7 api to use live server
-        $this->setServerConfig('live');
-
         $msg = 'Action Successful';
         $amt = $request->amount;
 
         if ($request->t_type == "Credit") {
             $data = ['status' => false];
             // get Trader7 account in question
-            $mt5 = Mt5Details::find($request->account_id);
-            if (!$mt5)
+            $t7 = Trader7::find($request->account_id);
+            if (!$t7)
                 return redirect()->back()->with('message', 'Trader7 account not found');
 
             if ($request->type == "Bonus") {
-                $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_CREDIT);
-                $mt5->bonus += $amt;
+                $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'deposit', 'bonus');
+                $t7->bonus += $amt;
             } elseif ($request->type == "Balance") {
-                $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-                $mt5->balance += $amt;
+                $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'deposit', 'bonus');
+                $t7->balance += $amt;
             }
 
-            if ($data['status'] == true) {
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->route('manageusers')
+                    ->with('message', 'Sorry an error occured, report this to admin!');
+            } else {
                 // Create deposit record
                 $this->saveRecord($request->user_id, $request->account_id, 'Express Credit', $request->amount, 'Deposit', 'Processed');
 
@@ -425,24 +417,22 @@ class UsersController extends Controller
                 $this->saveTransaction($request->user_id, $request->amount, 'Express Credit', $request->type);
 
                 $msg = 'The user\'s account has been successfully credited!';
-                $mt5->save();
-            } else {
-                return redirect()->route('manageusers')
-                    ->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->save();
             }
+
         } elseif ($request->t_type == "Debit") {
             $data = ['status' => false];
             // get Trader7 account in question
-            $mt5 = Mt5Details::find($request->account_id);
-            if (!$mt5)
+            $t7 = Trader7::find($request->account_id);
+            if (!$t7)
                 return redirect()->back()->with('message', 'Trader7 account not found');
 
             if ($request->type == "Bonus") {
-                $data = $this->performTransaction($mt5->login, -$amt, Trade::DEAL_CREDIT);
-                $mt5->bonus -= $amt;
+                $data = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'withdrawal', 'bonus');
+                $t7->bonus -= $amt;
             } elseif ($request->type == "Balance") {
-                $data = $this->performTransaction($mt5->login, -$amt, Trade::DEAL_BALANCE);
-                $mt5->balance -= $amt;
+                $data = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'withdrawal', 'balance');
+                $t7->balance -= $amt;
             }
 
             if ($data['status']) {
@@ -453,10 +443,10 @@ class UsersController extends Controller
                 $this->saveTransaction($request->user_id, $amt, 'Express Debit', $request->type);
 
                 $msg = 'The user\'s account has been successfully debited!';
-                $mt5->save();
+                $t7->save();
             } else {
                 return redirect()->route('manageusers')
-                    ->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                    ->with('message', 'Sorry an error occured, report this to admin!');
             }
         }
 

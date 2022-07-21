@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', trans(\App\Models\Setting::getValue('site_title')))
+@section('title', __('message.more_freedom'))
 
 @section('home-menu-item', 'uk-active')
 
@@ -16,21 +16,15 @@
                             <div class="uk-grid" data-uk-grid>
                                 <div class="uk-width-1-2@m">
                                     <div class="uk-overlay">
-                                        <h1>Get more <span class="in-highlight">freedom</span> in the markets.</h1>
-                                        <p class="uk-text-lead uk-visible@m">Trade Cryptocurrencies, Stock Indices,
-                                            Commodities
-                                            and Forex from a single account</p>
+                                        <h1>@lang('message.home.get_more1') <span class="in-highlight">@lang('message.home.get_more2')</span> @lang('message.home.get_more3')</h1>
+                                        <p class="uk-text-lead uk-visible@m">@lang('message.home.get_more_text')</p>
                                         <div class="in-slideshow-button">
                                             <a href="{{ route('register') }}"
-                                                class="uk-button uk-button-primary uk-border-rounded">Open
-                                                account</a>
+                                                class="uk-button uk-button-primary uk-border-rounded">@lang('message.open_account')</a>
                                             <a href="{{ route('account-types') }}"
-                                                class="uk-button uk-button-default uk-border-rounded uk-margin-small-left uk-visible@m">Discover
-                                                accounts</a>
+                                                class="uk-button uk-button-default uk-border-rounded uk-margin-small-left uk-visible@m">@lang('message.discover_accounts')</a>
                                         </div>
-                                        <p class="uk-text-small"><span class="uk-text-primary">*</span>Trading in Forex/
-                                            CFDs is
-                                            highly speculative and carries a high level of risk.</p>
+                                        <p class="uk-text-small"><span class="uk-text-primary">*</span>@lang('message.home.forex_warning')</p>
                                     </div>
                                 </div>
                                 <div class="uk-position-center">
@@ -46,20 +40,15 @@
                             <div class="uk-grid" data-uk-grid>
                                 <div class="uk-width-1-2@m">
                                     <div class="uk-overlay">
-                                        <h1>Let top <span class="in-highlight">traders</span> do the job for you!</h1>
-                                        <p class="uk-text-lead uk-visible@m">Covesting allows you to automatically copy top
-                                            performing traders and achieve the returns</p>
+                                        <h1>@lang('message.home.top_broker1') <span class="in-highlight">@lang('message.home.top_broker2')</span> @lang('message.home.top_broker3')</h1>
+                                        <p class="uk-text-lead uk-visible@m">@lang('message.home.top_broker_text')</p>
                                         <div class="in-slideshow-button">
                                             <a href="{{ route('register') }}"
-                                                class="uk-button uk-button-primary uk-border-rounded">Open
-                                                account</a>
+                                                class="uk-button uk-button-primary uk-border-rounded">>@lang('message.open_account')</a>
                                             <a href="{{ route('about') }}"
-                                                class="uk-button uk-button-default uk-border-rounded uk-margin-small-left uk-visible@m">About
-                                                Us</a>
+                                                class="uk-button uk-button-default uk-border-rounded uk-margin-small-left uk-visible@m">@lang('message.abt')</a>
                                         </div>
-                                        <p class="uk-text-small"><span class="uk-text-primary">*</span>Trading in Forex/
-                                            CFDs is
-                                            highly speculative and carries a high level of risk.</p>
+                                        <p class="uk-text-small"><span class="uk-text-primary">*</span>@lang('message.home.forex_warning')</p>
                                     </div>
                                 </div>
                                 <div class="uk-position-center">
@@ -85,7 +74,7 @@
                                             class="fas fa-drafting-compass in-icon-wrap small circle uk-box-shadow-small"></i>
                                     </div>
                                     <div>
-                                        <p class="uk-text-bold uk-margin-remove">Enhanced Tools</p>
+                                        <p class="uk-text-bold uk-margin-remove">@lang('message.home.enhanced_tools')</p>
                                     </div>
                                 </div>
                                 <div class="uk-flex uk-flex-middle">
@@ -93,7 +82,7 @@
                                         <i class="fas fa-book in-icon-wrap small circle uk-box-shadow-small"></i>
                                     </div>
                                     <div>
-                                        <p class="uk-text-bold uk-margin-remove">Trading Guides</p>
+                                        <p class="uk-text-bold uk-margin-remove">@lang('message.home.trading_guides')</p>
                                     </div>
                                 </div>
                                 <div class="uk-flex uk-flex-middle">
@@ -101,7 +90,7 @@
                                         <i class="fas fa-bolt in-icon-wrap small circle uk-box-shadow-small"></i>
                                     </div>
                                     <div>
-                                        <p class="uk-text-bold uk-margin-remove">Fast execution</p>
+                                        <p class="uk-text-bold uk-margin-remove">@lang('message.home.fast_execu')</p>
                                     </div>
                                 </div>
                                 <div class="uk-flex uk-flex-middle">
@@ -109,7 +98,7 @@
                                         <i class="fas fa-percentage in-icon-wrap small circle uk-box-shadow-small"></i>
                                     </div>
                                     <div>
-                                        <p class="uk-text-bold uk-margin-remove">0% Commission</p>
+                                        <p class="uk-text-bold uk-margin-remove">0% @lang('message.home.commission')</p>
                                     </div>
                                 </div>
                             </div>
@@ -125,10 +114,8 @@
             <div class="uk-container">
                 <div class="uk-grid-divider" data-uk-grid>
                     <div class="uk-width-expand@m in-margin-top-20@s">
-                        <h2>Why Sky Gold Markets is a trusted FX broker</h2>
-                        <p>With 15+ years of excellence and innovation, we provide high-quality access to financial markets,
-                            through our advanced execution model. Discover the world of online trading with CFDs on
-                            thousands of instruments in 6 asset classes.</p>
+                        <h2>@lang('message.home.why_us')</h2>
+                        <p>@lang('message.home.why_us_text')</p>
                     </div>
                     <div class="uk-width-2-3@m">
                         <div class="uk-child-width-1-2@s uk-child-width-1-2@m" data-uk-grid>
@@ -139,7 +126,7 @@
                                         width="72" height="72" data-uk-img>
                                 </div>
                                 <div>
-                                    <p class="uk-text-bold">Wide Range of Trading Instruments</p>
+                                    <p class="uk-text-bold">@lang('message.home.wide_range')</p>
                                 </div>
                             </div>
                             <div class="uk-flex uk-flex-middle">
@@ -149,7 +136,7 @@
                                         width="72" height="72" data-uk-img>
                                 </div>
                                 <div>
-                                    <p class="uk-text-bold">Unparalleled Trading Conditions</p>
+                                    <p class="uk-text-bold">@lang('message.home.unparalleled_conditions')</p>
                                 </div>
                             </div>
                             <div class="uk-flex uk-flex-middle">
@@ -159,7 +146,7 @@
                                         width="72" height="72" data-uk-img>
                                 </div>
                                 <div>
-                                    <p class="uk-text-bold">Globally Licensed &amp; Regulated</p>
+                                    <p class="uk-text-bold">@lang('message.home.glo_lic_reg')</p>
                                 </div>
                             </div>
                             <div class="uk-flex uk-flex-middle">
@@ -169,7 +156,7 @@
                                         width="72" height="72" data-uk-img>
                                 </div>
                                 <div>
-                                    <p class="uk-text-bold">Committed to Forex Education</p>
+                                    <p class="uk-text-bold">@lang('message.home.comm_forex_edu')</p>
                                 </div>
                             </div>
                         </div>
@@ -185,10 +172,8 @@
             <div class="uk-container">
                 <div class="uk-grid uk-flex uk-flex-center">
                     <div class="uk-width-1-2@m uk-text-center">
-                        <h2>Experience more than Trading.</h2>
-                        <p class="uk-text-lead">With 15+ years of excellence and innovation, we provide high-quality access
-                            to financial markets, through our advanced execution model. Discover the world of online trading
-                            with CFDs on thousands of instruments in 6 asset classes.</p>
+                        <h2>@lang('message.home.exp_more')</h2>
+                        <p class="uk-text-lead">@lang('message.home.exp_more_text')</p>
                         <i class="fas fa-chevron-down uk-text-primary"></i>
                     </div>
                     <div class="uk-width-5-6@m">
@@ -205,17 +190,15 @@
                                         </div>
                                         <div class="uk-card-body">
                                             <div class="in-heading-extra in-card-decor-1">
-                                                <h2 class="uk-margin-remove-bottom">Economic</h2>
-                                                <p class="uk-text-lead">Analysis</p>
+                                                <h2 class="uk-margin-remove-bottom">@lang('message.home.economic')</h2>
+                                                <p class="uk-text-lead">@lang('message.home.analysis')</p>
                                             </div>
-                                            <p class="uk-margin-small-top">Stay ahead of the markets with world-leading
-                                                market
-                                                analysis through daily webinars by industry experts.</p>
+                                            <p class="uk-margin-small-top">@lang('message.home.econ_analy_text')</p>
                                             <div class="uk-margin-medium-top">
                                                 <a class="uk-button uk-button-link uk-text-uppercase uk-text-small"
-                                                    href="#">Read analysis<i
+                                                    href="#">@lang('message.home.read_analy')<i
                                                         class="fas fa-caret-square-right uk-margin-small-left"></i></a>
-                                                <span class="uk-label uk-border-pill uk-align-right">Weekly Update</span>
+                                                <span class="uk-label uk-border-pill uk-align-right">@lang('message.home.we_upd')</span>
                                             </div>
                                         </div>
                                     </div>
@@ -233,17 +216,15 @@
                                         </div>
                                         <div class="uk-card-body">
                                             <div class="in-heading-extra in-card-decor-2">
-                                                <h2 class="uk-margin-remove-bottom">Technical</h2>
-                                                <p class="uk-text-lead">Analysis</p>
+                                                <h2 class="uk-margin-remove-bottom">@lang('message.home.technical')</h2>
+                                                <p class="uk-text-lead">@lang('message.home.analysis')</p>
                                             </div>
-                                            <p class="uk-margin-small-top">Access the financial markets with an account
-                                                catered
-                                                to your needs and benefit from good conditions.</p>
+                                            <p class="uk-margin-small-top">@lang('message.home.tech_analy')</p>
                                             <div class="uk-margin-medium-top">
                                                 <a class="uk-button uk-button-link uk-text-uppercase uk-text-small"
-                                                    href="#">Read analysis<i
+                                                    href="#">@lang('message.home.read_analy')<i
                                                         class="fas fa-caret-square-right uk-margin-small-left"></i></a>
-                                                <span class="uk-label uk-border-pill uk-align-right">Daily Update</span>
+                                                <span class="uk-label uk-border-pill uk-align-right">@lang('message.home.dai_upd')</span>
                                             </div>
                                         </div>
                                     </div>
@@ -256,17 +237,16 @@
                                             <div data-uk-margin>
                                                 <a href="#" class="uk-button in-button-app uk-margin-small-right">
                                                     <i class="fab fa-google-play fa-2x"></i>
-                                                    <span class="wrapper">Download from<span>Play Store</span></span>
+                                                    <span class="wrapper">@lang('message.home.down_from')<span>@lang('message.home.play_store')</span></span>
                                                 </a>
                                                 <a href="#" class="uk-button in-button-app">
                                                     <i class="fab fa-apple fa-2x"></i>
-                                                    <span class="wrapper">Download from<span>App Store</span></span>
+                                                    <span class="wrapper">@lang('message.home.down_from')<span>@lang('message.home.app_store')</span></span>
                                                 </a>
                                             </div>
                                             <hr>
-                                            <p>Trade on <span class="uk-text-bold uk-text-primary">world class
-                                                    platform</span>
-                                                without a doubt.</p>
+                                            <p>@lang('message.home.trade_on1') <span class="uk-text-bold uk-text-primary">@lang('message.home.trade_on2')</span>
+                                                    @lang('message.home.trade_on3')</p>
                                         </div>
                                         <div class="uk-visible@m">
                                             <img src="{{ asset('front/img/in-lazy.svg') }}"
@@ -289,15 +269,13 @@
                                                     <h1 class="uk-margin-remove-bottom">324,978,126</h1>
                                                     <p
                                                         class="uk-text-uppercase uk-text-primary uk-text-small uk-margin-remove-top">
-                                                        Trades Opened at Profit</p>
+                                                        @lang('message.home.trades_opened')</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-1 uk-width-expand@m uk-flex-middle">
-                                        <p class="uk-text-lead">Trade & Invest in Stocks, Currencies, Indices, and
-                                            Commodities
-                                            (CFDs).</p>
+                                        <p class="uk-text-lead">@lang('message.home.trade_invest')</p>
                                     </div>
                                 </div>
                             </div>
@@ -314,9 +292,8 @@
             <div class="uk-container uk-margin-small-bottom">
                 <div class="uk-grid-large" data-uk-grid>
                     <div class="uk-width-1-2@m">
-                        <h2>We are committed to meeting your CFD and FX trading needs</h2>
-                        <p class="uk-text-lead">Our clients are provided with exclusive access to trading tools, news and
-                            analysis.</p>
+                        <h2>@lang('message.home.we_comm')</h2>
+                        <p class="uk-text-lead">@lang('message.home.we_comm_text')</p>
                     </div>
                     <div class="uk-width-1-1">
                         <div class="uk-child-width-1-2@s uk-child-width-1-4@m uk-margin-small-top" data-uk-grid>
@@ -324,25 +301,25 @@
                                 <h1 class="uk-heading-bullet">
                                     <span class="count" data-counter-end="10">0</span>M+
                                 </h1>
-                                <p>clients</p>
+                                <p>@lang('message.clients')</p>
                             </div>
                             <div>
                                 <h1 class="uk-heading-bullet">
                                     <span class="count" data-counter-end="9">0</span>%
                                 </h1>
-                                <p>awards</p>
+                                <p>@lang('message.awards')</p>
                             </div>
                             <div>
                                 <h1 class="uk-heading-bullet">
                                     <span class="count" data-counter-end="5">0</span>M+
                                 </h1>
-                                <p>star services</p>
+                                <p>@lang('message.five_star')</p>
                             </div>
                             <div>
                                 <h1 class="uk-heading-bullet">
                                     <span class="count" data-counter-end="4">0</span>M+
                                 </h1>
-                                <p>regulations</p>
+                                <p>@lang('message.regulations')</p>
                             </div>
                         </div>
                     </div>
@@ -358,18 +335,15 @@
                     <div class="uk-width-5-6@m">
                         <div class="uk-grid uk-flex-middle" data-uk-grid>
                             <div class="uk-width-expand@m">
-                                <h2>Connect to global capital markets</h2>
+                                <h2></h2>
                             </div>
                             <div class="uk-width-3-5@m">
-                                <p class="uk-text-lead">Access 40,000+ trading instruments and professional asset
-                                    management on
-                                    award-winning platforms.</p>
+                                <p class="uk-text-lead">@lang('message.home.access_more')</p>
                             </div>
                         </div>
                     </div>
                     <div class="uk-width-1-1">
-                        <div class="uk-child-width-1-2@s
-uk-child-width-1-5@m in-profit-stockprice"
+                        <div class="uk-child-width-1-2@s uk-child-width-1-5@m in-profit-stockprice"
                             data-uk-grid>
                             <div>
                                 <div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-pill">
@@ -436,22 +410,21 @@ uk-child-width-1-5@m in-profit-stockprice"
                     <div class="uk-width-5-6@m">
                         <div class="uk-grid-large uk-flex-middle" data-uk-grid>
                             <div class="uk-width-auto@m">
-                                <h4 class="uk-margin-remove-bottom uk-text-primary">Ready to trade?</h4>
-                                <p class="uk-margin-remove-top">Get started with your trading account today.</p>
+                                <h4 class="uk-margin-remove-bottom uk-text-primary">@lang('message.home.ready_2trade')</h4>
+                                <p class="uk-margin-remove-top">@lang('message.home.get_stat')</p>
                             </div>
                             <div class="uk-width-expand@m">
                                 <form class="uk-grid-small" data-uk-grid action="{{ route('register') }}">
                                     <div class="uk-width-1-1 uk-width-expand@m">
                                         <input name="email" class="uk-input uk-border-rounded" type="text"
-                                            placeholder="Email address...">
+                                            placeholder="@lang('message.register.email')">
                                     </div>
                                     <div class="uk-width-1-1 uk-width-expand@m">
                                         <input name="phone" class="uk-input uk-border-rounded" type="text"
-                                            placeholder="Phone number...">
+                                            placeholder="@lang('message.body.phone')">
                                     </div>
                                     <div class="uk-width-1-1 uk-width-auto@m">
-                                        <button class="uk-button uk-button-primary uk-border-rounded uk-width-expand">Open
-                                            Account</button>
+                                        <button class="uk-button uk-button-primary uk-border-rounded uk-width-expand">@lang('message.open_account')</button>
                                     </div>
                                 </form>
                             </div>
@@ -469,8 +442,7 @@ uk-child-width-1-5@m in-profit-stockprice"
                         <div class="trustpilot-widget" data-locale="en-GB" data-template-id="5406e65db0d04a09e042d5fc"
                             data-businessunit-id="561d886b0000ff0005844fd6" data-style-height="28px"
                             data-style-width="100%" data-theme="light">
-                            <a href="https://uk.trustpilot.com/review/pepperstone.com" target="_blank"
-                                rel="noopener noreferrer">Trustpilot</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer">Trustpilot</a>
                         </div>
                     </div>
                 </div>

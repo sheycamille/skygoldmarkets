@@ -8,7 +8,7 @@ use App\Models\Setting;
 use App\Models\Deposit;
 use App\Models\Wdmethod;
 use App\Models\Withdrawal;
-use App\Models\Mt5Details;
+use App\Models\Trader7;
 use App\Models\Notification;
 use App\Models\TpTransaction;
 use App\Events\CheckAccounts;
@@ -259,7 +259,7 @@ class UserController extends Controller
         Mail::mailer('smtp')->bcc($deposit_email)->send(new NewNotification($objDemo));
 
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
         $status = 'Pending';
         $purpose = 'Deposit';
 
@@ -267,7 +267,7 @@ class UserController extends Controller
         $dp->amount = $request['amount'];
         $dp->payment_mode = $request['payment_mode'];
         $dp->status = $status;
-        $dp->account_id = $mt5_id;
+        $dp->account_id = $t7_id;
         $dp->proof = $proofname;
         $dp->user = Auth::user()->id;
         $dp->save();
@@ -373,23 +373,23 @@ class UserController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
-        $data = $this->performTransaction($mt5->login, $amount, Trade::DEAL_BALANCE);
-        if ($data['status']) {
-            $mt5->balance = $data['data']->Balance;
-            $mt5->save();
+        $resp = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-PayPal', 'SKY-Auto', 'deposit', 'balance');
+        if($resp['status'] || $resp['status'] == false) {
+            return json_encode(['message' => 'Sorry an error occured, report this to support!']);
         } else {
-            return json_encode(['message' => 'Sorry an error occured, report this to admin! ' . $data['msg']]);
+            $t7->balance = $amount;
+            $t7->save();
         }
 
         //save transaction
         $this->saveTransaction($user->id, $amount, 'Deposit', 'Credit');
 
         //save and confirm the deposit
-        $this->saveRecord($user->id, $mt5_id, 'PayPal', $amount, 'Deposit', 'Processed', 'PayPal');
+        $this->saveRecord($user->id, $t7_id, 'PayPal', $amount, 'Deposit', 'Processed', 'PayPal');
 
         //send email notification
         $currency = Setting::getValue('currency');
@@ -753,14 +753,14 @@ class UserController extends Controller
         $amount = $request->amount;
 
         // get the account or take the first
-        $account = Mt5Details::find($accountId);
+        $account = Trader7::find($accountId);
 
         if (!$account) {
-            $account = Mt5Details::first();
+            $account = Trader7::first();
         }
 
         // keep needed values in the user's session
-        $request->session()->put('mt5_account_id', $account->id);
+        $request->session()->put('t7_account_id', $account->id);
         $request->session()->put('amount', $amount);
 
         $country_id = Auth::user()->country_id;
@@ -883,10 +883,10 @@ class UserController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
         $amt = $request->session()->get('amount');
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
         $data = $request->all();
         $data['api_key'] = config('paypound.api_key');
@@ -902,19 +902,19 @@ class UserController extends Controller
 
         if ($resp->status == 'success') {
             $amt = $resp->data->amount;
-            $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-            if ($data['status']) {
-                $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                $mt5->save();
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-PayPound', 'SKY-Auto', 'deposit', 'balance');
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
-                return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->balance = $t7->balance + $amt;
+                $t7->save();
             }
 
             // save transaction
             $this->saveTransaction($user->id, $amt, 'Deposit', 'Credit');
 
             // save and confirm the deposit
-            $this->saveRecord($user->id, $mt5_id, 'PayPound', $amt, 'Deposit', 'Processed', 'PayPound Order Id: ' . $resp->data->order_id);
+            $this->saveRecord($user->id, $t7_id, 'PayPound', $amt, 'Deposit', 'Processed', 'PayPound Order Id: ' . $resp->data->order_id);
 
             // send email notification
             $currency = Setting::getValue('currency');
@@ -934,7 +934,7 @@ class UserController extends Controller
             return redirect()->back()->with('message', $resp->message);
         } elseif ($resp->status == '3d_redirect') {
             // save and confirm the deposit
-            $this->saveRecord($user->id, $mt5_id, 'PayPound', $amt, 'Deposit', 'Pending', 'PayPound Order Id: ' . $resp->data->order_id);
+            $this->saveRecord($user->id, $t7_id, 'PayPound', $amt, 'Deposit', 'Pending', 'PayPound Order Id: ' . $resp->data->order_id);
 
             return redirect($resp->redirect_3ds_url)->with('message', 'Redirecting you to complete 3DS security challenge.');
         } else {
@@ -949,18 +949,18 @@ class UserController extends Controller
         $user = User::find($data['customer_order_id']);
         $dp = $user->dp()->latest()->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
         if ($data['status'] == 'success') {
             $amt = $dp->amount;
-            $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-            if ($data['status']) {
-                $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                $mt5->save();
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-PayPound', 'SKY-Auto', 'deposit', 'balance');
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
             } else {
-                return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->balance = $t7->balance + $amt;
+                $t7->save();
             }
 
             // save transaction
@@ -994,10 +994,10 @@ class UserController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
         $amt = $request->session()->get('amount');
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
         $data = $request->all();
         $data['api_key'] = config('paystudio.api_key');
@@ -1013,19 +1013,19 @@ class UserController extends Controller
 
         if ($resp->status == 'success') {
             $amt = $resp->data->amount;
-            $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-            if ($data['status']) {
-                $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                $mt5->save();
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-PayStudio', 'SKY-Auto', 'deposit', 'balance');
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
             } else {
-                return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->balance = $t7->balance + $amt;
+                $t7->save();
             }
 
             // save transaction
             $this->saveTransaction($user->id, $amt, 'Deposit', 'Credit');
 
             // save and confirm the deposit
-            $this->saveRecord($user->id, $mt5_id, 'PayStudio', $amt, 'Deposit', 'Processed', 'PayStudio Order Id: ' . $resp->data->order_id);
+            $this->saveRecord($user->id, $t7_id, 'PayStudio', $amt, 'Deposit', 'Processed', 'PayStudio Order Id: ' . $resp->data->order_id);
 
             // send email notification
             $currency = Setting::getValue('currency');
@@ -1045,7 +1045,7 @@ class UserController extends Controller
             return redirect()->back()->with('message', $resp->message);
         } elseif ($resp->status == '3d_redirect') {
             // save and confirm the deposit
-            $this->saveRecord($user->id, $mt5_id, 'PayStudio', $amt, 'Deposit', 'Pending', 'PayStudio Order Id: ' . $resp->data->order_id);
+            $this->saveRecord($user->id, $t7_id, 'PayStudio', $amt, 'Deposit', 'Pending', 'PayStudio Order Id: ' . $resp->data->order_id);
 
             return redirect($resp->redirect_3ds_url)->with('message', 'Redirecting you to complete 3DS security challenge.');
         } else {
@@ -1060,18 +1060,18 @@ class UserController extends Controller
         $user = User::find($data['customer_order_id']);
         $dp = $user->dp()->latest()->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
         if ($data['status'] == 'success') {
             $amt = $dp->amount;
-            $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-            if ($data['status']) {
-                $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                $mt5->save();
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-PayStudio', 'SKY-Auto', 'deposit', 'balance');
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
-                return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->balance = $t7->balance + $amt;
+                $t7->save();
             }
 
             // save transaction
@@ -1105,10 +1105,10 @@ class UserController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
         $amt = $request->session()->get('amount');
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
         $data = $request->all();
         $data['api_key'] = config('chargemoney.api_key');
@@ -1124,19 +1124,19 @@ class UserController extends Controller
 
         if ($resp->status == 'success') {
             $amt = $resp->data->amount;
-            $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-            if ($data['status']) {
-                $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                $mt5->save();
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-ChargeMoney', 'SKY-Auto', 'deposit', 'balance');
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
-                return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->balance = $t7->balance + $amt;
+                $t7->save();
             }
 
             // save transaction
             $this->saveTransaction($user->id, $amt, 'Deposit', 'Credit');
 
             // save and confirm the deposit
-            $this->saveRecord($user->id, $mt5_id, 'ChargeMoney', $amt, 'Deposit', 'Processed', 'ChargeMoney Order Id: ' . $resp->data->order_id);
+            $this->saveRecord($user->id, $t7_id, 'ChargeMoney', $amt, 'Deposit', 'Processed', 'ChargeMoney Order Id: ' . $resp->data->order_id);
 
             // send email notification
             $currency = Setting::getValue('currency');
@@ -1156,7 +1156,7 @@ class UserController extends Controller
             return redirect()->back()->with('message', $resp->message);
         } elseif ($resp->status == '3d_redirect') {
             // save and confirm the deposit
-            $this->saveRecord($user->id, $mt5_id, 'ChargeMoney', $amt, 'Deposit', 'Pending', 'ChargeMoney Order Id: ' . $resp->data->order_id);
+            $this->saveRecord($user->id, $t7_id, 'ChargeMoney', $amt, 'Deposit', 'Pending', 'ChargeMoney Order Id: ' . $resp->data->order_id);
 
             return redirect($resp->redirect_3ds_url)->with('message', 'Redirecting you to complete 3DS security challenge.');
         } else {
@@ -1171,18 +1171,18 @@ class UserController extends Controller
         $user = User::find($data['customer_order_id']);
         $dp = $user->dp()->latest()->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
         if ($data['status'] == 'success') {
             $amt = $dp->amount;
-            $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-            if ($data['status']) {
-                $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                $mt5->save();
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-ChargeMoney', 'SKY-Auto', 'deposit', 'balance');
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
-                return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->balance = $t7->balance + $amt;
+                $t7->save();
             }
 
             // save transaction
@@ -1216,10 +1216,10 @@ class UserController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
         $amt = $request->session()->get('amount');
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
         $data = $request->all();
         $data['mid'] = config('ywallitpay.mid');
@@ -1241,19 +1241,19 @@ class UserController extends Controller
 
         if ($resp['status'] == 'C') {
             $amt = $resp['amount'];
-            $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-            if ($data['status']) {
-                $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                $mt5->save();
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-YWallit', 'SKY-Auto', 'deposit', 'balance');
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
-                return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->balance = $t7->balance + $amt;
+                $t7->save();
             }
 
             // save transaction
             $this->saveTransaction($user->id, $amt, 'Deposit', 'Credit');
 
             // save and confirm the deposit
-            $this->saveRecord($user->id, $mt5_id, 'YWallitPay', $amt, 'Deposit', 'Processed', 'YWallitPay Order Id: ' . $resp->data->order_id);
+            $this->saveRecord($user->id, $t7_id, 'YWallitPay', $amt, 'Deposit', 'Processed', 'YWallitPay Order Id: ' . $resp->data->order_id);
 
             // send email notification
             $currency = Setting::getValue('currency');
@@ -1271,7 +1271,7 @@ class UserController extends Controller
             return redirect(route('account.liveaccounts'))->with('message', 'Your deposit was successfully processed!');
         } elseif ($resp['status'] == 'S') {
             // save deposit as pending and redirect to 3ds
-            $this->saveRecord($user->id, $mt5_id, 'YWallitPay', $amt, 'Deposit', 'Pending', 'YWallitPay Order Id: ' . $resp->data->order_id);
+            $this->saveRecord($user->id, $t7_id, 'YWallitPay', $amt, 'Deposit', 'Pending', 'YWallitPay Order Id: ' . $resp->data->order_id);
 
             return redirect($resp['redirect_url'])->with('message', $resp['message']);
         } else {
@@ -1286,19 +1286,19 @@ class UserController extends Controller
         $user = User::find($data['customer_order_id']);
         $dp = $user->dp()->latest()->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
         dd($data);
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
         if ($data['status'] == 'C') {
             $amt = $dp->amount;
-            $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-            if ($data['status']) {
-                $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                $mt5->save();
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-YWallit', 'SKY-Auto', 'deposit', 'balance');
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
-                return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->balance = $t7->balance + $amt;
+                $t7->save();
             }
 
             // save transaction
@@ -1331,13 +1331,12 @@ class UserController extends Controller
 
     public function startVirtualPayCharge(Request $request)
     {
-        dd($request);
         $user = User::where('id', Auth::user()->id)->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
         $amt = $request->session()->get('amount');
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
         $data = $request->all();
 
@@ -1363,19 +1362,19 @@ class UserController extends Controller
 
         if ($resp->responseCode == '0') {
             $amt = $resp->amount;
-            $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-            if ($data['status']) {
-                $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                $mt5->save();
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-VirtualPay', 'SKY-Auto', 'deposit', 'balance');
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
-                return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->balance = $t7->balance + $amt;
+                $t7->save();
             }
 
             // save transaction
             $this->saveTransaction($user->id, $amt, 'Deposit', 'Credit');
 
             // save and confirm the deposit
-            $this->saveRecord($user->id, $mt5_id, 'VirtualPay', $amt, 'Deposit', 'Processed', 'VirtualPay Order Id: ' . $resp->data->order_id);
+            $this->saveRecord($user->id, $t7_id, 'VirtualPay', $amt, 'Deposit', 'Processed', 'VirtualPay Order Id: ' . $resp->data->order_id);
 
             // send email notification
             $currency = Setting::getValue('currency');
@@ -1395,7 +1394,7 @@ class UserController extends Controller
             return redirect()->back()->with('message', $resp->message);
         } elseif ($resp->status == '3d_redirect') {
             // save and confirm the deposit
-            $this->saveRecord($user->id, $mt5_id, 'VirtualPay', $amt, 'Deposit', 'Pending', 'VirtualPay Order Id: ' . $resp->data->order_id);
+            $this->saveRecord($user->id, $t7_id, 'VirtualPay', $amt, 'Deposit', 'Pending', 'VirtualPay Order Id: ' . $resp->data->order_id);
 
             return redirect($resp->redirect_3ds_url)->with('message', 'Redirecting you to complete 3DS security challenge.');
         } else {
@@ -1410,18 +1409,18 @@ class UserController extends Controller
         $user = User::find($data['customer_order_id']);
         $dp = $user->dp()->latest()->first();
 
-        $mt5_id = $request->session()->get('mt5_account_id');
+        $t7_id = $request->session()->get('t7_account_id');
 
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7 = Trader7::find($t7_id);
 
         if ($data['responseCode'] == '0') {
             $amt = $dp->amount;
-            $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-            if ($data['status']) {
-                $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                $mt5->save();
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-VirtualPay', 'SKY-Auto', 'deposit', 'balance');
+            if($respTrans['status'] || $respTrans['status'] == false) {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
-                return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                $t7->balance = $t7->balance + $amt;
+                $t7->save();
             }
 
             // save transaction
@@ -1455,8 +1454,8 @@ class UserController extends Controller
     {
         $data = $request->all();
         $user = auth()->user();
-        $mt5_id = $request->session()->get('mt5_account_id');
-        $mt5 = Mt5Details::find($mt5_id);
+        $t7_id = $request->session()->get('t7_account_id');
+        $t7 = Trader7::find($t7_id);
 
         /* Create a merchantAuthenticationType object with authentication details
           retrieved from the constants file */
@@ -1510,19 +1509,19 @@ class UserController extends Controller
                     $message_text = $tresponse->getMessages()[0]->getDescription() . ", Transaction ID: " . $tresponse->getTransId();
 
                     $amt = $data['amount'];
-                    $data = $this->performTransaction($mt5->login, $amt, Trade::DEAL_BALANCE);
-                    if ($data['status']) {
-                        $mt5->balance = $mt5->balance + $data['data']->getAmount();
-                        $mt5->save();
+                    $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-AuthorizeNet', 'SKY-Auto', 'deposit', 'balance');
+                    if($respTrans['status'] || $respTrans['status'] == false) {
+                        return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
                     } else {
-                        return redirect()->back()->with('message', 'Sorry an error occured, report this to admin! ' . $data['msg']);
+                        $t7->balance = $t7->balance + $amt;
+                        $t7->save();
                     }
 
                     // save transaction
                     $this->saveTransaction($user->id, $amt, 'Deposit', 'Credit');
 
                     // save the deposit
-                    $this->saveRecord($user->id, $mt5_id, 'Authorize.Net', $amt, 'Deposit', 'Processed', 'Authorize.net Order Id: ' . $tresponse->getTransId());
+                    $this->saveRecord($user->id, $t7_id, 'Authorize.Net', $amt, 'Deposit', 'Processed', 'Authorize.net Order Id: ' . $tresponse->getTransId());
 
                     // send email notification
                     $currency = Setting::getValue('currency');

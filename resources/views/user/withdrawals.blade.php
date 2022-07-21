@@ -47,7 +47,7 @@
                             @endif
                             <div class="row py-3 mb-4">
                                 <div class="col">
-                                    {{-- <a class="btn btn-primary" href="{{ route('account.mt5deposit') }}"><i
+                                    {{-- <a class="btn btn-primary" href="{{ route('account.t7deposit') }}"><i
                                         class="fa fa-plus"></i> @lang('message.body.new_depo')</a> --}}
                                     <a class="btn btn-primary" href="{{ route('mwithdrawal') }}">
                                         <i class="fa fa-plus"></i>
@@ -71,7 +71,7 @@
                                     @forelse ($withdrawals as $withdrawal)
                                         <tr>
                                             <th scope="row">{{ $withdrawal->id }}</th>
-                                            <td>{{ $withdrawal->mt5->login }}</td>
+                                            <td>{{ $withdrawal->t7->number }}</td>
                                             <td>
                                                 {{ \App\Models\Setting::getValue('currency') }}{{ $withdrawal->amount }}
                                             </td>

@@ -49,7 +49,7 @@
 
                             <div class="row py-3 mb-4">
                                 <div class="col">
-                                    {{-- <a class="btn btn-primary" href="{{ route('account.mt5deposit') }}"><i
+                                    {{-- <a class="btn btn-primary" href="{{ route('account.t7deposit') }}"><i
                                         class="fa fa-plus"></i> @lang('message.body.new_depo')</a> --}}
                                     <a class="btn btn-primary" href="#" data-toggle="modal"
                                         data-target="#depositModal"><i class="fa fa-plus"></i> @lang('message.body.new_depo')</a>
@@ -71,7 +71,7 @@
                                     @forelse ($deposits as $deposit)
                                         <tr>
                                             <th scope="row">{{ $deposit->id }}</th>
-                                            <td>{{ $deposit->mt5->login }}</td>
+                                            <td>{{ $deposit->t7->number }}</td>
                                             <td>{{ \App\Models\Setting::getValue('currency') }}{{ $deposit->amount }}
                                             </td>
                                             <td>{{ $deposit->payment_mode }}</td>

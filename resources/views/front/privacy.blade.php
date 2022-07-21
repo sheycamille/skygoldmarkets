@@ -1,8 +1,9 @@
 @extends('layouts.front')
 
-@section('title', 'Privacy Policy')
+@section('title', __('message.privacy_policy.policy'))
 
-@section('privacy-menu-item', 'active')
+@section('tools', 'uk-active')
+@section('privacy-menu-item', 'uk-active')
 
 @section('content')
 
@@ -12,9 +13,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Policies</a></li>
-                        <li><span>Privacy Policy</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.tools')</a></li>
+                        <li><span>@lang('message.privacy_policy.policy')</span></li>
                     </ul>
                 </div>
             </div>

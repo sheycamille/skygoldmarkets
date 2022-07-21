@@ -1,7 +1,8 @@
 @extends('layouts.front')
 
-@section('title', 'Credit Score')
+@section('title', __('message.cdt'))
 
+@section('company', 'uk-active')
 @section('credit-score-menu-item', 'uk-active')
 
 @section('content')
@@ -12,9 +13,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Policies</a></li>
-                        <li><span>Credit Score</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.company')</a></li>
+                        <li><span>@lang('message.cdt')</span></li>
                     </ul>
                 </div>
             </div>

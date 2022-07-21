@@ -18,6 +18,8 @@
                             <p class="text-center">Download our Trader</p>
                         </div>
                         <div class="card-body">
+                            <a href="https://web.skygoldmarkets.com" class="btn btn-primary"
+                                target="_blank">@lang('message.launch_webtrader')</a>
                             <a href="https://mobius-trader.s3.eu-north-1.amazonaws.com/MobiusTrader/MobiusTrader-Mobius.win.exe"
                                 class="btn btn-primary">@lang('message.body.windows')</a>
                             <a href="https://play.google.com/store/apps/details?id=com.mtrader7.terminal&hl=en"

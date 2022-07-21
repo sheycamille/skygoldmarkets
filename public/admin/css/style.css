@@ -9,7 +9,7 @@
  */
 
 :root {
-  --primary: #321fdb;
+  --primary: #fd6a4f;
   --secondary: #ced2d8;
   --success: #2eb85c;
   --info: #39f;
@@ -189,7 +189,7 @@ a {
 @media (hover: hover), (-ms-high-contrast: none) {
   a:hover {
     text-decoration: underline;
-    color: #321fdb;
+    color: #fd6a4f;
   }
 }
 
@@ -1504,8 +1504,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #321fdb;
-  border-color: #321fdb;
+  background-color: #fd6a4f;
+  border-color: red;
 }
 
 @media (hover: hover), (-ms-high-contrast: none) {
@@ -8318,7 +8318,7 @@ html:not([dir="rtl"])
 .c-header .c-header-nav .c-active > .c-header-nav-link,
 .c-header .c-header-nav .c-header-nav-link.c-show,
 .c-header .c-header-nav .c-header-nav-link.c-active {
-  color: rgba(0, 0, 21, 0.9);
+  color: #fd6a4f;
 }
 
 .c-header .c-header-toggler {
@@ -9266,7 +9266,7 @@ html:not([dir="rtl"]) .list-group-accent .list-group-item.list-group-item-divide
 }
 
 .list-group-accent .list-group-item-accent-primary {
-  border-left: 4px solid #321fdb;
+  border-left: 4px solid #fd6a4f;
 }
 
 .list-group-accent .list-group-item-accent-secondary {
@@ -12535,9 +12535,9 @@ html:not([dir="rtl"])
   color: rgba(255, 255, 255, 0.6);
 }
 
-.c-sidebar .c-sidebar-nav-link,
+.c-sidebar-nav-link.c-active,
 .c-sidebar .c-sidebar-nav-dropdown-toggle {
-  color: rgba(255, 255, 255, 0.8);
+  color:#fd6a4f;
   background: transparent;
 }
 
@@ -12548,7 +12548,7 @@ html:not([dir="rtl"])
 
 .c-sidebar .c-sidebar-nav-link.c-active,
 .c-sidebar .c-active.c-sidebar-nav-dropdown-toggle {
-  color: #fff;
+  color: #fd6a4f;
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -15080,7 +15080,7 @@ html:not([dir="rtl"]) .list-inline {
 }
 
 .bg-primary {
-  background-color: #321fdb !important;
+  background-color: #fd6a4f !important;
 }
 
 a.bg-primary:hover,

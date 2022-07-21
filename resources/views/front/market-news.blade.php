@@ -1,7 +1,8 @@
 @extends('layouts.front')
 
-@section('title', 'Market News')
+@section('title', __('message.frx_nws_page'))
 
+@section('tools', 'uk-active')
 @section('news-menu-item', 'uk-active')
 
 @section('content')
@@ -12,9 +13,9 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1 in-breadcrumb">
                     <ul class="uk-breadcrumb uk-float-right">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><span>News</span></li>
+                        <li><a href="{{ route('home') }}">@lang('message.topmenu.home')</a></li>
+                        <li><a href="#">@lang('message.tools')</a></li>
+                        <li><span>@lang('message.frx_nws_page')</span></li>
                     </ul>
                 </div>
             </div>
@@ -87,6 +88,8 @@
                 </div>
             </div>
         </div>
+
+        @include('front.prod-section')
 
     </main>
 @endsection

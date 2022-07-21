@@ -6,9 +6,11 @@ use Exception;
 
 use App\Models\User;
 use App\Models\Deposit;
-use App\Models\Mt5Details;
+use App\Models\Trader7;
 use App\Models\TpTransaction;
 use App\Models\Withdrawal;
+
+use App\Libraries\MobiusTrader;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +18,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
-use Tarikh\PhpMeta\Entities\Trade;
-use Tarikhagustia\LaravelMt5\LaravelMt5;
 
 use Carbon\Carbon;
 
@@ -84,47 +83,28 @@ class Controller extends BaseController
     }
 
 
-    protected function setServerConfig($type)
+    protected function performTransaction($cur, $actNum, $amt, $paySysCode, $purse, $type, $account='balance')
     {
-        if ($type == "demo") {
-            config([
-                'mt5.server' => env('MT5_SERVER_IP', '192.96.201.1'),
-                'mt5.login' => env('MT5_SERVER_WEB_LOGIN', 1096),
-                'mt5.password' => env('MT5_SERVER_WEB_PASSWORD', 'wqzbj5eo'),
-            ]);
+        $m7 = new MobiusTrader(config('mobius'));
+
+        $resp = ['status' => false];
+
+        if($type == 'deposit') {
+            if($account == 'balance')
+                $resp = $m7->funds_deposit($cur, (int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $paySysCode, $purse);
+            elseif($account == 'bonus')
+                $resp = $m7->bonus_add((int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $purse);
+            else
+                $resp = $m7->credit_add((int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $purse);
         } else {
-            config([
-                'mt5.server' => env('MT5_LIVE_SERVER_IP', '207.244.81.1'),
-                'mt5.login' => env('MT5_LIVE_SERVER_WEB_LOGIN', 1187),
-                'mt5.password' => env('MT5_LIVE_SERVER_WEB_PASSWORD', 'cmc8ttmv'),
-            ]);
+            $resp = $m7->balance_add($cur, (int)$actNum, -$m7->deposit_to_int($cur, (int)$amt), $paySysCode, $purse);
         }
+
+        return $resp;
     }
 
 
-    protected function performTransaction($login, $amt, $operation = Trade::DEAL_BALANCE)
-    {
-        $api = new LaravelMt5();
-        $trade = new Trade();
-        $trade->setLogin($login);
-        $trade->setAmount($amt);
-        $trade->setComment("skygoldmarkets action");
-        $trade->setType($operation);
-
-        $ret = [];
-        try {
-            $data = $api->trade($trade);
-            $ret = ['status' => true, 'data' => $data];
-        } catch (Exception $e) {
-            $ret = ['status' => false, 'msg' => $e->getMessage()];
-            if($ret['msg'] == 'unknown error') $ret = ['status' => true, 'data' => $data];
-        }
-
-        return $ret;
-    }
-
-
-    protected function saveRecord($user_id, $mt5_id, $method, $amt, $type, $status, $proof = null)
+    protected function saveRecord($user_id, $t7_id, $method, $amt, $type, $status, $proof = null)
     {
         if ($type == 'Deposit') {
             $record = new Deposit();
@@ -137,7 +117,7 @@ class Controller extends BaseController
         $record->status = $status;
         if ($proof != NUll)
             $record->proof = $proof;
-        $record->account_id = $mt5_id;
+        $record->account_id = $t7_id;
         $record->user = $user_id;
         $record->save();
 
@@ -160,27 +140,24 @@ class Controller extends BaseController
 
     protected function updateaccounts($user)
     {
-        // initialize the Trader7 api
-        $api = new LaravelMt5();
-
-        // check and update live account balances
-        $this->setServerConfig('live');
+        // initialize the Trader7 m7
+        $m7 = new MobiusTrader(config('mobius'));
 
         // Get user Trader7 accounts
-        $liveLogins = $user->accounts();
-        // $demoLogins = $user->demoaccounts();
+        $actcs = $user->accounts();
 
-        foreach ($liveLogins as $acc) {
+        foreach ($actcs as $acc) {
             try {
-                $data = $api->getUser($acc->login);
-                Mt5Details::where('id', $acc->id)
+                $resp = $m7->money_info($acc->number);
+                Trader7::where('id', $acc->id)
                     ->update([
-                        'balance' => $data->Balance,
-                        'bonus' => $data->Credit,
+                        'balance' => $resp['Balance'],
+                        'bonus' => $resp['Bonus'],
+                        'credit' => $resp['Credit'],
                     ]);
-                return ['status' => true, 'data' => $data];
+                return ['status' => true, 'data' => $resp];
             } catch (Exception $e) {
-                return ['status' => false, 'msg' => $e->getMessage()];
+                return ['status' => false, 'msg' => 'An error occurred, contact support'];
             }
         }
     }
