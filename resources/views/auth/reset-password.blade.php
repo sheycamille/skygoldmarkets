@@ -49,7 +49,7 @@
                                 <form class="uk-grid uk-form" action="{{ route('password.update') }}" method="post">
                                     @csrf
 
-                                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                                    <input type="hidden" name="token" value="{{ $request->token }}">
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -59,7 +59,7 @@
                                     <div class="uk-margin-small uk-width-1-1 uk-inline">
                                         <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
                                         <input name="email" class="uk-input uk-border-rounded" id="email"
-                                            value="{{ $email or old('email') }}" type="text"
+                                            value="{{ $request->email ?? old('email') }}" type="hidden"
                                             placeholder="email@gmail.com" required>
                                     </div>
 

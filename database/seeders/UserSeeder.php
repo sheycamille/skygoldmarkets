@@ -19,21 +19,21 @@ class UserSeeder extends Seeder
     public function run()
     {
         // default user
-        DB::table('users')->insert([
-            'name' => 'John',
-            'email' => 'support@skygoldmarkets.com',
-            'email_verified_at' => Carbon::now(),
-            'password' => Hash::make('SecreT12345'),
-            'account_type' => '1',
-            'ref_by' => '1',
-            'address' => "Makepe",
-            // 'town' => 'Buea',
-            // 'state' => 'South West',
-            'zip_code' => '063',
-            'country_id' => '1',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+        // DB::table('users')->insert([
+        //     'name' => 'John',
+        //     'email' => 'support@skygoldmarket.com',
+        //     'email_verified_at' => Carbon::now(),
+        //     'password' => Hash::make('SecreT12345'),
+        //     'account_type' => '1',
+        //     'ref_by' => '1',
+        //     'address' => "Makepe",
+        //     // 'town' => 'Buea',
+        //     // 'state' => 'South West',
+        //     'zip_code' => '063',
+        //     'country_id' => '1',
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now(),
+        // ]);
 
         // default admin
         $admin = DB::table('admins')->insert([
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
             'lastName' => 'Sky Gold Markets',
             'password' => Hash::make('SecreT12345'),
             'phone' => '+237679286569',
-            'email' => 'admin@skygoldmarkets.com',
+            'email' => 'admin@skygoldmarket.com',
             'acnt_type_active' => 'active',
             'dashboard_style' => "dark",
             'status' => 'active',

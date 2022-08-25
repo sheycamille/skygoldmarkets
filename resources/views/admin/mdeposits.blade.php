@@ -69,7 +69,7 @@
                                             <th scope="row">{{ $deposit->id }}</th>
                                             <td>{{ $deposit->duser->name }}</td>
                                             <td>{{ $deposit->duser->email }}</td>
-                                            <td>{{ $deposit->t7->number }}</td>
+                                            <td>@if($deposit->t7) {{ $deposit->t7->number }} @endif </td>
                                             <td>{{ \App\Models\Setting::getValue('currency') }}{{ $deposit->amount }}
                                             </td>
                                             <td>{{ $deposit->payment_mode }}</td>

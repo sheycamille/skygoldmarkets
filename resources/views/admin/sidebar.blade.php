@@ -2,8 +2,8 @@
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
         <div class="c-sidebar-brand">
             <a href="/">
-                <img class="c-sidebar-brand-full" src="{{ asset('front/img/group-logo.png') }}" width="200" alt="Sky Gold Markets Logo">
-                <img class="c-sidebar-brand-minimized" src="{{ asset('front/favicon.png') }}" width="100" alt="Sky Gold Markets Logo">
+                <img class="c-sidebar-brand-full" src="{{ asset('front/img/group-logo.png') }}" width="200" alt="Sky Gold Market Logo">
+                <img class="c-sidebar-brand-minimized" src="{{ asset('front/favicon.png') }}" width="100" alt="Sky Gold Market Logo">
             </a>
         </div>
         <ul class="c-sidebar-nav">

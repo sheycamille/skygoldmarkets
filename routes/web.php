@@ -106,6 +106,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['isadmin', 'twofactor']], f
 
     // manage users
     Route::get('users', 'Admin\UsersController@index')->name('manageusers');
+    Route::get('mobius_users', 'Admin\UsersController@fetchmobiususers')->name('fetchmobiususers');
     Route::get('users/list', 'Admin\UsersController@getusers')->name('fetchusers');
     Route::post('users/store', 'Admin\UsersController@store')->name('createuser');
     Route::post('users/update', 'Admin\UsersController@update')->name('updateuser');

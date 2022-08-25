@@ -28,8 +28,8 @@
             required>
     </div>
     <div class="form-group">
-        <h5 class="">Website Url (https://skygoldmarkets.com)</h5>
-        <input type="text" placeholder="https://skygoldmarkets.com" name="site_address" class="form-control"
+        <h5 class="">Website Url (https://skygoldmarket.com)</h5>
+        <input type="text" placeholder="https://skygoldmarket.com" name="site_address" class="form-control"
             value="{{\App\Models\Setting::getValue('site_address')}}" required>
     </div>
     <div class="form-group">

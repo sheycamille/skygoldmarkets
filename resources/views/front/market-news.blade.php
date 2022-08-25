@@ -35,7 +35,7 @@
                                     <div class="uk-card-body">
                                         <h1>
                                             Forex & Financial News and
-                                            Sky Gold Markets Analytics
+                                            Sky Gold Market Analytics
                                         </h1>
                                     </div>
                                 </article>

@@ -8,10 +8,10 @@
     <title>@yield('title') | {{ \App\Models\Setting::getValue('site_name') }}</title>
 
     <meta name="description"
-        content="{{ \App\Models\Setting::getValue('site_description') }} Sky Gold Markets offers CFDs on currency pairs and five other asset classes. Start trading forex online with the world’s best forex broker.">
+        content="{{ \App\Models\Setting::getValue('site_description') }} Sky Gold Market offers CFDs on currency pairs and five other asset classes. Start trading forex online with the world’s best forex broker.">
     <meta name="keywords"
         content="forex, exchange, broker, crypto, trading, indices, shares, stocks, bonds, cryptocurrencies, futures, energies">
-    <meta name="author" content="skygoldmarkets">
+    <meta name="author" content="skygoldmarket">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f2f3f5" />
@@ -110,7 +110,7 @@
                                 <li><a href="{{ route('about') }}">Company<i class="fas fa-chevron-down"></i></a>
                                     <div class="uk-navbar-dropdown">
                                         <ul class="uk-nav uk-navbar-dropdown-nav">
-                                            <li><a href="{{ route('about') }}">About Sky Gold Markets</a></li>
+                                            <li><a href="{{ route('about') }}">About Sky Gold Market</a></li>
                                             <li><a href="{{ route('credit-score') }}">Credit Score</a></li>
                                             <li><a href="{{ route('security') }}">Security</a></li>
                                         </ul>
@@ -232,7 +232,7 @@
                     <div>
                         <h5>Company</h5>
                         <ul class="uk-list uk-link-text">
-                            <li><a href="{{ route('about') }}">About Sky Gold Markets</a></li>
+                            <li><a href="{{ route('about') }}">About Sky Gold Market</a></li>
                             <li><a href="{{ route('contact') }}">Contact Us</a></li>
                             <li><a href="{{ route('credit-score') }}">Credit Score</a></li>
                             <li><a href="{{ route('security') }}">Security</a></li>
@@ -241,7 +241,7 @@
                 </div>
                 <div class="uk-grid uk-margin-large-top">
                     <div class="uk-width-1-1">
-                        <p class="uk-heading-line uk-margin-large-bottom"><span>Copyright ©2022 Sky Gold Markets. All
+                        <p class="uk-heading-line uk-margin-large-bottom"><span>Copyright ©2022 Sky Gold Market. All
                                 Rights Reserved.</span></p>
                         <p class="in-trading-risk">Trading derivatives and leveraged products carries a high level of
                             risk, including the risk of losing substantially more than your initial investment. It is

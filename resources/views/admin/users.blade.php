@@ -48,13 +48,16 @@
 
                         <div class="row">
                             <div class="col">
+                                <a href="{{ route('fetchmobiususers') }}" class="btn btn-success btn-md mb-2">Fetch Mobius
+                                    Users</a>
+
                                 @if (auth('admin')->user()->hasPermissionTo('muser-messageall', 'admin'))
                                     <a href="#" data-toggle="modal" data-target="#sendmailModal"
                                         class="btn btn-primary btn-md mb-2">Message all</a>
                                 @endif
 
                                 @if (\App\Models\Setting::getValue('enable_kyc') == 'yes' &&
-    auth('admin')->user()->hasPermissionTo('mkyc-list', 'admin'))
+                                    auth('admin')->user()->hasPermissionTo('mkyc-list', 'admin'))
                                     <a href="{{ route('kyc') }}" class="btn btn-warning btn-md mb-2">KYC</a>
                                 @endif
                             </div>
@@ -62,7 +65,8 @@
 
                         <div class="row">
                             <div class="bs-example widget-shadow table-responsive" data-example-id="hoverable-table">
-                                <table id="ShipTable" class="table table-bordered table-striped table-responsive-sm yajra-datatable">
+                                <table id="ShipTable"
+                                    class="table table-bordered table-striped table-responsive-sm yajra-datatable">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -70,6 +74,7 @@
                                             <th>Phone/Email</th>
                                             <th>Balance</th>
                                             <th>Bonus</th>
+                                            <th>Credit</th>
                                             <th>No. of Accounts</th>
                                             <th>Status</th>
                                             <th>Date Registered</th>
@@ -92,35 +97,61 @@
 @endsection
 
 @section('javascript')
-<script src="{{ asset('admin/js/jquery.validate.js') }}"></script>
-<script src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('admin/js/dataTables.bootstrap4.min.js') }}"></script>
-<script type="text/javascript">
-    $(function () {
+    <script src="{{ asset('admin/js/jquery.validate.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
 
-      var table = $('.yajra-datatable').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: "{{ route('fetchusers') }}",
-          columns: [
-              {data: 'id', name: 'ID'},
-              {data: 'name', name: 'Name'},
-              {data: 'phone-email', name: 'Phone/Email'},
-              {data: 'balance', name: 'Balance'},
-              {data: 'bonus', name: 'Bonus'},
-              {data: 'num_accounts', name: 'No. of Accounts'},
-              {data: 'status', name: 'Status'},
-              {data: 'date_registered', name: 'Date Registered'},
-              {
-                  data: 'action',
-                  name: 'action',
-                  orderable: true,
-                  searchable: true
-              },
-          ]
-      });
+            var table = $('.yajra-datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('fetchusers') }}",
+                columns: [{
+                        data: 'id',
+                        name: 'ID'
+                    },
+                    {
+                        data: 'name',
+                        name: 'Name'
+                    },
+                    {
+                        data: 'phone-email',
+                        name: 'Phone/Email'
+                    },
+                    {
+                        data: 'balance',
+                        name: 'Balance'
+                    },
+                    {
+                        data: 'bonus',
+                        name: 'Bonus'
+                    },
+                    {
+                        data: 'credit',
+                        name: 'Credit'
+                    },
+                    {
+                        data: 'num_accounts',
+                        name: 'No. of Accounts'
+                    },
+                    {
+                        data: 'status',
+                        name: 'Status'
+                    },
+                    {
+                        data: 'date_registered',
+                        name: 'Date Registered'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: true,
+                        searchable: true
+                    },
+                ]
+            });
 
-    });
-  </script>
+        });
+    </script>
 @endsection
-

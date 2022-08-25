@@ -49,15 +49,15 @@
                             <div class="mb-5 row">
                                 <div class="col-lg-8 offset-lg-2 card p-4 shadow-lg">
                                     <form method="post" action="{{ route('updatepass') }}">
-                                        <div class=" mb-2">
+                                        <div class="col-4 mb-2">
                                             <h5 class=""> @lang('message.chgepass.old')</h5>
-                                            <input type="password" name="old_password" class="form-control]" required>
+                                            <input type="password" name="old_password" class="form-control" required>
                                         </div>
-                                        <div class="mb-2">
+                                        <div class="col-4 mb-2">
                                             <h5 class=""> @lang('message.chgepass.new')* :</h5>
-                                            <input type="password" name="password" class="form-control]" required>
+                                            <input type="password" name="password" class="form-control" required>
                                         </div>
-                                        <div class=" mb-2">
+                                        <div class="col-4 mb-2">
                                             <h5 class=""> @lang('message.chgepass.knfrm')*:</h5>
                                             <input type="password" name="password_confirmation" class="form-control"
                                                 required>
@@ -65,8 +65,7 @@
                                         <input type="submit" class="btn btn-primary" value=" @lang('message.chgepass.sub')">
 
                                         <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                                        <input type="hidden" name="current_password"
-                                            value="{{ Auth::user()->password }}">
+                                        <input type="hidden" name="current_password" value="{{ Auth::user()->password }}">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}"><br />
                                     </form>
                                 </div>

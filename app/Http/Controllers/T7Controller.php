@@ -47,8 +47,31 @@ class T7Controller extends Controller
     // serves users live accounts
     public function liveaccounts()
     {
-        $user_id = Auth::user()->id;
-        $accounts = Trader7::where('type', MobiusTrader::ACCOUNT_NUMBER_TYPE_REAL)->where('client_id', $user_id)->get();
+        $user = Auth::user();
+        $accounts = Trader7::where('type', MobiusTrader::ACCOUNT_NUMBER_TYPE_REAL)->where('client_id', $user->id)->get();
+
+        $m7 = new MobiusTrader(config('mobius'));
+
+        if($accounts->isEmpty()) {
+            $accountsData = $this->fetchAccountNumbers($user->account_number);
+            foreach($accountsData as $data) {
+                $t7 = new Trader7();
+                $t7->client_id = $user->id;
+                $t7->number = $data['Id'];
+                $t7->name = $data['Name'];
+                $t7->type = $data['Type'];
+                $t7->leverage = $data['Leverage'];
+                $t7->currency = 'USD';
+                $t7->status = 'active';
+                $t7->currency_id = $data['CurrencyId'];
+                $t7->balance = $m7->deposit_to_int('USD', $data['Balance']);
+                $t7->bonus = $m7->deposit_from_int('USD', $data['Bonus']);
+                $t7->credit = $m7->deposit_to_int('USD', $data['Credit']);
+                $t7->save();
+            }
+        }
+        $accounts = Trader7::where('type', MobiusTrader::ACCOUNT_NUMBER_TYPE_REAL)->where('client_id', $user->id)->get();
+
         return view('user.liveaccounts', [
             'title' => 'Live Accounts',
             'accounts' => $accounts
@@ -132,7 +155,7 @@ class T7Controller extends Controller
         $resp = $this->performTransaction($t7Acc->currency, $t7Acc->number, '10000.0', 'SKG-DEMO', 'SKY-AUTO', 'deposit', 'balance');
 
         $msg = 'Your Trader7 Demo Account has been successfully topped up with $10k!';
-        if($resp['status'] and $resp['status'] == false) {
+        if(gettype($resp) !== 'integer') {
             $msg = 'An error occurred, please contact support';
         } else {
             // update the local record
@@ -151,12 +174,13 @@ class T7Controller extends Controller
         // send verification email
         $site_name = Setting::getValue('site_name');
         $objDemo = new \stdClass();
-        $objDemo->message = "\r Hello $user->name, \r \n " .
+        $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+        $objDemo->message = "\r Hello $name, \r \n " .
             " \r This is to inform you that a new Trader7 Account with details below have successfully registered on $site_name. \r \n " .
             "   \r  Account Number: $t7Acc->number \r \n " .
         $objDemo->sender = "$site_name";
         $objDemo->date = Carbon::Now();
-        $objDemo->subject = "Your new Trader7 Account with Sky Gold Markets!";
+        $objDemo->subject = "Your new Trader7 Account with Sky Gold Market!";
 
         Mail::mailer('smtp')->bcc($user->email)->send(new NewNotification($objDemo));
     }

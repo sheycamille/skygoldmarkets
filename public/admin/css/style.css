@@ -22260,3 +22260,30 @@ body {
     min-width: 60px;
     margin: 0 5px;
 }
+
+.mobile-menu h5 {
+    font-size: 14px;
+    padding: 0 15px;
+    margin-bottom: 0;
+}
+
+.mobile-menu h5 a {
+    padding: 0;
+    text-align: left;
+}
+
+.mobile-menu .c-header-nav-link {
+    color: inherit;
+    font-size: 12px;
+    padding: 0 15px;
+    margin-left: 15px;
+}
+
+.mobile-menu a {
+    color:inherit;
+    padding: 0 15px;
+}
+
+.mobile-menu .dropdown-divider {
+    margin: 0.2rem 0;
+}

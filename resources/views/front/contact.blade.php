@@ -39,7 +39,7 @@
                             </div>
                             <div>
                                 <h5 class="uk-margin-remove-bottom">@lang('message.register.email')</h5>
-                                <p class="uk-margin-small-top uk-margin-remove-bottom">support@skygoldmarkets.com</p>
+                                <p class="uk-margin-small-top uk-margin-remove-bottom">support@skygoldmarket.com</p>
                                 <p class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-top">@lang('message.contact.for_public_enquiries')</p>
                             </div>
                             <div>

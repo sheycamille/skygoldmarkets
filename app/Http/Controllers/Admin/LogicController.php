@@ -121,7 +121,8 @@ class LogicController extends Controller
 
         // send email notification
         $objDemo = new \stdClass();
-        $objDemo->message = "\r Hello $user->name, \r \n " .
+        $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+        $objDemo->message = "\r Hello $name, \r \n " .
         "This is to inform you that your deposit of $currency$deposit->amount has been received but unfortunately rejected because of the following reaon: \r \n ".
         "$request->reason \r \n ".
         "Please fix the problem, we will gladly process it or contact our support for further assistance. \r\n ";
@@ -148,7 +149,7 @@ class LogicController extends Controller
         // do the deposit on the Trader7 account
         $respTrans = $this->performTransaction($t7->currency, $t7->number, $deposit->amount, 'SKG-Admin', 'SKY-Auto', 'deposit', 'balance');
 
-        if($respTrans['status'] || $respTrans['status'] == false) {
+        if(gettype($respTrans) !== 'integer') {
             return redirect()->back()->with('message', 'Sorry an error occured, report this to admin!');
         }
 
@@ -168,7 +169,8 @@ class LogicController extends Controller
 
         // send email notification
         $objDemo = new \stdClass();
-        $objDemo->message = "\r Hello $user->name, \r \n
+        $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+        $objDemo->message = "\r Hello $name, \r \n
         This is to inform you that your deposit of $currency$deposit->amount has been received and processed. You can now check your Trader7 account. \r\r";
         $objDemo->sender = "$site_name";
         $objDemo->date = Carbon::Now();
@@ -191,7 +193,7 @@ class LogicController extends Controller
         $t7 = Trader7::find($withdrawal->account_id);
         $respTrans = $this->performTransaction($t7->currency, $t7->number, $withdrawal->amount, 'SKG-Admin', 'SKY-Auto', 'withdrawal');
 
-        if($respTrans['status'] || $respTrans['status'] == false) {
+        if(gettype($respTrans) !== 'integer') {
             return redirect()->back()->with('message', 'Sorry an error occured, report this to admin!');
         }
 
@@ -212,7 +214,8 @@ class LogicController extends Controller
 
         // send email notification
         $objDemo = new \stdClass();
-        $objDemo->message = "\r Hello $user->name, \r\n
+        $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+        $objDemo->message = "\r Hello $name, \r\n
 
         This is to inform you that your withdrawal request of $currency$withdrawal->amount have approved and the funds have been sent to your selected account. \r\n";
         $objDemo->sender = $site_name;

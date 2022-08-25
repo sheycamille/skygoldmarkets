@@ -10,7 +10,7 @@
 
     <meta name="description" content="{{ \App\Models\Setting::getValue('site_description') }}">
     <meta name="keywords" content="{{ \App\Models\Setting::getValue('keywords') }}">
-    <meta name="author" content="skygoldmarkets">
+    <meta name="author" content="skygoldmarket">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f2f3f5" />
@@ -312,8 +312,8 @@
                                         src="{{ asset('front/img/group-logo.png') }}"
                                         data-src="{{ asset('front/img/group-logo.png') }}" alt="logo"
                                         width="130" height="36" data-uk-img></a></li>
-                            <li><a href="mailto:support@skygoldmarkets.com"><i
-                                        class="fas fa-envelope uk-margin-small-right"></i>support@skygoldmarkets.com</a>
+                            <li><a href="mailto:support@skygoldmarket.com"><i
+                                        class="fas fa-envelope uk-margin-small-right"></i>support@skygoldmarket.com</a>
                             </li>
                             <li><a href="#"><i class="fas fa-map-marker-alt uk-margin-small-right"></i>Exchange
                                     Tower, 130 King Street West, Toronto, ON, Canada M5X 1A9</a></li>

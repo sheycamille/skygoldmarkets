@@ -75,32 +75,32 @@
                                 </div>
                             @endif
 
-                            <div class="d-flex justify-content-stretch flex-row pb-5 pt-5">
-                                <div class="col-3 text-center">
+                            <div class="d-flex justify-content-stretch flex-row pb-2 pt-2 row">
+                                <div class="col-sm-3 col-xs-6 text-center pb-1 p-0">
                                     <a class="btn btn-primary" href="{{ route('account.deposits') }}">
                                         @lang('message.body.depo')
                                     </a>
                                 </div>
-                                <div class="col-3 text-center">
+                                <div class="col-sm-3 col-xs-6 text-center pb-1 p-0">
                                     <a class="btn btn-primary" href="{{ route('account.withdrawals') }}">
                                         @lang('message.body.withdraw_funds')
                                     </a>
                                 </div>
-                                <div class="col-3 text-center">
+                                <div class="col-sm-3 col-xs-6 text-center pb-1 p-0">
                                     <a class="btn btn-primary" href="{{ route('account.liveaccounts') }}">
                                         @lang('message.body.open')
                                     </a>
                                 </div>
-                                <div class="col-3 text-center">
+                                <div class="col-sm-3 col-xs-6 text-center pb-1 p-0">
                                     <a class="btn btn-primary" href="{{ route('account.downloads') }}">
                                         @lang('message.body.downloads')
                                     </a>
                                 </div>
                             </div>
+                            <br><br>
 
                             <!-- Beginning of Dashboard Stats  -->
                             <div class="row">
-
                                 <div class="col-sm-6 col-md-4">
                                     <div class="card text-white bg-primary">
                                         <div class="card-body">

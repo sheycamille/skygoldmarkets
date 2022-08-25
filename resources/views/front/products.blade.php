@@ -85,7 +85,7 @@
                             ETFs in the form of CFDs combine the benefits and convenience of investing in stocks and those
                             of investing in mutual funds, making them ideal for diversified portfolios.
 
-                            Sky Gold Markets offers over 80 ETFs CFDs from the world’s leading exchanges to trade with
+                            Sky Gold Market offers over 80 ETFs CFDs from the world’s leading exchanges to trade with
                             direct
                             market access exclusively on our InvestPLUS. All ETFs are set to BUY only and can be traded with
                             up to 1:5 leverage.
@@ -114,7 +114,7 @@
                             A key driver in world markets, commodities can be a highly volatile asset category and are used
                             to diversify traders’ portfolios.
 
-                            Trade long or short on both rising and falling prices with Sky Gold Markets’ flexible leverage*,
+                            Trade long or short on both rising and falling prices with Sky Gold Market’ flexible leverage*,
                             ultra-low commissions and exceptional execution speeds.
 
                             Open an account to access our award-winning platforms, professional charting tools, leading
@@ -145,16 +145,16 @@
                             Start trading shares CFDs on the world’s biggest brands, including Amazon, Facebook, Apple,
                             Microsoft and Alphabet.
 
-                            Trade long or short on both rising and falling prices with Sky Gold Markets’ flexible leverage*,
+                            Trade long or short on both rising and falling prices with Sky Gold Market’ flexible leverage*,
                             ultra-low commissions and exceptional execution speeds.
 
-                            Sky Gold Markets offers hundreds of leading shares CFDs, from the world’s biggest exchanges to
+                            Sky Gold Market offers hundreds of leading shares CFDs, from the world’s biggest exchanges to
                             trade
                             from 0.01 lots in a secure and multi-regulated environment.
 
                             While we offer over 140 most-traded share CFDs on all our online and Trader 7 platforms, you
                             can find a far larger selection of over 900 shares and ETFs on our InvestPLUS account, available
-                            exclusively on the Sky Gold Markets Trader7.
+                            exclusively on the Sky Gold Market Trader7.
                         </p>
                         <div class="text-right">
                             <a class="btn-get-started mr-auto" href="{{ route('register') }}">Start Trading Shares</a><br>
@@ -213,7 +213,7 @@
                             Bitcoin, Litecoin, Ripple and Ethereum with CFDs. Trade long or short on both rising and falling
                             prices.
 
-                            Sky Gold Markets gives you easy access to crypto trading on award-winning mobile, web and
+                            Sky Gold Market gives you easy access to crypto trading on award-winning mobile, web and
                             desktop
                             platforms, enabling you to benefit from flexible leverage*, ultra-low spreads and exceptional
                             execution speeds.

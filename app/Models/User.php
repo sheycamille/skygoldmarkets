@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+
+use App\Libraries\MobiusTrader;
+
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -29,6 +34,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name', 'first_name', 'last_name', 'email', 'phone', 'country_id', 'password', 'phone_password', 'address', 'town', 'state', 'dashboard_style', 'account_type', 'zip_code', 'status', 'token_2fa_expiry', 'bank_name', 'account_name', 'account_number', 'swift_code', 'bank_address', 'btc_address', 'eth_address', 'xrp_address', 'usdt_address', 'bch_address', 'bnb_address', 'interac', 'paypal_email'
     ];
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -41,6 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'two_factor_secret',
     ];
 
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -49,6 +56,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     /**
      * The accessors to append to the model's array form.
@@ -83,32 +91,35 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo('App\Models\AccountType', 'account_type');
     }
 
+
     public function country()
     {
         return $this->belongsTo('App\Models\Country');
     }
 
-    // public function state()
-    // {
-    //     return $this->belongsTo('App\Models\State');
-    // }
 
-    // public function town()
-    // {
-    //     return $this->belongsTo('App\Models\City', 'town_id');
-    // }
+    public function state()
+    {
+        return $this->belongsTo('App\Models\State');
+    }
+
+
+    public function town()
+    {
+        return $this->belongsTo('App\Models\City', 'town_id');
+    }
 
 
     public function accounts()
     {
-        $accounts = Trader7::where('client_id', $this->id)->where('type', 'live')->get();
+        $accounts = Trader7::where('client_id', $this->id)->where('type', MobiusTrader::ACCOUNT_NUMBER_TYPE_REAL)->get();
         return $accounts;
     }
 
 
     public function demoaccounts()
     {
-        $accounts = Trader7::where('client_id', $this->id)->where('type', 'demo')->get();
+        $accounts = Trader7::where('client_id', $this->id)->where('type', MobiusTrader::ACCOUNT_NUMBER_TYPE_DEMO)->get();
         return $accounts;
     }
 
@@ -124,12 +135,30 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
+    public function totalDeposited()
+    {
+        $total_deposited = DB::table('deposits')->select(DB::raw("SUM(amount) as total"))->where('user', $this->id)->where('status', 'Processed')->get()->toArray()[0]->total;
+        return $total_deposited - $this->totalBonus() - $this->totalCredit();
+    }
+
+
     public function totalBonus()
     {
         $accounts = $this->accounts();
         $total = 0;
         foreach ($accounts as $acc) {
             $total += $acc->bonus;
+        }
+        return $total + $this->signup_bonus + $this->ref_bonus;
+    }
+
+
+    public function totalCredit()
+    {
+        $accounts = $this->accounts();
+        $total = 0;
+        foreach ($accounts as $acc) {
+            $total += $acc->credit;
         }
         return $total;
     }

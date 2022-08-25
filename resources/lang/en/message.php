@@ -33,7 +33,7 @@ return [
         'trading_guides' => 'Trading Guides',
         'fast_execu' => 'Fast execution',
         'commission' => 'Commission',
-        'why_us' => 'Why Sky Gold Markets is a trusted FX broker?',
+        'why_us' => 'Why Sky Gold Market is a trusted FX broker?',
         'why_us_text' => 'With 15+ years of excellence and innovation, we provide high-quality access to financial markets, through our advanced execution model. Discover the world of online trading with CFDs on thousands of instruments in 6 asset classes.',
         'wide_range' => 'Wide Range of Trading Instruments',
         'unparalleled_conditions' => 'Unparalleled Trading Conditions',
@@ -107,9 +107,9 @@ return [
         'asset_class' => "Trade the world's most sought-after asset class - cryptocurrencies - including Bitcoin, Ethereum and Litecoin.",
     ],
     'webtrader' => [
-        'webtrader_title1' => 'Sky Gold Markets Webtrader',
+        'webtrader_title1' => 'Sky Gold Market Webtrader',
         'webtrader_title2' => 'Trading Platform',
-        'webtrader_platform' => '  Our WebTrader platform is fast becoming one of the most popular used by traders, providing an added level of market analysis and access to full market depth on an impressive and fully customisable user interface. Alongside Sky Gold Markets’s advanced trading infrastructure, competitive pricing and superior order execution with no dealing desk intervention*, our WebTrader provides one of the most innovative trading experiences in the industry.',
+        'webtrader_platform' => '  Our WebTrader platform is fast becoming one of the most popular used by traders, providing an added level of market analysis and access to full market depth on an impressive and fully customisable user interface. Alongside Sky Gold Market’s advanced trading infrastructure, competitive pricing and superior order execution with no dealing desk intervention*, our WebTrader provides one of the most innovative trading experiences in the industry.',
         'trde_cdfs' => ' TRADE CFDS ON FOREX, METALS, INDICES & ENERGIES • LOWER SPREADS AND COMPETITIVE COMMISSIONS • MARKET EXECUTION',
         'webtrader_sub' => 'WebTrader',
         't7_account' => 'Access your Trader7 account
@@ -151,8 +151,8 @@ return [
         'for_mac' => 'Download Trader7 for Mac',
         'system_req' => 'System Requirements',
         'compatible' => 'Compatible with Microsoft Windows 2008/7/8/10 operating systems. Internet speed of 56 kbps or above',
-        'netting' => 'The Trader7 account is set to ‘Netting’ as default, meaning that trades are aggregated, and hedging is not possible',
-        'hedging' => 'although we can provide a ‘hedging’ version of the platform on request',
+        'netting' => 'The Trader7 account is set to `Netting` as default, meaning that trades are aggregated, and hedging is not possible',
+        'hedging' => 'although we can provide a `hedging` version of the platform on request',
         'meta_for_mobile' => 'Trader 7 for Mobile & Tablets',
         'with_fxpro' => 'With Trader7 Mobile you can enjoy the most popular trading platform on your mobile phone, anywhere at any time. Available for iOS and Android',
 
@@ -201,13 +201,13 @@ return [
     ],
     'about' => [
         'about_pt1' => 'About',
-        'about_pt2' => 'Sky Gold Markets',
-        'fsa' => 'Sky Gold Markets is permitted by the FSA of SVG in 2021 to act as a financial and monetary intermediary in the conduct of financial and monetary brokerage business for the sale and purchase of currencies and intermediating in money marked transactions and as permitted with granted company number 678 SVG.t',
+        'about_pt2' => 'Sky Gold Market',
+        'fsa' => 'Sky Gold Market is permitted by the FSA of SVG in 2021 to act as a financial and monetary intermediary in the conduct of financial and monetary brokerage business for the sale and purchase of currencies and intermediating in money marked transactions and as permitted with granted company number 678 SVG.t',
         'our_clients_first' => 'Putting our clients first',
         'since' => 'since 2016',
         'empowering_clients' => 'For about 5 years, we’ve been empowering clients by helping them take control of their financial lives',
         'strategy' => 'Our Strategy',
-        'aim' => 'At Sky Gold Markets we evolve with the times. We aim to continuously refine our services to cater to the needs of traders in this highly dynamic industry',
+        'aim' => 'At Sky Gold Market we evolve with the times. We aim to continuously refine our services to cater to the needs of traders in this highly dynamic industry',
         'ultra_fast' => 'Ultra-fast trade execution with no dealing desk intervention',
         'aggregation' => 'Aggregation of prices from multiple LPs & access to a deep liquidity poo',
         'research' => 'Continous research and development',
@@ -225,7 +225,7 @@ return [
         'since_2016' => 'since 2016',
         'subtitle' => 'For more than 6 years, we\'ve been empowering clients by helping them take control of their financial lives.',
         'philosophy' => 'Our Philosophy',
-        'phil_text' => 'At Sky Gold Markets, we strive to bring innovative products to our clients. We  continuously refine our services to cater to the needs of traders in this highly dynamic industry.',
+        'phil_text' => 'At Sky Gold Market, we strive to bring innovative products to our clients. We  continuously refine our services to cater to the needs of traders in this highly dynamic industry.',
         'our_vision' => 'Our Vision',
         'vision_text' => 'Our vision is to provide a free and wide market where even the basic investor can make money in the financial markets.',
         'culture' => 'Our Culture',
@@ -255,7 +255,7 @@ return [
     'security' => [
         'staying_safe' => 'Staying Safe Online',
         'online_security' => 'Important information about online security',
-        'safety' => 'At Sky Gold Markets, the safety of client data is a priority and we have sophisticated security measures in place designed to protect your personal information, privacy and funds',
+        'safety' => 'At Sky Gold Market, the safety of client data is a priority and we have sophisticated security measures in place designed to protect your personal information, privacy and funds',
         'high_encryption' => 'We use the highest levels of data encryption on our websites and applications',
         'strong_team' => 'A strong team of professionals is constantly monitoring and always prepared to respond to any incident or irregular activities in online payments',
         'control' => 'We take all controls to maintain the Trader7 Direct portal as a safe place for executing your transactions',
@@ -277,17 +277,17 @@ return [
         'virus_pt2' => 'Set up anti-malware software on any devices that you may use and frequently update them. You should also ensure that you have the latest OS updates on your device',
         'disclose' => 'Don’t disclose your data',
         'disclose_pt1' => 'Never share your password(s) or sensitive account information with anyone, nor should you write down any passwords or access codes. Be wary of any contact asking you to provide account details or personal information such as your ID',
-        'disclose_pt2' => 'Sky Gold Markets and other reputable companies would never ask for such details and you should deem any such contact or requests to be suspicious',
+        'disclose_pt2' => 'Sky Gold Market and other reputable companies would never ask for such details and you should deem any such contact or requests to be suspicious',
         'easy' => 'Don’t make it easy',
         'easy_pt1' => 'Sometimes it is easy for fraudsters simply because of a lack of password complexity or changing. Change your password(s) frequently and use a combination of symbols, numbers, upper and lowercase letters. Don’t use passwords that contain family names, pets or nicknames, as these are easily guessable. Use different passwords for different websites and enable multi-factor authentication wherever possible',
-        'for_clarity' => 'For clarity, we would like to highlight that Sky Gold Markets',
+        'for_clarity' => 'For clarity, we would like to highlight that Sky Gold Market',
         'clarity_pt1' => 'Does not provide the physical exchange of, or payment services relating to Cryptocurrencies',
         'clarity_pt2' => 'Will never ask you for your password(s) or other sensitive information',
         'clarity_pt3' => 'Will never ask you for your password(s) or other sensitive information',
         'clarity_pt4' => 'Will not engage in any investment or trading advice',
         'clarity_pt5' => 'Services do not include asset management or the guarantee of any returns on investment',
         'fraud_pt1' => 'Report any suspected fraud immediately to the cybersecurity fraud agency or relevant authorities in your jurisdiction',
-        'fraud_pt2' => 'If you receive any unsolicited calls, emails or SMS claiming to be Sky Gold Markets, do not engage in any communication and report this to us immediately via our official communication channels on our website',
+        'fraud_pt2' => 'If you receive any unsolicited calls, emails or SMS claiming to be Sky Gold Market, do not engage in any communication and report this to us immediately via our official communication channels on our website',
         'fraud_pt3' => 'Please also inform us should you notice any unauthorised transactions in your account or suspect that a third party may have access to your account information',
         'we_remind_you' => 'We remind you to be cautious of unauthorised communication channels and not to disclose any personal data or sensitive account information over social media',
         'we_remind_you_pt2' => 'The official Trader7 mobile application is available to download only from the Apple App Store and Google Play store. Other official trading software provided by us can be found in our download centre',
@@ -297,7 +297,7 @@ return [
     'trading_platforms' => [
         'o_t_p' => 'Our Trading Platforms',
         'advanced_platform' => 'The World’s Most Advanced Platform',
-        'more_features' => 'Enjoy more features with Sky Gold Markets’ Trader7 trading platform. The Sky Gold Markets Trader7 is the latest and most advanced Trader7 platform that offers all the pioneering features of MT4, with the addition of more advanced trading tools and indicators that enable traders to maintain more control of their trades and make more informed decisions using cutting-edge analysis',
+        'more_features' => 'Enjoy more features with Sky Gold Market’ Trader7 trading platform. The Sky Gold Market Trader7 is the latest and most advanced Trader7 platform that offers all the pioneering features of MT4, with the addition of more advanced trading tools and indicators that enable traders to maintain more control of their trades and make more informed decisions using cutting-edge analysis',
         'benefits' => 'Advantages & Benefits',
         'lates_platform' => 'The latest Trader7 platform provides a number of additional analytical tools and functions designed to give you a more comprehensive trading arsenal and an improved experience, thus making it one of the best platforms available in the market.',
         'mobile_apps' => 'SGM Mobile Apps',
@@ -348,9 +348,9 @@ return [
     ],
     'privacy_policy' => [
         'policy' => 'Privacy Policy',
-        'b1' => 'Sky Gold Markets is always looking to improve the experience of our clients in more ways than one and in
+        'b1' => 'Sky Gold Market is always looking to improve the experience of our clients in more ways than one and in
         an effort to create and manage every trading account our clients have, the company will need to
-        access some necessary information from them. The Policy on Privacy Protection indicates how Sky Gold Markets
+        access some necessary information from them. The Policy on Privacy Protection indicates how Sky Gold Market
          is committed to meet its responsibilities to obtain and protect the privacy of clients and
         ensure that the information they have provided remain confidential ',
         'personal' => 'Personal Information',
@@ -377,7 +377,7 @@ return [
         personal username and password.',
         'b9' => 'Prevention against fraud, money laundering or unauthorized transaction. ',
         'security' => 'Security',
-        'cookies' => 'Cookies on Sky Gold Marketsgroup.com',
+        'cookies' => 'Cookies on SkyGoldMarket.com',
         'b10' => 'The data and information that the company has collected and gathered  are all encrypted and are put
         away held in secure computer systems in order to prevent unauthorized access, improper modifications,
         misuse or loss of information. In any event that you would wish to close your account with the
@@ -396,7 +396,7 @@ return [
         this to be appropriate. The Company will notify you should we decide to make any changes by either
         posting a notice for public viewing or by email.',
         'links' => 'Links',
-        'b13' => 'Our website, Sky Gold Marketsgroup.com, may contain links to other websites on the internet. We are not, in
+        'b13' => 'Our website, Sky Gold Market.com, may contain links to other websites on the internet. We are not, in
         any way, responsible for any other privacy practices or collection of your information linked to
         these websites. Our policy only applies to the information collected by the Company. ',
         'questions' => 'Questions',
@@ -410,51 +410,51 @@ return [
     'order_execution' => [
         'order' => 'Order Execution Policy',
         'order_pol' => 'The Order of Execution Policy',
-        'b1' => 'The sole purpose of this Order of Execution policy is to establish a well-organized action plan for the procurement process by providing the finest conceivable result for its Clients, while Sky Gold Markets accomplishing a Clients’ orders.',
+        'b1' => 'The sole purpose of this Order of Execution policy is to establish a well-organized action plan for the procurement process by providing the finest conceivable result for its Clients, while Sky Gold Market accomplishing a Clients’ orders.',
         'b2' => 'Additionally, the aim of this document is to guide the said activities and to verify acquiescence with the necessities of the lawgiving bodies, counting the department and general development, which are established in the Internal Procedures Manual. ',
         'scope' => 'Scope and Services',
-        'b3' => 'The policy shall apply automatically upon the completion of trades on behalf of its Clients. Sky Gold Markets will continually be the principal counterparty as the orders of Clients are accomplished.',
-        'b4' => 'More so, Sky Gold Markets cannot assure that once an order is given, the Client’s expense will be beneficial than original value which could perhaps be obtainable in a different occurrence. ',
+        'b3' => 'The policy shall apply automatically upon the completion of trades on behalf of its Clients. Sky Gold Market will continually be the principal counterparty as the orders of Clients are accomplished.',
+        'b4' => 'More so, Sky Gold Market cannot assure that once an order is given, the Client’s expense will be beneficial than original value which could perhaps be obtainable in a different occurrence. ',
         'exe' => 'Execution Aspects',
-        'b5' => 'Sky Gold Markets is required to take several aspects into deliberation; the following are itemized below:',
-        'b6' => 'More so, Sky Gold Markets cannot assure that once an order is given, the Client’s expense will be beneficial than original value which could perhaps be obtainable in a different occurrence.',
+        'b5' => 'Sky Gold Market is required to take several aspects into deliberation; the following are itemized below:',
+        'b6' => 'More so, Sky Gold Market cannot assure that once an order is given, the Client’s expense will be beneficial than original value which could perhaps be obtainable in a different occurrence.',
         'quotes' => ' Quotes',
-        'b7' => 'Sky Gold Markets creates an owned tradable values taken from the figures obtained over the liberated price sources, counting banks that principally offers liquescency through the global market. Sky Gold Markets is to guarantee that the bid/ask spread controls is completed with the recommendation to an extensive assortment of fundamental price sources, counting statistical bases. With such, Sky Gold Markets can assure that the Client receives the best execution possible. ',
+        'b7' => 'Sky Gold Market creates an owned tradable values taken from the figures obtained over the liberated price sources, counting banks that principally offers liquescency through the global market. Sky Gold Market is to guarantee that the bid/ask spread controls is completed with the recommendation to an extensive assortment of fundamental price sources, counting statistical bases. With such, Sky Gold Market can assure that the Client receives the best execution possible. ',
         'charges' => ' Charges',
         'b8' => 'Once a Client secures a position on some of the provided financial instruments, it will certainly contain a commission or a financing payment.',
         'all' => ' Orders Of All Sizes',
-        'b9' => 'Orders are positioned in portion scopes. A component which processes the quantity of the deal is termed as “lot”, in which varies from every financial instruments given. If a Client desired to instigate an outsized scope of order, it may not be as much as favorable in several circumstances as liquidity ascends in the marketplace. Sky Gold Markets holds the right to refuse a Clients’ Order, if the size of the order is considered to be too large and cannot be completed by Sky Gold Markets . ',
+        'b9' => 'Orders are positioned in portion scopes. A component which processes the quantity of the deal is termed as “lot”, in which varies from every financial instruments given. If a Client desired to instigate an outsized scope of order, it may not be as much as favorable in several circumstances as liquidity ascends in the marketplace. Sky Gold Market holds the right to refuse a Clients’ Order, if the size of the order is considered to be too large and cannot be completed by Sky Gold Market. ',
         'frequency' => 'Frequency',
-        'b10' => 'Normally, Price values often changes in every coming periods. The regularity with which they do varies with financial instruments along with the current market conditions. As Sky Gold Markets produces its own tradable price values, the technology therefore used by the Client to make relations with Sky Gold Markets will play a decisive function. Additionally, tradable prices are distributed through the Sky Gold Markets ’s trading programs.',
+        'b10' => 'Normally, Price values often changes in every coming periods. The regularity with which they do varies with financial instruments along with the current market conditions. As Sky Gold Market produces its own tradable price values, the technology therefore used by the Client to make relations with Sky Gold Market will play a decisive function. Additionally, tradable prices are distributed through the Sky Gold Market’s trading programs.',
         'instruments' => 'Instruments',
-        'b11' => 'Sky Gold Markets fulfills orders in relation to any trading instruments in derivatives on foreign exchange ("FX").',
-        'b12' => 'Sky Gold Markets provides the following foreign exchange trading products:',
+        'b11' => 'Sky Gold Market fulfills orders in relation to any trading instruments in derivatives on foreign exchange ("FX").',
+        'b12' => 'Sky Gold Market provides the following foreign exchange trading products:',
         'l1' => 'Foreign Exchange Derivatives',
         'l2' => 'Commodities Derivatives',
         'l3' => 'Indices Derivatives',
         'l4' => 'Spot metals Derivatives ',
         'l5' => 'Best execution ideologies ',
-        'l6' => 'When an order of a Client is being accomplished, Sky Gold Markets is authorized to layout the following factors into observation:',
+        'l6' => 'When an order of a Client is being accomplished, Sky Gold Market is authorized to layout the following factors into observation:',
         'l7' => "The Client's characteristics and to where it is classified.",
         'l8' => 'The characteristics of the order of the Client.',
         'l9' => 'The characteristics of the execution spots to which that order is able to be engaged.',
         'l10' => 'The characteristics of trading instruments that are the order’s focus.',
         'instructions' => 'Client Instructions',
-        'b13' => 'In circumstances where the Client is given with a definite directive by Sky Gold Markets concerning the order execution and the company decided on this directive, consequently, an execution of order will be executed with the specific instruction given.',
-        'b14' => 'Still, if the Client wanted to perform an order and given a certain instruction, then by executing that order, Sky Gold Markets will fulfill with Sky Gold Markets’s responsibility to deliver the best execution for the Client. This may possible result in being unqualified to comply with Sky Gold Markets ’s order execution policy for that certain order.',
+        'b13' => 'In circumstances where the Client is given with a definite directive by Sky Gold Market concerning the order execution and the company decided on this directive, consequently, an execution of order will be executed with the specific instruction given.',
+        'b14' => 'Still, if the Client wanted to perform an order and given a certain instruction, then by executing that order, Sky Gold Market will fulfill with Sky Gold Market’s responsibility to deliver the best execution for the Client. This may possible result in being unqualified to comply with Sky Gold Market’s order execution policy for that certain order.',
         'entities' => 'Execution Entities',
         'b15' => 'Entities holding the execution are principally the setting to which orders are being placed or executed. The Execution Entities in order of the Clients will be consequently accredited by investment corporations. ',
-        'b16' => 'In general, the funds placed in the accounts by Clients with Sky Gold Markets, counting orders that are positioned towards a trading platform is secured by Sky Gold Markets and is the one accountable for the capitals entirely. ',
+        'b16' => 'In general, the funds placed in the accounts by Clients with Sky Gold Market, counting orders that are positioned towards a trading platform is secured by Sky Gold Market and is the one accountable for the capitals entirely. ',
         'review' => 'Review and Monitoring',
-        'b21' => 'Sky Gold Markets ’s implemented policy will definitely be monitored, including the substantial order execution provisions, predominantly on an constant foundation to regulate and suggest better improvements.',
-        'b17' => 'It is also mandatory for the company to evaluate the Policy and the pertinent order execution preparations on a systematic basis in any case so as to measure if Sky Gold Markets is competent enough to deliver the best execution for its Clients. ',
+        'b21' => 'Sky Gold Market’s implemented policy will definitely be monitored, including the substantial order execution provisions, predominantly on an constant foundation to regulate and suggest better improvements.',
+        'b17' => 'It is also mandatory for the company to evaluate the Policy and the pertinent order execution preparations on a systematic basis in any case so as to measure if Sky Gold Market is competent enough to deliver the best execution for its Clients. ',
         'permissions' => 'Clients Permissions',
-        'b18' => 'Sky Gold Markets is required to get the Client’s prior approval to this Policy when making a business association regarding the Client. Furthermore, Sky Gold Markets is mandated to take in the Client’s prior approval before the implementation of Clients’ orders or getting or conducting orders for execution.',
-        'b19' => 'Sky Gold Markets is capable to acquire the abovementioned agreements under a broad settlement.',
-        'b20' => 'Sky Gold Markets will accomodate Clients who acquired the Policy or sanctioned to take the Policy by electronic means or any other online transactions including those who have largely settled upon on the Trading Terms and Conditions of Sky Gold Markets. ',
+        'b18' => 'Sky Gold Market is required to get the Client’s prior approval to this Policy when making a business association regarding the Client. Furthermore, Sky Gold Market is mandated to take in the Client’s prior approval before the implementation of Clients’ orders or getting or conducting orders for execution.',
+        'b19' => 'Sky Gold Market is capable to acquire the abovementioned agreements under a broad settlement.',
+        'b20' => 'Sky Gold Market will accomodate Clients who acquired the Policy or sanctioned to take the Policy by electronic means or any other online transactions including those who have largely settled upon on the Trading Terms and Conditions of Sky Gold Market. ',
         'contact' => 'Contact',
         'cus' => 'Customer Support Department',
-        'email' => 'Email:support@Sky Gold Markets.com ',
+        'email' => 'Email:support@SkyGoldMarket.com ',
 
     ],
     'risk_disclosure' => [
@@ -517,19 +517,19 @@ return [
         'client' => 'Client Aggrement',
         'b1' => 'The Client (the “client,” “customer,” “you,” “he/she”) affirms that by using our Services, he or she
         had read this document thoroughly, understood and agreed with everything that is written
-        herein. This document, which is a legal contract between the client and Sky Gold Markets (“Sky Gold Markets ,” “Company,” “we,” “us,” “our”), shall determine the responsibilities and rights of Sky Gold Markets and its clients in connection with the Company’s services.',
+        herein. This document, which is a legal contract between the client and Sky Gold Market (“Sky Gold Market ,” “Company,” “we,” “us,” “our”), shall determine the responsibilities and rights of Sky Gold Market and its clients in connection with the Company’s services.',
         'risk' => 'General Risk Disclosure',
         'b3' => 'Derivatives and/or Forex trading carry a high risk of loss and are not suited for everyone. These
         Services are offered by the Company; in addition are indices, commodities, currencies and
         metals for trade. By using the Company Services, the Client understands the risks that may
         arise, and is aware of all the associated liabilities and costs; with that, the Client should be
-        capable of managing transactions on a regular basis. Sky Gold Markets has provided a Declaration
+        capable of managing transactions on a regular basis. Sky Gold Market has provided a Declaration
         of Risk statement for more detailed information, which hereby shall be understood and agreed
         to. ',
         'details' => 'COMPANY DETAILS',
         'b4' => 'Risk Warning: Trading Forex and Derivatives carries a high level of risk to your capital,
         and should therefore only invest with funds manageable by your own means.',
-        'b5' => 'Sky Gold Markets powered by Sky Gold Markets Ltd. (Registration No. 936729). A Company with
+        'b5' => 'Sky Gold Market powered by Sky Gold Market Ltd. (Registration No. 936729). A Company with
         operational address in 7/F, Low Block, Grand Millennium Plaza, 181 Queen’s Road
         Central, Hong Kong.',
         'b6' => 'All complaints may be directed to the email address and/or phone number and will be
@@ -537,7 +537,7 @@ return [
     ],
     'headings' => [
         'head' => 'HEADINGS',
-        'b1' => '“Sky Gold Markets ” refers to the Company, affiliates, subordinates, and their beneficiaries;',
+        'b1' => '“Sky Gold Market” refers to the Company, affiliates, subordinates, and their beneficiaries;',
         'b2' => 'The “Client” refers to a customer/s, client/s, party or     parties who use/s the Services
         of the Company and who have declared their steadfast compliance of the Terms and
         Conditions set herein;',
@@ -547,7 +547,7 @@ return [
     'application' => [
         'head' => 'APPLICABILITY OF TERMS AND CONDITIONS',
         'b1' => "The Terms and Conditions shall take effect, and bind the Client and Company, of all the
-        obligations and rights set at the time that the Client started to trade using Sky Gold Markets
+        obligations and rights set at the time that the Client started to trade using Sky Gold Market
         services and technologies. If the Client cannot formally disregard the Terms and
         Conditions for any reason, it should not affect any provisions; the Client's trading
         activities in the Company shall be enough affirmation of the Client's consent and
@@ -573,7 +573,7 @@ return [
         'eligibl' => 'Eligibility',
         'b2' => "Upon using the Company's services, the Client therefore agrees he/she is eligible to
         accept the agreements set herein, and that no law or jurisdiction is violated. The
-        services Sky Gold Markets provides are intended only for clients who are not prohibited by
+        services Sky Gold Market provides are intended only for clients who are not prohibited by
         the laws of any applicable jurisdiction from acquiring trading-related agreements. The
         Client hereby represents, warrants, and agrees to ensure that his/her use of the
         services shall comply with all applicable laws, statutes, and regulations. The Company
@@ -584,7 +584,7 @@ return [
     ],
     'offerings' => [
         'head' => 'COMPANY OFFERINGS',
-        'b1' => "Sky Gold Markets offers a variety of trading Services to clients and these include
+        'b1' => "Sky Gold Market offers a variety of trading Services to clients and these include
         Derivatives, Forex, Commodities and much more as displayed on the Company
         website. You acknowledge that any loss or profit that may be brought about by
         unstable market conditions shall be at your own risk.",
@@ -593,7 +593,7 @@ return [
     'communication' => [
         'head' => 'COMMUNICATION',
         'b1' => "You acknowledge that all communication from the Company shall be in electronic form
-        through Sky Gold Markets's website and other Company means of communication to
+        through Sky Gold Market's website and other Company means of communication to
         clients.",
 
     ],
@@ -610,7 +610,7 @@ return [
         Client's balance shall be deducted from his/her credit funds. Approved withdrawal
         request will be sent to the Client in the same manner it was received by the Company.
         The Company shall not be held liable for any transfer fee or other charges with respect
-        to the withdrawal. It is the exclusive right of Sky Gold Markets to reject any other withdrawal
+        to the withdrawal. It is the exclusive right of Sky Gold Market to reject any other withdrawal
         procedure requested by the Client and advises the most viable method.",
         'b3' => 'Funds which were transferred via card will be sent by the Company with the same
         amount of which was deposited by the Client. Bank account transfer shall take place
@@ -643,7 +643,7 @@ return [
     ],
     'client_fund' => [
         'head' => 'CLIENT FUND ',
-        'b1' => "Sky Gold Markets shall be allowed to keep the client's funds for the use of trading. Losses
+        'b1' => "Sky Gold Market shall be allowed to keep the client's funds for the use of trading. Losses
         and profits after trading shall be deducted or deposited to the client’s trading account",
 
         'b2' => 'The Company reserves the right to terminate accounts holding the minimum investment
@@ -655,13 +655,13 @@ return [
     'fund_transfer' => [
         'head' => 'CUSTOMER REPRESENTATIVE AND FUNDS TRANSFER  ',
         'b1' => "On such circumstances that the Client authorizes a third party to manage his/her trading
-        account, the Client affirms that such action is performed under his/her own risk, as Sky Gold Markets cannot be held liable for your action and is not obliged to make any
+        account, the Client affirms that such action is performed under his/her own risk, as Sky Gold Market cannot be held liable for your action and is not obliged to make any
         recommendations in the matter being. It is the Company’s discretion to refuse the
         appointment of representative and therefore may reject transactions made on the
         Client’s behalf. ",
 
         'b2' => 'Should a fund transfer request between two Company-clients was initiated, both parties
-        should submit a formal request subject to approval. Sky Gold Markets may dismiss funds
+        should submit a formal request subject to approval. Sky Gold Market may dismiss funds
         transfer requests. ',
 
     ],
@@ -679,10 +679,10 @@ return [
         ongoing trades may result to an automatic exit; trades will be closed accordingly.
         Exemption from automatic exit is feasible, provided that the account is in good standing,
         which, in such case, transferring to another liquidity provider is optional. ',
-        'b7' => 'All conversations between the Client and Sky Gold Markets workforces may be electronically
+        'b7' => 'All conversations between the Client and Sky Gold Market workforces may be electronically
         recorded with or without prior notice. These recordings may be used to clarify and solve
         disputes and/or legal preceding that may arise. It is further ackowledged that these
-        recordings are sole properties of the Company; Sky Gold Markets therefore reserves the
+        recordings are sole properties of the Company; Sky Gold Market therefore reserves the
         right to refuse provision of requested records. ',
 
     ],
@@ -694,7 +694,7 @@ return [
         give bonuses which are subject to separate and specific Terms and Conditions as set by
         the Company. ",
         'b3' => 'Bonuses and/or profit obtained from the bonuses shall only be withdrawn by the Client if
-        the required trading volume determined by Sky Gold Markets is met (minimum trading
+        the required trading volume determined by Sky Gold Market is met (minimum trading
         volume of $10,000 for every 1 bonus dollar $1).
         The Company reserves the right to amend the Bonus Terms and Conditions anytime
         without prior notice.',
@@ -705,18 +705,18 @@ return [
         bonus guidelines are not preserved. ',
         'b5' => "In case of suspected fraudulent activity in connection with the bonus and/or promotions,
         the Company can, in its sole discretion, cancel the bonus, promotion, as well as block
-        the trading account of the Client. Sky Gold Markets also reserves the right to block the
+        the trading account of the Client. Sky Gold Market also reserves the right to block the
         Client's trading account and return the balance to the Client.",
 
     ],
     'seclusion' => [
         'head' => 'SECLUSION OF CLIENT FUNDS AND CURRENCY CONVERSIONS   ',
-        'b1' => "Sky Gold Markets shall conduct money it holds on the Client's behalf as clients' funds. The
+        'b1' => "Sky Gold Market shall conduct money it holds on the Client's behalf as clients' funds. The
         Company retains and sustains books and accounting records of the client-funds adhere
         in furtherance of its clients in substance to the terms and conditions of the banks and
         credit institutions whereas such funds are secured and transferred. ",
 
-        'b2' => "Sky Gold Markets coordinates with various credit institutions; a complete list of these
+        'b2' => "Sky Gold Market coordinates with various credit institutions; a complete list of these
         credit institutions can be found on the Company’s official website or, if applicable,
         in the relevant Electronic Trading Platform.  ",
         'b3' => 'Taking into consideration, the speculative attributes of online trading by agreeing to this
@@ -733,13 +733,13 @@ return [
     ],
     'fees' => [
         'head' => 'FEES, COMMISSIONS AND OTHER COSTS  ',
-        'b1' => "Clients may be required to pay the cost and charges outlined in Sky Gold Markets's Service
+        'b1' => "Clients may be required to pay the cost and charges outlined in Sky Gold Market's Service
         fees including agreed commissions, while all amounts due shall be deducted from the
         Client's trading balance. Without prior notice, the Company reserves the right to alter
         spreads on any of the instruments due to the volatile nature of the market.  ",
 
         'b2' => "Payments hereof include rev share, commissions, rebates, and spreads for third parties
-        that instituted the professional connection between the Sky Gold Markets workforces and
+        that instituted the professional connection between the Sky Gold Market workforces and
         the clients.  ",
         'b3' => 'Clients heretofore are solely responsible for settling taxes, while the Company is not
         obliged to produce any recommendations regarding tax liabilities, reports, and filings.Failure to settle the amount to the Company on time is subject to 4% interest rate
@@ -757,21 +757,21 @@ return [
         'b1' => "Funds are needed in opening orders and/or making transactions. Furthermore, the
         Company requires the Client to maintain a specific amount of funds on the trading
         account for security reasons. Instruments have different margin specification and may be
-        changed at any time. Sky Gold Markets may impose maximum requirements to comply with
+        changed at any time. Sky Gold Market may impose maximum requirements to comply with
         various jurisdictions. In case the Client failed to keep the minimum margin required, the
         Company reserves the right to close all ongoing positions and liquidate your account
         without prior notice.  ",
 
         'b2' => "Client-funds for margin shall be provided by the Client only in the form of actual money
         unless the Company agrees otherwise. It is the Client's responsibility to monitor his/her
-        account and margin level, while Sky Gold Markets may elect to limit the trades and
+        account and margin level, while Sky Gold Market may elect to limit the trades and
         transactions, and increase the amount in the trading account following a margin call.    ",
 
 
     ],
     'abritage' => [
         'head' => 'POLICY AGAINST ARBITRAGE, MANIPULATION AND USE OF EXPERT ADVISOR  ',
-        'b1' => "Sky Gold Markets strictly prohibits any form of arbitrage and manipulation of its platform,
+        'b1' => "Sky Gold Market strictly prohibits any form of arbitrage and manipulation of its platform,
         thus, taking advantage of price latency and feed, connectivity delays and transaction
         errors would not be tolerated. Scalping activity and use of expert advisors are not
         allowed and in case of such activity, the Company reserves the right to forfeit the profits
@@ -787,7 +787,7 @@ return [
         'b2' => 'The Company may set cut-off times for accepting client instructions for orders and in
         case the client failed to place an order, order instruction or complete instruction in
         connection with the placement, the Company is not be held responsible for such
-        matter. Sky Gold Markets can execute orders of the client, but is not obliged to do so,
+        matter. Sky Gold Market can execute orders of the client, but is not obliged to do so,
         outside the normal trading hours.',
         'b3' => 'Orders can be placed, updated, or removed within the trading time set and if not
         executed, shall remain valid for the next day. It is the sole discretion of the Company to
@@ -806,7 +806,7 @@ return [
     ],
     'investment_advice' => [
         'head' => 'RESTRICTION ON INVESTMENT ADVICE ',
-        'b1' => "Based on what the Company considers reliable, Sky Gold Markets and all its workforces
+        'b1' => "Based on what the Company considers reliable, Sky Gold Market and all its workforces
         may provide investment advice and market signals to the Client. This information
         may be given by a broker single-handedly and might not be accurate and/or verified.
         Assessment of the recommendations is at the Client’s sole discretion.  ",
@@ -825,26 +825,26 @@ return [
         means of communication or on those contacts as indicated in the official website of the
         Company.',
         'b3' => 'If the Client fails to comply with these actions, the Client waives any rights he/she may
-        have had with respect to Sky Gold Markets regarding such discrepancy since the impossibility
+        have had with respect to Sky Gold Market regarding such discrepancy since the impossibility
         of moving on. This means that for all configurations in the Customer’s portfolio, the Client
         bears full responsibility of the moment of failure to perform the corresponding actions
-        regardless of further impact of profit or loss from the total amount of profit and loss. Noncompliance with these actions is seen as an inability to mitigate losses. The Client must submit any complaints to Sky Gold Markets in writing to the email address:
-        support@Sky Gold Markets.com. ',
-        'b4' => 'Within thirty (30) business days, Sky Gold Markets must verify any written
+        regardless of further impact of profit or loss from the total amount of profit and loss. Noncompliance with these actions is seen as an inability to mitigate losses. The Client must submit any complaints to Sky Gold Market in writing to the email address:
+        support@skygoldmarket.com. ',
+        'b4' => 'Within thirty (30) business days, Sky Gold Market must verify any written
         complaint if it is sufficiently documented, and present its position to the
         Client. ',
         'b5' => 'The Client, in his/her turn, will not make any public statements in any form relating to his
         complaint within thirty (30) business days. If the Client violates this clause, the Client
-        agrees to pay Sky Gold Markets reputational damages of $100.00 per day from the time of
+        agrees to pay Sky Gold Market reputational damages of $100.00 per day from the time of
         such violation, while the cumulative maximum of the payment may reach $10,000.00.',
-        'b6' => 'The Client and Sky Gold Markets undertake to make every effort to resolve any dispute, in good
+        'b6' => 'The Client and Sky Gold Market undertake to make every effort to resolve any dispute, in good
         faith and on a constructive basis. The Client acknowledges and agrees that threats and/or
-        blackmail against Sky Gold Markets is/are prohibited and is/are the legitimate ground/s for the
+        blackmail against Sky Gold Market is/are prohibited and is/are the legitimate ground/s for the
         termination of negotiations and the immediate termination of any business relationship.',
-        'b7' => 'Without prejudice to any other Sky Gold Markets rights under these Terms, if the parties are in
-        dispute regarding a trade warrant, Sky Gold Markets has the right in its sole discretion and
+        'b7' => 'Without prejudice to any other Sky Gold Market rights under these Terms, if the parties are in
+        dispute regarding a trade warrant, Sky Gold Market has the right in its sole discretion and
         without prior notice to accept any opinion and actions that it considers reasonable to limit
-        the maximum amount involved in the dispute. Sky Gold Markets is not liable to the Customer,
+        the maximum amount involved in the dispute. Sky Gold Market is not liable to the Customer,
         or has no obligations to the Client, regarding any fluctuations and risks on the Client’s
         trading ',
         'b8' => 'The dispute between the Client and the Company is governed by the jurisdiction of the
@@ -853,10 +853,10 @@ return [
     ],
     'indemnification' => [
         'head' => 'INDEMNIFICATION ',
-        'b1' => "You acknowledge that Sky Gold Markets and its workforces shall not be held liable for any
+        'b1' => "You acknowledge that Sky Gold Market and its workforces shall not be held liable for any
         losses, costs, expenses and damages that may arise in case the Client fails to
-        accomplish his/her obligations in this Agreement. Sky Gold Markets is free of liability in all
-        claims that may have been contributed by system and/or equipment error of Sky Gold Markets
+        accomplish his/her obligations in this Agreement. Sky Gold Market is free of liability in all
+        claims that may have been contributed by system and/or equipment error of Sky Gold Market
         or client, delays, errors or failures in performing any instruction on behalf of the client,
         actions of client representative, and market recommendations that have been made
         based on market data.  ",
@@ -865,7 +865,7 @@ return [
     'confidential' => [
         'head' => 'COPYRIGHT AND CONFIDENTIALITY ',
         'b1' => "The information contained in the official website, trademark, copyright, and intellectual
-        property rights are exclusive property of Sky Gold Markets and its licensors. All of these and
+        property rights are exclusive property of Sky Gold Market and its licensors. All of these and
         as such third-party materials shall not be altered, published, or distributed by clients
         and/ or by any third party.
         notice.  ",
@@ -881,7 +881,7 @@ return [
         'head' => 'TERMINATION AND AMENDMENT ',
         'b1' => "This Agreement may be terminated by the Client at any time; provided at least five
         business days of prior notice was served; provided that the Client does not have open
-        positions; and that no amount is owed by the Client to Sky Gold Markets . The Client may
+        positions; and that no amount is owed by the Client to Sky Gold Market. The Client may
         notify the Company in regards to the termination via email. The termination shall take
         effect immediately upon the receipt and confirmation of the Company.
         notice.  ",
@@ -890,8 +890,8 @@ return [
         herein. It also shall not affect the transactions delivered and agreed upon herein and
         furthermore will not ease the Client of any accountability that may arise after the
         termination. In case that the Client is not willing to fulfill his/her previous obligations
-        towards the Company, Sky Gold Markets reserves the right to call back all profits
-        generated from the Company's services. Sky Gold Markets has the sole and exclusive
+        towards the Company, Sky Gold Market reserves the right to call back all profits
+        generated from the Company's services. Sky Gold Market has the sole and exclusive
         rights to make any changes, updates, alterations to the Terms and Conditions without
         prior notice. ",
 
@@ -959,6 +959,7 @@ return [
         'dur' => 'Duration',
         'dp' => 'Deposit',
         'suite' => 'No suitable payment method found, please contact admin',
+        'credit' => 'Credit',
 
     ],
     'withdrawal_details' => [
@@ -1141,13 +1142,13 @@ return [
     'trade_cdfs' => 'Trade CFDs on a wide range of instruments, including popular FX pairs, Futures, Indices, Metals, Energies and Shares and experience the global markets at your fingertips.',
     'open_acount' => 'Open an Account',
     'compliment_trading' => 'Compliment your trading with our exclusive tools',
-    'skygoldmarkets_clients' => 'Sky Gold Markets clients are provided with exclusive access to trading tools, news and analysis.',
+    'skygoldmarkets_clients' => 'Sky Gold Market clients are provided with exclusive access to trading tools, news and analysis.',
     'calender' => 'Calender',
     'econs_earning' => 'Economic & Earnings Calendars',
     'analysis' => 'Analysis',
     'trading_central' => 'Trading Central Technical Analysis',
     'reviews' => 'Reviews',
-    'daily_market_reviews' => 'Daily market reviews from the Sky Gold Markets Analyst Team',
+    'daily_market_reviews' => 'Daily market reviews from the Sky Gold Market Analyst Team',
     'knowledge' => 'Knowledge',
     'education' => 'Educational Resources',
     'trading_flexibility' => 'Trading Flexibility',
@@ -1158,7 +1159,7 @@ return [
     'buy' => 'buy',
     'change' => 'change',
     'platform' => 'Check your platform for the most up to date prices.',
-    'why_trade' => 'Why Trade with Sky Gold Markets',
+    'why_trade' => 'Why Trade with Sky Gold Market',
     'improve_result' => 'Improve your trading results with our industry-leading technology',
     'best_cdf' => 'Best CFD Broker',
     'summit' => 'TradeON Summit 2020',
@@ -1173,8 +1174,8 @@ return [
     'creat_account' => 'Create account',
     'discover' => 'Discover platform',
     'choose_platform' => 'Choose Your Platform',
-    'platforms' => 'We provide our clients with a wide range of desktop, web and mobile trading platforms including Sky Gold Markets platform Trader 7 and WebTrader.',
-    'skygoldmarkets_platform' => 'Sky Gold Markets Platform',
+    'platforms' => 'We provide our clients with a wide range of desktop, web and mobile trading platforms including Sky Gold Market platform Trader 7 and WebTrader.',
+    'skygoldmarkets_platform' => 'Sky Gold Market Platform',
     'start_trading' => 'Start trading',
     'six_years' => '6 years',
     'fifthteen' => '15 years',
@@ -1182,7 +1183,7 @@ return [
     'cus_support' => 'Customer supports',
     'five_years' => '5+ Years of Excellence',
     'global_broker' => 'A Truly Global Broker',
-    'growth' => 'Sky Gold Markets has grown exponentially over the years and has become renowned for providing elite trading conditions to its clients',
+    'growth' => 'Sky Gold Market has grown exponentially over the years and has become renowned for providing elite trading conditions to its clients',
     'seamless' => 'Seamless Trading Experience',
     'int_awards' => '90+ UK & International Awards',
     'our_work' => 'Our work has been repeatedly acknowledged by the industry with over 90 awards received to date for the quality of our platforms and services',
@@ -1192,7 +1193,7 @@ return [
     'best_in_class' => 'Best in Class Trader7 Broker',
     'all_in_one' => 'All-In-One FX Calculator',
     'precautions' => 'Precautions You Should Take',
-    'your_data' => 'How Sky Gold Markets Protects Your Data',
+    'your_data' => 'How Sky Gold Market Protects Your Data',
     'suspicious' => 'Report Suspicious Inbox Messages',
     'fraud' => 'Reporting Fraud immediately',
     'download_now' => 'Download Now',
@@ -1221,7 +1222,7 @@ return [
     'excellence' => "5 years of excellence",
     'gbl_awd' => 'More than 15 international awards',
     'cus_sup' => '24/6 customer support',
-    'copyright' => 'Copyright © 2022 Sky Gold Markets. All rights reserved.',
+    'copyright' => 'Copyright © 2022 Sky Gold Market. All rights reserved.',
     'copyright_2' => 'Trading in derivatives and leveraged products carries a high level of risk, including the risk of losing much more than your initial investment. It is not suitable for everyone. Before making a decision about a financial product, you should obtain and review our Product Disclosure Statement (PDS) and Financial Services Guide (FSG), available on our website, and seek independent advice if necessary.',
     'industry_regulations' => '4 Regulations',
     'clients' => "Clients",

@@ -33,7 +33,6 @@ class Controller extends BaseController
         return redirect()->route('dashboard');
     }
 
-
     // Controller self ref issue
     public function ref(Request $request, $id)
     {
@@ -46,14 +45,12 @@ class Controller extends BaseController
         }
     }
 
-
     public function referuser()
     {
         return view('includes.referuser')->with(array(
             'title' => 'Refer user',
         ));
     }
-
 
     public function checkdate()
     {
@@ -65,7 +62,6 @@ class Controller extends BaseController
             return "Today is Weekend";
         }
     }
-
 
     protected function generate_string($strength = 16, $input = null)
     {
@@ -82,7 +78,6 @@ class Controller extends BaseController
         return $random_string;
     }
 
-
     protected function performTransaction($cur, $actNum, $amt, $paySysCode, $purse, $type, $account='balance')
     {
         $m7 = new MobiusTrader(config('mobius'));
@@ -91,18 +86,17 @@ class Controller extends BaseController
 
         if($type == 'deposit') {
             if($account == 'balance')
-                $resp = $m7->funds_deposit($cur, (int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $paySysCode, $purse);
+                $resp = $m7->balance_add((int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $purse);
+            elseif($account == 'credit')
+                $resp = $m7->credit_add((int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $purse);
             elseif($account == 'bonus')
                 $resp = $m7->bonus_add((int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $purse);
-            else
-                $resp = $m7->credit_add((int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $purse);
         } else {
             $resp = $m7->balance_add($cur, (int)$actNum, -$m7->deposit_to_int($cur, (int)$amt), $paySysCode, $purse);
         }
 
         return $resp;
     }
-
 
     protected function saveRecord($user_id, $t7_id, $method, $amt, $type, $status, $proof = null)
     {
@@ -124,7 +118,6 @@ class Controller extends BaseController
         return;
     }
 
-
     protected function saveTransaction($user_id, $amt, $purpose, $type)
     {
         $user = Auth::user();
@@ -137,28 +130,50 @@ class Controller extends BaseController
         ]);
     }
 
-
     protected function updateaccounts($user)
     {
         // initialize the Trader7 m7
         $m7 = new MobiusTrader(config('mobius'));
 
         // Get user Trader7 accounts
-        $actcs = $user->accounts();
+        $accs = $user->accounts();
 
-        foreach ($actcs as $acc) {
-            try {
-                $resp = $m7->money_info($acc->number);
-                Trader7::where('id', $acc->id)
+        $acc_numbers = $accs->pluck('number')->all();
+
+        try {
+            $resp = $m7->money_info($acc_numbers);
+            if(is_string($resp)) return ['status' => false, 'msg' => 'An error occurred, contact support'];
+            foreach($resp as $acc_num => $money_info) {
+                Trader7::where('number', $acc_num)
                     ->update([
-                        'balance' => $resp['Balance'],
-                        'bonus' => $resp['Bonus'],
-                        'credit' => $resp['Credit'],
+                        'balance' => $m7->deposit_from_int('USD', $money_info['Balance']),
+                        'bonus' => $m7->deposit_from_int('USD', $money_info['Bonus']),
+                        'credit' => $m7->deposit_from_int('USD', $money_info['Credit']),
+                        'currency_id' => $money_info['CurrencyId'],
+                        'currency' => $money_info['Currency']
                     ]);
-                return ['status' => true, 'data' => $resp];
-            } catch (Exception $e) {
-                return ['status' => false, 'msg' => 'An error occurred, contact support'];
             }
+            return ['status' => true, 'data' => $resp];
+        } catch (Exception $e) {
+            return ['status' => false, 'msg' => 'An error occurred, contact support'];
         }
+    }
+
+    protected function setMobiusPassword($acc_id, $login, $password)
+    {
+        $m7 = new MobiusTrader(config('mobius'));
+
+        // set the password
+        $resp = $m7->password_set($acc_id, $login, $password);
+        return $resp;
+    }
+
+    protected function fetchAccountNumbers($acc_id)
+    {
+        $m7 = new MobiusTrader(config('mobius'));
+
+        // set the password
+        $resp = $m7->get_account_numbers((int)$acc_id);
+        return $resp;
     }
 }

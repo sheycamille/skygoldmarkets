@@ -36,45 +36,45 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'skygoldmarkets.com'),
+            'host' => env('MAIL_HOST', 'smtp.titan.email'),
             'port' => env('MAIL_PORT', 465),
             'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
-            'timeout' => env('MAIL_TIMEOUT', 1000),
+            'timeout' => env('MAIL_TIMEOUT', 100),
             'auth_mode' => null,
         ],
 
         'verification' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'skygoldmarkets.com'),
+            'host' => env('MAIL_HOST', 'smtp.titan.email'),
             'port' => env('MAIL_PORT', 465),
             'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
             'username' => env('VERIFICATION_MAIL_USERNAME'),
             'password' => env('VERIFICATION_MAIL_PASSWORD'),
-            'timeout' => env('MAIL_TIMEOUT', 1000),
+            'timeout' => env('MAIL_TIMEOUT', 100),
             'auth_mode' => null,
         ],
 
         'deposits' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'skygoldmarkets.com'),
+            'host' => env('MAIL_HOST', 'smtp.titan.email'),
             'port' => env('MAIL_PORT', 465),
             'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
             'username' => env('DEPOSITS_MAIL_USERNAME'),
             'password' => env('DEPOSITS_MAIL_PASSWORD'),
-            'timeout' => env('MAIL_TIMEOUT', 1000),
+            'timeout' => env('MAIL_TIMEOUT', 100),
             'auth_mode' => null,
         ],
 
         'withdrawals' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'skygoldmarkets.com'),
+            'host' => env('MAIL_HOST', 'smtp.titan.email'),
             'port' => env('MAIL_PORT', 465),
             'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
             'username' => env('WITHDRAWALS_MAIL_USERNAME'),
             'password' => env('WITHDRAWALS_MAIL_PASSWORD'),
-            'timeout' => env('MAIL_TIMEOUT', 1000),
+            'timeout' => env('MAIL_TIMEOUT', 100),
             'auth_mode' => null,
         ],
 

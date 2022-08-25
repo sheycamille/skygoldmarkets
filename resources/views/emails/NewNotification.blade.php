@@ -15,5 +15,5 @@
 
 
     @php echo("\r Kind regards") @endphp,
-    {{ "\r " . $demo->sender }} @php echo("Get more freedom in the markets.\r\n") @endphp
+    {{ "\r " . $demo->sender }} @php echo("Get more freedom in the financial markets.\r\n") @endphp
 @endcomponent

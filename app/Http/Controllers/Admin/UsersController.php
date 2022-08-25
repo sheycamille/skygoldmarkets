@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Libraries\MobiusTrader;
-use App\Mail\NewNotification;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -15,6 +11,10 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use App\Http\Controllers\Controller;
+use App\Libraries\MobiusTrader;
+use App\Mail\NewNotification;
+
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Setting;
@@ -23,7 +23,7 @@ use App\Models\Deposit;
 use App\Models\Trader7;
 use App\Models\Withdrawal;
 use App\Models\TpTransaction;
-
+use Aws\Mobile\Exception\MobileException;
 use Carbon\Carbon;
 
 use DataTables;
@@ -67,14 +67,20 @@ class UsersController extends Controller
         $data = User::latest()->get();
         $fdata = Datatables::of($data)
             ->addIndexColumn()
+            ->addColumn('name', function($user) {
+                return $user->name ? $user->name: $user->first_name . ' ' .$user->last_name;
+            })
             ->addColumn('phone-email', function($user) {
-                return $user->phone . ' | ' . $user->emmail;
+                return $user->phone . ' | ' . $user->email;
             })
             ->addColumn('balance', function($user) {
                 return $user->totalBalance();
             })
             ->addColumn('bonus', function($user) {
                 return $user->totalBonus();
+            })
+            ->addColumn('credit', function($user) {
+                return $user->totalCredit();
             })
             ->addColumn('num_accounts', function($user) {
                 return count($user->accounts());
@@ -86,11 +92,11 @@ class UsersController extends Controller
                 $action = '<a href="#" data-toggle="modal" data-target="#resetpswdModal' . $user->id .'" class="m-1 btn btn-warning btn-xs">Reset Password</a>';
                 if (auth('admin')->user()->hasPermissionTo('muser-block', 'admin')) {
                     if ($user->status == null || $user->status == 'blocked') {
-                        $action = '<a class="m-1 btn btn-primary btn-sm"
+                        $action .= '<a class="m-1 btn btn-primary btn-sm"
                         href="'. route('userunblock', $user->id) .'">Unblock</a>';
                     }
                     else {
-                        $action = '<a class="m-1 btn btn-danger btn-sm"
+                        $action .= '<a class="m-1 btn btn-danger btn-sm"
                         href="'. route('userublock', $user->id) .'">Block</a>';
                     }
                 }
@@ -118,7 +124,8 @@ class UsersController extends Controller
                     data-target="#switchuserModal'. $user->id .'" class="m-2 btn btn-success btn-xs">Get access</a>';
                 }
 
-                $action .= view('admin.users_actions', compact('user'))->render();
+                $countries = Country::all();
+                $action .= view('admin.users_actions', compact('user', 'countries'))->render();
 
                 return $action;
             })
@@ -188,12 +195,20 @@ class UsersController extends Controller
     // Reset Password
     public function resetpswd(Request $request, $id)
     {
-        User::where('id', $id)
-            ->update([
-                'password' => Hash::make('user01236'),
-            ]);
+        $user = User::find($id);
+        $password = 'user01236';
+
+        $resp = $this->setMobiusPassword($user->account_number, $user->email, $password);
+        if($resp['status'] == MobiusTrader::STATUS_OK) {
+            $msg = "Password has been reset to default.";
+            $user->forceFill([
+                'password' => Hash::make($password),
+            ])->save();
+        } else {
+            $msg = "Sorry, there was an error, contact IT.";
+        }
         return redirect()->route('manageusers')
-            ->with('message', 'Password has been reset to default');
+            ->with('message', $msg);
     }
 
 
@@ -254,16 +269,15 @@ class UsersController extends Controller
         // update user accounts
         $this->updateaccounts($user);
 
-        //sum total deposited
-        $total_deposited = DB::table('deposits')->select(DB::raw("SUM(amount) as total"))->where('user', $id)->where('status', 'Processed')->get();
+        $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
 
         return view('admin.user_wallet')
             ->with(array(
                 'ref_bonus' => $user->ref_bonus,
-                'deposited' => $total_deposited['total'],
+                'deposited' => $user->totalDeposited(),
                 'bonus' => $user->totalBonus(),
                 'account_bal' => $user->totalBalance(),
-                'user' => $user->name,
+                'user' => $name,
                 'title' => 'User Profile',
             ));
     }
@@ -278,13 +292,15 @@ class UsersController extends Controller
         //Byeppass 2FA
         $user->token_2fa_expiry = \Carbon\Carbon::now()->addMinutes(15)->toDateTimeString();
         $user->save();
-        Auth::guard('admin')->account_number($admin, true);
-        Auth::guard('web')->account_number($user, true);
+        Auth::guard('admin')->login($admin, true);
+        Auth::guard('web')->login($user, true);
         $request->session()->invalidate();
         $request->session()->regenerate();
 
+        $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+
         return redirect()->route('dashboard')
-            ->with('message', "You are logged in as $user->name !");
+            ->with('message', "You are logged in as $name!");
     }
 
 
@@ -401,12 +417,15 @@ class UsersController extends Controller
             if ($request->type == "Bonus") {
                 $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'deposit', 'bonus');
                 $t7->bonus += $amt;
+            } elseif ($request->type == "Credit") {
+                    $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'deposit', 'credit');
+                    $t7->bonus += $amt;
             } elseif ($request->type == "Balance") {
                 $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'deposit', 'bonus');
                 $t7->balance += $amt;
             }
 
-            if($respTrans['status'] || $respTrans['status'] == false) {
+            if(gettype($respTrans) !== 'integer') {
                 return redirect()->route('manageusers')
                     ->with('message', 'Sorry an error occured, report this to admin!');
             } else {
@@ -548,4 +567,43 @@ class UsersController extends Controller
             ]);
         return response()->json(['success' => 'Changed']);
     }
+
+
+    // fetch users on mobius server
+    public function fetchmobiususers(Request $request)
+    {
+        $ids = [350617,350618,350815,350875,350876,351026,351184,351344,351970,352155,352160,352162,352175,352177,352178,352181,352182,352183,352185,352186,352346,352363,352364,352365,352367,352368,352371,352375,352376,352379,352381,352384,352385,352386,352388,352389,352391,352392,352394,352398,352509,352511,352512,352515,352516,352532,352539,352542,352545,352548,352553,352554,352555,352556,352557,352560,352561,352562,352563,352670,352834,352840,352844,352846,352849,352851,352853,352854,352855,352856,352963,352969,352980,352984,352985,352986,352987,352989,352991,352993,352995,352996,352997,353220,353224,353236,353237,353238,353247,353248,353249,353250,353251,353324,353325,353327,353330,353334,353335,353343,353346,353348,353349,353350,353352,353354,353413,353498,353500,353513,353517,353518,353519,353520,353521,353525,353526,353528,353529,353530,353531,353532,353533,353534,353535,353536,353537,353538,353540,353704,353707,353720,353730,353734,353738,353743,353746,353751,353752,353754,353757,353758,353759,353761,353762,353763,353768,353770,353771,353772,353774,353775,353777,353778,353780,353781,353782,353783,353784,353785,353786,353829,353928,353949,353952,353954,353955,353956,353957,353958,353959,353963,353967,353971,353974,353977,353982,353983,353984,353994,353996,354002,354003,354005,354006,354007,354010,354011,354012,354013,354015,354016,354017,354018,354019,354118,354131,354141,354143,354148,354150,354152,354153,354154,354159,354162,354166,354167,354168,354169,354170,354171,354173,354174,354175,354176,354177,354178,354179,354180,354182,354273,354277,354279,354286,354295,354304,354308,354309,354313,354316,354317,354318,354319,354321,354322,354323,354324,354325,354326,354327,354328,354329,354330,354331];
+
+        $m7 = new MobiusTrader(config('mobius'));
+        foreach($ids as $id) {
+            $resp = $m7->get_account($id);
+            if($resp['status'] === MobiusTrader::STATUS_OK) {
+                $acc = $resp['data'];
+                if(User::whereEmail($acc['Email'])->first() == null) {
+                    $country = Country::whereName($acc['Country'])->first();
+                    $password = 'user01236';
+
+                    $user = new User();
+                    $user->first_name = $acc['Name'];
+                    $user->last_name = $acc['LastName'];
+                    $user->name = $acc['Name'] . ' ' . $acc['LastName'];
+                    $user->phone = $acc['Phone'];
+                    $user->email = $acc['Email'];
+                    $user->status = 'active';
+                    $user->account_number = $acc['Id'];
+                    $user->town = $acc['City'];
+                    $user->country_id = $country->id;
+                    $user->state = $acc['State'];
+                    $user->zip_code = $acc['ZipCode'];
+                    $user->password = Hash::make($password);
+                    $user->created_at = date('Y-m-d H:i:s', strtotime($acc['RegDate']));
+                    $user->updated_at = date('Y-m-d H:i:s', strtotime($acc['DateUpdate']));
+                    $user->save();
+
+                    $this->setMobiusPassword($user->account_number, $user->email, $password);
+                }
+            }
+        }
+        return redirect()->back()->with('message', 'Successfully fetched users.');
+   }
 }

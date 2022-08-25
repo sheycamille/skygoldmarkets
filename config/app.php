@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Sky Gold Markets'),
+    'name' => env('APP_NAME', 'Sky Gold Market'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://skygoldmarkets.com'),
+    'url' => env('APP_URL', 'http://skygoldmarket.com'),
 
     'asset_url' => env('ASSET_URL', null),
 

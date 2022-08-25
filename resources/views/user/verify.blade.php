@@ -117,7 +117,7 @@
                                                 value="{{ asset('storage/photos/' . Auth::user()->address_document) }}">
                                             @if (Auth::user()->address_document)
                                                 <img src="{{ asset('storage/photos/' . Auth::user()->address_document) }}"
-                                                    width="100">>
+                                                    width="100">
                                             @endif
                                             <br><br>
 

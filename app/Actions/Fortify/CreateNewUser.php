@@ -94,13 +94,15 @@ class CreateNewUser implements CreatesNewUsers
             'id' =>  $user->id,
             'hash' => $hash,
         ]);
-        $objDemo->message = "\r Hi $user->name, \r\n
+        $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+
+        $objDemo->message = "\r Hi $name, \r\n
         \r\n This is to inform you that you have successfully registered on $site_name. \r\n ";
         $objDemo->sender = "$site_name";
         $objDemo->date = Carbon::Now();
-        $objDemo->subject = "Welcome To Sky Gold Markets, Get more freedom in the markets.";
+        $objDemo->subject = "Welcome To Sky Gold Market, Get more freedom in the financial markets.";
         $mail = new NewNotification($objDemo);
-        $mail->subject = "Welcome To Sky Gold Markets, Get more freedom in the markets.";
+        $mail->subject = "Welcome To Sky Gold Market, Get more freedom in the financial markets.";
         Mail::mailer('smtp')->bcc($user->email)->send($mail);
     }
 

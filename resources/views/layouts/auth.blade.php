@@ -10,7 +10,7 @@
 
     <meta name="description" content="{{ \App\Models\Setting::getValue('site_description') }}">
     <meta name="keywords" content="{{ \App\Models\Setting::getValue('keywords') }}">
-    <meta name="author" content="skygoldmarkets">
+    <meta name="author" content="skygoldmarket">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f2f3f5" />

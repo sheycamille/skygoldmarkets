@@ -68,37 +68,43 @@
                                                     <th scope="row">{{ $user->id }}</th>
                                                     <td>{{ $user->first_name }} {{ $user->last_name }} </td>
                                                     <td>{{ $user->email }}</td>
-                                                    <td>{{ $user->account_verify }}</td>
+                                                    <td><span
+                                                            class="badge @if ($user->account_verify == 'Under Review') badge-primary @elseif($user->account_verify == 'Verified') badge-success @endif">{{ $user->account_verify }}</span>
+                                                    </td>
                                                     <td>{{ $user->docs_uploaded_date }}</td>
                                                     <td>{{ $user->docs_verified_date }}</td>
                                                     <td>
                                                         <a href="#" data-toggle="modal"
                                                             data-target="#viewkycIModal{{ $user->id }}"
-                                                            class="btn btn-priamry btn-sm"><i class="fa fa-eye"></i>
+                                                            class="badge badge-primary" style="paddig: 20px;"><i
+                                                                class="fa fa-eye"></i>
                                                             ID</a>
                                                         <a href="#" data-toggle="modal"
                                                             data-target="#viewkycIBModal{{ $user->id }}"
-                                                            class="btn btn-priamry btn-sm"><i class="fa fa-eye"></i> ID
+                                                            class="badge badge-primary" style="paddig: 20px;"><i
+                                                                class="fa fa-eye"></i> ID
                                                             Back</a>
                                                         <a href="#" data-toggle="modal"
                                                             data-target="#viewkycAModal{{ $user->id }}"
-                                                            class="btn btn-priamry btn-sm"><i class="fa fa-eye"></i>
+                                                            class="badge badge-primary" style="paddig: 20px;"><i
+                                                                class="fa fa-eye"></i>
                                                             Address Document</a>
                                                         <a href="#" data-toggle="modal"
                                                             data-target="#viewkycPModal{{ $user->id }}"
-                                                            class="btn btn-priamry btn-sm"><i class="fa fa-eye"></i>
+                                                            class="badge badge-primary" style="paddig: 20px;"><i
+                                                                class="fa fa-eye"></i>
                                                             Passport</a>
 
-                                                        @if(auth('admin')->user()->hasPermissionTo('mkyc-validate', 'admin'))
-                                                            @if ($user->account_verify != 'Verified')
-                                                                <a href="{{ route('acceptkyc', $user->id) }}"
-                                                                    class="btn btn-primary btn-sm">Accept</a>
-                                                                <a href="{{ route('rejectkyc', $user->id) }}"
-                                                                    class="btn btn-danger btn-sm">Reject</a>
-                                                            @else
-                                                                <a href="{{ route('resetkyc', $user->id) }}"
-                                                                    class="btn btn-danger btn-sm">Reset Verification</a>
-                                                            @endif
+                                                        @if (auth('admin')->user()->hasPermissionTo('mkyc-validate', 'admin'))
+                                                            {{-- @if ($user->account_verify != 'Verified') --}}
+                                                            <a href="{{ route('acceptkyc', $user->id) }}"
+                                                                class="btn btn-success btn-sm">Accept</a>
+                                                            <a href="{{ route('rejectkyc', $user->id) }}"
+                                                                class="btn btn-danger btn-sm">Reject</a>
+                                                            {{-- @else --}}
+                                                            <a href="{{ route('resetkyc', $user->id) }}"
+                                                                class="btn btn-danger btn-sm">Reset Verification</a>
+                                                            {{-- @endif --}}
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -188,7 +194,8 @@
                                                                         class="img-fluid" />
                                                                 @else
                                                                     <img src="{{ asset('storage/photos/' . $user->passport) }}"
-                                                                        alt="Passport" title="" class="img-fluid" />
+                                                                        alt="Passport" title=""
+                                                                        class="img-fluid" />
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -232,7 +239,8 @@
                                                                         class="img-fluid" />
                                                                 @else
                                                                     <img src="{{ asset('storage/photos/' . $user->passport) }}"
-                                                                        alt="Passport" title="" class="img-fluid" />
+                                                                        alt="Passport" title=""
+                                                                        class="img-fluid" />
                                                                 @endif
                                                             </div>
                                                         </div>

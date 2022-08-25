@@ -10,10 +10,10 @@
     <title>@yield('title') | {{ \App\Models\Setting::getValue('site_name') }}</title>
 
     <meta name="description"
-        content="{{ \App\Models\Setting::getValue('site_description') }} Sky Gold Markets offers CFDs on currency pairs and five other asset classes. Start trading forex online with the world's best forex broker.">
+        content="{{ \App\Models\Setting::getValue('site_description') }} Sky Gold Market offers CFDs on currency pairs and five other asset classes. Start trading forex online with the world's best forex broker.">
     <meta name="keywords"
         content="forex, exchange, broker, crypto, trading, indices, shares, stocks, bonds, cryptocurrencies, futures, energies">
-    <meta name="author" content="skygoldmarkets">
+    <meta name="author" content="skygoldmarket">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f2f3f5" />
@@ -47,13 +47,13 @@
             </main>
 
             <footer class="c-footer">
-                <div><a href="https://skygoldmarkets.com">Sky Gold Markets</a> &copy; 2022.</div>
-                <div class="ml-auto">Powered by&nbsp;<a href="https://skygoldmarkets.com/">Sky Gold Markets</a></div>
+                <div><a href="https://skygoldmarket.com">Sky Gold Market</a> &copy; 2022.</div>
+                <div class="ml-auto">Powered by&nbsp;<a href="https://skygoldmarket.com/">Sky Gold Market</a></div>
             </footer>
         </div>
     </div>
 
-    <!-- Sky Gold Markets and necessary plugins-->
+    <!-- Sky Gold Market and necessary plugins-->
     <script src="{{ asset('admin/js/coreui.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/js/coreui-utils.js') }}"></script>
     <script src="{{ asset('admin/js/jquery.min.js') }}"></script>

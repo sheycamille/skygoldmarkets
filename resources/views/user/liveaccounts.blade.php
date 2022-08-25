@@ -69,6 +69,7 @@
                                                     <th>@lang('message.account_name')</th>
                                                     <th>@lang('message.body.balnce')</th>
                                                     <th>@lang('message.body.bonus')</th>
+                                                    <th>@lang('message.body.credit')</th>
                                                     <th>@lang('message.body.leverage') </th>
                                                     <th>@lang('message.body.status')</th>
                                                     <th>@lang('message.body.date_created')</th>
@@ -82,6 +83,7 @@
                                                         <th scope="row">{{ $account->name }}</th>
                                                         <td>{{ $account->balance }}{{ $account->currency }}</td>
                                                         <td>{{ $account->bonus }}{{ $account->currency }}</td>
+                                                        <td>{{ $account->credit }}{{ $account->currency }}</td>
                                                         <td>1:{{ $account->leverage }}</td>
                                                         <td>
                                                             @if ($account->status)
@@ -180,7 +182,7 @@
                                                     </div>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="8">No data available</td>
+                                                        <td colspan="9">No data available</td>
                                                     </tr>
                                                 @endforelse
                                             </tbody>

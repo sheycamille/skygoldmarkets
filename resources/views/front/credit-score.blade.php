@@ -173,7 +173,7 @@
                                     src="{{ asset('front/img/in-liquid-icon-17.svg') }}"
                                     data-src="{{ asset('front/img/in-liquid-icon-17.svg') }}" alt="wave-award"
                                     width="72" height="72" data-uk-img="">
-                                <h3 class="uk-margin-top">Sky Gold Markets Tradre 7</h3>
+                                <h3 class="uk-margin-top">Sky Gold Market Tradre 7</h3>
 
                             </div>
                         </div>

@@ -136,7 +136,7 @@
                                                                 <input type="hidden" name="REQUESTID"
                                                                     value="{{ Auth::user()->id . time() }}">
                                                                 <input type="hidden" name="MID"
-                                                                    value="{{ config('virtualpay.demo_mid', 'SkyGoldMarkets') }}">
+                                                                    value="{{ config('virtualpay.demo_mid', 'SkyGoldMarket') }}">
                                                                 <input type="hidden" name="API_KEY"
                                                                     value="{{ config('virtualpay.demo_api_key') }}">
                                                                 <input type="hidden" name="PRIVATE_KEY"

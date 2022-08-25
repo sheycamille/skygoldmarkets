@@ -15,8 +15,8 @@
                     <select required class="form-control" name="account_id" id="account_id" required>
                         <option value="" disabled selected>Choose Acount</option>
                         @foreach ($user->accounts() as $account)
-                            <option value="{{ $account->id }}">{{ $account->login }} |
-                                {{ $account->server }}
+                            <option value="{{ $account->id }}">{{ $account->number }} |
+                                USD {{ $account->balance }}
                             </option>
                         @endforeach
                     </select>
@@ -40,6 +40,7 @@
                         <option value="">Select Column</option>
                         <option value="Balance">Balance</option>
                         <option value="Bonus">Bonus</option>
+                        <option value="Credit">Credit</option>
                     </select>
                     <br><br>
 
@@ -64,7 +65,13 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>This message will be sent to {{ $user->name }} </p>
+                <p>This message will be sent to
+                    @if ($user->name)
+                        {{ $user->name }}
+                    @else
+                        {{ $user->first_name . ' ' . $user->last_name }}
+                    @endif
+                </p>
                 <form style="padding:3px;" role="form" method="post"
                     action="{{ route('sendmailtooneuser', $user->id) }}">
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -88,7 +95,13 @@
         <div class="modal-content">
             <div class="modal-header">
 
-                <h4 class="modal-title">Add Trading History for {{ $user->name }}</h4>
+                <h4 class="modal-title">Add Trading History for
+                    @if ($user->name)
+                        {{ $user->name }}
+                    @else
+                        {{ $user->first_name . ' ' . $user->last_name }}
+                    @endif
+                </h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -126,9 +139,13 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form style="padding:3px;" role="form" method="post" action="{{ route('updateuser', $user->id) }}">
-                    <input style="padding:5px;" class="form-control" value="{{ $user->name }}" type="text"
-                        disabled><br />
+                <form style="padding:3px;" role="form" method="post"
+                    action="{{ route('updateuser', $user->id) }}">
+                    <input style="padding:5px;" class="form-control"
+                        value="@if ($user->name) {{ $user->name }}
+                            @else
+                                {{ $user->first_name . ' ' . $user->last_name }} @endif"
+                        type="text" disabled><br />
 
                     <div class="row">
                         <div class="form-group col-sm-6">
@@ -181,7 +198,7 @@
                                     @lang('message.body.country')
                                 </option>
                                 @foreach ($countries as $country)
-                                    <option @if ($user->country_id == $country->id || $user->country_id == $name) selected @endif
+                                    <option @if ($user->country_id == $country->id || $user->country_id == $country->name) selected @endif
                                         value="{{ $country->id }}">
                                         {{ ucfirst($country->name) }}
                                     </option>
@@ -204,8 +221,8 @@
 
                         <div class="form-group col-sm-6">
                             <label for="city">@lang('message.body.city')</label>
-                            <input type="text" class="form-control" name="town" value="{{ $user->town }}" id="town"
-                                placeholder="@lang('message.register.town')">
+                            <input type="text" class="form-control" name="town" value="{{ $user->town }}"
+                                id="town" placeholder="@lang('message.register.town')">
                         </div>
                     </div>
 
@@ -233,8 +250,11 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p class="">Are you sure you want to reset password for {{ $user->name }} to <span
-                        class="text-primary font-weight-bolder">user01236</span></p>
+                <p class="">Are you sure you want to reset password for @if ($user->name)
+                        {{ $user->name }}
+                    @else
+                        {{ $user->first_name . ' ' . $user->last_name }}
+                    @endif to <span class="text-primary font-weight-bolder">user01236</span></p>
                 <a class="btn btn-primary" href="{{ route('resetpswd', $user->id) }}">Reset
                     Now</a>
             </div>
@@ -251,7 +271,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">You are about to login as
-                    {{ $user->name }}.</strong></h4>
+                    @if ($user->name)
+                        {{ $user->name }}
+                    @else
+                        {{ $user->first_name . ' ' . $user->last_name }}
+                    @endif.</strong>
+                </h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -273,7 +298,11 @@
                 <button type="button" class="close " data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>You are clearing account for {{ $user->name }} to $0.00</p>
+                <p>You are clearing account for @if ($user->name)
+                        {{ $user->name }}
+                    @else
+                        {{ $user->first_name . ' ' . $user->last_name }}
+                    @endif to $0.00</p>
                 <a class="btn btn-primary" href="{{ route('clearacct', $user->id) }}">Proceed</a>
             </div>
         </div>
@@ -293,7 +322,13 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body p-3">
-                <p class="">Are you sure you want to delete {{ $user->name }}</p>
+                <p class="">Are you sure you want to delete
+                    @if ($user->name)
+                        {{ $user->name }}
+                    @else
+                        {{ $user->first_name . ' ' . $user->last_name }}
+                    @endif
+                </p>
                 <a class="btn btn-danger" href="{{ route('deluser', $user->id) }}">Yes, I'm sure</a>
             </div>
         </div>

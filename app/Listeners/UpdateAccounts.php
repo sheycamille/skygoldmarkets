@@ -2,6 +2,8 @@
 
 namespace App\Listeners;
 
+use Exception;
+
 use App\Models\Trader7;
 
 use App\Libraries\MobiusTrader;
@@ -34,34 +36,30 @@ class UpdateAccounts
         if (strpos(strtolower(get_class($user)), 'admin') > -1)
             return;
 
-        // Get user Trader7 accounts
-        $liveLogins = $user->accounts();
-        $demoLogins = $user->demoaccounts();
-
         // initialize the Trader7 api
-        $api = new MobiusTrader();
+        $m7 = new MobiusTrader();
 
-        foreach ($liveLogins as $acc) {
-            $resp = $api->money_info($acc->number);
-            if($resp['status'] == MobiusTrader::STATUS_OK) {
-                Trader7::where('id', $acc->id)
+        // Get user Trader7 accounts
+        $accs = $user->accounts();
+
+        $acc_numbers = $accs->pluck('number')->all();
+
+        try {
+            $resp = $m7->money_info($acc_numbers);
+            if(is_string($resp)) return ['status' => false, 'msg' => 'An error occurred, contact support'];
+            foreach($resp as $acc_num => $money_info) {
+                Trader7::where('number', $acc_num)
                     ->update([
-                        'balance' => $resp['Balance'],
-                        'bonus' => $resp['Bonus'],
+                        'balance' => $m7->deposit_from_int('USD', $money_info['Balance']),
+                        'bonus' => $m7->deposit_from_int('USD', $money_info['Bonus']),
+                        'credit' => $m7->deposit_from_int('USD', $money_info['Credit']),
+                        'currency_id' => $money_info['CurrencyId'],
+                        'currency' => $money_info['Currency']
                     ]);
             }
-        }
-
-        // update demo account balances
-        foreach ($demoLogins as $acc) {
-            $resp = $api->money_info($acc->number);
-            if($resp['status'] == MobiusTrader::STATUS_OK) {
-                Trader7::where('id', $acc->id)
-                    ->update([
-                        'balance' => $resp['Balance'],
-                        'bonus' => $resp['Bonus'],
-                    ]);
-            }
+            return ['status' => true, 'data' => $resp];
+        } catch (Exception $e) {
+            return ['status' => false, 'msg' => 'An error occurred, contact support'];
         }
     }
 
