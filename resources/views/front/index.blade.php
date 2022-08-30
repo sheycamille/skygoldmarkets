@@ -435,7 +435,7 @@
         </div>
 
         <!-- section content end -->
-        <div class="uk-section in-offset-bottom-40 in-profit-trustpilot">
+        {{-- <div class="uk-section in-offset-bottom-40 in-profit-trustpilot">
             <div class="uk-container">
                 <div class="uk-grid" data-uk-grid>
                     <div class="uk-width-1-1">
@@ -447,6 +447,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </main>
 @endsection

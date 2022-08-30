@@ -80,7 +80,7 @@ class AdminController extends Controller
             ->addColumn('role', function($admin) {
                 return $admin->name;
             })
-            
+
             ->addColumn('action', function($admin) {
                 $action = '';
                 if (auth('admin')->user()->hasPermissionTo('muser-access-wallet', 'admin')) {
@@ -93,9 +93,6 @@ class AdminController extends Controller
                     $action .= '<a class="m-1 btn btn-info btn-sm text-nowrap" href="'. route('userwallet', $admin->id) .'">Send Email</a>';
                 }
                 
-                
-                
-
                 return $action;
             })
             ->rawColumns(['action'])
@@ -104,7 +101,7 @@ class AdminController extends Controller
              //dd($fdata);
 
              return $fdata;
-            
+
     }
 
 

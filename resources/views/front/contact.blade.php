@@ -34,7 +34,7 @@
                             <div>
                                 <h5 class="uk-margin-remove-bottom">@lang('message.address')</h5>
                                 <p class="uk-margin-small-top">
-                                    @lang('message.contact.london_office'): 20-22 Wenlock Road, London, England, N1 7GU.
+                                    @lang('message.contact.london_office'): F26 First Floor, Eden Plaza, Eden Island, Seychelles
                                 </p>
                             </div>
                             <div>
@@ -42,13 +42,13 @@
                                 <p class="uk-margin-small-top uk-margin-remove-bottom">support@skygoldmarket.com</p>
                                 <p class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-top">@lang('message.contact.for_public_enquiries')</p>
                             </div>
-                            <div>
+                            {{-- <div>
                                 <h5 class="uk-margin-remove-bottom">@lang('message.contact.call')</h5>
                                 <a href="tel:+18028519171">(+1) 781 499 2351 (US & Canada)</a>
                                 <br>
                                 <a href="tel:+61894672610">(+61) 894 672 610 (Australia)</a>
                                 <p class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-top">@lang('message.contact.mon_fri'), @lang('message.contact.9am_5pm')</p>
-                            </div>
+                            </div> --}}
                         </div>
                         <hr class="uk-margin-medium">
                         <h4 class="uk-margin-remove-bottom uk-text-muted uk-text-center">@lang('message.contact.have_a_question')?</h4>

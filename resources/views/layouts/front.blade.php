@@ -315,8 +315,7 @@
                             <li><a href="mailto:support@skygoldmarket.com"><i
                                         class="fas fa-envelope uk-margin-small-right"></i>support@skygoldmarket.com</a>
                             </li>
-                            <li><a href="#"><i class="fas fa-map-marker-alt uk-margin-small-right"></i>Exchange
-                                    Tower, 130 King Street West, Toronto, ON, Canada M5X 1A9</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt uk-margin-small-right"></i>F26 First Floor, Eden Plaza, Eden Island, Seychelles</a></li>
                         </ul>
                     </div>
                 </div>
