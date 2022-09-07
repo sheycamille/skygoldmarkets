@@ -62,8 +62,8 @@ class CreateUsersTable extends Migration
             $table->string('id_card_back')->nullable();
             $table->text('address_document')->nullable();
             $table->string('passport')->nullable();
-            $table->date('docs_uploaded_date')->nullable();
-            $table->date('docs_verified_date')->nullable();
+            $table->datetime('docs_uploaded_date')->nullable();
+            $table->datetime('docs_verified_date')->nullable();
             $table->string('account_verify')->nullable();
 
             $table->datetime('entered_at')->nullable();

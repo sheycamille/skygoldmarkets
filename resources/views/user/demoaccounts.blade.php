@@ -185,7 +185,7 @@
                     location.reload();
                     loader.toggle();
                 },
-                fail: function() {
+                error: function() {
                     location.reload();
                     loader.toggle();
                 },

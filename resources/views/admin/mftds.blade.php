@@ -55,12 +55,24 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Client Name</th>
+                                                <th>Client Details</th>
                                                 <th>First Deposit</th>
                                                 <th>Date of Deposit </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @forelse ($users as $user)
+                                                @php
+                                                    $dp = $user
+                                                        ->dp()
+                                                        ->where('status', 'Processed')
+                                                        ->first();
+                                                @endphp
+
+                                                @if (!$dp->amount)
+                                                    @continue
+                                                @endif
+
                                                 <tr>
                                                     <th scope="row">{{ $user->id }}</th>
                                                     <td>
@@ -70,12 +82,7 @@
                                                             {{ $user->first_name . ' ' . $user->last_name }}
                                                         @endif
                                                     </td>
-                                                    @php
-                                                        $dp = $user
-                                                            ->dp()
-                                                            ->where('status', 'Processed')
-                                                            ->first();
-                                                    @endphp
+                                                    <td>{{ $user->phone . ' | ' . $user->email }}</td>
                                                     <td>{{ $dp->amount }}</td>
                                                     <td> {{ \Carbon\Carbon::parse($dp->date_created)->toDayDateTimeString() }}
                                                     </td>

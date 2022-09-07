@@ -4,7 +4,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" style="text-align:center;">Credit/Debit User account.</strong></h4>
+                <h4 class="modal-title" style="text-align:center;">Credit/Debit User Account</strong></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -87,7 +87,6 @@
 
 
 <!-- /Trading History Modal -->
-
 <div id="TradingModal{{ $user->id }}" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -135,7 +134,7 @@
         <div class="modal-content">
             <div class="modal-header">
 
-                <h4 class="modal-title">Edit user details.</strong></h4>
+                <h4 class="modal-title">Edit User</strong></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -275,7 +274,7 @@
                         {{ $user->name }}
                     @else
                         {{ $user->first_name . ' ' . $user->last_name }}
-                    @endif.</strong>
+                    @endif</strong>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
@@ -338,7 +337,7 @@
 
 
 <!-- Live Trader7 Account Mg't  Modal -->
-<div id="liveaccounts{{ $user->id }}" class="modal fade" role="dialog">
+{{-- <div id="liveaccounts{{ $user->id }}" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -370,7 +369,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <style>
     .cell {
         margin-right: 2%;

@@ -150,7 +150,7 @@ class LogicController extends Controller
         $respTrans = $this->performTransaction($t7->currency, $t7->number, $deposit->amount, 'SKG-Admin', 'SKY-Auto', 'deposit', 'balance');
 
         if(gettype($respTrans) !== 'integer') {
-            return redirect()->back()->with('message', 'Sorry an error occured, report this to admin!');
+            return redirect()->back()->with('message', 'Sorry an error occured, report this to IT!');
         }
 
         $deposit->status = 'Processed';
@@ -194,7 +194,7 @@ class LogicController extends Controller
         $respTrans = $this->performTransaction($t7->currency, $t7->number, $withdrawal->amount, 'SKG-Admin', 'SKY-Auto', 'withdrawal');
 
         if(gettype($respTrans) !== 'integer') {
-            return redirect()->back()->with('message', 'Sorry an error occured, report this to admin!');
+            return redirect()->back()->with('message', 'Sorry an error occured, report this to IT!');
         }
 
         // update withdrawal
@@ -216,7 +216,6 @@ class LogicController extends Controller
         $objDemo = new \stdClass();
         $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
         $objDemo->message = "\r Hello $name, \r\n
-
         This is to inform you that your withdrawal request of $currency$withdrawal->amount have approved and the funds have been sent to your selected account. \r\n";
         $objDemo->sender = $site_name;
         $objDemo->subject = "Successful withdrawal";

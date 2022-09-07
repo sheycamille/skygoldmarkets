@@ -945,8 +945,8 @@ return [
         'metatrader4' => 'Download MetaTrader 4 For PC, smartphones, and tablets',
         'windows' => 'Download For
         Windows',
-        'android' => 'Andriod Download',
-        'iphone' => 'iphone Download',
+        'android' => 'For Andriod',
+        'iphone' => 'For iPhone',
         'contact_us' => 'Contact us for inquiries, suggestions or complains.',
         'subj' => 'Subject',
         'mes' => 'Message',

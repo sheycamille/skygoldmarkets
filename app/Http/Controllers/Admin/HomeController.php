@@ -121,18 +121,18 @@ class HomeController extends Controller
              ->addColumn('id', function($deposit) {
                  return $deposit->id ;
              })
-            
+
              ->addColumn('action', function($deposit) {
                  $action = '';
                  if (auth('admin')->user()->hasPermissionTo('muser-access-wallet', 'admin')) {
                      $action .= '<a class="m-1 btn btn-info btn-sm" href="'. route('userwallet', $deposit->id) .'">See Wallet</a>';
                  }
-                 
+
                  return $action;
              })
              ->rawColumns(['action'])
              ->make(true);
- 
+
              // dd($fdata);
              return $fdata;
      }
@@ -150,7 +150,7 @@ class HomeController extends Controller
         ));
     }
 
-    
+
     //Return KYC route
     public function kyc()
     {
@@ -259,7 +259,7 @@ class HomeController extends Controller
 
     public function mftds(Request $request)
     {
-        $users = User::all();
+        $users = User::orderBy('created_at', 'desc')->get();
 
         return view('admin.mftds', [
             'title' => "First Time Deposits",

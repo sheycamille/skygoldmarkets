@@ -104,30 +104,29 @@
                         </svg>
                     </a>
                     <ul class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
-                        <li class="quick-actions-header">
-                            @if (Auth::user()->account_verify == 'yes')
-                                <span class="subtitle op-8">
-                                    <a href="#" class="p-0 col-12">
-                                        KYC Status: Account verified
-                                    </a>
+                        @if (Auth::user()->account_verify == 'Verified')
+                            <li class="quick-actions-header text-center">
+                                <span>
+                                    KYC Status: Verified
                                 </span>
-                            @else
-                                <span class="subtitle op-8"><a>KYC status: {{ Auth::user()->account_verify }}</a></span>
-                            @endif
-                        </li>
+                            </li>
+                        @else
+                            <li class="quick-actions-header text-center">
+                                <span><a>KYC status: {{ Auth::user()->account_verify }}</a></span>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                        @endif
 
-                        <li class="dropdown-divider"></li>
-
-                        <li class="quick-actions-scroll scrollbar-outer">
-                            <div class="quick-actions-items">
-                                <div class="m-0 row">
-                                    @if (Auth::user()->account_verify != 'yes')
+                        @if (Auth::user()->account_verify != 'Verified')
+                            <li class="quick-actions-scroll scrollbar-outer">
+                                <div class="quick-actions-items">
+                                    <div class="m-0 row">
                                         <a href="{{ route('account.verify') }}" class="btn btn-success">Verify
                                             Account </a>
-                                    @endif
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        @endif
                     </ul>
                 </li>
 
@@ -285,24 +284,27 @@
                                 @lang('message.dashboard.down')
                             </a>
                         </li>
-                        <div class="dropdown-divider"></div>
-
-                        <h5>KYC</h5>
-                        <div class="dropdown-divider"></div>
-                        <li class="c-sidebar-nav-item">
-                            @if (Auth::user()->account_verify == 'yes')
-                                <a href="#" class="c-header-nav-link">
-                                    KYC Status: Account verified
-                                </a>
-                            @else
-                                <span class="subtitle op-8"><a>KYC status: {{ Auth::user()->account_verify }}</a></span>
-                            @endif
-                        </li>
                         <li class="dropdown-divider"></li>
 
+                        <h5>KYC</h5>
+                        <li class="dropdown-divider"></li>
+
+                        @if (Auth::user()->account_verify == 'Verified')
+                            <li class="c-sidebar-nav-item text-center">
+                                <span>
+                                    KYC Status: Verified
+                                </span>
+                            </li>
+                        @else
+                            <li class="c-sidebar-nav-item text-center">
+                                <span><a>KYC status: {{ Auth::user()->account_verify }}</a></span>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                        @endif
+
                         <li class="c-sidebar-nav-item">
-                            @if (Auth::user()->account_verify != 'yes')
-                                <span class="c-header-nav-link ">
+                            @if (Auth::user()->account_verify != 'Verified')
+                                <span class="c-header-nav-link">
                                     <a href="{{ route('account.verify') }}" class="btn btn-success btn-sm">Verify Account
                                     </a>
                                 </span>

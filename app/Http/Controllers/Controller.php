@@ -85,14 +85,16 @@ class Controller extends BaseController
         $resp = ['status' => false];
 
         if($type == 'deposit') {
+            $amt = $m7->deposit_to_int($cur, (int)$amt);
             if($account == 'balance')
-                $resp = $m7->balance_add((int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $purse);
+                $resp = $m7->balance_add((int)$actNum, $amt, $purse);
             elseif($account == 'credit')
-                $resp = $m7->credit_add((int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $purse);
+                $resp = $m7->credit_add((int)$actNum, $amt, $purse);
             elseif($account == 'bonus')
-                $resp = $m7->bonus_add((int)$actNum, $m7->deposit_to_int($cur, (int)$amt), $purse);
+                $resp = $m7->bonus_add((int)$actNum, $amt, $purse);
         } else {
-            $resp = $m7->balance_add($cur, (int)$actNum, -$m7->deposit_to_int($cur, (int)$amt), $paySysCode, $purse);
+            $amt = -$m7->deposit_to_int($cur, (int)$amt);
+            $resp = $m7->funds_withdraw($cur, (int)$actNum, $amt, $paySysCode, $purse);
         }
 
         return $resp;

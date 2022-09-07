@@ -23,8 +23,8 @@
                                 target="_blank">@lang('message.launch_webtrader')</a>
                             <a href="https://play.google.com/store/apps/details?id=com.mtrader7.terminal&hl=en"
                                     class="btn btn-primary" target="_blank">@lang('message.body.android') </a>
-                            {{-- <a href=""
-                                class="btn btn-primary" target="_blank">@lang('message.body.iphone')</a> --}}
+                            <a href="https://apps.apple.com/gb/app/mobiustrader-7/id1355359598"
+                                class="btn btn-primary" target="_blank">@lang('message.body.iphone')</a>
                         </div>
                         <div class="card-body">
                             <h4>Desktop Apps</h4>

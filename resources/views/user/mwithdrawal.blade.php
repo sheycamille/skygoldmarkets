@@ -109,11 +109,8 @@
                                                             id="account_id" required>
                                                             <option value="" disabled selected>Choose Account</option>
                                                             @foreach (Auth::user()->accounts() as $account)
-                                                                <option value="{{ $account->id }}">
-                                                                    {{ $account->login }} |
-                                                                    {{ $account->server }} |
-                                                                    USD {{ $account->balance }}
-                                                                </option>
+                                                                <option value="{{ $account->id }}">{{ $account->number }}
+                                                                    | USD {{ $account->balance }} </option>
                                                             @endforeach
                                                         </select> <br>
                                                         <input value="{{ $method->name }}" type="hidden"

@@ -1105,8 +1105,8 @@ return [
         'metatrader5' => 'Télécharger Tradre 7 pour PC, smartphones et tablettes',
         'windows' => 'Téléchargement pour
         Windows',
-        'android' => 'Téléchargement Andriod',
-        'iphone' => 'Téléchargement iphone',
+        'android' => 'Pour Andriod',
+        'iphone' => 'Pour iPhone',
         'contact_us' => 'Contactez-nous pour toute question, suggestion ou plainte.',
         'subj' => 'Subjet',
         'mes' => 'Message',

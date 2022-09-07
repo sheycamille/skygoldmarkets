@@ -80,28 +80,34 @@ class AdminController extends Controller
             ->addColumn('role', function($admin) {
                 return $admin->name;
             })
-
             ->addColumn('action', function($admin) {
-                $action = '';
-                if (auth('admin')->user()->hasPermissionTo('muser-access-wallet', 'admin')) {
-                    $action .= '<a class="m-1 btn btn-info btn-sm" href="'. route('userwallet', $admin->id) .'">See Wallet</a>';
+                $action = '<a href="#" data-toggle="modal" data-target="#resetpswdModal{{ $admin->id }}" class="m-1 btn btn-warning btn-sm text-nowrap">Reset Password</a>';
+                $action = '<a href="#" data-toggle="modal" data-target="#sendmailModal' . $admin->id . '" class="m-1 btn btn-info btn-sm text-nowrap">Send Email</a>';
+
+                if (auth('admin')->user()->hasPermissionTo('madmin-block', 'admin')) {
+                    if ($admin->acnt_type_active == null || $admin->acnt_type_active == 'blocked') {
+                        $action .= ' <a class="m-1 btn btn-primary btn-sm" href="' . route("adminunblock", $admin->id) . '">Unblock</a>';
+                    } else {
+                        $action .= '<a class="m-1 btn btn-danger btn-sm text-nowrap" href="' . route("adminublock", $admin->id) . '">Block</a>';
+                    }
                 }
+
+                if (auth('admin')->user()->hasPermissionTo('madmin-delete', 'admin') && auth('admin')->user()->id != $admin->id) {
+                    $action .= '<a href="#" data-toggle="modal" data-target="#deleteModal' . $admin->id . '" class="m-1 btn btn-danger btn-sm">Delete</a>';
+                }
+
                 if (auth('admin')->user()->hasPermissionTo('madmin-edit', 'admin')) {
-                    $action .= '<a class="m-1 btn btn-secondary btn-sm" data-toggle="modal" data-target="#edituser{{$admin->id}}" href="'. route('editadmin', $admin->id) .'">Edit</a>';
+                    $action .= '<a href="#" data-toggle="modal" data-target="#edituser' . $admin->id . '" class="m-1 btn btn-secondary btn-sm">Edit</a>';
                 }
-                if (auth('admin')->user()->hasPermissionTo('muser-access-wallet', 'admin')) {
-                    $action .= '<a class="m-1 btn btn-info btn-sm text-nowrap" href="'. route('userwallet', $admin->id) .'">Send Email</a>';
-                }
-                
+
+                $action .= view('admin.admin_actions', compact('admin'))->render();
+
                 return $action;
             })
             ->rawColumns(['action'])
             ->make(true);
 
-             //dd($fdata);
-
              return $fdata;
-
     }
 
 

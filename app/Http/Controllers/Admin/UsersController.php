@@ -61,6 +61,7 @@ class UsersController extends Controller
             ));
     }
 
+
     // Return users data
     public function getusers()
     {
@@ -106,18 +107,17 @@ class UsersController extends Controller
                 if (auth('admin')->user()->hasPermissionTo('muser-credit-debit', 'admin')) {
                     $action .= '<a href="#" data-toggle="modal" data-target="#topupModal'. $user->id .'" class="m-1 btn btn-dark btn-xs">Topup</a>';
                 }
-                if (auth('admin')->user()->hasPermissionTo('muser-delete', 'admin')) {
-                    $action .= '<a href="#" data-toggle="modal" data-target="#deleteModal'. $user->id .'" class="m-1 btn btn-danger btn-xs">Delete</a>';
-                }
                 if (auth('admin')->user()->hasPermissionTo('muser-edit', 'admin')) {
                     $action .= '<a href="#" data-toggle="modal" data-target="#edituser'. $user->id .'" class="m-1 btn btn-secondary btn-xs">Edit</a>';
                 }
-                if(count($user->accounts()) > 1) {
-                    $action .= ' <a href="#" data-toggle="modal" data-target="#liveaccounts'. $user->id . '" class="m-1 btn btn-danger btn-xs">Delete
-                    Accounts</a>';
+                if (auth('admin')->user()->hasPermissionTo('muser-delete', 'admin')) {
+                    $action .= '<a href="#" data-toggle="modal" data-target="#deleteModal'. $user->id .'" class="m-1 btn btn-danger btn-xs">Delete</a>';
                 }
+                // if(count($user->accounts()) > 1) {
+                //     $action .= ' <a href="#" data-toggle="modal" data-target="#liveaccounts'. $user->id . '" class="m-1 btn btn-danger btn-xs">Delete Accounts</a>';
+                // }
                 if (auth('admin')->user()->hasPermissionTo('muser-messageall', 'admin')) {
-                    $action .= '<a href="#" data-toggle="modal" data-target="#sendmailtooneuserModal'. $user->id .'" class="m-1 btn btn-info btn-xs">Send Message</a>';
+                    $action .= '<a href="#" data-toggle="modal" data-target="#sendmailtooneuserModal'. $user->id .'" class="m-1 btn btn-info btn-xs">Message</a>';
                 }
                 if (auth('admin')->user()->hasPermissionTo('muser-access-account', 'admin')) {
                     $action .= '<a href="#" data-toggle="modal"
@@ -427,7 +427,7 @@ class UsersController extends Controller
 
             if(gettype($respTrans) !== 'integer') {
                 return redirect()->route('manageusers')
-                    ->with('message', 'Sorry an error occured, report this to admin!');
+                    ->with('message', 'Sorry an error occured, report this to IT!');
             } else {
                 // Create deposit record
                 $this->saveRecord($request->user_id, $request->account_id, 'Express Credit', $request->amount, 'Deposit', 'Processed');
@@ -465,7 +465,7 @@ class UsersController extends Controller
                 $t7->save();
             } else {
                 return redirect()->route('manageusers')
-                    ->with('message', 'Sorry an error occured, report this to admin!');
+                    ->with('message', 'Sorry an error occured, report this to IT!');
             }
         }
 
