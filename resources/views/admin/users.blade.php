@@ -93,7 +93,6 @@
         </div>
     </div>
 
-    @include('admin.includes.modals')
 @endsection
 
 @section('javascript')
@@ -146,6 +145,7 @@
                     {
                         data: 'action',
                         name: 'action',
+                        width: "25%",
                         orderable: true,
                         searchable: true
                     },
@@ -153,5 +153,11 @@
             });
 
         });
+
+        function loadActions(id) {
+            $.get('users/getactions/' + id, function(data) {
+                $('#actions' + id).html(data);
+            });
+        }
     </script>
 @endsection

@@ -90,49 +90,58 @@ class UsersController extends Controller
                 return \Carbon\Carbon::parse($user->created_at)->toDayDateTimeString();
             })
             ->addColumn('action', function($user) {
-                $action = '<a href="#" data-toggle="modal" data-target="#resetpswdModal' . $user->id .'" class="m-1 btn btn-warning btn-xs">Reset Password</a>';
-                if (auth('admin')->user()->hasPermissionTo('muser-block', 'admin')) {
-                    if ($user->status == null || $user->status == 'blocked') {
-                        $action .= '<a class="m-1 btn btn-primary btn-sm"
-                        href="'. route('userunblock', $user->id) .'">Unblock</a>';
-                    }
-                    else {
-                        $action .= '<a class="m-1 btn btn-danger btn-sm"
-                        href="'. route('userublock', $user->id) .'">Block</a>';
-                    }
-                }
-                if (auth('admin')->user()->hasPermissionTo('muser-access-wallet', 'admin')) {
-                    $action .= '<a class="m-1 btn btn-info btn-sm" href="'. route('userwallet', $user->id) .'">See Wallet</a>';
-                }
-                if (auth('admin')->user()->hasPermissionTo('muser-credit-debit', 'admin')) {
-                    $action .= '<a href="#" data-toggle="modal" data-target="#topupModal'. $user->id .'" class="m-1 btn btn-dark btn-xs">Topup</a>';
-                }
-                if (auth('admin')->user()->hasPermissionTo('muser-edit', 'admin')) {
-                    $action .= '<a href="#" data-toggle="modal" data-target="#edituser'. $user->id .'" class="m-1 btn btn-secondary btn-xs">Edit</a>';
-                }
-                if (auth('admin')->user()->hasPermissionTo('muser-delete', 'admin')) {
-                    $action .= '<a href="#" data-toggle="modal" data-target="#deleteModal'. $user->id .'" class="m-1 btn btn-danger btn-xs">Delete</a>';
-                }
-                // if(count($user->accounts()) > 1) {
-                //     $action .= ' <a href="#" data-toggle="modal" data-target="#liveaccounts'. $user->id . '" class="m-1 btn btn-danger btn-xs">Delete Accounts</a>';
-                // }
-                if (auth('admin')->user()->hasPermissionTo('muser-messageall', 'admin')) {
-                    $action .= '<a href="#" data-toggle="modal" data-target="#sendmailtooneuserModal'. $user->id .'" class="m-1 btn btn-info btn-xs">Message</a>';
-                }
-                if (auth('admin')->user()->hasPermissionTo('muser-access-account', 'admin')) {
-                    $action .= '<a href="#" data-toggle="modal"
-                    data-target="#switchuserModal'. $user->id .'" class="m-2 btn btn-success btn-xs">Get access</a>';
-                }
-
-                $countries = Country::all();
-                $action .= view('admin.users_actions', compact('user', 'countries'))->render();
-
-                return $action;
+                return '<div id="actions'. $user->id .'" ><a href="#" onclick="loadActions('. $user->id .')" class="m-1 btn btn-primary btn-xs">Actions</a></div>';
             })
             ->rawColumns(['action'])
             ->make(true);
 
             return $fdata;
+    }
+
+    public function getactions(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if(!$user) return '';
+
+        $action = '<a href="#" data-toggle="modal" data-target="#resetpswdModal' . $user->id .'" class="m-1 btn btn-warning btn-xs">Reset Password</a>';
+        if (auth('admin')->user()->hasPermissionTo('muser-block', 'admin')) {
+            if ($user->status == null || $user->status == 'blocked') {
+                $action .= '<a class="m-1 btn btn-primary btn-sm"
+                href="'. route('userunblock', $user->id) .'">Unblock</a>';
+            }
+            else {
+                $action .= '<a class="m-1 btn btn-danger btn-sm"
+                href="'. route('userublock', $user->id) .'">Block</a>';
+            }
+        }
+        if (auth('admin')->user()->hasPermissionTo('muser-access-wallet', 'admin')) {
+            $action .= '<a class="m-1 btn btn-info btn-sm" href="'. route('userwallet', $user->id) .'">See Wallet</a>';
+        }
+        if (auth('admin')->user()->hasPermissionTo('muser-credit-debit', 'admin')) {
+            $action .= '<a href="#" data-toggle="modal" data-target="#topupModal'. $user->id .'" class="m-1 btn btn-dark btn-xs">Topup</a>';
+        }
+        if (auth('admin')->user()->hasPermissionTo('muser-edit', 'admin')) {
+            $action .= '<a href="#" data-toggle="modal" data-target="#edituser'. $user->id .'" class="m-1 btn btn-secondary btn-xs">Edit</a>';
+        }
+        if (auth('admin')->user()->hasPermissionTo('muser-delete', 'admin')) {
+            $action .= '<a href="#" data-toggle="modal" data-target="#deleteModal'. $user->id .'" class="m-1 btn btn-danger btn-xs">Delete</a>';
+        }
+        // if(count($user->accounts()) > 1) {
+        //     $action .= ' <a href="#" data-toggle="modal" data-target="#liveaccounts'. $user->id . '" class="m-1 btn btn-danger btn-xs">Delete Accounts</a>';
+        // }
+        if (auth('admin')->user()->hasPermissionTo('muser-messageall', 'admin')) {
+            $action .= '<a href="#" data-toggle="modal" data-target="#sendmailtooneuserModal'. $user->id .'" class="m-1 btn btn-info btn-xs">Message</a>';
+        }
+        if (auth('admin')->user()->hasPermissionTo('muser-access-account', 'admin')) {
+            $action .= '<a href="#" data-toggle="modal"
+            data-target="#switchuserModal'. $user->id .'" class="m-2 btn btn-success btn-xs">Get access</a>';
+        }
+
+        $countries = Country::all();
+        $action .= view('admin.users_actions', compact('user', 'countries'))->render();
+
+        return $action;
     }
 
 

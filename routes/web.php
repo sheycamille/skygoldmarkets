@@ -122,6 +122,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['isadmin', 'twofactor']], f
     Route::get('users/clearacct/{id}', 'Admin\UsersController@clearacct')->name('clearacct');
     Route::post('users/topup', 'Admin\UsersController@topup')->name('topup');
     Route::get('users/delliveaccount/{id}', 'Admin\UsersController@dellaccounts')->name('dellaccounts');
+    Route::get('users/getactions/{id}', 'Admin\UsersController@getactions')->name('getactions');
 
     Route::post('users/changestyle', 'Admin\UsersController@changestyle')->name('changestyle');
 
