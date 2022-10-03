@@ -113,12 +113,22 @@
                                                 <div
                                                     class="col-6 text-center d-flex justify-content-center align-items-center">
                                                     <a class="text-center"
-                                                        href="https://accounts.binance.me/en/register?ref=127286501"
+                                                        href="https://www.binance.com/en/activity/referral-entry/CPA?fromActivityPage=true&ref=CPA_00N7BOAUZ2"
                                                         target="_blank">
                                                         <img src="{{ asset('dash/images/binance.png') }}"
                                                             alt="Buy on Binance" tilte="Buy on Binance" width="80%" />
                                                         <br>
                                                         <span>@lang('message.coins.buy')</span>
+                                                    </a>
+                                                </div>
+                                                <div
+                                                    class="col-6 text-center d-flex justify-content-center align-items-center">
+                                                    <a class="text-center" href="https://catalyx.io/" target="_blank">
+                                                        <img src="{{ asset('dash/images/catalyx.png') }}"
+                                                            alt="Buy on Catalyx" tilte="Buy on Catalyx"
+                                                            width="80%" />
+                                                        <br>
+                                                        <span>Buy Now</span>
                                                     </a>
                                                 </div>
                                                 <div
@@ -131,10 +141,9 @@
                                                         <span>@lang('message.coins.buy')</span>
                                                     </a>
                                                 </div>
-                                                <br><br><br><br><br><br><br><br><br>
                                                 <div
                                                     class="col-6 text-center d-flex justify-content-center align-items-center">
-                                                    <a class="text-center" href="https://www.coinbase.com/" target="_blank">
+                                                    <a class="text-center" href="https://coinbase.com/join/leonar_0of?src=ios-link" target="_blank">
                                                         <img src="{{ asset('dash/images/coinbase.png') }}"
                                                             alt="Buy on Coinbase" tilte="Buy on Coinbase" width="80%" />
                                                         <br>
@@ -145,7 +154,7 @@
                                                     class="col-6 text-center d-flex justify-content-center align-items-center">
                                                     <a class="text-center" href="https://shakepay.com/" target="_blank">
                                                         <img src="{{ asset('dash/images/shakepay.jpg') }}"
-                                                            alt="Buy on ShakePay" tilte="Buy on Blockchain"
+                                                            alt="Buy on ShakePay" tilte="Buy on Shakepay"
                                                             width="80%" />
                                                         <br>
                                                         <span>Buy Now</span>

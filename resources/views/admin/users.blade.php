@@ -108,50 +108,59 @@
                 ajax: "{{ route('fetchusers') }}",
                 columns: [{
                         data: 'id',
-                        name: 'ID'
+                        name: 'ID',
+                        orderable: true
                     },
                     {
                         data: 'name',
-                        name: 'Name'
+                        name: 'Name',
+                        searchable: true,
+                        orderable: true
                     },
                     {
                         data: 'phone-email',
-                        name: 'Phone/Email'
+                        name: 'Phone/Email',
+                        searchable: true,
+                        orderable: true
                     },
                     {
                         data: 'balance',
-                        name: 'Balance'
+                        name: 'Balance',
+                        orderable: true
                     },
                     {
                         data: 'bonus',
-                        name: 'Bonus'
+                        name: 'Bonus',
+                        orderable: true
                     },
                     {
                         data: 'credit',
-                        name: 'Credit'
+                        name: 'Credit',
+                        orderable: true
                     },
                     {
                         data: 'num_accounts',
-                        name: 'No. of Accounts'
+                        name: 'No. of Accounts',
+                        orderable: true
                     },
                     {
                         data: 'status',
-                        name: 'Status'
+                        name: 'Status',
+                        orderable: true
                     },
                     {
                         data: 'date_registered',
-                        name: 'Date Registered'
+                        name: 'Date Registered',
+                        orderable: true
                     },
                     {
                         data: 'action',
                         name: 'action',
                         width: "25%",
                         orderable: true,
-                        searchable: true
                     },
                 ]
             });
-
         });
 
         function loadActions(id) {

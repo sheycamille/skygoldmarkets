@@ -65,11 +65,12 @@ class UsersController extends Controller
     // Return users data
     public function getusers()
     {
-        $data = User::latest()->get();
-        $fdata = Datatables::of($data)
+        $rusers = User::latest()->get();
+
+        $pusers = Datatables::of($rusers)
             ->addIndexColumn()
             ->addColumn('name', function($user) {
-                return $user->name ? $user->name: $user->first_name . ' ' .$user->last_name;
+                return $user->first_name . ' ' . $user->last_name;
             })
             ->addColumn('phone-email', function($user) {
                 return $user->phone . ' | ' . $user->email;
@@ -95,7 +96,7 @@ class UsersController extends Controller
             ->rawColumns(['action'])
             ->make(true);
 
-            return $fdata;
+            return $pusers;
     }
 
     public function getactions(Request $request, $id)
