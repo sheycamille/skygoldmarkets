@@ -5,6 +5,14 @@
 @section('manage-users', 'c-show')
 @section('users', 'c-active')
 
+@section('css')
+    <style>
+        .tb-actions {
+            width: 20%;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     @include('admin.topmenu')
@@ -74,14 +82,32 @@
                                             <th>Phone/Email</th>
                                             <th>Balance</th>
                                             <th>Bonus</th>
-                                            <th>Credit</th>
                                             <th>No. of Accounts</th>
                                             <th>Status</th>
                                             <th>Date Registered</th>
-                                            <th>Action</th>
+                                            <th class="tb-actions">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($users as $user)
+                                            <tr>
+                                                <th scope="row">{{ $user->id }}</th>
+                                                <td>{{ $user->first_name . ' ' . $user->last_name }}</td>
+                                                <td>{{ $user->phone }} | {{ $user->email }}</td>
+                                                <td>{{ $user->totalBalance() }}</td>
+                                                <td>{{ $user->totalBonus() }}</td>
+                                                @php $numAccs = count($user->accounts()) @endphp
+                                                <td>{{ $numAccs }}</td>
+                                                <td>{{ $user->status }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($user->created_at)->toDayDateTimeString() }}
+                                                </td>
+                                                <td class="tb-actions">
+                                                    <div id="actions{{ $user->id }}"><a href="#"
+                                                            onclick="loadActions({{ $user->id }})"
+                                                            class="m-1 btn btn-primary btn-xs">Actions</a></div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -101,65 +127,10 @@
     <script src="{{ asset('admin/js/dataTables.bootstrap4.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
-
             var table = $('.yajra-datatable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('fetchusers') }}",
-                columns: [{
-                        data: 'id',
-                        name: 'ID',
-                        orderable: true
-                    },
-                    {
-                        data: 'name',
-                        name: 'Name',
-                        searchable: true,
-                        orderable: true
-                    },
-                    {
-                        data: 'phone-email',
-                        name: 'Phone/Email',
-                        searchable: true,
-                        orderable: true
-                    },
-                    {
-                        data: 'balance',
-                        name: 'Balance',
-                        orderable: true
-                    },
-                    {
-                        data: 'bonus',
-                        name: 'Bonus',
-                        orderable: true
-                    },
-                    {
-                        data: 'credit',
-                        name: 'Credit',
-                        orderable: true
-                    },
-                    {
-                        data: 'num_accounts',
-                        name: 'No. of Accounts',
-                        orderable: true
-                    },
-                    {
-                        data: 'status',
-                        name: 'Status',
-                        orderable: true
-                    },
-                    {
-                        data: 'date_registered',
-                        name: 'Date Registered',
-                        orderable: true
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        width: "25%",
-                        orderable: true,
-                    },
-                ]
+                order: [
+                    [8, 'asc']
+                ],
             });
         });
 

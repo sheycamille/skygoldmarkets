@@ -107,7 +107,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['isadmin', 'twofactor']], f
     // manage users
     Route::get('users', 'Admin\UsersController@index')->name('manageusers');
     Route::get('mobius_users', 'Admin\UsersController@fetchmobiususers')->name('fetchmobiususers');
-    Route::get('users/list', 'Admin\UsersController@getusers')->name('fetchusers');
+    Route::get('users/getactions/{id}', 'Admin\UsersController@getactions')->name('getactions');
     Route::post('users/store', 'Admin\UsersController@store')->name('createuser');
     Route::post('users/update', 'Admin\UsersController@update')->name('updateuser');
     Route::get('users/unblock/{id}', 'Admin\UsersController@unblock')->name('userunblock');
@@ -122,7 +122,6 @@ Route::group(['prefix' => 'admin',  'middleware' => ['isadmin', 'twofactor']], f
     Route::get('users/clearacct/{id}', 'Admin\UsersController@clearacct')->name('clearacct');
     Route::post('users/topup', 'Admin\UsersController@topup')->name('topup');
     Route::get('users/delliveaccount/{id}', 'Admin\UsersController@dellaccounts')->name('dellaccounts');
-    Route::get('users/getactions/{id}', 'Admin\UsersController@getactions')->name('getactions');
 
     Route::post('users/changestyle', 'Admin\UsersController@changestyle')->name('changestyle');
 

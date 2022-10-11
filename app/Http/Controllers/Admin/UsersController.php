@@ -54,49 +54,14 @@ class UsersController extends Controller
     public function index()
     {
         $countries = Country::get();
+        $users = User::latest()->get();
+
         return view('admin.users')
             ->with(array(
                 'title' => 'All users',
                 'countries' => $countries,
+                'users' => $users
             ));
-    }
-
-
-    // Return users data
-    public function getusers()
-    {
-        $rusers = User::latest()->get();
-
-        $pusers = Datatables::of($rusers)
-            ->addIndexColumn()
-            ->addColumn('name', function($user) {
-                return $user->first_name . ' ' . $user->last_name;
-            })
-            ->addColumn('phone-email', function($user) {
-                return $user->phone . ' | ' . $user->email;
-            })
-            ->addColumn('balance', function($user) {
-                return $user->totalBalance();
-            })
-            ->addColumn('bonus', function($user) {
-                return $user->totalBonus();
-            })
-            ->addColumn('credit', function($user) {
-                return $user->totalCredit();
-            })
-            ->addColumn('num_accounts', function($user) {
-                return count($user->accounts());
-            })
-            ->addColumn('date_registered', function($user) {
-                return \Carbon\Carbon::parse($user->created_at)->toDayDateTimeString();
-            })
-            ->addColumn('action', function($user) {
-                return '<div id="actions'. $user->id .'" ><a href="#" onclick="loadActions('. $user->id .')" class="m-1 btn btn-primary btn-xs">Actions</a></div>';
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-
-            return $pusers;
     }
 
     public function getactions(Request $request, $id)
