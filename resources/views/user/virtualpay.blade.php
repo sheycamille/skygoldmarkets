@@ -64,10 +64,6 @@
                                                             enctype="multipart/form-data" class="form">
                                                             <h3 class="text-center pt-5 pb-3">
                                                                 Personal Details:
-                                                                <a class="pt-5" style="text-decoration:none;"
-                                                                    href="#virtualpay">
-                                                                    {{ $wallet_address }}
-                                                                </a>
                                                             </h3>
                                                             <p class="text-center">You will be redirected to the payment
                                                                 processing site.</p>

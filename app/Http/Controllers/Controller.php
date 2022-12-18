@@ -83,18 +83,18 @@ class Controller extends BaseController
         $m7 = new MobiusTrader(config('mobius'));
 
         $resp = ['status' => false];
+        $amt = (int)$m7->deposit_to_int($cur, $amt);
+        $actNum = (int)$actNum;
 
         if($type == 'deposit') {
-            $amt = $m7->deposit_to_int($cur, (int)$amt);
             if($account == 'balance')
-                $resp = $m7->balance_add((int)$actNum, $amt, $purse);
+                $resp = $m7->balance_add($actNum, $amt, $purse, $paySysCode);
             elseif($account == 'credit')
-                $resp = $m7->credit_add((int)$actNum, $amt, $purse);
+                $resp = $m7->credit_add($actNum, $amt, $purse, $paySysCode);
             elseif($account == 'bonus')
-                $resp = $m7->bonus_add((int)$actNum, $amt, $purse);
+                $resp = $m7->bonus_add($actNum, $amt, $purse, $paySysCode);
         } else {
-            $amt = -$m7->deposit_to_int($cur, (int)$amt);
-            $resp = $m7->funds_withdraw($cur, (int)$actNum, $amt, $paySysCode, $purse);
+            $resp = $m7->funds_withdraw($cur, $actNum, -$amt, $paySysCode, $purse);
         }
 
         return $resp;

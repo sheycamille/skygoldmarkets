@@ -99,7 +99,7 @@
                                                 @php $numAccs = count($user->accounts()) @endphp
                                                 <td>{{ $numAccs }}</td>
                                                 <td>{{ $user->status }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($user->created_at)->toDayDateTimeString() }}
+                                                <td>{{ $user->created_at }}
                                                 </td>
                                                 <td class="tb-actions">
                                                     <div id="actions{{ $user->id }}"><a href="#"
@@ -129,8 +129,9 @@
         $(function() {
             var table = $('.yajra-datatable').DataTable({
                 order: [
-                    [8, 'asc']
+                    [7, 'desc']
                 ],
+                'pageLength': 100,
             });
         });
 

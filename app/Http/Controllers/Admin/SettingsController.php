@@ -541,6 +541,14 @@ class SettingsController extends Controller
             $setting->save();
         }
 
+        if ($request->usdc_address) {
+            $setting = Setting::where('name', 'usdc_address')->first();
+            if (!$setting) $setting = new Setting();
+            $setting->name = 'usdc_address';
+            $setting->value = $request->usdc_address;
+            $setting->save();
+        }
+
         if ($request->bnb_address) {
             $setting = Setting::where('name', 'bnb_address')->first();
             if (!$setting) $setting = new Setting();

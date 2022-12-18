@@ -5,6 +5,21 @@
 @section('deposits-and-withdrawals', 'c-show')
 @section('deposits', 'c-active')
 
+@section('css')
+    <style>
+        .pricing-table {
+            min-height: 196px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pricing-table h2 {
+            
+        }
+    </style>
+@endsection
+
 @section('content')
 
     @include('user.topmenu')

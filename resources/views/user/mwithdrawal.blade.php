@@ -100,14 +100,14 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form style="padding:3px;" role="form" method="post"
-                                                        action="{{ route('withdrawal') }}">
+                                                        action="{{ route('withdrawal') }}" validate>
                                                         <input class="form-control" placeholder="Enter amount here"
-                                                            type="text" name="amount" required><br />
+                                                            type="text" name="amount" required value=""><br />
                                                         <input class="form-control " value="{{ $method->name }}"
                                                             type="text" disabled><br />
-                                                        <select required class="form-control" name="account_id"
-                                                            id="account_id" required>
-                                                            <option value="" disabled selected>Choose Account</option>
+                                                        <select class="form-control" name="account_id" id="account_id"
+                                                            required>
+                                                            <option value="">Choose Account</option>
                                                             @foreach (Auth::user()->accounts() as $account)
                                                                 <option value="{{ $account->id }}">{{ $account->number }}
                                                                     | USD {{ $account->balance }} </option>
@@ -119,8 +119,7 @@
                                                             name="method_id"><br />
 
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <input type="submit" class="btn btn-primary" value="Submit"
-                                                            onclick="this.disabled = true; form.submit(); this.value='Please Wait ...';" />
+                                                        <input type="submit" class="btn btn-primary" value="Submit" />
                                                     </form>
                                                 </div>
                                             </div>

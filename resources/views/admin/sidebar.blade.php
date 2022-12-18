@@ -1,9 +1,11 @@
 @section('sidebar')
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
-        <div class="c-sidebar-brand">
+        <div class="c-sidebar-brand" style="padding: 20px;">
             <a href="/">
-                <img class="c-sidebar-brand-full" src="{{ asset('front/img/group-logo.png') }}" width="200" alt="Sky Gold Market Logo">
-                <img class="c-sidebar-brand-minimized" src="{{ asset('front/favicon.png') }}" width="100" alt="Sky Gold Market Logo">
+                <img class="c-sidebar-brand-full" src="{{ asset('front/img/group-logo.png') }}" width="160"
+                    alt="Sky Gold Market Logo">
+                <img class="c-sidebar-brand-minimized" src="{{ asset('front/favicon.png') }}" width="100"
+                    alt="Sky Gold Market Logo">
             </a>
         </div>
         <ul class="c-sidebar-nav">
@@ -28,7 +30,7 @@
                     @endif
 
                     @if (\App\Models\Setting::getValue('enable_kyc') == 'yes' &&
-    auth('admin')->user()->hasPermissionTo('mkyc-list', 'admin'))
+                        auth('admin')->user()->hasPermissionTo('mkyc-list', 'admin'))
                         <li class="c-sidebar-nav-item">
                             <a class="c-sidebar-nav-link @yield('kyc')" href="{{ route('kyc') }}">
                                 KYC
@@ -84,8 +86,7 @@
                     @endif
                     @if (auth('admin')->user()->hasPermissionTo('macctype-create', 'admin'))
                         <li class="c-sidebar-nav-item">
-                            <a class="c-sidebar-nav-link @yield('addaccounttype')"
-                                href="{{ route('showaddaccounttype') }}">
+                            <a class="c-sidebar-nav-link @yield('addaccounttype')" href="{{ route('showaddaccounttype') }}">
                                 Add Account Type
                             </a>
                         </li>

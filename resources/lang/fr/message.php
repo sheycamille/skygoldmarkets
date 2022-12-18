@@ -1145,6 +1145,7 @@ return [
 
         ',
         'us_addres' => "Adresse de l'USDT",
+        'usdc_addres' => "Adresse de l'USDC",
         'xr_addres' => 'Adresse de XRP',
         'bn_addres' => 'Adresse de BNB ',
     ],

@@ -20,6 +20,8 @@
 
     <link rel="icon" href="{{ asset('front/favicon.png') }}" type="image/png" />
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Icons-->
     <link href="{{ asset('admin/css/free.min.css') }}" rel="stylesheet"> <!-- icons -->
 

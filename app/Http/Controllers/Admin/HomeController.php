@@ -17,8 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-use DataTables;
-
 
 class HomeController extends Controller
 {
@@ -96,7 +94,7 @@ class HomeController extends Controller
         return view('admin.mwithdrawals')
             ->with(array(
                 'title' => 'Manage users withdrawals',
-                'withdrawals' => Withdrawal::orderBy('id', 'desc')->get(),
+                'withdrawals' => Withdrawal::orderBy('created_at', 'desc')->get(),
             ));
     }
 
@@ -107,35 +105,9 @@ class HomeController extends Controller
         return view('admin.mdeposits')
             ->with(array(
                 'title' => 'Manage users deposits',
-                'deposits' => Deposit::orderBy('id', 'desc')->get(),
+                'deposits' => Deposit::orderBy('created_at', 'desc')->get(),
             ));
     }
-
-
-     // Return deposits data
-     public function getdeposits()
-     {
-         $data = Deposit::latest()->get();
-         $fdata = Datatables::of($data)
-             ->addIndexColumn()
-             ->addColumn('id', function($deposit) {
-                 return $deposit->id ;
-             })
-
-             ->addColumn('action', function($deposit) {
-                 $action = '';
-                 if (auth('admin')->user()->hasPermissionTo('muser-access-wallet', 'admin')) {
-                     $action .= '<a class="m-1 btn btn-info btn-sm" href="'. route('userwallet', $deposit->id) .'">See Wallet</a>';
-                 }
-
-                 return $action;
-             })
-             ->rawColumns(['action'])
-             ->make(true);
-
-             // dd($fdata);
-             return $fdata;
-     }
 
 
     //return front end management page
@@ -145,8 +117,8 @@ class HomeController extends Controller
             'title' => 'Frontend management',
             'faqs' => Faq::all(),
             'images' => Images::orderBy('id', 'desc')->get(),
-            'testimonies' => Testimony::orderBy('id', 'desc')->get(),
-            'contents' => Content::orderBy('id', 'desc')->get(),
+            'testimonies' => Testimony::orderBy('created_at', 'desc')->get(),
+            'contents' => Content::orderBy('created_at', 'desc')->get(),
         ));
     }
 

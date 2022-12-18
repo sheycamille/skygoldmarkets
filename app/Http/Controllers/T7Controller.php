@@ -8,7 +8,6 @@ use App\Mail\NewNotification;
 
 use App\Libraries\MobiusTrader;
 
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +64,7 @@ class T7Controller extends Controller
                 $t7->status = 'active';
                 $t7->currency_id = $data['CurrencyId'];
                 $t7->balance = $m7->deposit_to_int('USD', $data['Balance']);
-                $t7->bonus = $m7->deposit_from_int('USD', $data['Bonus']);
+                $t7->bonus = $m7->deposit_to_int('USD', $data['Bonus']);
                 $t7->credit = $m7->deposit_to_int('USD', $data['Credit']);
                 $t7->save();
             }

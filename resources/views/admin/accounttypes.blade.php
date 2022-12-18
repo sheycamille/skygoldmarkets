@@ -58,7 +58,8 @@
                                 </div>
 
                                 <div class="table-responsive" data-example-id="hoverable-table">
-                                    <table id="ShipTable" class="table table-bordered table-striped table-responsive-sm">
+                                    <table id="ShipTable"
+                                        class="table table-bordered table-striped table-responsive-sm yajra-datatable">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -89,8 +90,7 @@
                                                             No
                                                         @endif
                                                     </td>
-                                                    <td>{{ \Carbon\Carbon::parse($accounttype->created_at)->toDayDateTimeString() }}
-                                                    </td>
+                                                    <td>{{ $accounttype->created_at }}</td>
                                                     <td>
                                                         <a href="#" data-toggle="modal"
                                                             data-target="#popModal{{ $accounttype->id }}"
@@ -101,8 +101,7 @@
                                                 </tr>
 
                                                 <!-- POP Modal -->
-                                                <div id="popModal{{ $accounttype->id }}" class="modal fade"
-                                                    role="dialog">
+                                                <div id="popModal{{ $accounttype->id }}" class="modal fade" role="dialog">
                                                     <div class="modal-dialog">
 
                                                         <!-- Modal content-->
@@ -146,8 +145,7 @@
                                                                     <input style="padding:5px;" class="form-control"
                                                                         placeholder="Enter Max Leverage" type="text"
                                                                         name="max_leverage"
-                                                                        value="{{ $accounttype->max_leverage }}"
-                                                                        required>
+                                                                        value="{{ $accounttype->max_leverage }}" required>
                                                                     <br />
 
                                                                     <h5 class="">Minimum Trade Size</h5>
@@ -254,8 +252,7 @@
                                                                         <input style="padding:5px;" class="form-control"
                                                                             placeholder="Enter Requotes" type="text"
                                                                             name="requotes"
-                                                                            value="{{ $accounttype->requotes }}"
-                                                                            required>
+                                                                            value="{{ $accounttype->requotes }}" required>
                                                                         <br />
 
                                                                         <h5 class="">Available Instruments
@@ -332,4 +329,19 @@
             </div>
         </div>
     </div>
+@endsection
+@section('javascript')
+    <script src="{{ asset('admin/js/jquery.validate.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            var table = $('.yajra-datatable').DataTable({
+                order: [
+                    [7, 'desc']
+                ],
+                'pageLength': 100,
+            });
+        });
+    </script>
 @endsection

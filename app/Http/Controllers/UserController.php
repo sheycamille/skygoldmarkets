@@ -20,7 +20,6 @@ use App\Mail\NewNotification;
 use App\Libraries\MobiusTrader;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -192,6 +191,7 @@ class UserController extends Controller
                 'ltc_address' => $request->ltc_address,
                 'xrp_address' => $request->xrp_address,
                 'usdt_address' => $request->usdt_address,
+                'usdc_address' => $request->usdc_address,
                 'bch_address' => $request->bch_address,
                 'bnb_address' => $request->bnb_address,
                 'interac' => $request->interac,
@@ -288,7 +288,7 @@ class UserController extends Controller
 
         if ($request->amount < $method->minimum) {
             return redirect()->back()
-                ->with("message", "Sorry, The minimum amount is $$method->minimum.");
+                ->with("message", "Sorry, the minimum amount is for your selected method is $$method->minimum.");
         }
 
         if ($enable_kyc == "yes") {
@@ -369,11 +369,11 @@ class UserController extends Controller
 
         $t7 = Trader7::find($t7_id);
 
-        $resp = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-PayPal', 'SKY-Auto', 'deposit', 'balance');
+        $resp = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-PayPal', 'SKY-Auto-'.$request->orderid, 'deposit', 'balance');
         if(gettype($resp) !== 'integer') {
             return json_encode(['message' => 'Sorry an error occured, report this to support!']);
         } else {
-            $t7->balance = $amount;
+            $t7->balance += $amount;
             $t7->save();
         }
 
@@ -400,7 +400,7 @@ class UserController extends Controller
 
         Session::flash('message', 'Your deposit was successfully processed!');
 
-        return json_encode(['message' => 'Deposit Sucessful! Redirecting...']);
+        return response()->json(['message' => 'Deposit Sucessful! Redirecting...']);
     }
 
 
@@ -801,13 +801,6 @@ class UserController extends Controller
             $data = [
                 'dmethod' => $method,
             ];
-        } elseif (strpos(strtolower($method->setting_key), 'paypound') > -1) {
-            $view = 'paypound';
-            $title = 'Make PayPound Payment';
-            $data = [
-                'countries' => $countries,
-                'dmethod' => $method,
-            ];
         } elseif (strpos(strtolower($method->setting_key), 'paystudio') > -1) {
             $view = 'paystudio';
             $title = 'Make PayStudio Payment';
@@ -857,6 +850,30 @@ class UserController extends Controller
             $title = 'Make Interac Payment';
             $data = [
                 'dmethod' => $method,
+            ];
+        } elseif (strpos(strtolower($method->setting_key), 'taopay') > -1) {
+            $view = 'taopay';
+            $title = 'Make Taopay Payment';
+            $data = [
+                'countries' => $countries,
+                'dmethod' => $method,
+            ];
+        } elseif (strpos(strtolower($method->setting_key), 'cashonex') > -1) {
+            $view = 'cashonex';
+            $title = 'Make Cashonex Payment';
+            $data = [
+                'countries' => $countries,
+                'dmethod' => $method,
+            ];
+        } elseif (strpos(strtolower($method->setting_key), 'numpay') > -1) {
+            $view = 'numpay';
+            $title = 'Make NumPay Payment';
+            $transaction_id = rand();
+            $request->session()->put('numpay_transaction_id', $transaction_id);
+            $data = [
+                'countries' => $countries,
+                'dmethod' => $method,
+                'transaction_id' => $transaction_id,
             ];
         } else {
             $view = 'coins';
@@ -1245,7 +1262,6 @@ class UserController extends Controller
         ])->post('https://app.ywallitpay.com/api/v1/transactions', $data);
 
         $resp = $response->json();
-        dd($resp);
 
         if ($resp['status'] == 'C') {
             $amt = $resp['amount'];
@@ -1296,7 +1312,6 @@ class UserController extends Controller
         $dp = $user->dp()->latest()->first();
 
         $t7_id = $request->session()->get('t7_account_id');
-        dd($data);
 
         $t7 = Trader7::find($t7_id);
 
@@ -1570,5 +1585,421 @@ class UserController extends Controller
             $message_text = "No response returned";
         }
         return redirect(route('account.liveaccounts'))->with('message', $message_text);
+    }
+
+
+    public function startCashonexPay(Request $request)
+    {
+        $endpoint = "https://cashonex.com/api/rest/payment";
+
+        $t7_id = $request->session()->get('t7_account_id');
+        $t7 = Trader7::find($t7_id);
+        $user = Auth::user();
+        $amount = $request->amount;
+
+        $deposit = new Deposit();
+        $deposit->status = 'Pending';
+        $deposit->payment_mode = 'Cashonex';
+        $deposit->user = $user->id;
+        $deposit->account_id = $t7_id;
+        $deposit->save();
+
+        $postInput = [
+            'salt' => config('cashonex.api_secret'),
+            'last_name' => $request->last_name,
+            'first_name' => $request->first_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'country' => $request->country,
+            'zip_code' => $request->zip_code,
+            'amount' => $amount,
+            'currency' => $request->currency,
+            'pay_by' => $request->pay_by,
+            'card_number' => $request->card_number,
+            'card_name' => $request->card_name,
+            'cvv_code' => $request->cvv_code,
+            'expiry_month' => $request->expiry_month,
+            'expiry_year' => $request->expiry_year,
+            'clientip' => $request->ip(),
+            'redirect_url' => route('verifycashonexcharge'),
+            'webhook_url' => route('verifycashonexcharge'),
+            'orderid' => $deposit->id,
+        ];
+
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'secret' => config('cashonex.api_secret')
+        ];
+
+        $response = Http::withHeaders($headers)->post($endpoint, $postInput);
+
+        $resp = json_decode($response->getBody(), true);
+        $msg = $resp['message'];
+
+        if($resp['success'] ==  false) {
+            return redirect()->back()->with('message', $msg);
+        }
+
+        if($resp['data']['gatewayStatus']=='APPROVED') {
+            $paymentId =$resp['data']['paymentId'];
+            $respT7 = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-Cashonex', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
+
+            if(gettype($respT7) !== 'integer') {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
+            } else {
+                $t7->balance += $amount;
+                $t7->save();
+                $deposit->txn_id = $paymentId;
+                $deposit->status = 'Processed';
+                $deposit->save();
+
+                //save transaction
+                $this->saveTransaction($user->id, $amount, 'Deposit', 'Credit');
+
+                //send email notification
+                $currency = Setting::getValue('currency');
+                $site_name = Setting::getValue('site_name');
+                $objDemo = new \stdClass();
+
+                $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+                $objDemo->message = "\r Hello $name, \r\n
+
+                \r This is to inform you that your deposit of $currency$amount has been received and confirmed.";
+                $objDemo->sender = "$site_name";
+                $objDemo->date = Carbon::Now();
+                $objDemo->subject = "Deposit Processed!";
+
+                Mail::bcc($user->email)->send(new NewNotification($objDemo));
+                $msg = 'Your deposit was successfully processed!';
+            }
+        }
+
+        // If 3D
+        if($resp['data']['redirectUrl']!='') {
+            $msg = 'Security Redirection by PSP! Redirecting...';
+            header('Location: '.$resp['data']['redirectUrl']);
+        }
+
+        // If 2D
+        if($resp['data']['gatewayStatus']=='INITIATED') {
+            $msg = 'Deposit Initiated by PSP! Check back later...';
+        }
+
+        if($resp['data']['gatewayStatus']=='DECLINED') {
+            $msg = 'Deposit Declined by PSP!';
+        }
+
+        Session::flash('message', $msg);
+        return redirect(route('account.liveaccounts'))->with('message', $msg);
+    }
+
+
+    public function checkCashonex(Request $request)
+    {
+        $endpoint = "https://cashonex.co/api/rest/paymentStatus";
+        $user = Auth::user();
+        $deposit = Deposit::find($request->deposit_id);
+        $amount = $deposit->amount;
+        $t7 = Trader7::find($deposit->account_id);
+
+        $postInput = [
+            'api-key' => config('cashonex.api_key'),
+            'orderid' => $deposit->id,
+            'paymentId' => $deposit->txn_id,
+        ];
+
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'secret' => config('cashonex.api_secret')
+        ];
+
+        $response = Http::withHeaders($headers)->post($endpoint, $postInput);
+
+        $resp = json_decode($response->getBody(), true);
+
+        if($resp['data']['gatewayStatus']=='APPROVED') {
+            $paymentId =$resp['data']['paymentId'];
+            $respT7 = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-Cashonex', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
+
+            if(gettype($respT7) !== 'integer') {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
+            } else {
+                $t7->balance += $amount;
+                $t7->save();
+                $deposit->txn_id = $paymentId;
+                $deposit->status = 'Processed';
+                $deposit->save();
+
+                //save transaction
+                $this->saveTransaction($user->id, $amount, 'Deposit', 'Credit');
+
+                //send email notification
+                $currency = Setting::getValue('currency');
+                $site_name = Setting::getValue('site_name');
+                $objDemo = new \stdClass();
+
+                $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+                $objDemo->message = "\r Hello $name, \r\n
+
+                \r This is to inform you that your deposit of $currency$amount has been received and confirmed.";
+                $objDemo->sender = "$site_name";
+                $objDemo->date = Carbon::Now();
+                $objDemo->subject = "Deposit Processed!";
+
+                Mail::bcc($user->email)->send(new NewNotification($objDemo));
+                $message = 'Your deposit was successfully processed!';
+            }
+        }
+    }
+
+
+    public function handleCashonexPay(Request $request)
+    {
+        print($request);
+    }
+
+
+    public function startNumPay(Request $request)
+    {
+        $data = $request->all();
+        $stringD = implode(', ', $data);
+        error_log($stringD);
+
+        $amount = $request->session()->get('amount');
+        $t7_id = $request->session()->get('t7_account_id');
+        $t7 = Trader7::find($t7_id);
+        $user = Auth::user();
+        $paymentId = $request->transaction_id;
+
+        $deposit = Deposit::where('txn_id', $paymentId)->first();
+        if(!$deposit) $deposit = new Deposit();
+
+        $deposit->status = $request->status;
+        $deposit->payment_mode = 'NumpPay';
+        $deposit->user = $user->id;
+        $deposit->account_id = $t7_id;
+        $deposit->txn_id = $paymentId;
+        $deposit->save();
+        $msg = $request->status . ': '  . $request->xresponse;
+
+        if($request->status ==  'Declined') {
+            return redirect(route('account.liveaccounts'))->with('message', $msg);
+        }
+
+        if($request->status == 'Success') {
+            if($request->paid_amount) $amount = $request->paid_amount;
+            $respT7 = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-NUMPAY', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
+
+            if(gettype($respT7) !== 'integer') {
+                return redirect(route('account.liveaccounts'))->with('message', 'Sorry an error occured, report this to support!');
+            } else {
+                $t7->balance += $amount;
+                $t7->save();
+                $deposit->txn_id = $paymentId;
+                $deposit->amount = $amount;
+                $deposit->status = 'Processed';
+                $deposit->save();
+
+                //save transaction
+                $this->saveTransaction($user->id, $amount, 'Deposit', 'Credit');
+
+                //send email notification
+                $currency = Setting::getValue('currency');
+                $site_name = Setting::getValue('site_name');
+                $objDemo = new \stdClass();
+
+                $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+                $objDemo->message = "\r Hello $name, \r\n
+
+                \r This is to inform you that your deposit of $currency$amount has been received and confirmed.";
+                $objDemo->sender = "$site_name";
+                $objDemo->date = Carbon::Now();
+                $objDemo->subject = "Deposit Processed!";
+
+                Mail::bcc($user->email)->send(new NewNotification($objDemo));
+                $msg = 'Your deposit was successfully processed!';
+            }
+        }
+
+        Session::flash('message', $msg);
+        return redirect(route('account.liveaccounts'))->with('message', $msg);
+    }
+
+
+    public function handleNumPay(Request $request)
+    {
+        error_log(implode(" ", $request->all()));
+        dd($request->all());
+    }
+
+
+    public function startPaycly(Request $request)
+    {
+        $endpoint = "";
+
+        $t7_id = $request->session()->get('t7_account_id');
+        $t7 = Trader7::find($t7_id);
+        $user = Auth::user();
+        $amount = $request->amount;
+
+        $deposit = new Deposit();
+        $deposit->status = 'Pending';
+        $deposit->payment_mode = 'Cashonex';
+        $deposit->user = $user->id;
+        $deposit->account_id = $t7_id;
+        $deposit->save();
+
+        $postInput = [
+            'salt' => config('cashonex.api_key'),
+            'last_name' => $request->last_name,
+            'first_name' => $request->first_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'country' => $request->country,
+            'zip_code' => $request->zip_code,
+            'amount' => $amount,
+            'currency' => $request->currency,
+            'pay_by' => $request->pay_by,
+            'card_number' => $request->card_number,
+            'card_name' => $request->card_name,
+            'cvv_code' => $request->cvv_code,
+            'expiry_month' => $request->expiry_month,
+            'expiry_year' => $request->expiry_year,
+            'clientip' => $request->ip(),
+            'redirect_url' => route('verifycashonexcharge'),
+            'webhook_url' => route('verifycashonexcharge'),
+            'orderid' => $deposit->id,
+        ];
+
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'secret' => config('cashonex.api_secret')
+        ];
+
+        $response = Http::withHeaders($headers)->post($endpoint, $postInput);
+
+        $resp = json_decode($response->getBody(), true);
+        $msg = $resp['message'];
+
+        if($resp['success'] ==  false) {
+            return redirect()->back()->with('message', $msg);
+        }
+
+        if($resp['data']['gatewayStatus']=='APPROVED') {
+            $paymentId =$resp['data']['paymentId'];
+            $respT7 = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-Cashonex', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
+
+            if(gettype($respT7) !== 'integer') {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
+            } else {
+                $t7->balance += $amount;
+                $t7->save();
+                $deposit->txn_id = $paymentId;
+                $deposit->status = 'Processed';
+                $deposit->save();
+
+                //save transaction
+                $this->saveTransaction($user->id, $amount, 'Deposit', 'Credit');
+
+                //send email notification
+                $currency = Setting::getValue('currency');
+                $site_name = Setting::getValue('site_name');
+                $objDemo = new \stdClass();
+
+                $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+                $objDemo->message = "\r Hello $name, \r\n
+
+                \r This is to inform you that your deposit of $currency$amount has been received and confirmed.";
+                $objDemo->sender = "$site_name";
+                $objDemo->date = Carbon::Now();
+                $objDemo->subject = "Deposit Processed!";
+
+                Mail::bcc($user->email)->send(new NewNotification($objDemo));
+                $msg = 'Your deposit was successfully processed!';
+            }
+        }
+
+        // If 3D
+        if($resp['data']['redirectUrl']!='') {
+            $msg = 'Security Redirection by PSP! Redirecting...';
+            header('Location: '.$resp['data']['redirectUrl']);
+        }
+
+        // If 2D
+        if($resp['data']['gatewayStatus']=='INITIATED') {
+            $msg = 'Deposit Initiated by PSP! Check back later...';
+        }
+
+        if($resp['data']['gatewayStatus']=='DECLINED') {
+            $msg = 'Deposit Declined by PSP!';
+        }
+
+        Session::flash('message', $msg);
+        return redirect(route('account.liveaccounts'))->with('message', $msg);
+    }
+
+
+    public function checkPaycly(Request $request)
+    {
+        $endpoint = "https://cashonex.co/api/rest/paymentStatus";
+        $user = Auth::user();
+        $deposit = Deposit::find($request->deposit_id);
+        $amount = $deposit->amount;
+        $t7 = Trader7::find($deposit->account_id);
+
+        $postInput = [
+            'api-key' => config('cashonex.api_key'),
+            'orderid' => $deposit->id,
+            'paymentId' => $deposit->txn_id,
+        ];
+
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'secret' => config('cashonex.api_secret')
+        ];
+
+        $response = Http::withHeaders($headers)->post($endpoint, $postInput);
+
+        $resp = json_decode($response->getBody(), true);
+
+        if($resp['data']['gatewayStatus']=='APPROVED') {
+            $paymentId =$resp['data']['paymentId'];
+            $respT7 = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-Cashonex', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
+
+            if(gettype($respT7) !== 'integer') {
+                return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
+            } else {
+                $t7->balance += $amount;
+                $t7->save();
+                $deposit->txn_id = $paymentId;
+                $deposit->status = 'Processed';
+                $deposit->save();
+
+                //save transaction
+                $this->saveTransaction($user->id, $amount, 'Deposit', 'Credit');
+
+                //send email notification
+                $currency = Setting::getValue('currency');
+                $site_name = Setting::getValue('site_name');
+                $objDemo = new \stdClass();
+
+                $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+                $objDemo->message = "\r Hello $name, \r\n
+
+                \r This is to inform you that your deposit of $currency$amount has been received and confirmed.";
+                $objDemo->sender = "$site_name";
+                $objDemo->date = Carbon::Now();
+                $objDemo->subject = "Deposit Processed!";
+
+                Mail::bcc($user->email)->send(new NewNotification($objDemo));
+                $message = 'Your deposit was successfully processed!';
+            }
+        }
     }
 }

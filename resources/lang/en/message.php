@@ -982,6 +982,7 @@ return [
         '' => 'Litcoin',
         'ltc_addres' => 'LTC Address',
         'us_addres' => 'USDT Address',
+        'usdc_addres' => 'USDC Address',
         'xr_addres' => 'XRP Address',
         'bn_addres' => 'BNB Address ',
     ],

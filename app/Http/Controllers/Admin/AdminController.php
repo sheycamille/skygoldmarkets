@@ -41,7 +41,7 @@ class AdminController extends Controller
     public function index()
     {
         $roles = Role::get();
-        $admins = Admin::orderby('id', 'desc')->get();
+        $admins = Admin::orderby('created_at', 'desc')->get();
         return view('admin.madmins')->with(array(
             'title' => 'Add new manager',
             'admins' => $admins,
@@ -78,7 +78,12 @@ class AdminController extends Controller
                 return $admin->acnt_type_active;
             })
             ->addColumn('role', function($admin) {
-                return $admin->name;
+                $roles = '';
+                foreach($admin->roles as $role) {
+                    $roles .= $role->name . ', ';
+                }
+
+                return $roles;
             })
             ->addColumn('action', function($admin) {
                 $action = '<a href="#" data-toggle="modal" data-target="#resetpswdModal{{ $admin->id }}" class="m-1 btn btn-warning btn-sm text-nowrap">Reset Password</a>';
@@ -100,7 +105,9 @@ class AdminController extends Controller
                     $action .= '<a href="#" data-toggle="modal" data-target="#edituser' . $admin->id . '" class="m-1 btn btn-secondary btn-sm">Edit</a>';
                 }
 
-                $action .= view('admin.admin_actions', compact('admin'))->render();
+                $roles = Role::get();
+
+                $action .= view('admin.admin_actions', compact('admin', 'roles'))->render();
 
                 return $action;
             })

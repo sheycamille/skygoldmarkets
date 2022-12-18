@@ -49,7 +49,7 @@
                     <div class="row mb-5">
                         <div class="col-lg-12 p-4">
                             <div class="table-responsive" data-example-id="hoverable-table">
-                                <table id="ShipTable" class="table table-bordered table-striped table-responsive-sm">
+                                <table id="ShipTable" class="table table-bordered table-striped table-responsive-sm yajra-datatable">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -127,3 +127,18 @@
     </div>
 </div>
 @endsection
+@section('javascript')
+    <script src="{{ asset('admin/js/jquery.validate.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            var table = $('.yajra-datatable').DataTable({
+                order: [
+                    [8, 'desc']
+                ],
+            });
+        });
+    </script>
+@endsection
+

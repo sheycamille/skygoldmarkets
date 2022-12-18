@@ -96,13 +96,13 @@ Route::group(['prefix' => 'admin',  'middleware' => ['isadmin', 'twofactor']], f
     Route::post('roles/store', 'Admin\RoleController@store')->name('storerole');
     Route::get('roles/edit/{id}', 'Admin\RoleController@edit')->name('editrole');
     Route::post('roles/update/{id}', 'Admin\RoleController@update')->name('updaterole');
-    Route::post('roles/delete/{id}', 'Admin\RoleController@delete')->name('deleterole');
+    Route::post('roles/delete/{id}', 'Admin\RoleController@destroy')->name('deleterole');
 
     // manage permissions
     Route::get('perms/list', 'Admin\PermController@index')->name('manageperms');
     Route::get('perms/create', 'Admin\PermController@create')->name('createperm');
     Route::post('perms/store', 'Admin\PermController@store')->name('storeperm');
-    Route::post('perms/delete/{id}', 'Admin\PermController@delete')->name('deleteperm');
+    Route::post('perms/delete/{id}', 'Admin\PermController@destroy')->name('deleteperm');
 
     // manage users
     Route::get('users', 'Admin\UsersController@index')->name('manageusers');
@@ -132,7 +132,6 @@ Route::group(['prefix' => 'admin',  'middleware' => ['isadmin', 'twofactor']], f
 
     // manage deposits and their processing
     Route::get('deposits/list', 'Admin\HomeController@mdeposits')->name('mdeposits');
-    Route::get('deposit/list', 'Admin\HomeController@getdeposits')->name('fetchdeposits');
     Route::get('deposits/pdeposit/{id}', 'Admin\LogicController@pdeposit')->name('pdeposit');
     Route::post('deposits/rejectdeposit/{id}', 'Admin\LogicController@rejectdeposit')->name('rejectdeposit');
 
@@ -285,6 +284,18 @@ Route::middleware(['auth'])->group(function () {
     // authorizenet payments
     Route::get('dashboard/authorizenet_pay', 'UserController@startAuthorizeNetPay')->name('authorizenetpay');
     Route::post('dashboard/authorizenet_dopay', 'UserController@handleAuthorizeNetPay')->name('authorizenetdopay');
+
+    // cashonex payments
+    Route::post('dashboard/start_cashonex_charge', 'UserController@startCashonexPay')->name('startcashonexcharge');
+    Route::post('dashboard/verify_cashonex_charge', 'UserController@handleCashonexPay')->name('verifycashonexcharge');
+
+    // numpay payments
+    Route::any('dashboard/start_numpay_charge', 'UserController@startNumPay')->name('startnumpaycharge');
+    Route::post('dashboard/verify_numpay_charge', 'UserController@handleNumPay')->name('verifynumpaycharge');
+
+    // paycly payments
+    Route::any('dashboard/start_paycly_charge', 'UserController@startPaycly')->name('startpayclycharge');
+    Route::post('dashboard/verify_paycly_charge', 'UserController@handlePaycly')->name('verifypayclycharge');
 });
 
 Route::get('/dashboard/weekend', 'Controller@checkdate');

@@ -50,7 +50,7 @@
                         <div class="mb-5 row">
                             <div class="col-12 p-4">
                                 <div class="bs-example table-responsive" data-example-id="hoverable-table">
-                                    <table id="ShipTable" class="table table-bordered table-striped table-responsive-sm">
+                                    <table id="ShipTable" class="table table-bordered table-striped table-responsive-sm yajra-datatable">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -248,7 +248,6 @@
                                                 </div>
                                                 <!-- /view KYC Passport Modal -->
 
-
                                                 <!-- View KYC Address Modal -->
                                                 <div id="viewkycAModal{{ $user->id }}" class="modal fade"
                                                     role="dialog">
@@ -310,3 +309,20 @@
         </div>
     </div>
 @endsection
+
+@section('javascript')
+    <script src="{{ asset('admin/js/jquery.validate.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            var table = $('.yajra-datatable').DataTable({
+                order: [
+                    [4, 'desc']
+                ],
+                'pageLength': 100,
+            });
+        });
+    </script>
+@endsection
+

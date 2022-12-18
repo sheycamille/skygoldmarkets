@@ -454,6 +454,30 @@
                                 </div><br>
 
 
+                                {{-- USDC Settings --}}
+                                <div class="panel panel-default" style="border:0px solid #fff;">
+                                    <!-- Panel Heading Starts -->
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" href="#usdc">
+                                                USDC <i class="fa fa-arrow-down"></i> </a>
+                                        </h4>
+                                    </div>
+
+                                    <div id="usdc" class="panel-collapse collapse">
+                                        <div class="sign-u">
+                                            <div class="sign-up1">
+                                                <h4 class="">USDC address :</h4>
+                                            </div>
+                                            <div class="sign-up2">
+                                                <input type="text" name="usdc_address" class="form-control"
+                                                    value="{{ \App\Models\Setting::getValue('usdc_address') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><br>
+
+
                                 {{-- BNB Settings --}}
                                 <div class="panel panel-default" style="border:0px solid #fff;">
                                     <!-- Panel Heading Starts -->

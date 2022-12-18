@@ -51,7 +51,7 @@
                                 <div class="bs-example table-responsive" data-example-id="hoverable-table">
                                     <div style="margin:3px;">
                                         <table id="ShipTable"
-                                            class="table table-bordered table-striped table-responsive-sm">
+                                            class="table table-bordered table-striped table-responsive-sm yajra-datatable">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -78,7 +78,7 @@
                                                         <td>{{ $withdrawal->payment_mode }}</td>
                                                         <td>{{ $withdrawal->duser->email }}</td>
                                                         <td>{{ $withdrawal->status }}</td>
-                                                        <td>{{ \Carbon\Carbon::parse($withdrawal->created_at)->toDayDateTimeString() }}
+                                                        <td>{{ $withdrawal->created_at }}
                                                         </td>
                                                         <td>
                                                             <a href="#" class="m-1 btn btn-info btn-sm"
@@ -165,6 +165,10 @@
                                                                         <h3 class="">USDT Wallet:</h3>
                                                                         <h4 class="">
                                                                             {{ $withdrawal->duser->usdt_address }}</h4><br>
+                                                                    @elseif($withdrawal->payment_mode == 'USDC')
+                                                                        <h3 class="">USDC Wallet:</h3>
+                                                                        <h4 class="">
+                                                                            {{ $withdrawal->duser->usdc_address }}</h4><br>
                                                                     @elseif($withdrawal->payment_mode == 'XRP')
                                                                         <h3 class="">XRP Wallet:</h3>
                                                                         <h4 class="">
@@ -188,6 +192,10 @@
                                                                     @elseif($withdrawal->payment_mode == 'Bank transfer')
                                                                         <h4 class="">Bank name:
                                                                             {{ $withdrawal->duser->bank_name }}</h4><br>
+                                                                        <h4 class="">Bank Address:
+                                                                            {{ $withdrawal->duser->bank_address }}</h4><br>
+                                                                        <h4 class="">Swift Code:
+                                                                            {{ $withdrawal->duser->swift_code }}</h4><br>
                                                                         <h4 class="">Account name:
                                                                             {{ $withdrawal->duser->account_name }}</h4><br>
                                                                         <h4 class="">Account number:
@@ -219,4 +227,19 @@
     </div>
 
     @include('admin.includes.modals')
+@endsection
+@section('javascript')
+    <script src="{{ asset('admin/js/jquery.validate.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            var table = $('.yajra-datatable').DataTable({
+                order: [
+                    [8, 'desc']
+                ],
+                'pageLength': 100,
+            });
+        });
+    </script>
 @endsection

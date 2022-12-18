@@ -15,7 +15,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header fw-bolder">
-                        Client Depposits
+                        Client Deposits
                     </div>
                     <div class="card-body">
 
@@ -49,7 +49,8 @@
                         <div class="mb-5 row">
                             <div class="col-12 p-4">
                                 <div class="table-responsive" data-example-id="hoverable-table">
-                                    <table id="ShipTable" class="table table-bordered table-striped table-responsive-sm">
+                                    <table id="ShipTable"
+                                        class="table table-bordered table-striped table-responsive-sm yajra-datatable">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -67,7 +68,7 @@
                                             @forelse ($deposits as $deposit)
                                                 <tr>
                                                     <th scope="row">{{ $deposit->id }}</th>
-                                                    <td>{{ $deposit->duser->name ? $deposit->duser->name : ($deposit->duser->first_name . ' ' . $deposit->duser->last_name) }}
+                                                    <td>{{ $deposit->duser->name ? $deposit->duser->name : $deposit->duser->first_name . ' ' . $deposit->duser->last_name }}
                                                     </td>
                                                     <td>{{ $deposit->duser->email }}</td>
                                                     <td>
@@ -79,7 +80,7 @@
                                                     </td>
                                                     <td>{{ $deposit->payment_mode }}</td>
                                                     <td>{{ $deposit->status }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($deposit->created_at)->toDayDateTimeString() }}
+                                                    <td>{{ $deposit->created_at }}
                                                     </td>
                                                     <td>
                                                         <a href="#" class="btn btn-primary btn-sm m-1"
@@ -154,17 +155,19 @@
                                                                 @if ($deposit->payment_mode == 'Credit Card' ||
                                                                     $deposit->payment_mode == 'Express Deposit' ||
                                                                     $deposit->payment_mode == 'CoinPayments')
-                                                                    <h4
-                                                                        class=">This Payment was either
-                                                    made with credit/debit card, admin topup or automatic crypto
-                                                    payment hence no proof of payment provided</h4>
-@else
-@if (\App\Models\Setting::getValue('location') == 'Email')
-<h3 class=">
+                                                                    <h4>This Payment was either
+                                                                        made with credit/debit card, admin topup or
+                                                                        automatic crypto
+                                                                        payment hence no proof of payment provided</h4>
+                                                                @else
+                                                                    @if (\App\Models\Setting::getValue('location') == 'Email')
+                                                                        <h3
+                                                                            class=">
                                                                         Check your email with
                                                                         the deposit that has an attachment name of
                                                                         <span
-                                                                            class="text-danger">{{ $deposit->proof }}</span>
+                                                                            class="text-danger">
+                                                                            {{ $deposit->proof }}</span>
                                                                         </h3>
                                                                     @elseif(\App\Models\Setting::getValue('location') == 'Local')
                                                                         <img src="{{ asset('storage/photos/' . $deposit->proof) }}"
@@ -184,64 +187,70 @@
                                                                         <img src="{{ $psrc }}"
                                                                             alt="Proof of Payment" title=""
                                                                             class="img-fluid" />
+                                                                    @endif
                                                                 @endif
-                                            @endif
 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /POP Modal -->
+
+                                                <!-- Send Message Modal -->
+                                                <div id="sendMessageModal{{ $deposit->id }}" class="modal fade"
+                                                    role="dialog">
+                                                    <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title"> Send Deposit
+                                                                    Email
+                                                                    {{ $deposit->duser->name }}</h4>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal">&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4 class="">
+                                                                    This message will be sent to
+                                                                    {{ $deposit->duser->name }}
+                                                                    {{ $deposit->duser->l_name }}
+                                                                </h4>
+                                                                <form style="padding:3px;" role="form" method="post"
+                                                                    action="{{ route('sendmailtooneuser') }}">
+                                                                    <input type="hidden" name="user_id"
+                                                                        value="{{ $deposit->duser->id }}">
+                                                                    <textarea class="form-control" name="message" row="3" required>This is to inform you that your deposit of {{ \App\Models\Setting::getValue('currency') }}{{ $deposit->amount }} has been received and processed. You can now check your Trader7 account.</textarea>
+                                                                    <br />
+                                                                    <input type="hidden" name="_token"
+                                                                        value="{{ csrf_token() }}">
+                                                                    <input type="hidden" name="type" value="deposit">
+                                                                    <input type="submit" class="btn btn-primary"
+                                                                        value="Send">
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /Send Message Modal -->
+                                            @empty
+                                                <tr>
+                                                    <td colspan="10">No data available</td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /POP Modal -->
-
-                    <!-- Send Message Modal -->
-                    <div id="sendMessageModal{{ $deposit->id }}" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title"> Send Deposit
-                                        Email
-                                        {{ $deposit->duser->name }}</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                    <h4 class="">
-                                        This message will be sent to {{ $deposit->duser->name }}
-                                        {{ $deposit->duser->l_name }}
-                                    </h4>
-                                    <form style="padding:3px;" role="form" method="post"
-                                        action="{{ route('sendmailtooneuser') }}">
-                                        <input type="hidden" name="user_id" value="{{ $deposit->duser->id }}">
-                                        <textarea class="form-control" name="message" row="3" required>This is to inform you that your deposit of {{ \App\Models\Setting::getValue('currency') }}{{ $deposit->amount }} has been received and processed. You can now check your Trader7 account.</textarea>
-                                        <br />
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="hidden" name="type" value="deposit">
-                                        <input type="submit" class="btn btn-primary" value="Send">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Send Message Modal -->
-                    @empty
-                        <tr>
-                            <td colspan="10">No data available</td>
-                        </tr>
-                        @endforelse
-                        </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-        </div>
-        </div>
-        </div>
+    </div>
 
-        @include('admin.includes.modals')
-    @endsection
+    @include('admin.includes.modals')
+@endsection
 
 @section('javascript')
     <script src="{{ asset('admin/js/jquery.validate.js') }}"></script>
@@ -249,56 +258,12 @@
     <script src="{{ asset('admin/js/dataTables.bootstrap4.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
-
             var table = $('.yajra-datatable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('fetchdeposits') }}",
-                columns: [{
-                        data: 'id',
-                        name: 'ID'
-                    },
-                    {
-                        data: 'txn_id',
-                        name: 'Txn. ID'
-                    },
-                    {
-                        data: 'user',
-                        name: 'User'
-                    },
-                    {
-                        data: 'uname',
-                        name: 'Uname'
-                    },
-                    {
-                        data: 'amount',
-                        name: 'Amount'
-                    },
-                    {
-                        data: 'payment_mode',
-                        name: 'Payment Mode'
-                    },
-                    {
-                        data: 'purpose',
-                        name: 'Purpose'
-                    },
-                    {
-                        data: 'status',
-                        name: 'Status'
-                    },
-                    {
-                        data: 'proof',
-                        name: 'Proof'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: true,
-                        searchable: true
-                    },
-                ]
+                order: [
+                    [7, 'desc']
+                ],
+                'pageLength': 100,
             });
-
         });
     </script>
 @endsection

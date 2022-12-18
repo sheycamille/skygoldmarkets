@@ -34,10 +34,12 @@
                 <button type="button" class="close " data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body p-3">
-                <p class="">Are you sure you want to delete
-                    {{ $admin->firstName }}</p>
-                <a class="btn btn-danger" href="{{ route('deladmin', $admin->id) }}">Yes
-                    i'm sure</a>
+                <form action="{{ route('deladmin', $admin->id) }}" method="POST">
+                    @csrf
+                    <p class="">Are you sure you want to delete
+                        {{ $admin->firstName }}</p>
+                    <button class="btn btn-danger btn-sm">Yes, I'm sure</button>
+                </form>
             </div>
         </div>
     </div>

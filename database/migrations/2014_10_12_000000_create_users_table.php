@@ -44,6 +44,7 @@ class CreateUsersTable extends Migration
             $table->string('bch_address')->nullable();
             $table->string('bnb_address')->nullable();
             $table->string('usdt_address')->nullable();
+            $table->string('usdc_address')->nullable();
             $table->string('xrp_address')->nullable();
             $table->string('interac')->nullable();
             $table->string('paypal_email')->nullable();

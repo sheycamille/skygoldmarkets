@@ -86,6 +86,17 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="card">
+                                <div class="card-header"><strong>BNB</strong> <small></small></div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="bnb">@lang('message.withdrawal_details.bn_addres') </label>
+                                        <input name="bnb_address" class="form-control" id="bnb" type="text"
+                                            value="{{ Auth::user()->bnb_address }}">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-sm-6">
@@ -138,25 +149,23 @@
                             </div>
 
                             <div class="card">
+                                <div class="card-header"><strong>USDC</strong> <small></small></div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="usdc">@lang('message.withdrawal_details.usdc_addres')</label>
+                                        <input name="usdc_address" class="form-control" id="usdc" type="text"
+                                            value="{{ Auth::user()->usdc_address }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
                                 <div class="card-header"><strong>XRP</strong> <small></small></div>
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="xrp">@lang('message.withdrawal_details.xr_addres')</label>
                                         <input name="xrp_address" class="form-control" id="xrp" type="text"
                                             value="{{ Auth::user()->xrp_address }}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-header"><strong>BNB</strong> <small></small></div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="bnb">@lang('message.withdrawal_details.bn_addres') </label>
-                                        <input name="bnb_address" class="form-control" id="bnb" type="text"
-                                            value="{{ Auth::user()->bnb_address }}">
                                     </div>
                                 </div>
                             </div>

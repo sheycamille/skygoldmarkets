@@ -3,7 +3,7 @@
 return [
 
     /**
-     * Public Key From ChargeMoney Dashboard
+     * Public Key From AuthorizeNet Dashboard
      *
      */
     'mid' => getenv('AUTHORIZENET_MERCHANT_LOGIN_ID'),

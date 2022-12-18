@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'PayPound Payment')
+@section('title', 'Cashonex Payment')
 
 @section('deposits-and-withdrawals', 'c-show')
 @section('deposits', 'c-active')
@@ -56,10 +56,11 @@
                                                         USD</strong>
                                                 </h3>
                                             </div>
+
                                             <div class="card shadow">
                                                 <div class="card-body">
-                                                    <div id="paypound" class="d-flex justify-content-center col-xs-12">
-                                                        <form method="post" action="{{ route('startpaypoundcharge') }}"
+                                                    <div id="cashonex" class="d-flex justify-content-center col-xs-12">
+                                                        <form method="post" action="{{ route('startcashonexcharge') }}"
                                                             enctype="multipart/form-data" class="form">
                                                             <h3 class=" text-center pt-5 pb-3">
                                                                 Personal Details:
@@ -85,17 +86,10 @@
                                                                         class="form-control"
                                                                         value="{{ Auth::user()->email }}" required>
                                                                 </div>
-                                                                {{-- </div>
-                                                        <div class="form-group d-flex justify-content-center col-xs-12">
-                                                            <div class="col-md-5" style="display: inline-block;">
-                                                                <h5 class="">Country Phone Code</h5>
-                                                                <input type="text" name="country_code"
-                                                                    class="form-control" value="">
-                                                            </div> --}}
 
                                                                 <div class="col-md-5" style="display: inline-block;">
                                                                     <h5 class="">Phone No*</h5>
-                                                                    <input type="text" name="phone_no"
+                                                                    <input type="text" name="phone"
                                                                         class="form-control"
                                                                         value="{{ Auth::user()->phone }}" required>
                                                                 </div>
@@ -123,7 +117,7 @@
                                                                 </div>
                                                                 <div class="col-md-2" style="display: inline-block;">
                                                                     <h5 class="">Zip Code*</h5>
-                                                                    <input type="text" name="zip"
+                                                                    <input type="text" name="zip_code"
                                                                         class="form-control"
                                                                         value="{{ Auth::user()->zip_code }}" required>
                                                                 </div>
@@ -138,7 +132,7 @@
                                                                         @foreach ($countries as $country)
                                                                             <option
                                                                                 @if (Auth::user()->country == $country->id) selected @endif
-                                                                                value="{{ $country->id }}">
+                                                                                value="{{ strtoupper($country->code) }}">
                                                                                 {{ $country->name }}</option>
                                                                         @endforeach
                                                                     </select> <br>
@@ -152,36 +146,58 @@
                                                             <div
                                                                 class="form-group d-flex justify-content-center col-xs-12">
                                                                 <div class="col-md-4" style="display: inline-block;">
+                                                                    <h5 class="">Card Type*</h5>
+                                                                    <select class="form-control" name="pay_by"
+                                                                        id="pay_by" required>
+                                                                        <option selected disabled value="">Choose
+                                                                            Card Type</option>
+                                                                        <option>VISA</option>
+                                                                        <option>MASTERCARD</option>
+                                                                        <option>AMEX</option>
+                                                                        <option>DISCOVER</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-4" style="display: inline-block;">
+                                                                    <h5 class="">Card Name*</h5>
+                                                                    <input type="text" name="card_name"
+                                                                        class="form-control"
+                                                                        value="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}"
+                                                                        required>
+                                                                </div>
+                                                                <div class="col-md-4" style="display: inline-block;">
                                                                     <h5 class="">Card No*</h5>
-                                                                    <input type="text" name="card_no"
+                                                                    <input type="text" name="card_number"
                                                                         class="form-control" value="" required>
                                                                 </div>
+                                                            </div>
+
+                                                            <div class="form-group d-flex justify-content-start col-xs-12">
                                                                 <div class="col-md-3" style="display: inline-block;">
                                                                     <h5 class="">Expiry Month*</h5>
-                                                                    <input type="text" name="ccExpiryMonth"
+                                                                    <input type="text" name="expiry_month"
                                                                         class="form-control" value="" required>
                                                                 </div>
                                                                 <div class="col-md-2" style="display: inline-block;">
                                                                     <h5 class="">Expiry Year*</h5>
-                                                                    <input type="text" name="ccExpiryYear"
+                                                                    <input type="text" name="expiry_year"
                                                                         class="form-control" value="" required>
                                                                 </div>
                                                                 <div class="col-md-3" style="display: inline-block;">
                                                                     <h5 class="">CVV Number*</h5>
-                                                                    <input type="text" name="cvvNumber"
+                                                                    <input type="text" name="cvv_code"
                                                                         class="form-control" value="" required>
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group d-flex justify-content-start col-xs-12">
                                                                 <div class="col-md-4" style="display: inline-block;">
-                                                                    <h5 class="">Currency*</h5>
-                                                                    <input type="text" name="currency"
+                                                                    {{-- <h5 class="">Currency*</h5> --}}
+                                                                    <input type="hidden" name="currency"
                                                                         class="form-control" value="USD" required>
                                                                 </div>
                                                                 <div class="col-md-4" style="display: inline-block;">
-                                                                    <h5 class="">Amount*</h5>
-                                                                    <input type="text" name="amount"
+                                                                    {{-- <h5 class="">Amount*</h5> --}}
+                                                                    <input type="hidden" name="amount"
                                                                         class="form-control" value="{{ $amount }}"
                                                                         required>
                                                                 </div>

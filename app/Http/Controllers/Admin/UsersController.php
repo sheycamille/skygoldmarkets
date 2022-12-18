@@ -23,10 +23,7 @@ use App\Models\Deposit;
 use App\Models\Trader7;
 use App\Models\Withdrawal;
 use App\Models\TpTransaction;
-use Aws\Mobile\Exception\MobileException;
 use Carbon\Carbon;
-
-use DataTables;
 
 
 class UsersController extends Controller
@@ -39,11 +36,12 @@ class UsersController extends Controller
         $this->middleware('auth:admin');
         $this->middleware('permission:muser-list|muser-create|muser-edit|muser-delete', ['only' => ['index']]);
         $this->middleware('permission:muser-create', ['only' => ['store']]);
-        $this->middleware('permission:muser-edit', ['only' => ['update' , 'resetpswd', 'dellaccounts']]);
+        $this->middleware('permission:muser-edit', ['only' => ['update', 'dellaccounts']]);
         $this->middleware('permission:muser-block', ['only' => ['ublock', 'unblock', '']]);
         $this->middleware('permission:muser-messageall', ['only' => ['sendmailtooneuser', 'sendmailtoall']]);
         $this->middleware('permission:muser-access-account', ['only' => ['switchtouser']]);
         $this->middleware('permission:muser-access-wallet', ['only' => ['userwallet']]);
+        $this->middleware('permission:muser-reset-password', ['only' => ['resetpswd']]);
         $this->middleware('permission:muser-credit-debit', ['only' => ['topup']]);
         $this->middleware('permission:muser-delete', ['only' => ['destroy']]);
         $this->middleware('permission:mkyc-validate', ['only' => ['acceptkyc', 'rejectkyc', 'resetkyc']]);
@@ -70,7 +68,9 @@ class UsersController extends Controller
 
         if(!$user) return '';
 
-        $action = '<a href="#" data-toggle="modal" data-target="#resetpswdModal' . $user->id .'" class="m-1 btn btn-warning btn-xs">Reset Password</a>';
+        if(auth('admin')->user()->hasPermissionTo('muser-reset-password', 'admin')) {
+            $action = '<a href="#" data-toggle="modal" data-target="#resetpswdModal' . $user->id .'" class="m-1 btn btn-warning btn-xs">Reset Password</a>';
+        }
         if (auth('admin')->user()->hasPermissionTo('muser-block', 'admin')) {
             if ($user->status == null || $user->status == 'blocked') {
                 $action .= '<a class="m-1 btn btn-primary btn-sm"
@@ -383,7 +383,7 @@ class UsersController extends Controller
         $amt = $request->amount;
 
         if ($request->t_type == "Credit") {
-            $data = ['status' => false];
+            $respTrans = ['status' => false];
             // get Trader7 account in question
             $t7 = Trader7::find($request->account_id);
             if (!$t7)
@@ -393,10 +393,10 @@ class UsersController extends Controller
                 $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'deposit', 'bonus');
                 $t7->bonus += $amt;
             } elseif ($request->type == "Credit") {
-                    $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'deposit', 'credit');
-                    $t7->bonus += $amt;
+                $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'deposit', 'credit');
+                $t7->bonus += $amt;
             } elseif ($request->type == "Balance") {
-                $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'deposit', 'bonus');
+                $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'deposit', 'balance');
                 $t7->balance += $amt;
             }
 
@@ -415,21 +415,21 @@ class UsersController extends Controller
             }
 
         } elseif ($request->t_type == "Debit") {
-            $data = ['status' => false];
+            $respTrans = ['status' => false];
             // get Trader7 account in question
             $t7 = Trader7::find($request->account_id);
             if (!$t7)
                 return redirect()->back()->with('message', 'Trader7 account not found');
 
             if ($request->type == "Bonus") {
-                $data = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'withdrawal', 'bonus');
+                $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'withdrawal', 'bonus');
                 $t7->bonus -= $amt;
             } elseif ($request->type == "Balance") {
-                $data = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'withdrawal', 'balance');
+                $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-Admin', 'SKY-Auto', 'withdrawal', 'balance');
                 $t7->balance -= $amt;
             }
 
-            if ($data['status']) {
+            if (gettype($respTrans) !== 'integer') {
                 // create withdrawal record
                 $this->saveRecord($request->user_id, $request->account_id, 'Express Debit', $amt, 'Withdrawal', 'Processed');
 
@@ -580,5 +580,5 @@ class UsersController extends Controller
             }
         }
         return redirect()->back()->with('message', 'Successfully fetched users.');
-   }
+    }
 }

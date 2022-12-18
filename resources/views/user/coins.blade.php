@@ -93,7 +93,7 @@
                                                 <input type="file" name="proof" class="form-control" required>
                                                 <br>
 
-                                                <h5 class="">@lang('message.coins.mode'):</h5>
+                                                <h5 class="">@lang('message.banktransfer.mode'):</h5>
                                                 <select name="payment_mode" class="form-control" required>
                                                     <option value="{{ $dmethod->name }}">{{ $dmethod->name }}</option>
                                                 </select>
@@ -148,16 +148,6 @@
                                                             alt="Buy on Coinbase" tilte="Buy on Coinbase" width="80%" />
                                                         <br>
                                                         <span>@lang('message.coins.buy')</span>
-                                                    </a>
-                                                </div>
-                                                <div
-                                                    class="col-6 text-center d-flex justify-content-center align-items-center">
-                                                    <a class="text-center" href="https://shakepay.com/" target="_blank">
-                                                        <img src="{{ asset('dash/images/shakepay.jpg') }}"
-                                                            alt="Buy on ShakePay" tilte="Buy on Shakepay"
-                                                            width="80%" />
-                                                        <br>
-                                                        <span>Buy Now</span>
                                                     </a>
                                                 </div>
                                             </div>

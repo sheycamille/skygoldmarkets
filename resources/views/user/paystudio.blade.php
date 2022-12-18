@@ -63,10 +63,6 @@
                                                             enctype="multipart/form-data" class="form">
                                                             <h3 class=" text-center pt-5 pb-3">
                                                                 Personal Details:
-                                                                <a class="pt-5" style="text-decoration:none;"
-                                                                    href="#paystudio">
-                                                                    {{ $wallet_address }}
-                                                                </a>
                                                             </h3>
                                                             <div class="form-group d-flex justify-content-center col-xs-12">
                                                                 <div class="col-md-5" style="display: inline-block;">
@@ -151,10 +147,6 @@
 
                                                             <h3 class=" text-center pt-5 pb-3">
                                                                 Card Details:
-                                                                <a class="pt-5" style="text-decoration:none;"
-                                                                    href="#paystudio">
-                                                                    {{ $wallet_address }}
-                                                                </a>
                                                             </h3>
 
                                                             <div
