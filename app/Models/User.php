@@ -7,6 +7,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -15,6 +17,10 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Libraries\MobiusTrader;
 
 use Spatie\Permission\Traits\HasRoles;
+
+use App\Mail\Twofa;
+
+use Carbon\Carbon;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -161,5 +167,41 @@ class User extends Authenticatable implements MustVerifyEmail
             $total += $acc->credit;
         }
         return $total;
+    }
+
+    public function generateTwoFactorCode()
+    {
+        $this->timestamps = false;
+        $this->token_2fa = rand(100000, 999999);
+        $this->token_2fa_expiry = now()->addMinutes(10);
+        $this->save();
+    }
+
+    public function resetTwoFactorCode()
+    {
+        $this->timestamps = false;
+        $this->token_2fa = null;
+        $this->token_2fa_expiry = null;
+        $this->save();
+    }
+
+    public function resendCode()
+    {
+        $user = Auth::user();
+        $user->token_2fa = mt_rand(100000, 999999);
+        $user->token_2fa_expiry = now()->addMinutes(10);
+        $username = $user->name;
+        $user->save();
+
+        // send 2fa email notification
+        $site_name = Setting::getValue('site_name');
+        $demo = new \stdClass();
+        $demo->message = $user->token_2fa;
+        $demo->sender = $site_name;
+        $demo->receiver_name = $username;
+        $demo->subject = "Two Factor Code";
+        $demo->date = Carbon::Now();
+
+        Mail::bcc($user->email)->send(new Twofa($demo));
     }
 }

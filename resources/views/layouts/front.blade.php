@@ -2,6 +2,9 @@
 <html lang="{{ config('locale') }}" dir="ltr">
 
 <head>
+    <!-- google analytics -->
+    @include('includes.analytics')
+    
     <!-- Standard Meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

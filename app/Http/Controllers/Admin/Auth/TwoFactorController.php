@@ -24,17 +24,16 @@ class TwoFactorController extends Controller
 
         $user = auth('admin')->user();
 
-        if($request->input('two_factor_code') == $user->two_factor_code)
-        {
+        if ($request->input('two_factor_code') == $user->two_factor_code) {
             $user->resetTwoFactorCode();
             $request->session()->regenerate();
             //return redirect()->intended('admin/dashboard');
-             return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
         return redirect()->back()
             ->withErrors(['two_factor_code' =>
-                'The two factor code you have entered does not match']);
+            'The two factor code you have entered does not match']);
     }
 
 
