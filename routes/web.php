@@ -203,14 +203,22 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/forgot-password', 'FrontController@forgotpassword')->name('password.request');
 Route::middleware(['auth'])->get('/dashboard', 'UserController@dashboard')->name('dashboard');
 
+Route::get('/logout', 'UserController@logout')->name('logout.perform');
+
+Route::prefix('login')->group(function () {
+    Route::get('resend', 'TwoFactorController@resend')->name('user-2fa-resend');
+    Route::resource('verify', 'TwoFactorController')->only(['index', 'store']);
+    
+});
+
 // Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => ['auth', 'twofa', 'prevent-back-history']], function () {
     // Two Factor Authentication
     Route::post('dashboard/changetheme', 'UserController@changetheme')->name('changetheme');
     Route::get('dashboard/refreshAccounts', 'UserController@refreshAccounts')->name('refreshaccounts');
-    Route::get('2fa', 'TwoFactorController@showTwoFactorForm')->name('2fa');
-    Route::post('2fa', 'TwoFactorController@verifyTwoFactor');
     Route::post('dashboard/savedocs', 'UserController@savevdocs')->name('kycsubmit');
+
+    Route::get('check', 'TwoFactorController@check2FA')->name('check2fa');
 
     Route::get('dashboard/skip_account', 'Controller@skip_account');
     Route::get('dashboard/tradinghistory', 'UserController@tradinghistory')->name('tradinghistory');

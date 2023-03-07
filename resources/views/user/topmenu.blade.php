@@ -352,13 +352,9 @@
                         </li>
                         <div class="dropdown-divider"></div>
 
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <a class="dropdown-item" href="{{ route('logout.perform') }}">
                             @lang('message.topmenu.log')
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
                     </ul>
                 </li>
             </ul>

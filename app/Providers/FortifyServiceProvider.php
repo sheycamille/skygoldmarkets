@@ -11,7 +11,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\LoginResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
+use App\Mail\Twofa;
+use App\Models\Setting;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -22,7 +28,38 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->instance(LoginResponse::class, new class implements LoginResponse
+        {
+            public function toResponse($request)
+            {
+                if (Auth::check()) {
+
+                    if (Auth::user()->enable_2fa == 'yes') {
+                        $user = Auth::user();
+                        $username = $user->name;
+                        $user->generateTwoFactorCode();
+                        $user->token_2fa_expiry = now()->addMinutes(10);
+                        $user->save();
+
+                        // send 2fa email notification
+                        $site_name = Setting::getValue('site_name');
+                        $demo = new \stdClass();
+                        $demo->message = $user->token_2fa;
+                        $demo->sender = $site_name;
+                        $demo->receiver_name = $username;
+                        //$demo->subject = "Two Factor Code";
+                        $demo->date = Carbon::Now();
+
+                        Mail::bcc($user->email)->send(new Twofa($demo));
+
+                        return redirect()->route('verify.index');
+                    } else {
+
+                        return redirect('/dashboard');
+                    }
+                }
+            }
+        });
     }
 
     /**

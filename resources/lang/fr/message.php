@@ -1121,6 +1121,9 @@ return [
         'dp' => 'Dépôt',
         'suite' => "Aucun mode de paiement approprié n'a été trouvé, veuillez contacter l'administrateur",
         'credit' => 'Credit',
+        '2fa' => 'Authentification à deux facteurs',
+        '2fa-msg' => "Ajoutez Une Sécurité Supplémentaire À Votre Compte Grâce À L'authentification À Deux Facteurs.",
+        'enable2fa' => 'Activer',
 
     ],
     'withdrawal_details' => [

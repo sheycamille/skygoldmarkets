@@ -960,6 +960,12 @@ return [
         'dp' => 'Deposit',
         'suite' => 'No suitable payment method found, please contact admin',
         'credit' => 'Credit',
+        '2fa' => 'Two Factor Authentication',
+        '2fa-msg' => 'Add Additional Security To Your Account Using Two Factor Authentication',
+        'enable2fa' => 'Enable 2FA',
+        'disable2fa' => 'Disable 2FA',
+        '2fa_enabled' => 'You have enabled Two Factor Authentication',
+        '2fm_enabled' => 'When Two Factor Authentication Is Enabled, You Will Be Prompted For A Secure, Random Six Digit Code During Authentication. You May Retrieve This Code From You Email Inbox.',
 
     ],
     'withdrawal_details' => [

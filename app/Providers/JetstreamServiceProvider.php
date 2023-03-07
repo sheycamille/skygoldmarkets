@@ -52,8 +52,10 @@ class JetstreamServiceProvider extends ServiceProvider
                 $user &&
                 Hash::check($request->password, $user->password)
             ) {
+                
                 $request->session()->put('getAnouc', 'true');
                 return $user;
+                //dd($user);
             }
         });
 

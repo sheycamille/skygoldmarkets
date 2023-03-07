@@ -4,6 +4,8 @@
 
 @section('stylesheets')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <style>
         span.select2.select2-container.select2-container--default {
             max-width: 100%;
@@ -236,6 +238,14 @@
                                         </div>
                                     </div>
 
+                                    <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                        <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                                        @if ($errors->has('g-recaptcha-response'))
+                                        <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                                        @endif
+                                        
+                                    </div>
+
                                     <div class="uk-margin-small uk-width-1-1">
                                         <button
                                             class="uk-button uk-width-1-1 uk-button-primary uk-border-rounded uk-float-left"
@@ -258,6 +268,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer>
     </script>
+
     <script type="text/javascript">
         $(function() {
             $('.country-select').select2({
