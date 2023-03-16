@@ -36,7 +36,7 @@
                                 </div>
 
                                 <!-- form begin -->
-                                <form method="POST" action="{{ route('verify.store') }}" class="mt-5 card__form">
+                                <form method="POST" action="{{ route('admin.verify.check') }}" class="mt-5 card__form">
                                     {{ csrf_field() }}
                                     <h1>Two Factor Verification</h1>
                                     <p class="text-muted">

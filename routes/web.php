@@ -66,7 +66,7 @@ Route::prefix('adminlogin')->group(function () {
     Route::post('logout', 'Admin\Auth\LoginController@logout')->name('adminlogout');
     Route::get('dashboard', 'Admin\Auth\LoginController@validate_admin')->name('validate_admin');
     Route::get('verify/resend', 'Admin\Auth\TwoFactorController@resend')->name('admin.verify.resend');
-    Route::resource('verify', 'Admin\Auth\TwoFactorController')->only(['index', 'store'])->name('get', 'admin.verify');
+    Route::resource('verify', 'Admin\Auth\TwoFactorController')->only(['index', 'store'])->name('index', 'admin.verify.index')->name('store', 'admin.verify.check');
 });
 
 Route::group(['prefix' => 'admin',  'middleware' => ['isadmin', 'twofactor']], function () {
@@ -207,8 +207,7 @@ Route::get('/logout', 'UserController@logout')->name('logout.perform');
 
 Route::prefix('login')->group(function () {
     Route::get('resend', 'TwoFactorController@resend')->name('user-2fa-resend');
-    Route::resource('verify', 'TwoFactorController')->only(['index', 'store']);
-    
+    Route::resource('verify', 'TwoFactorController')->only(['index', 'store'])->name('index', 'user.verify.index')->name('store', 'user.verify.check');
 });
 
 // Route::middleware(['auth:sanctum', 'verified'])->group(function () {

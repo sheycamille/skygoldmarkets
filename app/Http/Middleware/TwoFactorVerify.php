@@ -37,7 +37,7 @@ class TwoFactorVerify
             }
 
             if (!$request->is('verify*')) {
-                return redirect()->route('verify.index');
+                return redirect()->route('user.verify.index');
             }
         }
 
