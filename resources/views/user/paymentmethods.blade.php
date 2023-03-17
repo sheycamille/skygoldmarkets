@@ -14,8 +14,14 @@
             justify-content: space-between;
         }
 
-        .pricing-table h2 {
-            
+        .pricing-table h2 {}
+
+        .pay-logos {
+            width: 140px;
+            height: 140px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 5px;
         }
     </style>
 @endsection
@@ -67,7 +73,9 @@
                                     data-example-id="hoverable-table"> --}}
                                     @forelse($pmethods as $pmethod)
                                         <div class="col-lg-4 p-4">
-                                            <div class="pricing-table purple border">
+                                            <div class="pricing-table purple">
+                                                <img class="pay-logos" src="{{ asset('public/logos' . $pmethod->logo) }}"
+                                                    alt="{{ $pmethod->logo }}">
                                                 <h2 class="">{{ $pmethod->name }}</h2>
                                                 <div class="pricing-features">
                                                     <div class="feature">
