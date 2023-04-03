@@ -133,12 +133,13 @@ class UserController extends Controller
     // return deposit route
     public function deposits()
     {
+        $deposits = Deposit::where('user', Auth::user()->id)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
         return view('user.deposits')
             ->with(array(
                 'title' => 'Deposits',
-                'deposits' => Deposit::where('user', Auth::user()->id)
-                    ->orderBy('id', 'desc')
-                    ->get(),
+                'deposits' => $deposits,
             ));
     }
 
@@ -150,7 +151,7 @@ class UserController extends Controller
             ->with(array(
                 'title' => 'withdrawals',
                 'withdrawals' => Withdrawal::where('user', Auth::user()->id)
-                    ->orderBy('id', 'desc')
+                    ->orderBy('created_at', 'desc')
                     ->get(),
             ));
     }
