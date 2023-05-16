@@ -1111,7 +1111,7 @@ return [
     ],
     'modal' => [
         'make_new' => 'Make new deposit',
-        'chose' => 'Choose Acount',
+        'chose' => 'Choose Account',
         'pay' => 'Payment will be sent to your recieving address',
         'enter' => 'Enter amount here',
         'sub' => 'Submit',

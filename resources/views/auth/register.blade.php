@@ -139,7 +139,7 @@
                                             for="account_type"></span>
                                         <select class="uk-input uk-border-rounded" name="account_type" id="account_type"
                                             required>
-                                            <option>Choose Account Type</option>
+                                            <option disabled>Choose Account Type</option>
                                             @foreach ($account_types as $accType)
                                                 <option @if ($accType->id == request()->get('account_type')) selected @endif
                                                     value="{{ $accType->id }}">
@@ -243,7 +243,7 @@
                                         @if ($errors->has('g-recaptcha-response'))
                                         <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                                         @endif
-                                        
+
                                     </div>
 
                                     <div class="uk-margin-small uk-width-1-1">

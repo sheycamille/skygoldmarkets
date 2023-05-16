@@ -208,7 +208,7 @@ Route::get('/logout', 'UserController@logout')->name('logout.perform');
 Route::prefix('login')->group(function () {
     Route::get('resend', 'TwoFactorController@resend')->name('user-2fa-resend');
     Route::resource('verify', 'TwoFactorController')->only(['index', 'store'])->name('index', 'user.verify.index')->name('store', 'user.verify.check');
-    
+
 });
 
 // Route::middleware(['auth:sanctum', 'verified'])->group(function () {
@@ -304,6 +304,34 @@ Route::group(['middleware' => ['auth', 'twofa', 'prevent-back-history']], functi
     // paycly payments
     Route::any('dashboard/start_paycly_charge', 'UserController@startPaycly')->name('startpayclycharge');
     Route::post('dashboard/verify_paycly_charge', 'UserController@handlePaycly')->name('verifypayclycharge');
+
+
+    // ragapay payments
+    Route::any('success_ragapay_charge', 'UserController@successRagapay')->name('successragapaycharge');
+    Route::any('cancel_ragapay_charge', 'UserController@cancelRagapay')->name('cancelragapaycharge');
+
+
+    // xpro payments
+    Route::any('success_xpro_charge', 'UserController@successRagapay')->name('successxprocharge');
+    Route::any('cancel_xpro_charge', 'UserController@cancelRagapay')->name('cancelxprocharge');
+
+
+    // helcim payments
+    Route::post('helcim_charge', 'UserController@startHelcim')->name('starthelcimcharge');
+    Route::any('success_helcim_charge', 'UserController@successHelcim')->name('successhelcimcharge');
+    Route::any('cancel_helcim_charge', 'UserController@cancelHelcim')->name('cancelhelcimcharge');
 });
 
 Route::get('/dashboard/weekend', 'Controller@checkdate');
+
+// chargemoney payments
+Route::get('verify_chargemoney_charge', 'FrontController@verifyChargeMoneyCharge')->name('verifychargemoneycharge');
+
+// ragapay payments notifications
+Route::any('ragapay_notifications', 'FrontController@ragapayNotifications')->name('ragapay_notifications');
+
+// paycly payments
+Route::any('verify_paycly_charge', 'UserOutDoorController@handlePaycly')->name('handlepayclycharge');
+
+// xpro payments notifications
+Route::any('xpro_notifications', 'UserOutDoorController@xproNotifications')->name('xpro_notifications');

@@ -370,8 +370,9 @@ class UserController extends Controller
 
         $t7 = Trader7::find($t7_id);
 
-        $resp = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-PayPal', 'SKY-Auto-'.$request->orderid, 'deposit', 'balance');
-        if(gettype($resp) !== 'integer') {
+        $respTrans = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-PayPal', 'SKY-Auto-'.$request->orderid, 'deposit', 'balance');
+
+        if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
             return json_encode(['message' => 'Sorry an error occured, report this to support!']);
         } else {
             $t7->balance += $amount;
@@ -876,6 +877,140 @@ class UserController extends Controller
                 'dmethod' => $method,
                 'transaction_id' => $transaction_id,
             ];
+        } elseif (strpos(strtolower($method->setting_key), 'paycly') > -1) {
+            $depo = new Deposit();
+            $depo->amount = number_format((float)$amount, 2, '.', '');;
+            $depo->payment_mode = 'Paycly';
+            $depo->user = $user->id;
+            $depo->account_id = $t7_id;
+            $depo->status = 'Pending';
+            $depo->save();
+
+            $view = 'paycly';
+            $title = 'Make Paycly Payment';
+
+            $data = [
+                'countries' => $countries,
+                'dmethod' => $method,
+                'id_order' => 'order-'.$depo->id.'-'.$t7_id,
+                'client_ip' => $request->ip(),
+            ];
+        } elseif (strpos(strtolower($method->setting_key), 'ragapay') > -1) {
+            $depo = new Deposit();
+            $depo->amount = number_format((float)$amount, 2, '.', '');;
+            $depo->payment_mode = 'Ragapay';
+            $depo->user = $user->id;
+            $depo->account_id = $t7_id;
+            $depo->status = 'Pending';
+            $depo->save();
+
+            $order_number = 'order-'.$depo->id.'-'.$t7_id;
+
+            $request->session()->put('ragapay_order_number', $order_number);
+
+            $view = 'ragapay';
+            $title = 'Make RagaPay Payment';
+
+            $data = [
+                'countries' => $countries,
+                'dmethod' => $method,
+                'transaction_id' => $order_number,
+            ];
+
+            // make an auth request to Ragapay
+            $desc = 'Payment of goods';
+            $amount = number_format((float)$amount, 2, '.', '');
+            $to_md5 = sha1(md5(strtoupper($order_number . $amount . 'usd' . $desc . config('ragapay.api_secret'))));
+
+            $input = [
+                'merchant_key'=> config('ragapay.api_key'),
+                'operation'=> 'purchase',
+                'methods'=> [],
+                'order'=> [
+                    'number'=> $order_number,
+                    'amount'=> $amount,
+                    'currency'=> 'USD',
+                    'description'=> $desc,
+                ],
+                'cancel_url'=> route('cancelragapaycharge'),
+                'success_url'=> route('successragapaycharge'),
+                'customer'=> [
+                    'name'=> $user->name,
+                    'email'=> $user->email,
+                ],
+                'hash'=> $to_md5
+            ];
+
+            $response = Http::post(config('ragapay.endpoint'), $input);
+
+            $data['url'] = $response['redirect_url'];
+            // dd([$input, $response, $response['redirect_url']]);
+            return redirect($data['url']);
+        } elseif (strpos(strtolower($method->setting_key), 'xpro') > -1) {
+            $depo = new Deposit();
+            $depo->amount = number_format((float)$amount, 2, '.', '');;
+            $depo->payment_mode = 'Xpro';
+            $depo->user = $user->id;
+            $depo->account_id = $t7_id;
+            $depo->status = 'Pending';
+            $depo->save();
+
+            $order_number = 'order-'.$depo->id.'-'.$t7_id;
+
+            $request->session()->put('xpro_order_number', $order_number);
+
+            $view = 'xpro';
+            $title = 'Make Xpro Payment';
+
+            $data = [
+                'countries' => $countries,
+                'dmethod' => $method,
+                'transaction_id' => $order_number,
+            ];
+
+            // make an auth request to Xpro
+            $desc = 'Payment of goods';
+            $amount = number_format((float)$amount, 2, '.', '');
+            $to_md5 = sha1(md5(strtoupper($order_number . $amount . 'usd' . $desc . config('xpro.api_secret'))));
+
+            $input = [
+                'merchant_key'=> config('xpro.api_key'),
+                'operation'=> 'purchase',
+                'methods'=> ['card'],
+                'order'=> [
+                    'number'=> $order_number,
+                    'amount'=> $amount,
+                    'currency'=> 'USD',
+                    'description'=> $desc,
+                ],
+                'cancel_url'=> route('cancelxprocharge'),
+                'success_url'=> route('successxprocharge'),
+                'customer'=> [
+                    'name'=> $user->name,
+                    'email'=> $user->email,
+                ],
+                'hash'=> $to_md5
+            ];
+
+            $response = Http::post(config('xpro.endpoint'), $input);
+
+            $data['url'] = $response['redirect_url'];
+            return redirect($data['url']);
+        } elseif (strpos(strtolower($method->setting_key), 'stripe') > -1) {
+            $view = 'stripe';
+            $title = 'Make Stripe Payment';
+            $data = [
+                'countries' => $countries,
+                'dmethod' => $method,
+            ];
+        } elseif (strpos(strtolower($method->setting_key), 'helcim') > -1) {
+            $view = 'helcim';
+            $title = 'Make Helcim Payment';
+            $data = [
+                'dmethod' => $method,
+            ];
+        } elseif (strpos(strtolower($method->setting_key), 'axes') > -1) {
+            return redirect('https://axesformation.ca/shop/');
         } else {
             $view = 'coins';
             $wallet_address = Setting::where('name', $method->setting_key)->first()->value;
@@ -923,7 +1058,7 @@ class UserController extends Controller
         if ($resp->status == 'success') {
             $amt = $resp->data->amount;
             $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-PayPound', 'SKY-Auto', 'deposit', 'balance');
-            if(gettype($respTrans) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
                 $t7->balance = $t7->balance + $amt;
@@ -977,7 +1112,7 @@ class UserController extends Controller
         if ($data['status'] == 'success') {
             $amt = $dp->amount;
             $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-PayPound', 'SKY-Auto', 'deposit', 'balance');
-            if(gettype($respTrans) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
             } else {
                 $t7->balance = $t7->balance + $amt;
@@ -1036,7 +1171,7 @@ class UserController extends Controller
         if ($resp->status == 'success') {
             $amt = $resp->data->amount;
             $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-PayStudio', 'SKY-Auto', 'deposit', 'balance');
-            if(gettype($respTrans) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
             } else {
                 $t7->balance = $t7->balance + $amt;
@@ -1090,7 +1225,7 @@ class UserController extends Controller
         if ($data['status'] == 'success') {
             $amt = $dp->amount;
             $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-PayStudio', 'SKY-Auto', 'deposit', 'balance');
-            if(gettype($respTrans) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
                 $t7->balance = $t7->balance + $amt;
@@ -1149,7 +1284,7 @@ class UserController extends Controller
         if ($resp->status == 'success') {
             $amt = $resp->data->amount;
             $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-ChargeMoney', 'SKY-Auto', 'deposit', 'balance');
-            if(gettype($respTrans) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
                 $t7->balance = $t7->balance + $amt;
@@ -1203,7 +1338,7 @@ class UserController extends Controller
         if ($data['status'] == 'success') {
             $amt = $dp->amount;
             $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-ChargeMoney', 'SKY-Auto', 'deposit', 'balance');
-            if(gettype($respTrans) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
                 $t7->balance = $t7->balance + $amt;
@@ -1267,7 +1402,7 @@ class UserController extends Controller
         if ($resp['status'] == 'C') {
             $amt = $resp['amount'];
             $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-YWallit', 'SKY-Auto', 'deposit', 'balance');
-            if(gettype($respTrans) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
                 $t7->balance = $t7->balance + $amt;
@@ -1319,7 +1454,7 @@ class UserController extends Controller
         if ($data['status'] == 'C') {
             $amt = $dp->amount;
             $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-YWallit', 'SKY-Auto', 'deposit', 'balance');
-            if(gettype($respTrans) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
                 $t7->balance = $t7->balance + $amt;
@@ -1389,7 +1524,7 @@ class UserController extends Controller
         if ($resp->responseCode == '0') {
             $amt = $resp->amount;
             $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-VirtualPay', 'SKY-Auto', 'deposit', 'balance');
-            if(gettype($respTrans) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
                 $t7->balance = $t7->balance + $amt;
@@ -1443,7 +1578,7 @@ class UserController extends Controller
         if ($data['responseCode'] == '0') {
             $amt = $dp->amount;
             $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-VirtualPay', 'SKY-Auto', 'deposit', 'balance');
-            if(gettype($respTrans) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support! ');
             } else {
                 $t7->balance = $t7->balance + $amt;
@@ -1538,7 +1673,7 @@ class UserController extends Controller
 
                     $amt = $data['amount'];
                     $respTrans = $this->performTransaction($t7->currency, $t7->number, $amt, 'SKG-AuthorizeNet', 'SKY-Auto', 'deposit', 'balance');
-                    if(gettype($respTrans) !== 'integer') {
+                    if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                         return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
                     } else {
                         $t7->balance = $t7->balance + $amt;
@@ -1646,9 +1781,9 @@ class UserController extends Controller
 
         if($resp['data']['gatewayStatus']=='APPROVED') {
             $paymentId =$resp['data']['paymentId'];
-            $respT7 = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-Cashonex', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-Cashonex', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
 
-            if(gettype($respT7) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
             } else {
                 $t7->balance += $amount;
@@ -1723,9 +1858,9 @@ class UserController extends Controller
 
         if($resp['data']['gatewayStatus']=='APPROVED') {
             $paymentId =$resp['data']['paymentId'];
-            $respT7 = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-Cashonex', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-Cashonex', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
 
-            if(gettype($respT7) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
             } else {
                 $t7->balance += $amount;
@@ -1792,9 +1927,9 @@ class UserController extends Controller
 
         if($request->status == 'Success') {
             if($request->paid_amount) $amount = $request->paid_amount;
-            $respT7 = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-NUMPAY', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-NUMPAY', 'SKY-Auto-'.$paymentId, 'deposit', 'balance');
 
-            if(gettype($respT7) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect(route('account.liveaccounts'))->with('message', 'Sorry an error occured, report this to support!');
             } else {
                 $t7->balance += $amount;
@@ -1895,9 +2030,9 @@ class UserController extends Controller
 
         if($resp['data']['gatewayStatus']=='APPROVED') {
             $paymentId =$resp['data']['paymentId'];
-            $respT7 = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKY-Paycly', 'SKY-AUTOCO-'.$paymentId, 'deposit', 'balance');
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKY-Paycly', 'SKY-AUTOCO-'.$paymentId, 'deposit', 'balance');
 
-            if(gettype($respT7) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
             } else {
                 $t7->balance += $amount;
@@ -2042,9 +2177,9 @@ class UserController extends Controller
             $deposit->save();
 
             $paymentId = $charge->id;
-            $respT7 = $this->performTransaction($t7->currency, $t7->number, $amount, 'GdP-Stripe', 'GdP-AUTOCO-'.$paymentId, 'deposit', 'balance');
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amount, 'GdP-Stripe', 'GdP-AUTOCO-'.$paymentId, 'deposit', 'balance');
 
-            if(gettype($respT7) !== 'integer') {
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
                 return redirect()->back()->with('message', 'Sorry an error occured, report this to support!');
             } else {
                 $t7->balance += $amount;
@@ -2101,5 +2236,62 @@ class UserController extends Controller
 
         return redirect('/');
 
+    }
+
+
+    public function startHelcim(Request $request)
+    {
+        $data = $request->all();
+        $amount = $request->session()->get('amount');
+        if(!$amount)
+            $amount = $data['amount']/1.4;
+
+        if($data['response']) {
+
+            $user = User::where('id', Auth::user()->id)->first();
+
+            $t7_id = $request->session()->get('t7_account_id');
+
+            $t7 = Trader7::find($t7_id);
+
+            $respTrans = $this->performTransaction($t7->currency, $t7->number, $amount, 'SKG-Helcim', 'SKG-AUTOHELCIM-'.$data['transactionId'], 'deposit', 'balance');
+
+            if($respTrans['status'] !== MobiusTrader::STATUS_OK) {
+                return json_encode(['message' => 'Sorry an error occured, report this to support!']);
+            } else {
+                $t7->balance += $amount;
+                $t7->save();
+            }
+
+            //save transaction
+            $this->saveTransaction($user->id, $amount, 'Deposit', 'Credit');
+
+            //save and confirm the deposit
+            $this->saveRecord($user->id, $t7_id, 'Helcim', $amount, 'Deposit', 'Processed', 'Helcim');
+
+            //send email notification
+            $currency = Setting::getValue('currency');
+            $site_name = Setting::getValue('site_name');
+            $objDemo = new \stdClass();
+
+            $name = $user->name ? $user->name: ($user->first_name ? $user->first_name: $user->last_name);
+            $objDemo->message = "\r Hello $name, \r\n
+
+            \r This is to inform you that your deposit of $currency$amount has been received and confirmed.";
+            $objDemo->sender = "$site_name";
+            $objDemo->date = Carbon::Now();
+            $objDemo->subject = "Deposit Processed!";
+
+            Mail::bcc($user->email)->send(new NewNotification($objDemo));
+
+            $msg = 'Your deposit was successfully processed!';
+            Session::flash('message', $msg);
+            return redirect(route('account.liveaccounts'))->with('message', $msg);
+
+        } else {
+            $msg = $data['responseMessage'];
+            Session::flash('message', $msg);
+            return redirect()->back();
+        }
     }
 }
