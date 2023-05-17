@@ -186,7 +186,7 @@ class Controller extends BaseController
             'Password' => $password,
             'SessionType' => 0
         );
-        $resp = $m7->password_set('PasswordSet', $data);
+        $resp = $m7->call('PasswordSet', $data);
         return $resp;
     }
 
