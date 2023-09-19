@@ -16,7 +16,7 @@
                 <div style="width:100%;max-width:300px;display:inline-block;vertical-align:top;height:100px">
                     <h2 style="text-align:center;">Android App</h2>
                     <a style="text-align:center;"
-                        href="https://play.google.com/store/apps/details?id=com.mtrader7.terminal&hl=en">
+                        href="https://play.google.com/store/apps/details?id=com.freetraderprogram&hl=en">
                         <img class="" src="{{ asset('dash/images/google_play_badge.png') }}"
                             alt="Andriod Download" tilte="Andriod Download" height="66" />
                         <br><br>
